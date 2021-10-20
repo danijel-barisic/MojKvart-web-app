@@ -30,34 +30,59 @@
 			
 			\begin{packed_enum}
 			
-				\item  \underbar{Neregistrirani/neprijavljeni korisnik (inicijator) može:}
+				\item  \underbar{Neregistrirani korisnik (inicijator) može:}
 				\begin{packed_enum}
-					\item TODO	
+					\item se registrirati u sustav stvaranjem novog korisničkog računa, za što su mu potrebni ime, prezime, adresa stanovanja, adresa e-pošte i lozinka
+				\end{packed_enum}
+				
+				\item  \underbar{Neprijavljeni korisnik (inicijator) može:}
+				\begin{packed_enum}
+					\item se prijaviti u sustav,	za što su mu potrebni adresa e-pošte i lozinka
 				\end{packed_enum}
 				
 				\item  \underbar{Stanovnik četvrti (inicijator) može:}
 				\begin{packed_enum}
-					\item TODO	
+					\item otvarati teme na Forumu
+					\item komentirati u temama na Forumu
+					\item predlagati najave budućih događanja u cjelini "Događanja", za što je potrebno navesti naziv, mjesto, vrijeme, trajanje i kratak opis
+					\item poslati zahtjev administratorima za promjenu uloge (u vijećnika ili moderatora)
+					\item promijeniti adresu	
 				\end{packed_enum}
 				
 				\item  \underbar{Vijećnik (inicijator) može:}
 				\begin{packed_enum}
-					\item TODO	
+					\item stvoriti objavu u cjelini "Vijeće četvrti"	
 				\end{packed_enum}
 				
 				\item  \underbar{Moderator (inicijator) može:}
 				\begin{packed_enum}
-					\item TODO	
+					\item pregledati najave događanja koje predlažu stanovnici
+					\item objaviti najave događanja u cjelini "Događanja"
+					\item odbaciti prijedloge događanja
+					\item urediti prijedloge događanja
+					\item ukloniti objave na forumu	
 				\end{packed_enum}
 				
 				\item  \underbar{Administrator (inicijator) može:}
 				\begin{packed_enum}
-					\item TODO	
+					\item vidjeti popis svih registriranih korisnika i njihove osobne podatke
+					\item definirati četvrt i područje koje ta četvrt obuhvaća
+					\item obrisati četvrti
+					\item dodijeliti ulogu moderatora ili vijećnika registriranom korisniku
+					\item privremeno blokirati korisnika
+					\item trajno obrisati profil korisnika
+					\item pristupiti svim podacima u bazi podataka (objave na forumima, događanja u četvrtima i slično)	
 				\end{packed_enum}
 				
 				\item  \underbar{Baza podataka (sudionik):}
 				\begin{packed_enum}
-					\item TODO	
+					\item pohranjuje podatke o korisnicima i njihovim ovlastima
+					\item pohranjuje podatke o četvrtima
+					\begin{packed_enum}
+						\item ulice koje im pripadaju
+						\item teme na forumu
+						\item izvješća s Vijeća četvrti
+					\end{packed_enum}
 				\end{packed_enum}
 				
 			\end{packed_enum}
