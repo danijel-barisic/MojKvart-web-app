@@ -141,6 +141,70 @@
 							
 						\end{packed_item}
 					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC1 - Registracija}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Stvoriti korisnički račun za pristup sustavu
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} -
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item Korisnik odabere opciju za registraciju
+							\item Korisnik uspješno unese tražene podatke
+							\item Korisnik dobiva obavijest o uspješnoj registraciji
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+	
+							\item[2.a] Korisnik odabere e-mail s kojim je već povezan korisnički račun u sustavu, ili unese tražene podatke u krivom formatu
+							\item[] \begin{packed_enum}
+								
+								\item Korisnik dobiva obavijest o pogrešci
+								\item Korisnik biva preusmjeren na stranicu za registraciju
+								\item Korisnik mijenja podatke i ponovno odabire opciju registracije, ili odustaje od registracije
+								
+							\end{packed_enum}
+							
+						\end{packed_item}
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC2 - Prijava u sustav}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Dobiti pristup sustavu
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} -
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item Korisnik odabire opciju prijave u sustav
+							\item Korisnik unosi e-mail adresu i lozinku
+							\item Korisnik se uspješno prijavio, i biva preusmjeren na početnu stranicu
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+	
+							\item[3.a] Korisnik unosi e-mail s kojim nije povezan niti jedan korisnički račun, ili unosi krivu lozinku, ili unosi tražene podatke u krivom formatu
+							\item[] \begin{packed_enum}
+								
+								\item Korisnik dobiva obavijest o pogrešci
+								\item Korisnik biva preusmjeren na stranicu za prijavu
+								\item Korisnik mijenja podatke i ponovno odabire opciju prijave, ili odustaje od prijave
+								
+							\end{packed_enum}
+							
+						\end{packed_item}
+					\end{packed_item}
 				
 					
 				\subsubsection{Dijagrami obrazaca uporabe}
