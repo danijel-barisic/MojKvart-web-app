@@ -166,7 +166,6 @@
 							\item[] \begin{packed_enum}
 								
 								\item Korisnik dobiva obavijest o pogrešci
-								\item Korisnik biva preusmjeren na stranicu za registraciju
 								\item Korisnik mijenja podatke i ponovno odabire opciju registracije, ili odustaje od registracije
 								
 							\end{packed_enum}
@@ -187,7 +186,7 @@
 	
 							\item Korisnik odabire opciju prijave u sustav
 							\item Korisnik unosi e-mail adresu i lozinku
-							\item Korisnik se uspješno prijavio, i biva preusmjeren na početnu stranicu
+							\item Korisnik dobiva pristup sustavu
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
@@ -198,8 +197,61 @@
 							\item[] \begin{packed_enum}
 								
 								\item Korisnik dobiva obavijest o pogrešci
-								\item Korisnik biva preusmjeren na stranicu za prijavu
 								\item Korisnik mijenja podatke i ponovno odabire opciju prijave, ili odustaje od prijave
+								
+							\end{packed_enum}
+							
+						\end{packed_item}
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC3 - Pregled osobnih podataka}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Vidjeti osobne podatke
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item Korisnik odabire opciju "Osobni podaci"
+							\item Korisnik dobije prikaz osobnih podataka
+						\end{packed_enum}
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC4 - Promjena osobnih podataka}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Promijeniti osobne podatke
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item Korisnik odabire opciju promjene osobnih podataka
+							\item Korisnik mijenja svoje osobne podatke
+							\item Korisnik sprema promjene
+							\item Baza podataka se ažurira
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+	
+							\item[2.a] Korisnik mijenja svoje osobne podatke, ali ne spremi promjene
+							\item[] \begin{packed_enum}
+								
+								\item Sustav upozori korisnika da nije spremio promjene
+								
+							\end{packed_enum}
+							
+							\item[2.b] Korisnik pokuša promijeniti e-mail adresu
+							\item[] \begin{packed_enum}
+								
+								\item Sustav upozori korisnika da ne može promijeniti e-mail adresu
 								
 							\end{packed_enum}
 							
