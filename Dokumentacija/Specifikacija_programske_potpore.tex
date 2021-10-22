@@ -630,11 +630,61 @@
 								\item Sustav upozorava korisnika da je polje za tekst prazno
 								
 							\end{packed_enum}
+						\end{packed_item}						
+					\end{packed_item}
+					\noindent \underbar{\textbf{UC21 - Objava izvješća }}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Vijećnik
+						\item  \textbf{Cilj:} Objava kratkog izvješća
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik ima "Vijećnik" ulogu
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item Korisnik odabire opciju "Objavi" 
+							\item Kratko izvješće se objavljuje
+							\item Baza podataka se ažurira
+							
+							
+							
+							
+							
+						\end{packed_enum}
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+						\item[2.a] Korisnik odabire opciju "objavi" iako je tekstualno polje prazno
+							\item[] \begin{packed_enum}
+								
+								\item Sustav upozorava korisnika da je polje za tekst prazno
+								
+							\end{packed_enum}
 						\end{packed_item}
 						
 						
 						
-					\end{packed_item}	
+					\end{packed_item}
+					\noindent \underbar{\textbf{UC22 - Otvaranje teme na forumu }}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Otvaranje nove teme na forumu
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen u  sustav
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item Korisnik odabire opciju "Otvori temu" u cjelini "Vijeće" 
+							\item Otvara se nova tema na cjelini "Forum"
+							\item Baza podataka se ažurira
+							
+						\end{packed_enum}				
+						
+					\end{packed_item}
+						
 				\subsubsection{Dijagrami obrazaca uporabe}
 					
 					\textit{Prikazati odnos aktora i obrazaca uporabe odgovarajućim UML dijagramom. Nije nužno nacrtati sve na jednom dijagramu. Modelirati po razinama apstrakcije i skupovima srodnih funkcionalnosti.}
