@@ -976,6 +976,90 @@
 						\end{packed_enum}
 					
 					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC35 - Pregled blokiranih korisnika}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Administrator
+						\item  \textbf{Cilj:} Pregledati popis blokiranih korisnika
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Administrator"
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item Korisnik odabire opciju "Blokirani korisnici"
+							\item Korisnik biva preusmjeren na stranicu gdje vidi popis blokiranih korisnika
+						\end{packed_enum}
+					
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC36 - Blokiranje korisnika}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Administrator
+						\item  \textbf{Cilj:} Blokirati korisnika
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Administrator", drugi korisnik nije blokiran
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item Korisnik odabire korisnika kojeg želi blokirati
+							\item Korisnik odabire opciju "Blokiraj korisnika"
+							\item Baza podataka se ažurira
+						\end{packed_enum}
+						
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC37 - Deblokiranje korisnika}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Administrator
+						\item  \textbf{Cilj:} Deblokirati korisnika
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Administrator", dugi korisnik je blokiran
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item Korisnik odabire korisnika kojeg želi deblokirati
+							\item Korisnik odabire opciju "Deblokiraj korisnika"
+							\item Baza podataka se ažurira
+						\end{packed_enum}
+						
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC38 - Brisanje korisničkog računa drugog korisnika}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Administrator
+						\item  \textbf{Cilj:} Obrisati korisnički račun drugog korisnika
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Administrator"
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item Korisnik odabire korisnika čiji korisnički račun želi obrisati
+							\item Korisnik odabire opciju "Obriši korisnički račun"
+							\item Sustav upozorava korisnika da je brisanje korisničkog računa trajna i nepovratna akcija
+							\item Korisnik potvrđuje svoj odabir i briše korisnički račun drugog korisnika
+							\item Baza podataka se ažurira
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+	
+							\item[4.a] Korisnik odustane od brisanja korisničkog računa
+							\item[] \begin{packed_enum}
+								
+								\item Korisnik biva preusmjeren na pregled osobnih podataka drugog korisnika								
+							\end{packed_enum}
+							
+						\end{packed_item}
+					\end{packed_item}
 						
 				\subsubsection{Dijagrami obrazaca uporabe}
 					
