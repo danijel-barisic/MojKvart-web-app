@@ -1095,6 +1095,86 @@
 						\end{packed_enum}
 						
 					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC41 - Definiranje četvrti}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Administrator
+						\item  \textbf{Cilj:} Definirati četvrt
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Administrator"
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item Korisnik odabire opciju "Četvrti"
+							\item Korisnik odabire opciju "Dodaj četvrt"
+							\item Korisnik ispunjava sve potrebne podatke - ime četvrti, imena ulica, za svaku ulicu raspon brojeva
+							\item Korisnik spremi promjene
+							\item Baza podataka se ažurira
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+	
+							\item[3.a] Korisnik unese ime četvrti koje je već zauzeto, ili ime ulice koje je već zauzeto, ili za četvrt ne definira niti jednu ulicu, ili za ulicu ne definira raspon brojeva
+							\item[] \begin{packed_enum}
+								
+								\item Sustav obavještava korisnika o pogrešci
+								\item Korisnik ispravlja pogrešku i ponovno pokuša spremiti promjene, ili odustane od definiranja četvrti
+								
+							\end{packed_enum}
+							
+						\end{packed_item}
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC42 - Uređivanje četvrti}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Administrator
+						\item  \textbf{Cilj:} Promijeniti podatke o nekoj četvrti
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Administrator"
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item TODO
+						\end{packed_enum}
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC43 - Brisanje četvrti}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Administrator
+						\item  \textbf{Cilj:} Obrisati četvrt
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Administrator"
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item Korisnik odabire opciju "Četvrti"
+							\item Korisnik odabire opciju "Obriši četvrt"
+							\item Sustav upozorava korisnika da je brisanje četvrti trajna i nepovratna akcija
+							\item Korisnik potvrđuje svoju odluku i obriše četvrt
+							\item Baza podataka se ažurira
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+	
+							\item[4.a] Korisnik odustane od brisanja četvrti
+							\item[] \begin{packed_enum}
+								
+								\item Korisnik biva preusmjeren na stranicu pregleda četvrti
+								
+							\end{packed_enum}
+							
+						\end{packed_item}
+					\end{packed_item}
 						
 				\subsubsection{Dijagrami obrazaca uporabe}
 					
