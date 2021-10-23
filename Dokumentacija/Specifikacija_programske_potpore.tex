@@ -302,7 +302,7 @@
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik odabire opciju pregleda osobnih podataka (UC3)
+							\item Korisnik odabire opciju pregleda osobnih podataka
 							\item Korisnik bira opciju brisanja korisničkog računa
 							\item Sustav upozori korisnika da je brisanje računa trajna i nepovratna akcija
 							\item Korisnik potvrđuje svoj odabir
@@ -726,6 +726,47 @@
 							
 						\end{packed_enum}				
 						
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC24 - Podnošenje zahtjeva za dodjelu uloge}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Priložiti zahtjev za promjenu uloge
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik nema ulogu za koju šalje zahtjev
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item Korisnik odabire opciju "Osobni podaci"
+							\item Korisnik odabire opciju "Zahtjev za ulogom"
+							\item Korisnik odabire ulogu za koju šalje zahtjev
+							\item Korisnik pošalje zahtjev
+							\item Baza podataka se ažurira
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+						
+							\item[3.a] Korisnik pokuša poslati zahtjev bez da je odabrao ulogu
+							\item[] \begin{packed_enum}
+								
+								\item Sustav upozori korisnika da nije odabrao ulogu
+								\item Korisnik odabere ulogu, ili odustane od zahtjeva
+								
+							\end{packed_enum}
+	
+							\item[4.a] Korisnik ugasi prozor za zahtjev za ulogu bez da je poslao zahtjev
+							\item[] \begin{packed_enum}
+								
+								\item Sustav upozori korisnika da nije poslao zahtjev
+								\item Korisnik pošalje zahtjev, ili odustane od njega
+								
+							\end{packed_enum}
+							
+						\end{packed_item}
 					\end{packed_item}
 						
 				\subsubsection{Dijagrami obrazaca uporabe}
