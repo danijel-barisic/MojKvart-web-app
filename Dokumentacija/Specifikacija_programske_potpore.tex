@@ -563,12 +563,13 @@
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik pregledava temu na "Forumu" (UC15)
-							\item Korisnik odabire odgovor čiji autor je on
+							\item Korisnik je autor odgovora kojeg odabire
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
+							\item Korisnik odabire opciu "Uredi odgovor"
 							\item Otvara se polje za odgovor koje sadrži trenutnu verziju teksta odgovora
 							\item Korisnik uređuje tekst
 							\item Korisnik odabire opciju "Spremi promjene"
@@ -580,10 +581,11 @@
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
-						\item[2.a] Korisnik napušta stranicu iako napisani odgovor nije objavio
+						\item[2.a] Korisnik napušta stranicu iako uređeni odgovor nije objavio
 							\item[] \begin{packed_enum}
 								
 								\item Sustav upozorava korisnika da uređeni tekst neće biti spremljen ako napusti stranicu
+								\item Korisnik odabire opciju "Spremi promjene", ili odustane od promjena
 								
 							\end{packed_enum}
 						\item[2.b] Korisnik je obrisao sav tekst odgovora i odabrao opciju "Spremi promjene"
@@ -637,13 +639,18 @@
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC19 - Brisanje teme na forumu}}
+					\noindent \underbar{\textbf{UC19 - Brisanje teme na "Forumu"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Moderator
 						\item  \textbf{Cilj:} Obrisati temu na forumu
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Moderator"
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik pregledava "Forum" (UC14)
+							\item Korisnik ima ulogu "Moderator"
+						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -652,7 +659,7 @@
 							\item Sustav upozorava korisnika da je brisanje teme trajna i nepovratna akcija
 							\item Korisnik potvrđuje svoju odluku i tema se obriše
 							\item Baza podataka se ažurira
-							\item Prikaz tema na forumu se ažurira
+							\item Korisnik biva preusmjeren na stranicu "Forum"
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
@@ -674,7 +681,7 @@
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
-						\item  \textbf{Cilj:} Pregled izvješća i budućih tema
+						\item  \textbf{Cilj:} Pregled svih izvješća u cjelini "Vijeće četvrti"
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
 						\item  \textbf{Opis osnovnog tijeka:}
@@ -682,46 +689,103 @@
 						\item[] \begin{packed_enum}
 	
 							\item Korisnik odabire opciju "Vijeće četvrti" 
-							\item Prikazuju se objave Vijeća četvrti, poredane po vremenu objave
+							\item Korisnik biva preusmjeren na stranicu "Vijeće četvrti" gdje dobije prikaz svih izvješća, poredanih kronološki od najsvježijeg
 							
 							
 						\end{packed_enum}
+
 						
-						
-					\end{packed_item}					
-					\noindent \underbar{\textbf{UC21 - Stvaranje novog izvješća }}
+					\end{packed_item}		
+					
+					\noindent \underbar{\textbf{UC21 - Prikaz izvješća u "Vijeću četvrti" }}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Prikaz jednog ivzješća u cjelini "Vijeće četvrti"
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik pregledava "Vijeće četvrti" (UC20)
+						\end{packed_enum}
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item Korisnik odabire izvješće koje želi pregledati 
+							\item Korisnik biva preusmjeren na stranicu koja odgovara izvješću koje je odabrao
+							
+							
+						\end{packed_enum}
+
+						
+					\end{packed_item}							
+								
+					\noindent \underbar{\textbf{UC22 - Stvaranje novog izvješća na "Vijeću četvrti"}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Vijećnik
 						\item  \textbf{Cilj:} Otvaranje polja za pisanje izvješća
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Vijećnik"
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik pregledava "Vijeće četvrti" (UC20)
+							\item Korisnik ima ulogu "Vijećnik"
+						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
 							\item Korisnik odabire opciju "Stvaranje novog izvješća" 
 							\item Otvara se polje za pisanje izvješća
+							\item Korisnik ispunjava polje tekstom izvješća
+							\item Korisnik bira opciju "Objavi izvješće"
+							\item Baza podataka se ažurira
+							\item Korisnik biva preusmjeren na stranicu "Vijeća četvrti"
 							
 							
 						\end{packed_enum}
 						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+	
+							\item[3.a] Korisnik pokuša objaviti prazno izvješće bez teksta
+							\item[] \begin{packed_enum}
+								
+								\item Sustav upozorava korisnika da izvješće s "Vijeća četvrti" ne može biti prazan tekst
+								\item Korisnik doda tekst u polje za tekst izvješća, ili odustane od objave izvješća
+								
+							\end{packed_enum}
+							
+						\end{packed_item}
+						
 						
 					\end{packed_item}					
-					\noindent \underbar{\textbf{UC22 - Uređivanje izvješća }}
+					\noindent \underbar{\textbf{UC23 - Uređivanje izvješća na "Vijeću četvrti"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Vijećnik
 						\item  \textbf{Cilj:} Urediti kratko izvješće
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Vijećnik"
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik pregledava izvješće s "Vijeća četvrti" (UC21)
+							\item Korisnik ima ulogu "Vijećnik"
+							\item Korisnik je autor izvješća kojeg pregledava
+						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik uređuje izvješće u tekstualnom polju 
-							\item Korisnik sprema promjene na izvješću
+							\item Korisnik odabire opciju "Uredi izvješće"
+							\item Otvara se tekstualno polje koje sadrži trenutnu verziju ivzješća
+							\item Korisnik uređuje tekst
+							\item Korisnik odabire opciju "Spremi promjene"
 							\item Baza podataka se ažurira
+							\item Korisnik biva preusmjeren na stranicu koja odgovara tom izvješću na "Vijeću četvrti"
 							
 							
 							
@@ -729,10 +793,19 @@
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
-						\item[2.a] Korisnik zatvara stranicu bez spremanja promjena
+						\item[3.a] Korisnik napušta stranicu iako uređeno izvješće nije objavio
 							\item[] \begin{packed_enum}
 								
-								\item Sustav upozorava korisnika želi li spremiti napisani tekst
+								\item Sustav upozorava korisnika da uređeni tekst neće biti spremljen ako napusti stranicu
+								\item Korisnik odabire opciju "Spremi promjene", ili odustane od promjena
+								
+							\end{packed_enum}
+							
+						\item[3.b] Korisnik je obrisao sav tekst izvješća i odabrao opciju "Spremi promjene"
+							\item[] \begin{packed_enum}
+								
+								\item Sustav upozorava korisnika da tekst izvješća ne smije biti prazan
+								\item Korisnik u polje za tekst izvješća doda neki tekst, ili odustane od promjene izvješća
 								
 							\end{packed_enum}
 						\end{packed_item}
@@ -742,52 +815,26 @@
 					\end{packed_item}					
 					
 
-					\noindent \underbar{\textbf{UC23 - Objava izvješća }}
-					\begin{packed_item}
-	
-						\item \textbf{Glavni sudionik: }Vijećnik
-						\item  \textbf{Cilj:} Objava kratkog izvješća
-						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Vijećnik"
-						\item  \textbf{Opis osnovnog tijeka:}
-						
-						\item[] \begin{packed_enum}
-	
-							\item Korisnik odabire opciju "Objavi" 
-							\item Izvješće s "Vijeća četvrti" se objavljuje
-							\item Baza podataka se ažurira
-							\item Prikaz izvješća na "Vijeću četvrti" se ažurira	
-							
-							
-						\end{packed_enum}
-						\item  \textbf{Opis mogućih odstupanja:}
-						
-						\item[] \begin{packed_item}
-						\item[2.a] Korisnik odabire opciju "objavi" iako je tekstualno polje prazno
-							\item[] \begin{packed_enum}
-								
-								\item Sustav upozorava korisnika da je polje za tekst prazno
-								
-							\end{packed_enum}
-						\end{packed_item}
-						\end{packed_item}
-						
-						\noindent \underbar{\textbf{UC24 - Brisanje izvješća s "Vijeća četvrti"}}
+					\noindent \underbar{\textbf{UC24 - Brisanje izvješća s "Vijeća četvrti"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Vijećnik
 						\item  \textbf{Cilj:} Obrisati izvješće u cjelini "Vijeće četvrti"
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Vijećnik"
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik pregledava izvješće s "Vijeća četvrti" (UC21)
+							\item Korisnik ima ulogu "Vijećnik"														\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik odabire opciju "Obriši izvještaj"
+							\item Korisnik odabire opciju "Obriši izvješće"
 							\item Sustav upozorava korisnika da je brisanje izvješća trajna i nepovratna akcija
 							\item Korisnik potvrđuje svoju odluku i izvješće se obriše
 							\item Baza podataka se ažurira
-							\item Prikaz izvješća s "Vijeća četvrti" se ažurira
+							\item Korisnik biva preusmjeren na stranicu "Vijeće četvrti"
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
@@ -797,7 +844,7 @@
 							\item[3.a] Korisnik odustane od brisanja izvješća
 							\item[] \begin{packed_enum}
 								
-								\item Korisnik biva preusmjeren na stranicu izvješća s "Vijeća četvrti"
+								\item Korisnik biva preusmjeren na stranicu koja odgovara tom izvješću
 								
 							\end{packed_enum}
 							
@@ -806,20 +853,24 @@
 						
 						
 						
-					\noindent \underbar{\textbf{UC25 - Otvaranje teme na forumu vezane za izvješće s "Vijeća četvrti"}}
+					\noindent \underbar{\textbf{UC25 - Otvaranje teme na "Forumu" vezane za izvješće s "Vijeća četvrti"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
 						\item  \textbf{Cilj:} Na forumu stvoriti temu vezanu uz izvješće na "Vijeću četvrti"
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav, za izvješće za koje korisnik želi otvoriti temu na forumu nije već otvorena tema
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik pregledava izvješće s "Vijeća četvrti" (UC21)
+							\item Za odabrano izvješće nije već otvorena tema na "Forumu"								\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik odabire opciju "Otvori temu na forumu" kod izvješća u cjelini "Vijeće četvrti
+							\item Korisnik odabire opciju "Otvori temu na 'Forumu'" kod izvješća u cjelini "Vijeće četvrti"
 							\item Otvara se nova tema na cjelini "Forum"
 							\item Baza podataka se ažurira
+							\item Korisnik biva preusmjeren na novootvorenu temu na "Forumu"
 							
 						\end{packed_enum}				
 						
