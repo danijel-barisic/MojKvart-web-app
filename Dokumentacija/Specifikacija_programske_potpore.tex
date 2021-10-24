@@ -1182,56 +1182,68 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC38 - Pregled liste četvrti}}
+					\noindent \underbar{\textbf{UC38 - Pregled popisa kvartova}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
-						\item  \textbf{Cilj:} Pregledati listu četvrti
+						\item  \textbf{Cilj:} Pregledati listu kvartova
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Administrator"
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik ima ulogu "Administrator"
+						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik odabire opciju "Četvrti"
-							\item Korisnik biva preusmjeren na stranicu gdje vidi popis četvrti
+							\item Korisnik odabire opciju "Kvartovi"
+							\item Korisnik biva preusmjeren na stranicu gdje vidi popis kvartova
 						\end{packed_enum}
 					
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC39 - Pregled četvrti}}
+					\noindent \underbar{\textbf{UC39 - Pregled kvarta}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
-						\item  \textbf{Cilj:} Pregledati sadržaj sustava za pojedinu četvrt
+						\item  \textbf{Cilj:} Pregledati korisnički sadržaj sustava za pojedini kvart
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Administrator"
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik ima ulogu "Administrator"
+							\item Korisnik pregledava popis kvartova (UC38)
+						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik odabire opciju "Četvrti"
-							\item Korisnik odabire četvrt koju želi pregledati
-							\item Korisnik biva preusmjeren na početnu stranicu te četvrti
+							\item Korisnik odabire kvart koju želi pregledati
+							\item Korisnik biva preusmjeren na početnu stranicu tog kvarta
 						\end{packed_enum}
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC40 - Definiranje četvrti}}
+					\noindent \underbar{\textbf{UC40 - Definiranje kvarta}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
-						\item  \textbf{Cilj:} Definirati četvrt
+						\item  \textbf{Cilj:} Definirati novi kvart
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Administrator"
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik ima ulogu "Administrator"
+							\item Korisnik pregledava popis kvartova (UC38)
+						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik odabire opciju "Četvrti"
-							\item Korisnik odabire opciju "Dodaj četvrt"
-							\item Korisnik ispunjava sve potrebne podatke - ime četvrti, imena ulica, za svaku ulicu raspon brojeva
-							\item Korisnik spremi promjene
+							\item Korisnik odabire opciju "Dodaj kvart"
+							\item Korisnik ispunjava sve potrebne podatke - ime kvarta, imena ulica, za svaku ulicu raspon brojeva
+							\item Korisnik odabire opciju "Spremi promjene"
 							\item Baza podataka se ažurira
 						\end{packed_enum}
 						
@@ -1239,58 +1251,85 @@
 						
 						\item[] \begin{packed_item}
 	
-							\item[3.a] Korisnik unese ime četvrti koje je već zauzeto, ili ime ulice koje je već zauzeto, ili za četvrt ne definira niti jednu ulicu, ili za ulicu ne definira raspon brojeva
+							\item[3.a] Korisnik unese ime četvrti koje je već zauzeto, ili ime ulice koje je već zauzeto, ili za četvrt ne definira niti jednu ulicu, ili za ulicu ne definira raspon brojeva, ili za ulicu definira mogućnost postojanja negativnih brojeva
 							\item[] \begin{packed_enum}
 								
 								\item Sustav obavještava korisnika o pogrešci
-								\item Korisnik ispravlja pogrešku i ponovno pokuša spremiti promjene, ili odustane od definiranja četvrti
+								\item Korisnik ispravlja pogrešku i odabire opciju "Spremi promjene", ili odustane od definiranja četvrti
 								
 							\end{packed_enum}
 							
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC41 - Uređivanje četvrti}}
+					\noindent \underbar{\textbf{UC41 - Uređivanje kvarta}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
-						\item  \textbf{Cilj:} Promijeniti podatke o nekoj četvrti
+						\item  \textbf{Cilj:} Promijeniti podatke o nekom kvartu
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Administrator"
-						\item  \textbf{Opis osnovnog tijeka:}
-						
+						\item  \textbf{Preduvjeti:}
 						\item[] \begin{packed_enum}
-	
-							\item TODO
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik ima ulogu "Administrator"
+							\item Korisnik pregledava podatke o kvartu (UC39)
 						\end{packed_enum}
-					\end{packed_item}
-					
-					\noindent \underbar{\textbf{UC42 - Brisanje četvrti}}
-					\begin{packed_item}
-	
-						\item \textbf{Glavni sudionik: }Administrator
-						\item  \textbf{Cilj:} Obrisati četvrt
-						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Administrator"
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik odabire opciju "Četvrti"
-							\item Korisnik odabire opciju "Obriši četvrt"
-							\item Sustav upozorava korisnika da je brisanje četvrti trajna i nepovratna akcija
-							\item Korisnik potvrđuje svoju odluku i obriše četvrt
+							\item Korisnik odabire opciju "Uredi kvart"
+							\item Korisnik radi promjene
+							\item Korisnik sprema promjene
 							\item Baza podataka se ažurira
+							\item Korisnik biva preusmjeren na stranicu koja sadrži podatke o tom kvartu
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
 	
-							\item[4.a] Korisnik odustane od brisanja četvrti
+							\item[3.a] Korisnik odustane od promjena
 							\item[] \begin{packed_enum}
 								
-								\item Korisnik biva preusmjeren na stranicu pregleda četvrti
+								\item Korisnik biva preusmjeren na stranicu koja sadrži podatke o tom kvartu
+								
+							\end{packed_enum}
+							
+						\end{packed_item}
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC42 - Brisanje kvarta}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Administrator
+						\item  \textbf{Cilj:} Obrisati četvrt
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik ima ulogu "Administrator"
+							\item Korisnik pregledava podatke o kvartu (UC39)
+						\end{packed_enum}
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item Korisnik odabire opciju "Obriši kvart"
+							\item Sustav upozorava korisnika da je brisanje kvarta trajna i nepovratna akcija
+							\item Korisnik potvrđuje svoju odluku i obriše kvart
+							\item Baza podataka se ažurira
+							\item Korisnik biva preusmjeren na stranicu "Kvartovi"
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+	
+							\item[3.a] Korisnik odustane od brisanja kvarta
+							\item[] \begin{packed_enum}
+								
+								\item Korisnik biva preusmjeren na stranicu koja sadrži podatke o tom kvartu
 								
 							\end{packed_enum}
 							
