@@ -104,47 +104,6 @@
 			
 				
 			\subsection{Obrasci uporabe}
-				
-				\textbf{\textit{dio 1. revizije}}
-				
-				\subsubsection{Opis obrazaca uporabe}
-					\textit{Funkcionalne zahtjeve razraditi u obliku obrazaca uporabe. Svaki obrazac je potrebno razraditi prema donjem predlošku. Ukoliko u nekom koraku može doći do odstupanja, potrebno je to odstupanje opisati i po mogućnosti ponuditi rješenje kojim bi se tijek obrasca vratio na osnovni tijek.}\\
-					
-
-					\noindent \underbar{\textbf{UC$<$broj obrasca$>$ -$<$ime obrasca$>$}}
-					\begin{packed_item}
-	
-						\item \textbf{Glavni sudionik: }$<$sudionik$>$
-						\item  \textbf{Cilj:} $<$cilj$>$
-						\item  \textbf{Sudionici:} $<$sudionici$>$
-						\item  \textbf{Preduvjet:} $<$preduvjet$>$
-						\item  \textbf{Opis osnovnog tijeka:}
-						
-						\item[] \begin{packed_enum}
-	
-							\item $<$opis korak jedan$>$
-							\item $<$opis korak dva$>$
-							\item $<$opis korak tri$>$
-							\item $<$opis korak četiri$>$
-							\item $<$opis korak pet$>$
-						\end{packed_enum}
-						
-						\item  \textbf{Opis mogućih odstupanja:}
-						
-						\item[] \begin{packed_item}
-	
-							\item[2.a] $<$opis mogućeg scenarija odstupanja u koraku 2$>$
-							\item[] \begin{packed_enum}
-								
-								\item $<$opis rješenja mogućeg scenarija korak 1$>$
-								\item $<$opis rješenja mogućeg scenarija korak 2$>$
-								
-							\end{packed_enum}
-							\item[2.b] $<$opis mogućeg scenarija odstupanja u koraku 2$>$
-							\item[3.a] $<$opis mogućeg scenarija odstupanja  u koraku 3$>$
-							
-						\end{packed_item}
-					\end{packed_item}
 					
 					\noindent \underbar{\textbf{UC1 - Registracija}}
 					\begin{packed_item}
@@ -157,8 +116,9 @@
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik odabere opciju za registraciju
-							\item Korisnik uspješno unese tražene podatke
+							\item Korisnik odabire opciju "Registracija"
+							\item Korisnik unosi tražene podatke
+							\item Korisnik odabire opciju "Podnesi"
 							\item Korisnik dobiva obavijest o uspješnoj registraciji
 							\item Korisnik biva preusmjeren na početnu stranicu
 						\end{packed_enum}
@@ -167,11 +127,11 @@
 						
 						\item[] \begin{packed_item}
 	
-							\item[2.a] Korisnik odabere e-mail s kojim je već povezan korisnički račun u sustavu, ili unese tražene podatke u krivom formatu
+							\item[3.a] Korisnik odabire e-mail s kojim je već povezan korisnički račun u sustavu, ili unese tražene podatke u krivom formatu
 							\item[] \begin{packed_enum}
 								
 								\item Korisnik dobiva obavijest o pogrešci
-								\item Korisnik mijenja podatke i ponovno odabire opciju registracije, ili odustaje od registracije
+								\item Korisnik mijenja podatke i ponovno odabire "Podnesi", ili odustaje od registracije
 								
 							\end{packed_enum}
 							
@@ -189,9 +149,10 @@
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik odabire opciju prijave u sustav
+							\item Korisnik odabire "Prijava"
 							\item Korisnik unosi e-mail adresu i lozinku
-							\item Korisnik dobiva pristup sustavu
+							\item Korisnik odabire opciju "Podnesi"
+							\item Korisnik dobiva pristup korisničkom dijelu sustava
 							\item Korisnik biva preusmjeren na početnu stranicu
 						\end{packed_enum}
 						
@@ -203,7 +164,7 @@
 							\item[] \begin{packed_enum}
 								
 								\item Korisnik dobiva obavijest o pogrešci
-								\item Korisnik mijenja podatke i ponovno odabire opciju prijave, ili odustaje od prijave
+								\item Korisnik mijenja podatke i ponovno odabire opciju "Podnesi", ili odustaje od prijave
 								
 							\end{packed_enum}
 							
@@ -222,8 +183,9 @@
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik odabire opciju odjave iz sustava
-							\item Korisnik biva odjavljen iz sustava i preusmjeren na stranicu "Prijava"
+							\item Korisnik odabire opciju "Odjava"
+							\item Korisnik gubi pristup korisničkom dijelu sustava
+							\item Korisnik biva preusmjeren na stranicu "Prijava"
 						\end{packed_enum}
 					\end{packed_item}					
 					
@@ -240,7 +202,7 @@
 						\item[] \begin{packed_enum}
 	
 							\item Korisnik odabire opciju "Osobni podaci"
-							\item Korisnik dobije prikaz osobnih podataka
+							\item Korisnik biva preusmjeren na stranicu "Osobni podaci" gdje dobije prikaz svojih osobnih podataka
 						\end{packed_enum}
 					\end{packed_item}
 					
@@ -250,13 +212,17 @@
 						\item \textbf{Glavni sudionik: }Korisnik
 						\item  \textbf{Cilj:} Promijeniti osobne podatke
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik pregledava svoje osobne podatke (UC4)
+						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik odabire opciju promjene osobnih podataka
-							\item Korisnik mijenja svoje osobne podatke
+							\item Korisnik odabire opciju "Promjena osobnih podataka"
+							\item Korisnik mijenja svoje podatke
 							\item Korisnik sprema promjene
 							\item Baza podataka se ažurira
 						\end{packed_enum}
@@ -298,17 +264,20 @@
 						\item \textbf{Glavni sudionik: }Korisnik
 						\item  \textbf{Cilj:} Obrisati korisnički račun
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik pregledava svoje osobne podatke (UC4)
+						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik odabire opciju pregleda osobnih podataka
-							\item Korisnik bira opciju brisanja korisničkog računa
-							\item Sustav upozori korisnika da je brisanje računa trajna i nepovratna akcija
+							\item Korisnik odabire opciju "Obriši korisnički račun"
+							\item Sustav upozori korisnika da je brisanje korisničkog računa trajna i nepovratna akcija
 							\item Korisnik potvrđuje svoj odabir
 							\item Korisnički račun se izbriše iz baze podataka
-							\item Korisnik biva preusmjeren na stranicu za prijavu
+							\item Korisnik biva preusmjeren na stranicu "Prijava"
 							
 						\end{packed_enum}
 						
@@ -326,13 +295,17 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC7 - Promjena četvrti stanovanja korisnika}}
+					\noindent \underbar{\textbf{UC7 - Promjena kvarta stanovanja korisnika}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
-						\item  \textbf{Cilj:} Ukloniti dodatne uloge korisniku koji je promijenio kvart
+						\item  \textbf{Cilj:} Ukloniti dodatne uloge ("Vijećnik" i "Moderator") korisniku koji je promijenio kvart
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je upravo promijenio svoje osobne podatke, i promijenio je adresu na adresu koja pripada drugom kvartu
+						\\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik je promijenio svoje osobne podatke (UC5)
+							\item Korisnik je pri promjeni osobnih podataka promijenio adresu, i nova adresa ne pripada kvartu kojem je pripadala njegova stara adresa
+						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
