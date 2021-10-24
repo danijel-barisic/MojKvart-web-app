@@ -949,6 +949,7 @@
 						\item \textbf{Glavni sudionik: } Administrator
 						\item  \textbf{Cilj:} Pregledati osobne podatke korisnika
 						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjeti:}
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik ima ulogu "Administrator"
@@ -970,6 +971,7 @@
 						\item \textbf{Glavni sudionik: }Administrator
 						\item  \textbf{Cilj:} Dodijeliti ulogu korisniku (radi jednoznačnosti, u daljnjem tekstu: objekt)
 						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjeti:}
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik ima ulogu "Administrator"
@@ -992,6 +994,7 @@
 						\item \textbf{Glavni sudionik: }Administrator
 						\item  \textbf{Cilj:} Oduzeti ulogu korisniku (radi jednoznačnosti, u daljnjem tekstu: objekt)
 						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjeti:}
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik ima ulogu "Administrator"
@@ -1013,13 +1016,17 @@
 						\item \textbf{Glavni sudionik: }Administrator
 						\item  \textbf{Cilj:} Pregledati zahtjeve korisnika za uloge
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Administrator"
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik ima ulogu "Administrator"
+						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik odabire opciju "Zahtjevi za uloge"
-							\item Korisnik biva preusmjeren na stranicu gdje vidi sve zahtjeve za ulogu koji nisu obrađeni
+							\item Korisnik odabire opciju "Zahtjevi uloga"
+							\item Korisnik biva preusmjeren na stranicu "Zahtjevi uloga" gdje dobije pregled svih nerazriješenih zahtjeva uloga
 						\end{packed_enum}
 						
 
@@ -1031,12 +1038,16 @@
 						\item \textbf{Glavni sudionik: } Administrator
 						\item  \textbf{Cilj:} Prihvatiti zahtjev korisnika za ulogu
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Administrator"
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik ima ulogu "Administrator"
+							\item Korisnik pregledava zahtjeve uloga (UC31)
+						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik odabire opciju pregleda zahtjeva za ulogu
 							\item Korisnik odabire zahtjev
 							\item Korisnik prihvaća zahtjev
 							\item Baza podataka se ažurira
@@ -1050,7 +1061,12 @@
 						\item \textbf{Glavni sudionik: } Administrator
 						\item  \textbf{Cilj:} Odbiti zahtjev korisnika za ulogu
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Administrator"
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik ima ulogu "Administrator"
+							\item Korisnik pregledava zahtjeve uloga (UC31)
+						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -1069,7 +1085,12 @@
 						\item \textbf{Glavni sudionik: }Administrator
 						\item  \textbf{Cilj:} Pregledati popis blokiranih korisnika
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Administrator"
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik ima ulogu "Administrator"
+							\item Korisnik pregledava sve korisnike u sustavu (UC27)
+						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -1084,14 +1105,19 @@
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
-						\item  \textbf{Cilj:} Blokirati korisnika
+						\item  \textbf{Cilj:} Blokirati korisnika (radi jednoznačnosti, u daljnjem tekstu: objekt)
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Administrator", drugi korisnik nije blokiran
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik ima ulogu "Administrator"
+							\item Korisnik pregledava osobne podatke objekta (UC28)
+							\item Objekt trenutno nije blokiran
+						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik odabire korisnika kojeg želi blokirati
 							\item Korisnik odabire opciju "Blokiraj korisnika"
 							\item Baza podataka se ažurira
 						\end{packed_enum}
@@ -1102,14 +1128,19 @@
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
-						\item  \textbf{Cilj:} Deblokirati korisnika
+						\item  \textbf{Cilj:} Deblokirati korisnika (radi jednoznačnosti, u daljnjem tekstu: objekt)
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Administrator", dugi korisnik je blokiran
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik ima ulogu "Administrator"
+							\item Korisnik pregledava osobne podatke objekta (UC28)
+							\item Objekt je trenutno blokiran
+						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik odabire korisnika kojeg želi deblokirati
 							\item Korisnik odabire opciju "Deblokiraj korisnika"
 							\item Baza podataka se ažurira
 						\end{packed_enum}
@@ -1120,14 +1151,18 @@
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
-						\item  \textbf{Cilj:} Obrisati korisnički račun drugog korisnika
+						\item  \textbf{Cilj:} Obrisati korisnički račun drugog korisnika (radi jednoznačnosti, u daljnjem tekstu: objekt)
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Administrator"
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik ima ulogu "Administrator"
+							\item Korisnik pregledava osobne podatke objekta (UC28)
+						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik odabire korisnika čiji korisnički račun želi obrisati
 							\item Korisnik odabire opciju "Obriši korisnički račun"
 							\item Sustav upozorava korisnika da je brisanje korisničkog računa trajna i nepovratna akcija
 							\item Korisnik potvrđuje svoj odabir i briše korisnički račun drugog korisnika
@@ -1138,10 +1173,10 @@
 						
 						\item[] \begin{packed_item}
 	
-							\item[4.a] Korisnik odustane od brisanja korisničkog računa
+							\item[3.a] Korisnik odustane od brisanja korisničkog računa
 							\item[] \begin{packed_enum}
 								
-								\item Korisnik biva preusmjeren na pregled osobnih podataka drugog korisnika								
+								\item Korisnik biva preusmjeren na pregled osobnih podataka objekta							
 							\end{packed_enum}
 							
 						\end{packed_item}
