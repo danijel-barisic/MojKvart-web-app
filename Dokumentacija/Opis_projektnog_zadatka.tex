@@ -10,7 +10,7 @@
 	
 	Na početnoj stranici, odabirom poveznice "Događaji", korisnik biva preusmjeren na stranicu sa svim potvrđenim događajima u svojoj četvrti. Ovdje može vidjeti vidjeti te događaje, te predložiti vlastite događaje, za što mora unijeti naziv događaja, mjesto, vrijeme, trajanje i kratak opis. Prijedloge događaja odobravaju moderatori pojedinih četvrti.
 	
-	Odabirom poveznice "Forum" na početnoj stranici, korisnik biva preusmjeren na stranicu "Forum" gdje dobije prikaz svih tema na forumu za svoju četvrt. Korisnik može čitati teme i objave u njima, stvarati vlastite teme, komentirati objave drugih korisnika, uređivati i brisati svoje odgovore. U slučaju da se u temi na forumu obrišu sve objave, tema se automatski obriše. 
+	Odabirom poveznice "Forum" na početnoj stranici, korisnik biva preusmjeren na stranicu "Forum" gdje dobije prikaz svih tema na forumu za svoju četvrt. Korisnik može čitati teme i objave u njima, stvarati vlastite teme, komentirati objave drugih korisnika, uređivati i brisati svoje odgovore. U slučaju da se u temi na forumu obrišu sve objave, tema se automatski obriše. Pri stvaranju teme, korisnik mora napisati prvu objavu u njoj.
 	
 	Konačno, odabirom poveznice "Vijeće četvrti" na početnoj stranici, korisnik biva preusmjeren na stranicu vijeća, gdje može vidjeti popis izvješća s prethodnih sjednica. Korisnik može odabrati pojedino izvješće za više detalja, a može i automatski otvoriti temu na forumu vezanu za pojedino izvješće. Takve teme je moguće otvoriti jednom po izvješću, i vizualno se razlikuju od ostalih tema na forumu, te u njima prva objava bude tekst izvješća. Tada se u tekst izvješća ugradi poveznica na raspravu na temu za to izvješće.
 	
@@ -28,4 +28,18 @@
 	
 	Dodatno, pod opcijom "Kvartovi", administratori mogu odabrati opciju "Dodaj kvart", čime definiraju novi kvart u sustavu. Za kvart moraju odabrati ime, i to ime kvarta mora biti jedinstveno među imenima kvartova. Dodatno, moraju odabrati koje ulice pripadaju tom kvartu, te imena ulica također moraju biti jedinstvena, a za svaku ulicu moraju odabrati i raspon dozvoljenih brojeva.
 	
-	Konačno, pri pregledu kvartova, administratori mogu uređivati podatke za pojedine kvartove, te ih mogu i obrisati. Ukoliko promjenom podataka kvarta adresa nekog korisnika prestane biti validna, ili ukoliko se njegov kvart i time sve ulice u tom kvartu obriše, pri idućoj prijavi korisnik će morati promijeniti svoju adresu prije nastavka korištenja sustava. 
+	Konačno, pri pregledu kvartova, administratori mogu uređivati podatke za pojedine kvartove, te ih mogu i obrisati. Ukoliko promjenom podataka kvarta adresa nekog korisnika prestane biti validna, ili ukoliko se njegov kvart i time sve ulice u tom kvartu obriše, pri idućoj prijavi korisnik će morati promijeniti svoju adresu prije nastavka korištenja sustava.
+	
+	Za ovu svrhu su stanovnici pojedinih kvarta mogli koristiti razne aplikacije općenitije namjene, npr. Facebook grupe ili Discord serveri, ali prednost ovakvog sustava je upravo prilagođenost toj specifičnoj namjeni spajanja ljudi pojedinog kvarta, te naglasak i jasnija definicija upravo onih funkcionalnosti koje su bitnije za neki kvart.
+	
+	Sustav bi se mogao prilagoditi i na mobilne uređaje, no svrha ovog projekta je napraviti web aplikaciju, a ideja izrade mobilne aplikacije je jedna od mogućnosti za kasnije faze projekta. Postoje također razne ideje manje važnosti koje nisu nužne za osnovno funkcioniranje projekta, ali bi poboljšale cjelokupni sustav, a neke od njih su:
+	
+	\begin{packed_item}
+		\item 	mogućnost da svaki korisnik može pregledati osobne podatke svakog drugog korisnika
+		\item	mogućnost da korisnici biraju svoje nadimke, i da se, umjesto njihovih imena i prezimena, ti nadimci prikazuju u sustavu
+		\item 	2FA prilikom prijave
+		\item 	primanje obavijesti na mail
+		\item 	mogućnost pregleda svih objava koje je korisnik imao na forumu
+		\item	mogućnost pregleda raznih statistika na forumu
+		
+	\end{packed_item}
