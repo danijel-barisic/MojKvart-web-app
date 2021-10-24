@@ -435,6 +435,7 @@
 						\item \textbf{Glavni sudionik: }Moderator
 						\item  \textbf{Cilj:} Objava predloženog događaja u cjelini "Događaji"
 						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjeti:}
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik ima ulogu "Moderator"
@@ -473,11 +474,11 @@
 						\end{packed_enum}
 						
 					\end{packed_item}
-					\noindent \underbar{\textbf{UC14 - Pregled tema na forumu}}
+					\noindent \underbar{\textbf{UC14 - Pregled tema na "Forumu"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
-						\item  \textbf{Cilj:} Prikaz tema na forumu
+						\item  \textbf{Cilj:} Prikaz tema na "Forumu"
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
 						\item  \textbf{Opis osnovnog tijeka:}
@@ -485,19 +486,23 @@
 						\item[] \begin{packed_enum}
 	
 							\item Korisnik odabire cjelinu „Forum“
-							\item Prikazuju se teme na forumu poredane po vremenu zadnjeg odgovora
+							\item Korisnik biva preusmjeren na stranicu "Forum" gdje gdje dobije prikaz tema na "Forumu", poredanih po vremenu zadnjeg odgovora
 							
 						\end{packed_enum}
 						
 						
 					\end{packed_item}						
-					\noindent \underbar{\textbf{UC15 - Prikaz teme na forumu}}
+					\noindent \underbar{\textbf{UC15 - Prikaz teme na "Forumu"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
 						\item  \textbf{Cilj:} Otvoriti temu na forumu i vidjeti sve objave u njoj
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik pregledava "Forum" (UC14)
+						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -509,13 +514,16 @@
 						
 						
 					\end{packed_item}
-					\noindent \underbar{\textbf{UC16 - Odabir objave za odgovor }}
+					\noindent \underbar{\textbf{UC16 - Odabir objave za odgovor u temi na "Forumu"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
-						\item  \textbf{Cilj:} Odabir objave na koju korisnik želi odgovoriti
+						\item  \textbf{Cilj:} Odabir objave na koju korisnik želi odgovoriti u temi na "Froumu"
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik pregledava temu na "Forumu" (UC15)
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
