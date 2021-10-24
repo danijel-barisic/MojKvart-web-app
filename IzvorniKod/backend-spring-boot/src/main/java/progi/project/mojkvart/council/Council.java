@@ -1,5 +1,5 @@
 package progi.project.mojkvart.council;
 
-public class Council {
-
+public class Council{
+    
 }
