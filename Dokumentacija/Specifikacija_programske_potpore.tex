@@ -301,7 +301,8 @@
 						\item \textbf{Glavni sudionik: }Korisnik
 						\item  \textbf{Cilj:} Ukloniti dodatne uloge ("Vijećnik" i "Moderator") korisniku koji je promijenio kvart
 						\item  \textbf{Sudionici:} Baza podataka
-						\\item[] \begin{packed_enum}
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik je promijenio svoje osobne podatke (UC5)
 							\item Korisnik je pri promjeni osobnih podataka promijenio adresu, i nova adresa ne pripada kvartu kojem je pripadala njegova stara adresa
@@ -319,7 +320,7 @@
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
-						\item  \textbf{Cilj:} Prikaz potvrđenih događaja u korisnikovoj četvrti
+						\item  \textbf{Cilj:} Prikaz potvrđenih događaja u korisnikovom kvartu
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
 						\item  \textbf{Opis osnovnog tijeka:}
@@ -327,7 +328,7 @@
 						\item[] \begin{packed_enum}
 	
 							\item Korisnik odabere opciju "Događaji"
-							\item Aplikacija prikazuje događaje za korisnikovu četvrt
+							\item Korisnik biva preusmjeren na stranicu "Događaji" gdje dobije prikaz potvrđenih događaja u njegovom kvartu
 						\end{packed_enum}
 						
 							
@@ -338,14 +339,18 @@
 						\item \textbf{Glavni sudionik: }Korisnik
 						\item  \textbf{Cilj:} Stvoriti prijedlog događaja
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik pregledava događaje (UC8)
+						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
 							\item Korisnik odabire opciju "Novi prijedlog događaja" 
 							\item Korisnik ispunjava polja "naziv", "mjesto", "vrijeme", "trajanje" i "kratki opis"
-							\item Korisnik stvara novi prijedlog događaja
+							\item Korisnik odabire opciju "Objavi prijedlog događaja"
 							\item Baza podataka se ažurira
 						\end{packed_enum}
 						
@@ -357,7 +362,7 @@
 							\item[] \begin{packed_enum}
 								
 								\item Sustav upozori korisnika da sva polja nisu ispunjena
-								\item Korisnik ispuni preostala polja i objavi prijedlog događaja, ili odustane od prijedloga
+								\item Korisnik ispuni preostala polja i odabire opciju "Objavi prijedlog događaja", ili odustane od prijedloga
 								
 							\end{packed_enum}
 							
@@ -370,14 +375,19 @@
 						\item \textbf{Glavni sudionik: }Moderator
 						\item  \textbf{Cilj:} Pregled prijedloga događaja u cjelini "Događaji"
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Moderator"
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik ima ulogu "Moderator"
+							\item Korisnik pregledava događaje (UC8)
+						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
 							\item Korisnik odabire opciju "Događaji" 
 							\item Korisnik odabire opciju "Prijedlozi događaja" 
-							\item Prikazuju se svi prijedlozi događaja za korisnikovu četvrt
+							\item Korisnik biva preusmjeren na stranicu "Prijedlozi događaja" gdje dobije prikaz svih prijedloga događaja za svoj kvart
 							
 						\end{packed_enum}
 						\end{packed_item}
@@ -388,12 +398,18 @@
 						\item \textbf{Glavni sudionik: }Moderator
 						\item  \textbf{Cilj:} Uređivanje prijedloga događaja u cjelini "Događaji"
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Moderator"
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik ima ulogu "Moderator"
+							\item Korisnik pregledava prijedloge događaja (UC10)
+						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
 							\item Korisnik odabire prijedlog događaja 
+							\item Korisnik odabire opciju "Uredi prijedlog događaja"
 							\item Korisnik uređuje polja za odabrani prijedlog događaja
 							\item Korisnik sprema promjene
 							\item Baza podataka se ažurira
@@ -403,7 +419,7 @@
 						
 						\item[] \begin{packed_item}
 	
-							\item[3.a] Moderator nije spremio promjene
+							\item[3.a] Korisnik nije spremio promjene
 							\item[] \begin{packed_enum}
 								
 								\item Sustav upozori moderatora da promjene nisu spremljene
@@ -419,13 +435,17 @@
 						\item \textbf{Glavni sudionik: }Moderator
 						\item  \textbf{Cilj:} Objava predloženog događaja u cjelini "Događaji"
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Moderator"
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik ima ulogu "Moderator"
+							\item Korisnik pregledava prijedloge događaja (UC10)
+						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
 							\item Korisnik odabire prijedlog događaja 
-							\item Korisnik objavljuje događaj u cjelini "Događanja"
+							\item Korisnik odabire opciju "Objavi događaj"
 							\item Baza podataka se ažurira
 							
 						\end{packed_enum}
@@ -436,13 +456,18 @@
 						\item \textbf{Glavni sudionik: }Moderator
 						\item  \textbf{Cilj:} Brisanje prijedloga događaja u cjelini "Događaji"
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i ima ulogu "Moderator"
+						\item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik ima ulogu "Moderator"
+							\item Korisnik pregledava prijedloge događaja (UC10)
+						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
 							\item Korisnik odabire prijedlog događaja 
-							\item Korisnik briše prijedlog događaja 
+							\item Korisnik odabire opciju "Obriši prijedlog događaja"
 							\item Baza podataka se ažurira
 							
 						\end{packed_enum}
