@@ -131,7 +131,7 @@
 							\item[] \begin{packed_enum}
 								
 								\item Korisnik dobiva obavijest o pogrešci
-								\item Korisnik mijenja podatke i ponovno odabire "Podnesi", ili odustaje od registracije
+								\item Korisnik mijenja podatke i ponovno odabire opciju "Podnesi", ili odustaje od registracije
 								
 							\end{packed_enum}
 							
@@ -142,7 +142,7 @@
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
-						\item  \textbf{Cilj:} Dobiti pristup sustavu
+						\item  \textbf{Cilj:} Dobiti pristup korisničkom dijelu sustava
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} -
 						\item  \textbf{Opis osnovnog tijeka:}
@@ -231,7 +231,7 @@
 						
 						\item[] \begin{packed_item}
 	
-							\item[2.a] Korisnik mijenja svoje osobne podatke, ali ne spremi promjene
+							\item[3.a] Korisnik mijenja svoje osobne podatke, ali ne spremi promjene
 							\item[] \begin{packed_enum}
 								
 								\item Sustav upozori korisnika da nije spremio promjene
@@ -239,7 +239,7 @@
 								
 							\end{packed_enum}
 							
-							\item[2.b] Korisnik pokuša promijeniti e-mail adresu
+							\item[3.b] Korisnik pokuša promijeniti e-mail adresu
 							\item[] \begin{packed_enum}
 								
 								\item Sustav upozori korisnika da ne može promijeniti e-mail adresu
@@ -247,7 +247,7 @@
 								
 							\end{packed_enum}
 							
-							\item[2.c] Korisnik pokuša promijeniti neki osobni podatak u nedozvoljeni format (npr. ime koje počinje malim slovom), ili pokuša promijeniti adresu na neku adresu koja ne postoji u sustavu
+							\item[3.c] Korisnik pokuša promijeniti neki osobni podatak u nedozvoljeni format (npr. ime koje počinje malim slovom), ili pokuša promijeniti adresu na neku adresu koja ne postoji u sustavu
 							\item[] \begin{packed_enum}
 								
 								\item Sustav upozori korisnika o pogrešci
@@ -285,7 +285,7 @@
 						
 						\item[] \begin{packed_item}
 	
-							\item[4.a] Korisnik odustane od brisanja svog računa
+							\item[3.a] Korisnik odustane od brisanja svog računa
 							\item[] \begin{packed_enum}
 								
 								\item Korisnik biva preusmjeren na stranicu "Osobni podaci"
@@ -358,7 +358,7 @@
 						
 						\item[] \begin{packed_item}
 	
-							\item[2.a] Korisnik nije ispunio sva polja prilikom stvaranja prijedloga događaja
+							\item[3.a] Korisnik nije ispunio sva polja prilikom stvaranja prijedloga događaja
 							\item[] \begin{packed_enum}
 								
 								\item Sustav upozori korisnika da sva polja nisu ispunjena
@@ -385,7 +385,6 @@
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik odabire opciju "Događaji" 
 							\item Korisnik odabire opciju "Prijedlozi događaja" 
 							\item Korisnik biva preusmjeren na stranicu "Prijedlozi događaja" gdje dobije prikaz svih prijedloga događaja za svoj kvart
 							
@@ -419,10 +418,11 @@
 						
 						\item[] \begin{packed_item}
 	
-							\item[3.a] Korisnik nije spremio promjene
+							\item[4.a] Korisnik nije spremio promjene
 							\item[] \begin{packed_enum}
 								
-								\item Sustav upozori moderatora da promjene nisu spremljene
+								\item Sustav upozori korisnika da promjene nisu spremljene
+								\item Korisnik spremi promjene, ili odustane od njih
 								
 							\end{packed_enum}
 							
@@ -518,7 +518,7 @@
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
-						\item  \textbf{Cilj:} Odgovoriti na željenu objavu u temi na "Froumu"
+						\item  \textbf{Cilj:} Odgovoriti na željenu objavu u temi na "Forumu"
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjeti:}
 						\item[] \begin{packed_enum}
@@ -529,8 +529,8 @@
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik unutar teme na forumu na odabranoj objavi odabire opciju "Odgovori"
-							\item Otvara se polje za odgovor koje odgovara na željenu objavu
+							\item Korisnik unutar teme na "Forumu" na odabranoj objavi odabire opciju "Odgovori"
+							\item Otvara se polje za odgovor
 							\item Korisnik ispunjava polje za odgovor tekstom
 							\item Korisnik bira opciju "Objavi odgovor"
 							\item Baza podataka se ažurira
@@ -569,7 +569,7 @@
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik odabire opciu "Uredi odgovor"
+							\item Korisnik odabire opciju "Uredi odgovor"
 							\item Otvara se polje za odgovor koje sadrži trenutnu verziju teksta odgovora
 							\item Korisnik uređuje tekst
 							\item Korisnik odabire opciju "Spremi promjene"
@@ -581,14 +581,14 @@
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
-						\item[2.a] Korisnik napušta stranicu iako uređeni odgovor nije objavio
+						\item[4.a] Korisnik napušta stranicu iako uređeni odgovor nije objavio
 							\item[] \begin{packed_enum}
 								
 								\item Sustav upozorava korisnika da uređeni tekst neće biti spremljen ako napusti stranicu
 								\item Korisnik odabire opciju "Spremi promjene", ili odustane od promjena
 								
 							\end{packed_enum}
-						\item[2.b] Korisnik je obrisao sav tekst odgovora i odabrao opciju "Spremi promjene"
+						\item[4.b] Korisnik je obrisao sav tekst odgovora i odabrao opciju "Spremi promjene"
 							\item[] \begin{packed_enum}
 								
 								\item Sustav upozorava korisnika da tekst objave ne smije biti prazan
@@ -643,7 +643,7 @@
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Moderator
-						\item  \textbf{Cilj:} Obrisati temu na forumu
+						\item  \textbf{Cilj:} Obrisati temu na "Forumu"
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjeti:}
 						\item[] \begin{packed_enum}
@@ -721,11 +721,11 @@
 						
 					\end{packed_item}							
 								
-					\noindent \underbar{\textbf{UC22 - Stvaranje novog izvješća na "Vijeću četvrti"}}
+					\noindent \underbar{\textbf{UC22 - Objava novog izvješća na "Vijeću četvrti"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Vijećnik
-						\item  \textbf{Cilj:} Otvaranje polja za pisanje izvješća
+						\item  \textbf{Cilj:} Objaviti novo izvješće na "Vijeću četvrti"
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjeti:}
 						\item[] \begin{packed_enum}
@@ -751,7 +751,7 @@
 						
 						\item[] \begin{packed_item}
 	
-							\item[3.a] Korisnik pokuša objaviti prazno izvješće bez teksta
+							\item[4.a] Korisnik pokuša objaviti prazno izvješće bez teksta
 							\item[] \begin{packed_enum}
 								
 								\item Sustav upozorava korisnika da izvješće s "Vijeća četvrti" ne može biti prazan tekst
@@ -767,7 +767,7 @@
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Vijećnik
-						\item  \textbf{Cilj:} Urediti kratko izvješće
+						\item  \textbf{Cilj:} Urediti izvješće
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjeti:}
 						\item[] \begin{packed_enum}
@@ -781,7 +781,7 @@
 						\item[] \begin{packed_enum}
 	
 							\item Korisnik odabire opciju "Uredi izvješće"
-							\item Otvara se tekstualno polje koje sadrži trenutnu verziju ivzješća
+							\item Otvara se tekstualno polje koje sadrži trenutnu verziju izvješća
 							\item Korisnik uređuje tekst
 							\item Korisnik odabire opciju "Spremi promjene"
 							\item Baza podataka se ažurira
@@ -793,7 +793,7 @@
 						\item  \textbf{Opis mogućih odstupanja:}
 						
 						\item[] \begin{packed_item}
-						\item[3.a] Korisnik napušta stranicu iako uređeno izvješće nije objavio
+						\item[4.a] Korisnik napušta stranicu iako uređeno izvješće nije objavio
 							\item[] \begin{packed_enum}
 								
 								\item Sustav upozorava korisnika da uređeni tekst neće biti spremljen ako napusti stranicu
@@ -801,7 +801,7 @@
 								
 							\end{packed_enum}
 							
-						\item[3.b] Korisnik je obrisao sav tekst izvješća i odabrao opciju "Spremi promjene"
+						\item[4.b] Korisnik je obrisao sav tekst izvješća i odabrao opciju "Spremi promjene"
 							\item[] \begin{packed_enum}
 								
 								\item Sustav upozorava korisnika da tekst izvješća ne smije biti prazan
@@ -853,7 +853,7 @@
 						
 						
 						
-					\noindent \underbar{\textbf{UC25 - Otvaranje teme na "Forumu" vezane za izvješće s "Vijeća četvrti"}}
+					\noindent \underbar{\textbf{UC25 - Otvaranje teme na "Forumu" vezanu za izvješće s "Vijeća četvrti"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -868,7 +868,7 @@
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik odabire opciju "Otvori temu na 'Forumu'" kod izvješća u cjelini "Vijeće četvrti"
+							\item Korisnik odabire opciju "Otvori temu na 'Forumu'"
 							\item Otvara se nova tema na cjelini "Forum"
 							\item Baza podataka se ažurira
 							\item Korisnik biva preusmjeren na novootvorenu temu na "Forumu"
@@ -887,12 +887,12 @@
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik nema ulogu za koju šalje zahtjev
+							\item Korisnik pregledava svoje osobne podatke (UC4)
 							\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik odabire opciju "Osobni podaci"
 							\item Korisnik odabire opciju "Zahtjev za ulogom"
 							\item Korisnik odabire ulogu za koju šalje zahtjev
 							\item Korisnik pošalje zahtjev
@@ -911,7 +911,7 @@
 								
 							\end{packed_enum}
 	
-							\item[4.a] Korisnik ugasi prozor za zahtjev za ulogu bez da je poslao zahtjev
+							\item[3.a] Korisnik pokuša ugasiti prozor za zahtjev za ulogu bez da je poslao zahtjev
 							\item[] \begin{packed_enum}
 								
 								\item Sustav upozori korisnika da nije poslao zahtjev
@@ -937,8 +937,8 @@
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik odabire opciju "Svi korisnici"
-							\item Korisnik dobije pregled svih korisnika u sustavu
+							\item Korisnik odabire opciju "Korisnici"
+							\item Korisnik biva preusmjeren na stranicu "Korisnici" gdje dobije popis svih korisnika sustava
 						\end{packed_enum}
 					
 					\end{packed_item}
@@ -947,7 +947,7 @@
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: } Administrator
-						\item  \textbf{Cilj:} Pregledati osobne podatke korisnika
+						\item  \textbf{Cilj:} Pregledati osobne podatke korisnika (radi jednoznačnosti, u daljnjem tekstu: objekt)
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjeti:}
 						\item[] \begin{packed_enum}
@@ -959,8 +959,8 @@
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik odabire korisnika čije osobne podatke želi pregledati
-							\item Korisnik biva preusmjeren na stranicu s osobnim podacima korisnika kojeg pregledava
+							\item Korisnik odabire objekta čije osobne podatke želi pregledati
+							\item Korisnik biva preusmjeren na stranicu s osobnim podacima objekta
 						\end{packed_enum}
 						
 					\end{packed_item}
@@ -976,6 +976,7 @@
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik ima ulogu "Administrator"
 							\item Korisnik pregledava osobne podatke objekta (UC28)
+							\item Objekt nema ulogu koju mu korisnik želi dodijeliti
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -999,6 +1000,7 @@
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik ima ulogu "Administrator"
 							\item Korisnik pregledava osobne podatke objekta (UC28)
+							\item Objekt ima ulogu koju mu korisnik želi oduzeti
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -1006,6 +1008,7 @@
 	
 							\item Korisnik odabire ulogu koju želi oduzeti objektu
 							\item Baza podataka se ažurira
+							\item Korisnik biva preusmjeren na stranicu s osobnim podacima objekta
 						\end{packed_enum}
 						
 					\end{packed_item}
@@ -1049,7 +1052,7 @@
 						\item[] \begin{packed_enum}
 	
 							\item Korisnik odabire zahtjev
-							\item Korisnik prihvaća zahtjev
+							\item Korisnik odabire opciju "Prihvati"
 							\item Baza podataka se ažurira
 						\end{packed_enum}
 						
@@ -1071,9 +1074,8 @@
 						
 						\item[] \begin{packed_enum}
 	
-							\item Korisnik odabire opciju pregleda zahtjeva za ulogu
 							\item Korisnik odabire zahtjev
-							\item Korisnik odbija zahtjev
+							\item Korisnik odabire opciju "Odbij"
 							\item Baza podataka se ažurira
 						\end{packed_enum}
 					
@@ -1120,6 +1122,7 @@
 	
 							\item Korisnik odabire opciju "Blokiraj korisnika"
 							\item Baza podataka se ažurira
+							\item Korisnik biva preusmjeren na stranicu s osobnim podacima objekta
 						\end{packed_enum}
 						
 					\end{packed_item}
@@ -1143,6 +1146,7 @@
 	
 							\item Korisnik odabire opciju "Deblokiraj korisnika"
 							\item Baza podataka se ažurira
+							\item Korisnik biva preusmjeren na stranicu s osobnim podacima objekta
 						\end{packed_enum}
 						
 					\end{packed_item}
@@ -1167,6 +1171,7 @@
 							\item Sustav upozorava korisnika da je brisanje korisničkog računa trajna i nepovratna akcija
 							\item Korisnik potvrđuje svoj odabir i briše korisnički račun drugog korisnika
 							\item Baza podataka se ažurira
+							\item Korisnik biva preusmjeren na stranicu s popisom svih korisnika u sustavu
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
@@ -1186,7 +1191,7 @@
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
-						\item  \textbf{Cilj:} Pregledati listu kvartova
+						\item  \textbf{Cilj:} Pregledati popis kvartova
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjeti:}
 						\item[] \begin{packed_enum}
@@ -1198,7 +1203,7 @@
 						\item[] \begin{packed_enum}
 	
 							\item Korisnik odabire opciju "Kvartovi"
-							\item Korisnik biva preusmjeren na stranicu gdje vidi popis kvartova
+							\item Korisnik biva preusmjeren na stranicu "Kvartovi" gdje vidi popis kvartova
 						\end{packed_enum}
 					
 					\end{packed_item}
@@ -1245,6 +1250,7 @@
 							\item Korisnik ispunjava sve potrebne podatke - ime kvarta, imena ulica, za svaku ulicu raspon brojeva
 							\item Korisnik odabire opciju "Spremi promjene"
 							\item Baza podataka se ažurira
+							\item Korisnik biva preusmjeren na stranicu "Kvartovi"
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
@@ -1279,7 +1285,7 @@
 						\item[] \begin{packed_enum}
 	
 							\item Korisnik odabire opciju "Uredi kvart"
-							\item Korisnik radi promjene
+							\item Korisnik stvara promjene
 							\item Korisnik sprema promjene
 							\item Baza podataka se ažurira
 							\item Korisnik biva preusmjeren na stranicu koja sadrži podatke o tom kvartu
@@ -1303,7 +1309,7 @@
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
-						\item  \textbf{Cilj:} Obrisati četvrt
+						\item  \textbf{Cilj:} Obrisati kvart
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjeti:}
 						\item[] \begin{packed_enum}
