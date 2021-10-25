@@ -1112,7 +1112,30 @@
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC33 - Pregled zahtjeva za ulogu}}
+					\noindent \underbar{\textbf{UC33 - Automatsko razrješavanje zahtjeva za ulogu kod manualne dodjele uloge korisniku}}
+                    \begin{packed_item}
+    
+                        \item \textbf{Glavni sudionik: }Administrator
+                        \item  \textbf{Cilj:} Promijeniti status zahtjeva za ulogu korisnika (radi jednoznačnosti, u daljnjem tekstu: objekt) u "Prihvaćen" pri manualnoj dodjeli uloge
+                        \item  \textbf{Sudionici:} Baza podataka
+                        \item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik ima ulogu "Administrator"
+							\item Korisnik je upravo objektu dodijelio ulogu (UC31)
+							\item Postoji zahtjev za ulogom sa statusom "Nerazriješen" čiji autor je objekt i u kojem je uloga jednaka ulozi koju je korisnik manualno dodijelio objektu
+						\end{packed_enum}
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+	
+							\item Status zahtjeva za ulogu se automatski promijeni u "Prihvaćen"
+							\item Baza podataka se ažurira
+						\end{packed_enum}
+
+                    \end{packed_item}
+					
+					\noindent \underbar{\textbf{UC34 - Pregled zahtjeva za ulogu}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1134,7 +1157,7 @@
 
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC34 - Prihvaćanje zahtjeva za ulogu}}
+					\noindent \underbar{\textbf{UC35 - Prihvaćanje zahtjeva za ulogu}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: } Administrator
@@ -1157,7 +1180,7 @@
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC35 - Odbijanje zahtjeva za ulogu}}
+					\noindent \underbar{\textbf{UC36 - Odbijanje zahtjeva za ulogu}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: } Administrator
@@ -1180,7 +1203,7 @@
 					
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC36 - Pregled blokiranih korisnika}}
+					\noindent \underbar{\textbf{UC37 - Pregled blokiranih korisnika}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1202,7 +1225,7 @@
 					
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC37 - Blokiranje korisnika}}
+					\noindent \underbar{\textbf{UC38 - Blokiranje korisnika}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1227,7 +1250,7 @@
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC38 - Deblokiranje korisnika}}
+					\noindent \underbar{\textbf{UC39 - Deblokiranje korisnika}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1251,7 +1274,7 @@
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC39 - Brisanje korisničkog računa drugog korisnika}}
+					\noindent \underbar{\textbf{UC40 - Brisanje korisničkog računa drugog korisnika}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1288,7 +1311,7 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC40 - Pregled popisa kvartova}}
+					\noindent \underbar{\textbf{UC41 - Pregled popisa kvartova}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1309,7 +1332,7 @@
 					
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC41 - Pregled kvarta}}
+					\noindent \underbar{\textbf{UC42 - Pregled kvarta}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1331,7 +1354,7 @@
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC42 - Definiranje kvarta}}
+					\noindent \underbar{\textbf{UC43 - Definiranje kvarta}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1369,7 +1392,7 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC43 - Uređivanje kvarta}}
+					\noindent \underbar{\textbf{UC44 - Uređivanje kvarta}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1406,7 +1429,7 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC44 - Brisanje kvarta}}
+					\noindent \underbar{\textbf{UC45 - Brisanje kvarta}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
