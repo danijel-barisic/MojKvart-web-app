@@ -317,8 +317,46 @@
 							\item Baza podataka se ažurira
 						\end{packed_enum}
 					\end{packed_item}
+					
+					
+					\noindent \underbar{\textbf{UC8 - Promjena adrese radi ispravljanja nevažećeg statusa stanovanja}}
+                    \begin{packed_item}
+    
+                        \item \textbf{Glavni sudionik: }Korisnik
+                        \item  \textbf{Cilj:} Promijeniti adresu i omogućiti korisniku pristup korisničkom dijelu sustava
+                        \item  \textbf{Sudionici:} Baza podataka
+                        \item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnikov status stanovanja je "Nevažeći"
+						\end{packed_enum}
+                        \item  \textbf{Opis osnovnog tijeka:}
+                        
+                        \item[] \begin{packed_enum}
+    
+                            \item Korisnik ispunjava obrazac u kojem unosi novu adresu
+                            \item Korisnik odabire opciju "Spremi promjene"
+                            \item Baza podataka se ažurira
+                            \item Korisnik biva preusmjeren na početnu stranicu
+                        \end{packed_enum}
+                        
+                        \item  \textbf{Opis mogućih odstupanja:}
+                        
+                        \item[] \begin{packed_item}
+    
+                            \item[2.a] Korisnik nije unio novu adresu, ili je adresa koju je korisnik unio nevažeća
+                            \item[] \begin{packed_enum}
+                                
+                                \item Sustav upozorava korisnika o pogrešci
+                                \item Korisnik ispravlja pogrešku i ponovno odabire opciju "Spremi promjene", ili odustaje od popravljanja adrese
+                                
+                            \end{packed_enum}
+                            
+                        \end{packed_item}
+                    \end{packed_item}					
+					
 
-					\noindent \underbar{\textbf{UC8 - Pregled događaja u cjelini "Događaji" }}
+					\noindent \underbar{\textbf{UC9 - Pregled događaja u cjelini "Događaji" }}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -335,7 +373,7 @@
 						
 							
 						\end{packed_item}
-					\noindent \underbar{\textbf{UC9 - Stvaranje prijedloga događaja}}
+					\noindent \underbar{\textbf{UC10 - Stvaranje prijedloga događaja}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -378,7 +416,7 @@
 							
 						\end{packed_item}
 					\end{packed_item}						
-					\noindent \underbar{\textbf{UC10 - Pregled prijedloga događaja}}
+					\noindent \underbar{\textbf{UC11 - Pregled prijedloga događaja}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Moderator
@@ -400,7 +438,7 @@
 						\end{packed_enum}
 						\end{packed_item}
 						
-						\noindent \underbar{\textbf{UC11 - Uređivanje prijedloga događaja}}
+						\noindent \underbar{\textbf{UC12 - Uređivanje prijedloga događaja}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Moderator
@@ -446,7 +484,7 @@
 							
 						\end{packed_item}
 						\end{packed_item}
-					\noindent \underbar{\textbf{UC12 - Objava prijedloga događaja}}
+					\noindent \underbar{\textbf{UC13 - Objava prijedloga događaja}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Moderator
@@ -468,7 +506,7 @@
 							
 						\end{packed_enum}
 						\end{packed_item}
-					\noindent \underbar{\textbf{UC13 - Brisanje prijedloga događaja}}
+					\noindent \underbar{\textbf{UC14 - Brisanje prijedloga događaja}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Moderator
@@ -491,7 +529,7 @@
 						\end{packed_enum}
 						
 					\end{packed_item}
-					\noindent \underbar{\textbf{UC14 - Pregled tema na "Forumu"}}
+					\noindent \underbar{\textbf{UC15 - Pregled tema na "Forumu"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -509,7 +547,7 @@
 						
 						
 					\end{packed_item}						
-					\noindent \underbar{\textbf{UC15 - Prikaz teme na "Forumu"}}
+					\noindent \underbar{\textbf{UC16 - Prikaz teme na "Forumu"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -532,7 +570,7 @@
 					\end{packed_item}
 					
 					
-					\noindent \underbar{\textbf{UC16 - Otvaranje teme na "Forumu"}}
+					\noindent \underbar{\textbf{UC17 - Otvaranje teme na "Forumu"}}
                     \begin{packed_item}
     
                         \item \textbf{Glavni sudionik: }Korisnik
@@ -567,7 +605,7 @@
                     		\end{packed_item}	
                     	\end{packed_item}				
 					
-					\noindent \underbar{\textbf{UC17 - Odgovaranje na objavu u temi na "Forumu"}}
+					\noindent \underbar{\textbf{UC18 - Odgovaranje na objavu u temi na "Forumu"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -606,7 +644,7 @@
 						
 					\end{packed_item}
 					\end{packed_item}
-					\noindent \underbar{\textbf{UC18 - Uređivanje odgovora u temi na "Forumu"}}
+					\noindent \underbar{\textbf{UC19 - Uređivanje odgovora u temi na "Forumu"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -652,7 +690,7 @@
 						
 					\end{packed_item}	
 					
-					\noindent \underbar{\textbf{UC19 - Brisanje odgovora u temi na "Forumu"}}
+					\noindent \underbar{\textbf{UC20 - Brisanje odgovora u temi na "Forumu"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -692,7 +730,7 @@
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC20 - Brisanje teme na "Forumu"}}
+					\noindent \underbar{\textbf{UC21 - Brisanje teme na "Forumu"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Moderator
@@ -729,7 +767,7 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC21 - Automatsko brisanje teme na "Forumu"}}
+					\noindent \underbar{\textbf{UC22 - Automatsko brisanje teme na "Forumu"}}
                     \begin{packed_item}
     
                         \item \textbf{Glavni sudionik: }Korisnik
@@ -751,7 +789,7 @@
                     \end{packed_item}
 					
 										
-					\noindent \underbar{\textbf{UC22 - Pregled cjeline "Vijeće četvrti" }}
+					\noindent \underbar{\textbf{UC23 - Pregled cjeline "Vijeće četvrti" }}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -771,7 +809,7 @@
 						
 					\end{packed_item}		
 					
-					\noindent \underbar{\textbf{UC23 - Prikaz izvješća u "Vijeću četvrti" }}
+					\noindent \underbar{\textbf{UC24 - Prikaz izvješća u "Vijeću četvrti" }}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -795,7 +833,7 @@
 						
 					\end{packed_item}							
 								
-					\noindent \underbar{\textbf{UC24 - Objava novog izvješća na "Vijeću četvrti"}}
+					\noindent \underbar{\textbf{UC25 - Objava novog izvješća na "Vijeću četvrti"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Vijećnik
@@ -844,7 +882,7 @@
 						
 						
 					\end{packed_item}					
-					\noindent \underbar{\textbf{UC25 - Uređivanje izvješća na "Vijeću četvrti"}}
+					\noindent \underbar{\textbf{UC26 - Uređivanje izvješća na "Vijeću četvrti"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Vijećnik
@@ -896,7 +934,7 @@
 					\end{packed_item}					
 					
 
-					\noindent \underbar{\textbf{UC26 - Brisanje izvješća s "Vijeća četvrti"}}
+					\noindent \underbar{\textbf{UC27 - Brisanje izvješća s "Vijeća četvrti"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Vijećnik
@@ -934,7 +972,7 @@
 						
 						
 						
-					\noindent \underbar{\textbf{UC27 - Otvaranje teme na "Forumu" vezanu za izvješće s "Vijeća četvrti"}}
+					\noindent \underbar{\textbf{UC28 - Otvaranje teme na "Forumu" vezanu za izvješće s "Vijeća četvrti"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -972,7 +1010,7 @@
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC28 - Podnošenje zahtjeva za dodjelu uloge}}
+					\noindent \underbar{\textbf{UC29 - Podnošenje zahtjeva za dodjelu uloge}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -1019,7 +1057,7 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC29 - Pristup svim korisnicima u sustavu}}
+					\noindent \underbar{\textbf{UC30 - Pristup svim korisnicima u sustavu}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1040,7 +1078,7 @@
 					
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC30 - Pregled korisnika}}
+					\noindent \underbar{\textbf{UC31 - Pregled korisnika}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: } Administrator
@@ -1062,7 +1100,7 @@
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC31 - Dodjela uloge}}
+					\noindent \underbar{\textbf{UC32 - Dodjela uloge}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1087,7 +1125,7 @@
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC32 - Oduzimanje uloge}}
+					\noindent \underbar{\textbf{UC33 - Oduzimanje uloge}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1112,7 +1150,7 @@
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC33 - Automatsko razrješavanje zahtjeva za ulogu kod manualne dodjele uloge korisniku}}
+					\noindent \underbar{\textbf{UC34 - Automatsko razrješavanje zahtjeva za ulogu kod manualne dodjele uloge korisniku}}
                     \begin{packed_item}
     
                         \item \textbf{Glavni sudionik: }Administrator
@@ -1135,7 +1173,7 @@
 
                     \end{packed_item}
 					
-					\noindent \underbar{\textbf{UC34 - Pregled zahtjeva za ulogu}}
+					\noindent \underbar{\textbf{UC35 - Pregled zahtjeva za ulogu}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1157,7 +1195,7 @@
 
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC35 - Prihvaćanje zahtjeva za ulogu}}
+					\noindent \underbar{\textbf{UC36 - Prihvaćanje zahtjeva za ulogu}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: } Administrator
@@ -1180,7 +1218,7 @@
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC36 - Odbijanje zahtjeva za ulogu}}
+					\noindent \underbar{\textbf{UC37 - Odbijanje zahtjeva za ulogu}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: } Administrator
@@ -1203,7 +1241,7 @@
 					
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC37 - Pregled blokiranih korisnika}}
+					\noindent \underbar{\textbf{UC38 - Pregled blokiranih korisnika}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1225,7 +1263,7 @@
 					
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC38 - Blokiranje korisnika}}
+					\noindent \underbar{\textbf{UC39 - Blokiranje korisnika}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1250,7 +1288,7 @@
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC39 - Deblokiranje korisnika}}
+					\noindent \underbar{\textbf{UC40 - Deblokiranje korisnika}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1274,7 +1312,7 @@
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC40 - Brisanje korisničkog računa drugog korisnika}}
+					\noindent \underbar{\textbf{UC41 - Brisanje korisničkog računa drugog korisnika}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1311,7 +1349,7 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC41 - Pregled popisa kvartova}}
+					\noindent \underbar{\textbf{UC42 - Pregled popisa kvartova}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1332,7 +1370,7 @@
 					
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC42 - Pregled kvarta}}
+					\noindent \underbar{\textbf{UC43 - Pregled kvarta}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1354,7 +1392,7 @@
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC43 - Definiranje kvarta}}
+					\noindent \underbar{\textbf{UC44 - Definiranje kvarta}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1392,7 +1430,7 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC44 - Uređivanje kvarta}}
+					\noindent \underbar{\textbf{UC45 - Uređivanje kvarta}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1429,7 +1467,7 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC45 - Brisanje kvarta}}
+					\noindent \underbar{\textbf{UC46 - Brisanje kvarta}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1448,6 +1486,7 @@
 							\item Korisnik odabire opciju "Obriši kvart"
 							\item Sustav upozorava korisnika da je brisanje kvarta trajna i nepovratna akcija
 							\item Korisnik potvrđuje svoju odluku i obriše kvart
+							\item Iz baze podataka se obrišu svi podaci vezani za taj kvart - sve teme na "Forumu", sva izvješća s "Vijeća četvrti", svi događaji na "Događajima"
 							\item Baza podataka se ažurira
 							\item Korisnik biva preusmjeren na stranicu "Kvartovi"
 						\end{packed_enum}
@@ -1465,6 +1504,29 @@
 							
 						\end{packed_item}
 					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC47 - Automatsko postavljanje statusa stanovanja korisnika na "Nevažeći"}}
+                    \begin{packed_item}
+    
+                        \item \textbf{Glavni sudionik: }Administrator
+                        \item  \textbf{Cilj:} Ažurirati status stanovanja korisnicima pri promjeni podataka ili brisanja kvarta
+                        \item  \textbf{Sudionici:} Baza podataka
+                        \item  \textbf{Preduvjeti:}
+						\item[] \begin{packed_enum}
+							\item Korisnik je prijavljen u sustav
+							\item Korisnik ima ulogu "Administrator"
+							\item Korisnik je promijenio podatke o kvartu (UC44) ili obrisao kvart (UC45)
+							\item Postoje korisnici sustava čije adrese zbog prethodne točke preduvjeta su prestale biti važeće
+						\end{packed_enum}
+                        \item  \textbf{Opis osnovnog tijeka:}
+                        
+                        \item[] \begin{packed_enum}
+    
+                            \item Sustav automatski postavi status stanovanja na "Nevažeći" svim korisnicima čije adrese su zbog promjena podataka ili brisanja kvarta prestale biti važeće
+                            \item Baza podataka se ažurira
+                        \end{packed_enum}
+                        
+                    \end{packed_item}
 						
 				\subsubsection{Dijagrami obrazaca uporabe}
 					
