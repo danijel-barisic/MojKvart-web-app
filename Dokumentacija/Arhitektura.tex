@@ -26,7 +26,7 @@
 
 				\textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
 				
-				
+					
 				\begin{longtblr}[
 					label=none,
 					entry=none
@@ -35,14 +35,175 @@
 						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
 						rowhead = 1,
 					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
-					\hline \multicolumn{3}{|c|}{\textbf{korisnik - ime tablice}}	 \\ \hline[3pt]
-					\SetCell{LightGreen}IDKorisnik & INT	&  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  	\\ \hline
-					korisnickoIme	& VARCHAR &   	\\ \hline 
-					email & VARCHAR &   \\ \hline 
-					ime & VARCHAR	&  		\\ \hline 
-					\SetCell{LightBlue} primjer	& VARCHAR &   	\\ \hline 
+					\hline \multicolumn{3}{|c|}{\textbf{User}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}IDUser & INT	&  	Identifikacijski ključ korisnika  	\\ \hline
+					email	& VARCHAR & Email korisnika  	\\ \hline
+					firstName & VARCHAR & Ime korisnika \\ \hline
+					lastName & VARCHAR & Prezime korisnika \\ \hline
+					isBlocked & BOOLEAN & Oznaka je li korisnik blokiran \\ \hline
+					isAddressValid & BOOLEAN & Oznaka je li adresa korisnika valjana \\ \hline
+					\SetCell{LightBlue}IDHome & INT & Identifikacijski ključ korisnikove kuće  	\\ \hline
+					\SetCell{LightBlue}IDMeeting	& INT & Identifikacijski ključ sastanka  	\\ \hline
+					\SetCell{LightBlue}IDCouncil	 & INT & Identifikacijski ključ vijeća četvrti  	\\ \hline
+					\SetCell{LightBlue}IDDistrict	& INT & Identifikacijski ključ četvrti kojoj korisnik pripada  	\\ \hline
+					\end{longtblr}
+					
+					\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[7,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \multicolumn{3}{|c|}{\textbf{Event}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}IDEvent & INT	&  	Identifikacijski ključ događaja  	\\ \hline
+					eventName	& VARCHAR & Naziv događaja  	\\ \hline
+					eventDatetime & DATE & Vrijeme događaja \\ \hline
+					eventLocation & VARCHAR & Lokacija događaja \\ \hline
+					eventDuration & FLOAT & Trajanje događaja \\ \hline
+					eventDescription & VARCHAR & Opis događaja \\ \hline
+					eventStatus & VARCHAR & Status događaja \\ \hline
+					\SetCell{LightBlue}IDUser & INT & Identifikacijski ključ korisnika  	\\ \hline
+				
+				\end{longtblr}
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \multicolumn{3}{|c|}{\textbf{Thread}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}IDThread & INT	&  	Identifikacijski ključ dretve  	\\ \hline
+					threadName	& VARCHAR & Ime dretve  	\\ \hline 
+					\SetCell{LightBlue} IDDistrict	& INT & Identifikacijski ključ četvrti  	\\ \hline 
 				\end{longtblr}
 				
+				
+					\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \multicolumn{3}{|c|}{\textbf{Post}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}IDPost & INT	&  	Identifikacijski ključ objave  	\\ \hline
+					postDatetime	& DATE & Vrijeme postavljanja objave  	\\ \hline
+					postContent & VARCHAR & Sadržaj objave \\ \hline
+					replyId & INT & Identifikacijski ključ odgovora na objavu \\ \hline
+					\SetCell{LightBlue}IdThread	 & INT & Identifikacijski ključ pripadajuće dretve  	\\ \hline
+					\SetCell{LightBlue}IDUser	& INT & Identifikacijski ključ korisnika koji je objavio objavu  	\\ \hline
+				\end{longtblr}
+				
+					\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \multicolumn{3}{|c|}{\textbf{District}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}IDDistrict & INT	&  	Identifikacijski ključ četvrti  	\\ \hline
+					districtName	& INT & Naziv četvrti  	\\ \hline
+				\end{longtblr}
+				
+					\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[10,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \multicolumn{3}{|c|}{\textbf{Street}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}IDStreet & INT	&  	Identifikacijski ključ ulice  	\\ \hline
+					streetName	& VARCHAR & Naziv ulice  	\\ \hline
+					minStreetNumber & INT & Najmanji kućanski broj ulice \\ \hline
+					maxStreetNumber & INT & Najveći kućanski broj ulice \\ \hline
+					\SetCell{LightBlue}IDDistrict	 & INT & Identifikacijski ključ pripadajuće četvrti  	\\ \hline
+					\end{longtblr}
+							
+									\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \multicolumn{3}{|c|}{\textbf{Home}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}IDHome & INT	&  	Identifikacijski ključ kuće  	\\ \hline
+					homeNumber	& INT & Kućanski broj  	\\ \hline
+					\SetCell{LightBlue}IDStreet	 & INT & Identifikacijski ključ pripadajuće ulice  	\\ \hline
+							\end{longtblr}
+							
+							\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \multicolumn{3}{|c|}{\textbf{Role}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}IDRole & INT	&  	Identifikacijski ključ uloge  	\\ \hline
+					roleName	& VARCHAR & Naziv uloge 	\\ \hline
+					
+							\end{longtblr}
+							
+							
+							\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[8,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \multicolumn{3}{|c|}{\textbf{RoleRequest}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}IDRoleRequest & INT	&  	Identifikacijski ključ zahtjeva za ulogu  	\\ \hline
+					roleRequestStatus	& VARCHAR & Status zahtjeva za ulogu  	\\ \hline
+					\SetCell{LightBlue}IDUser	 & INT & Identifikacijski ključ korisnika 	\\ \hline
+					\SetCell{LightBlue}IDRole	 & INT & Identifikacijski ključ uloge  	\\ \hline
+							\end{longtblr}
+							
+							\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \multicolumn{3}{|c|}{\textbf{Meeting}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}IDMeeting & INT	&  	Identifikacijski ključ sastanka  	\\ \hline
+					\SetCell{LightBlue}IDCounil	 & INT & Identifikacijski ključ vijeća \\ \hline
+					\SetCell{LightBlue}IDDistrict	 & INT & Identifikacijski ključ četvrti \\ \hline
+					\SetCell{LightBlue}IDThread	 & INT & Identifikacijski ključ dretve \\ \hline
+					meetingReport	& VARCHAR & Izvješće sastanka  	\\ \hline
+					reportAuthorId	& INT & Identifikacijski broj korisnika koji je sastavio izvješće  	\\ \hline
+					  	
+							\end{longtblr}
+							
+							\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \multicolumn{3}{|c|}{\textbf{Council}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}IDCouncil & INT	&  	Identifikacijski ključ vijeća  	\\ \hline
+					\SetCell{LightBlue}IDMeeting	 & INT & Identifikacijski ključ sastanka  	\\ \hline
+							\end{longtblr}
+							
+							
 				
 			
 			\subsection{Dijagram baze podataka}
