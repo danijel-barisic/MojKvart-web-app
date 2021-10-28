@@ -32,7 +32,7 @@ public class Street {
     }
 
     public void setId(Long id) {
-        id = id;
+        this.id = id;
     }
 
     public String getName() {
@@ -57,6 +57,14 @@ public class Street {
 
     public void setMaxStreetNo(Integer maxStreetNo) {
         this.maxStreetNo = maxStreetNo;
+    }
+
+    public District getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(District district) {
+        this.district = district;
     }
 
     @Override

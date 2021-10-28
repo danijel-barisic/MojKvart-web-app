@@ -1,5 +1,6 @@
 package progi.project.mojkvart.thread;
 
+import progi.project.mojkvart.district.District;
 import progi.project.mojkvart.meeting.Meeting;
 import progi.project.mojkvart.post.Post;
 

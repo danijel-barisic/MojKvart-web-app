@@ -42,6 +42,22 @@ public class District {
         this.name = name;
     }
 
+    public List<Street> getStreets() {
+        return streets;
+    }
+
+    public void setStreets(List<Street> streets) {
+        this.streets = streets;
+    }
+
+    public Council getCouncil() {
+        return council;
+    }
+
+    public void setCouncil(Council council) {
+        this.council = council;
+    }
+
     @Override
     public String toString() {
         return id + ". " + name;

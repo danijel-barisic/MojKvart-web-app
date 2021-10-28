@@ -15,7 +15,6 @@ public class Council{
     private Long id;
 
     //*veza district - council bi trebala biti slaba*
-
     @OneToOne
     @JoinColumn(name = "district_id")
     private District district;
@@ -26,5 +25,13 @@ public class Council{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public District getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(District district) {
+        this.district = district;
     }
 }

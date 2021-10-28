@@ -1,5 +1,6 @@
 package progi.project.mojkvart.meeting;
 
+import progi.project.mojkvart.council.Council;
 import progi.project.mojkvart.thread.PostThread;
 import progi.project.mojkvart.user.User;
 

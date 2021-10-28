@@ -1,6 +1,7 @@
 package progi.project.mojkvart.post;
 
 import progi.project.mojkvart.thread.PostThread;
+import progi.project.mojkvart.user.User;
 
 import javax.persistence.*;
 import javax.persistence.Column;
