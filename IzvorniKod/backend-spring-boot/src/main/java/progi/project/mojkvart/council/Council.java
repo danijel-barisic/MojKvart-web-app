@@ -1,7 +1,8 @@
 package progi.project.mojkvart.council;
 
 import progi.project.mojkvart.district.District;
-
+import progi.project.mojkvart.meeting.Meeting;
+import java.util.List;
 import javax.persistence.*;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -18,6 +19,9 @@ public class Council{
     @OneToOne
     @JoinColumn(name = "district_id")
     private District district;
+
+    @OneToMany(mappedBy = "district")
+    private List<Meeting> meetings;
 
     public Long getId() {
         return id;

@@ -21,6 +21,7 @@ public class Meeting {
     private PostThread postThread;
 
     @ManyToOne
+    @JoinColumn(name = "district_id")
     private Council council;
 
     @OneToMany
