@@ -23,8 +23,7 @@ public class District {
     private List<Street> streets;
 
     //*veza district - council bi trebala biti slaba*
-    @OneToOne
-    @JoinColumn(name = "council_id")
+    @OneToOne(mappedBy = "district")
     private Council council;
 
     public Long getId() {

@@ -15,7 +15,9 @@ public class Council{
     private Long id;
 
     //*veza district - council bi trebala biti slaba*
-    @OneToOne(mappedBy = "council")
+
+    @OneToOne
+    @JoinColumn(name = "district_id")
     private District district;
 
     public Long getId() {
