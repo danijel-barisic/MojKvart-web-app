@@ -1,11 +1,11 @@
 package progi.project.mojkvart.post;
 
+import progi.project.mojkvart.thread.PostThread;
+
 import javax.persistence.*;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Post {
@@ -22,6 +22,12 @@ public class Post {
 
     @Column(name = "reply_id", nullable = true)
     private Long replyId;
+
+    @ManyToOne
+    private PostThread thread;
+
+    @ManyToOne
+    private User user;
 
     public Long getId() {
         return id;
@@ -53,6 +59,14 @@ public class Post {
 
     public void setReplyId(Long replyId) {
         this.replyId = replyId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
