@@ -256,6 +256,16 @@
 								
 							\end{packed_enum}
 							
+							\item[3.c] Korisnik je promijenio adresu, i nova adresa ne pripada kvartu kojem je pripadala njegova stara adresa
+							\item[] \begin{packed_enum}
+								
+								\item Sustav dodijeli korisnika novom kvartu
+								\item Sustav korisniku oduzima uloge "Vijećnik" i "Moderator", ako ih ima
+								\item Baza podataka se ažurira
+								\item Korisnik biva preusmjeren na stranicu "Osobni podaci"
+								
+							\end{packed_enum}
+							
 						\end{packed_item}
 					\end{packed_item}
 					
@@ -297,29 +307,8 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC7 - Promjena kvarta stanovanja korisnika}}
-					\begin{packed_item}
-	
-						\item \textbf{Glavni sudionik: }Korisnik
-						\item  \textbf{Cilj:} Ukloniti dodatne uloge ("Vijećnik" i "Moderator") korisniku koji je promijenio kvart
-						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjeti:}
-						\item[] \begin{packed_enum}
-							\item Korisnik je prijavljen u sustav
-							\item Korisnik je promijenio svoje osobne podatke (UC5)
-							\item Korisnik je pri promjeni osobnih podataka promijenio adresu, i nova adresa ne pripada kvartu kojem je pripadala njegova stara adresa
-						\end{packed_enum}
-						\item  \textbf{Opis osnovnog tijeka:}
-						
-						\item[] \begin{packed_enum}
-	
-							\item Sustav korisniku oduzima uloge "Moderator" i "Vijećnik", ako ih ima
-							\item Baza podataka se ažurira
-						\end{packed_enum}
-					\end{packed_item}
 					
-					
-					\noindent \underbar{\textbf{UC8 - Promjena adrese radi ispravljanja nevažećeg statusa stanovanja}}
+					\noindent \underbar{\textbf{UC7 - Promjena adrese radi ispravljanja nevažećeg statusa stanovanja}}
                     \begin{packed_item}
     
                         \item \textbf{Glavni sudionik: }Korisnik
@@ -356,7 +345,7 @@
                     \end{packed_item}					
 					
 
-					\noindent \underbar{\textbf{UC9 - Pregled događaja u cjelini "Događaji" }}
+					\noindent \underbar{\textbf{UC8 - Pregled događaja u cjelini "Događaji" }}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -373,7 +362,7 @@
 						
 							
 						\end{packed_item}
-					\noindent \underbar{\textbf{UC10 - Stvaranje prijedloga događaja}}
+					\noindent \underbar{\textbf{UC9 - Stvaranje prijedloga događaja}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -382,7 +371,7 @@
 						\item  \textbf{Preduvjeti:}
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
-							\item Korisnik pregledava događaje (UC9)
+							\item Korisnik pregledava događaje (UC8)
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -416,7 +405,7 @@
 							
 						\end{packed_item}
 					\end{packed_item}						
-					\noindent \underbar{\textbf{UC11 - Pregled prijedloga događaja}}
+					\noindent \underbar{\textbf{UC10 - Pregled prijedloga događaja}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Moderator
@@ -426,7 +415,7 @@
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik ima ulogu "Moderator"
-							\item Korisnik pregledava događaje (UC9)
+							\item Korisnik pregledava događaje (UC8)
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -438,7 +427,7 @@
 						\end{packed_enum}
 						\end{packed_item}
 						
-						\noindent \underbar{\textbf{UC12 - Uređivanje prijedloga događaja}}
+						\noindent \underbar{\textbf{UC11 - Uređivanje prijedloga događaja}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Moderator
@@ -448,7 +437,7 @@
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik ima ulogu "Moderator"
-							\item Korisnik pregledava prijedloge događaja (UC11)
+							\item Korisnik pregledava prijedloge događaja (UC10)
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -484,7 +473,7 @@
 							
 						\end{packed_item}
 						\end{packed_item}
-					\noindent \underbar{\textbf{UC13 - Objava prijedloga događaja}}
+					\noindent \underbar{\textbf{UC12 - Objava prijedloga događaja}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Moderator
@@ -494,7 +483,7 @@
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik ima ulogu "Moderator"
-							\item Korisnik pregledava prijedloge događaja (UC11)
+							\item Korisnik pregledava prijedloge događaja (UC10)
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -506,7 +495,7 @@
 							
 						\end{packed_enum}
 						\end{packed_item}
-					\noindent \underbar{\textbf{UC14 - Brisanje prijedloga događaja}}
+					\noindent \underbar{\textbf{UC13 - Brisanje prijedloga događaja}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Moderator
@@ -516,7 +505,7 @@
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik ima ulogu "Moderator"
-							\item Korisnik pregledava prijedloge događaja (UC11)
+							\item Korisnik pregledava prijedloge događaja (UC10)
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -529,7 +518,7 @@
 						\end{packed_enum}
 						
 					\end{packed_item}
-					\noindent \underbar{\textbf{UC15 - Pregled tema na "Forumu"}}
+					\noindent \underbar{\textbf{UC14 - Pregled tema na "Forumu"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -547,7 +536,7 @@
 						
 						
 					\end{packed_item}						
-					\noindent \underbar{\textbf{UC16 - Prikaz teme na "Forumu"}}
+					\noindent \underbar{\textbf{UC15 - Prikaz teme na "Forumu"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -556,7 +545,7 @@
 						\item  \textbf{Preduvjeti:}
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
-							\item Korisnik pregledava "Forum" (UC15)
+							\item Korisnik pregledava "Forum" (UC14)
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -570,7 +559,7 @@
 					\end{packed_item}
 					
 					
-					\noindent \underbar{\textbf{UC17 - Otvaranje teme na "Forumu"}}
+					\noindent \underbar{\textbf{UC16 - Otvaranje teme na "Forumu"}}
                     \begin{packed_item}
     
                         \item \textbf{Glavni sudionik: }Korisnik
@@ -579,7 +568,7 @@
                         \item  \textbf{Preduvjeti:}
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
-							\item Korisnik pregledava "Forum" (UC15)
+							\item Korisnik pregledava "Forum" (UC14)
 						\end{packed_enum}
                         \item  \textbf{Opis osnovnog tijeka:}
                         
@@ -605,7 +594,7 @@
                     		\end{packed_item}	
                     	\end{packed_item}				
 					
-					\noindent \underbar{\textbf{UC18 - Odgovaranje na objavu u temi na "Forumu"}}
+					\noindent \underbar{\textbf{UC17 - Odgovaranje na objavu u temi na "Forumu"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -614,7 +603,7 @@
 						\item  \textbf{Preduvjeti:}
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
-							\item Korisnik pregledava temu na "Forumu" (UC16)
+							\item Korisnik pregledava temu na "Forumu" (UC15)
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -644,7 +633,7 @@
 						
 					\end{packed_item}
 					\end{packed_item}
-					\noindent \underbar{\textbf{UC19 - Uređivanje odgovora u temi na "Forumu"}}
+					\noindent \underbar{\textbf{UC18 - Uređivanje odgovora u temi na "Forumu"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -653,7 +642,7 @@
 						\item  \textbf{Preduvjeti:}
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
-							\item Korisnik pregledava temu na "Forumu" (UC16)
+							\item Korisnik pregledava temu na "Forumu" (UC15)
 							\item Korisnik je autor odgovora kojeg odabire
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
@@ -690,7 +679,7 @@
 						
 					\end{packed_item}	
 					
-					\noindent \underbar{\textbf{UC20 - Brisanje odgovora u temi na "Forumu"}}
+					\noindent \underbar{\textbf{UC19 - Brisanje odgovora u temi na "Forumu"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -699,7 +688,7 @@
 						\item  \textbf{Preduvjeti:}
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
-							\item Korisnik pregledava temu na "Forumu" (UC16)
+							\item Korisnik pregledava temu na "Forumu" (UC15)
 							\item Korisnik odabire odgovor čiji autor je on, ili korisnik ima ulogu "Moderator"
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
@@ -725,12 +714,20 @@
 								\item Prozor za brisanje odgovora se ugasi
 								
 							\end{packed_enum}
+						\item[4.b] Korisnik je obrisao posljednji odgovor u odgovarajućoj temi
+							\item[] \begin{packed_enum}
+								
+								\item Sustav automatski obriše tu temu na "Forumu"
+								\item Baza podataka se ažurira
+								\item Korisnik biva preusmjeren na stranicu "Forum"
+								
+							\end{packed_enum}
 						\end{packed_item}
 						
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC21 - Brisanje teme na "Forumu"}}
+					\noindent \underbar{\textbf{UC20 - Brisanje teme na "Forumu"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Moderator
@@ -739,7 +736,7 @@
 						\item  \textbf{Preduvjeti:}
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
-							\item Korisnik pregledava "Forum" (UC15)
+							\item Korisnik pregledava "Forum" (UC14)
 							\item Korisnik ima ulogu "Moderator"
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
@@ -765,31 +762,9 @@
 							\end{packed_enum}
 							
 						\end{packed_item}
-					\end{packed_item}
-					
-					\noindent \underbar{\textbf{UC22 - Automatsko brisanje teme na "Forumu"}}
-                    \begin{packed_item}
-    
-                        \item \textbf{Glavni sudionik: }Korisnik
-                        \item  \textbf{Cilj:} Obrisati temu na "Forumu" u kojoj je upravo izbrisan zadnji odgovor
-                        \item  \textbf{Sudionici:} Baza podataka
-                        \item  \textbf{Preduvjeti:}
-						\item[] \begin{packed_enum}
-							\item Korisnik je prijavljen u sustav
-							\item Korisnik je upravo obrisao odgovor u temi na "Forumu" (UC20)
-							\item Obrisani odgovor je bio posljednji odgovor u svojoj temi
-						\end{packed_enum}
-                        \item  \textbf{Opis osnovnog tijeka:}
-                        
-                        \item[] \begin{packed_enum}
-    
-                            \item Sustav automatski obriše tu temu na "Forumu"
-                            \item Baza podataka se ažurira
-                        \end{packed_enum}
-                    \end{packed_item}
-					
+					\end{packed_item}					
 										
-					\noindent \underbar{\textbf{UC23 - Pregled cjeline "Vijeće četvrti" }}
+					\noindent \underbar{\textbf{UC21 - Pregled cjeline "Vijeće četvrti" }}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -809,7 +784,7 @@
 						
 					\end{packed_item}		
 					
-					\noindent \underbar{\textbf{UC24 - Prikaz izvješća u "Vijeću četvrti" }}
+					\noindent \underbar{\textbf{UC22 - Prikaz izvješća u "Vijeću četvrti" }}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -818,7 +793,7 @@
 						\item  \textbf{Preduvjeti:}
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
-							\item Korisnik pregledava "Vijeće četvrti" (UC23)
+							\item Korisnik pregledava "Vijeće četvrti" (UC21)
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -833,7 +808,7 @@
 						
 					\end{packed_item}							
 								
-					\noindent \underbar{\textbf{UC25 - Objava novog izvješća na "Vijeću četvrti"}}
+					\noindent \underbar{\textbf{UC23 - Objava novog izvješća na "Vijeću četvrti"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Vijećnik
@@ -842,7 +817,7 @@
 						\item  \textbf{Preduvjeti:}
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
-							\item Korisnik pregledava "Vijeće četvrti" (UC23)
+							\item Korisnik pregledava "Vijeće četvrti" (UC21)
 							\item Korisnik ima ulogu "Vijećnik"
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
@@ -882,7 +857,7 @@
 						
 						
 					\end{packed_item}					
-					\noindent \underbar{\textbf{UC26 - Uređivanje izvješća na "Vijeću četvrti"}}
+					\noindent \underbar{\textbf{UC24 - Uređivanje izvješća na "Vijeću četvrti"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Vijećnik
@@ -891,7 +866,7 @@
 						\item  \textbf{Preduvjeti:}
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
-							\item Korisnik pregledava izvješće s "Vijeća četvrti" (UC24)
+							\item Korisnik pregledava izvješće s "Vijeća četvrti" (UC22)
 							\item Korisnik ima ulogu "Vijećnik"
 							\item Korisnik je autor izvješća kojeg pregledava
 						\end{packed_enum}
@@ -934,7 +909,7 @@
 					\end{packed_item}					
 					
 
-					\noindent \underbar{\textbf{UC27 - Brisanje izvješća s "Vijeća četvrti"}}
+					\noindent \underbar{\textbf{UC25 - Brisanje izvješća s "Vijeća četvrti"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Vijećnik
@@ -943,7 +918,7 @@
 						\item  \textbf{Preduvjeti:}
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
-							\item Korisnik pregledava izvješće s "Vijeća četvrti" (UC24)
+							\item Korisnik pregledava izvješće s "Vijeća četvrti" (UC22)
 							\item Korisnik ima ulogu "Vijećnik"														\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -972,7 +947,7 @@
 						
 						
 						
-					\noindent \underbar{\textbf{UC28 - Otvaranje teme na "Forumu" vezanu za izvješće s "Vijeća četvrti"}}
+					\noindent \underbar{\textbf{UC26 - Otvaranje teme na "Forumu" vezanu za izvješće s "Vijeća četvrti"}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -981,7 +956,7 @@
 						\item  \textbf{Preduvjeti:}
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
-							\item Korisnik pregledava izvješće s "Vijeća četvrti" (UC24)
+							\item Korisnik pregledava izvješće s "Vijeća četvrti" (UC22)
 							\item Za odabrano izvješće nije već otvorena tema na "Forumu"								\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -1010,7 +985,7 @@
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC29 - Podnošenje zahtjeva za dodjelu uloge}}
+					\noindent \underbar{\textbf{UC27 - Podnošenje zahtjeva za dodjelu uloge}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik
@@ -1057,7 +1032,7 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC30 - Pregled svih korisnika u sustavu}}
+					\noindent \underbar{\textbf{UC28 - Pregled svih korisnika u sustavu}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1078,7 +1053,7 @@
 					
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC31 - Pregled korisnika}}
+					\noindent \underbar{\textbf{UC29 - Pregled korisnika}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: } Administrator
@@ -1088,7 +1063,7 @@
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik ima ulogu "Administrator"
-							\item Korisnik pregledava sve korisnike u sustavu (UC30)
+							\item Korisnik pregledava sve korisnike u sustavu (UC28)
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -1100,7 +1075,7 @@
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC32 - Dodjela uloge}}
+					\noindent \underbar{\textbf{UC30 - Dodjela uloge}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1110,7 +1085,7 @@
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik ima ulogu "Administrator"
-							\item Korisnik pregledava osobne podatke objekta (UC31)
+							\item Korisnik pregledava osobne podatke objekta (UC29)
 							\item Objekt nema ulogu koju mu korisnik želi dodijeliti
 							\item Objekt nema ulogu "Administrator"
 						\end{packed_enum}
@@ -1123,9 +1098,22 @@
 							\item Korisnik biva preusmjeren na stranicu s osobnim podacima objekta
 						\end{packed_enum}
 						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+						\item[1.a] Postoji zahtjev za ulogom sa statusom "Nerazriješen" čiji je autor objekt i kojem je uloga jednaka ulozi koji je korisnik manualno dodijelio objektu
+							\item[] \begin{packed_enum}
+								
+								\item Status zahtjeva za ulogu se automatski promijeni u "Prihvaćen"
+								\item Baza podataka se ažurira
+								\item Korisnik biva preusmjeren na stranicu s osobnim podacima objekta
+								
+							\end{packed_enum}
+                    		\end{packed_item}		
+						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC33 - Oduzimanje uloge}}
+					\noindent \underbar{\textbf{UC31 - Oduzimanje uloge}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1135,7 +1123,7 @@
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik ima ulogu "Administrator"
-							\item Korisnik pregledava osobne podatke objekta (UC31)
+							\item Korisnik pregledava osobne podatke objekta (UC29)
 							\item Objekt ima ulogu koju mu korisnik želi oduzeti
 							\item Objekt nema ulogu "Administrator"
 						\end{packed_enum}
@@ -1150,30 +1138,7 @@
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC34 - Automatsko razrješavanje zahtjeva za ulogu kod manualne dodjele uloge korisniku}}
-                    \begin{packed_item}
-    
-                        \item \textbf{Glavni sudionik: }Administrator
-                        \item  \textbf{Cilj:} Promijeniti status zahtjeva za ulogu korisnika (radi jednoznačnosti, u daljnjem tekstu: objekt) u "Prihvaćen" pri manualnoj dodjeli uloge
-                        \item  \textbf{Sudionici:} Baza podataka
-                        \item  \textbf{Preduvjeti:}
-						\item[] \begin{packed_enum}
-							\item Korisnik je prijavljen u sustav
-							\item Korisnik ima ulogu "Administrator"
-							\item Korisnik je upravo objektu dodijelio ulogu (UC32)
-							\item Postoji zahtjev za ulogom sa statusom "Nerazriješen" čiji autor je objekt i u kojem je uloga jednaka ulozi koju je korisnik manualno dodijelio objektu
-						\end{packed_enum}
-						\item  \textbf{Opis osnovnog tijeka:}
-						
-						\item[] \begin{packed_enum}
-	
-							\item Status zahtjeva za ulogu se automatski promijeni u "Prihvaćen"
-							\item Baza podataka se ažurira
-						\end{packed_enum}
-
-                    \end{packed_item}
-					
-					\noindent \underbar{\textbf{UC35 - Pregled zahtjeva za ulogu}}
+					\noindent \underbar{\textbf{UC32 - Pregled zahtjeva za ulogu}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1195,7 +1160,7 @@
 
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC36 - Prihvaćanje zahtjeva za ulogu}}
+					\noindent \underbar{\textbf{UC33 - Prihvaćanje zahtjeva za ulogu}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: } Administrator
@@ -1205,7 +1170,7 @@
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik ima ulogu "Administrator"
-							\item Korisnik pregledava zahtjeve uloga (UC35)
+							\item Korisnik pregledava zahtjeve uloga (UC32)
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -1218,7 +1183,7 @@
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC37 - Odbijanje zahtjeva za ulogu}}
+					\noindent \underbar{\textbf{UC34 - Odbijanje zahtjeva za ulogu}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: } Administrator
@@ -1228,7 +1193,7 @@
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik ima ulogu "Administrator"
-							\item Korisnik pregledava zahtjeve uloga (UC35)
+							\item Korisnik pregledava zahtjeve uloga (UC32)
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -1241,7 +1206,7 @@
 					
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC38 - Pregled blokiranih korisnika}}
+					\noindent \underbar{\textbf{UC35 - Pregled blokiranih korisnika}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1251,7 +1216,7 @@
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik ima ulogu "Administrator"
-							\item Korisnik pregledava sve korisnike u sustavu (UC30)
+							\item Korisnik pregledava sve korisnike u sustavu (UC28)
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -1263,7 +1228,7 @@
 					
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC39 - Blokiranje korisnika}}
+					\noindent \underbar{\textbf{UC36 - Blokiranje korisnika}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1273,7 +1238,7 @@
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik ima ulogu "Administrator"
-							\item Korisnik pregledava osobne podatke objekta (UC31)
+							\item Korisnik pregledava osobne podatke objekta (UC29)
 							\item Objekt trenutno nije blokiran
 							\item Objekt nema ulogu "Administrator"
 						\end{packed_enum}
@@ -1288,7 +1253,7 @@
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC40 - Deblokiranje korisnika}}
+					\noindent \underbar{\textbf{UC37 - Deblokiranje korisnika}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1298,7 +1263,7 @@
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik ima ulogu "Administrator"
-							\item Korisnik pregledava osobne podatke objekta (UC31)
+							\item Korisnik pregledava osobne podatke objekta (UC29)
 							\item Objekt je trenutno blokiran
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
@@ -1312,7 +1277,7 @@
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC41 - Brisanje korisničkog računa drugog korisnika}}
+					\noindent \underbar{\textbf{UC38 - Brisanje korisničkog računa drugog korisnika}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1322,7 +1287,7 @@
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik ima ulogu "Administrator"
-							\item Korisnik pregledava osobne podatke objekta (UC31)
+							\item Korisnik pregledava osobne podatke objekta (UC29)
 							\item Objekt nema ulogu "Administrator"
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
@@ -1349,7 +1314,7 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC42 - Pregled popisa kvartova}}
+					\noindent \underbar{\textbf{UC39 - Pregled popisa kvartova}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1370,7 +1335,7 @@
 					
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC43 - Pregled kvarta}}
+					\noindent \underbar{\textbf{UC40 - Pregled kvarta}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1380,7 +1345,7 @@
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik ima ulogu "Administrator"
-							\item Korisnik pregledava popis kvartova (UC42)
+							\item Korisnik pregledava popis kvartova (UC39)
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -1392,7 +1357,7 @@
 						
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC44 - Definiranje kvarta}}
+					\noindent \underbar{\textbf{UC41 - Definiranje kvarta}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1402,7 +1367,7 @@
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik ima ulogu "Administrator"
-							\item Korisnik pregledava popis kvartova (UC42)
+							\item Korisnik pregledava popis kvartova (UC39)
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -1430,7 +1395,7 @@
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC45 - Uređivanje kvarta}}
+					\noindent \underbar{\textbf{UC42 - Uređivanje kvarta}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1440,7 +1405,7 @@
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik ima ulogu "Administrator"
-							\item Korisnik pregledava podatke o kvartu (UC43)
+							\item Korisnik pregledava podatke o kvartu (UC40)
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -1464,10 +1429,19 @@
 								
 							\end{packed_enum}
 							
+							\item[3.b] Postoje korisnici sustava čije adrese su zbog promjena podataka o kvartu prestale biti važeće
+							\item[] \begin{packed_enum}
+								
+								\item Sustav automatski postavi status stanovanja na ”Nevažeći” svim korisnicima čije adrese su zbog promjena podataka kvarta prestale biti važeće
+								\item Baza podataka se ažurira
+								\item Korisnik biva preusmjeren na stranicu koja sadrži podatke o tom kvartu
+								
+							\end{packed_enum}
+							
 						\end{packed_item}
 					\end{packed_item}
 					
-					\noindent \underbar{\textbf{UC46 - Brisanje kvarta}}
+					\noindent \underbar{\textbf{UC43 - Brisanje kvarta}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Administrator
@@ -1477,7 +1451,7 @@
 						\item[] \begin{packed_enum}
 							\item Korisnik je prijavljen u sustav
 							\item Korisnik ima ulogu "Administrator"
-							\item Korisnik pregledava podatke o kvartu (UC43)
+							\item Korisnik pregledava podatke o kvartu (UC40)
 						\end{packed_enum}
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -1499,34 +1473,16 @@
 							\item[] \begin{packed_enum}
 								
 								\item Korisnik biva preusmjeren na stranicu koja sadrži podatke o tom kvartu
+								\end{packed_enum}
+							\item[4.a] Postoje korisnici sustava čije adrese su zbog brisanja kvarta prestale biti važeće
+							\item[] \begin{packed_enum}
 								
+								\item Sustav automatski postavi status stanovanja na ”Nevažeći” svim korisnicima čije adrese su zbog brisanja kvarta prestale biti važeće
+								\item Baza podataka se ažurira
+								\item Korisnik biva preusmjeren na stranicu "Kvartovi"
 							\end{packed_enum}
-							
-						\end{packed_item}
 					\end{packed_item}
-					
-					\noindent \underbar{\textbf{UC47 - Automatsko postavljanje statusa stanovanja korisnika na "Nevažeći"}}
-                    \begin{packed_item}
-    
-                        \item \textbf{Glavni sudionik: }Administrator
-                        \item  \textbf{Cilj:} Ažurirati status stanovanja korisnicima pri promjeni podataka ili brisanja kvarta
-                        \item  \textbf{Sudionici:} Baza podataka
-                        \item  \textbf{Preduvjeti:}
-						\item[] \begin{packed_enum}
-							\item Korisnik je prijavljen u sustav
-							\item Korisnik ima ulogu "Administrator"
-							\item Korisnik je promijenio podatke o kvartu (UC45) ili obrisao kvart (UC46)
-							\item Postoje korisnici sustava čije adrese zbog prethodne točke preduvjeta su prestale biti važeće
-						\end{packed_enum}
-                        \item  \textbf{Opis osnovnog tijeka:}
-                        
-                        \item[] \begin{packed_enum}
-    
-                            \item Sustav automatski postavi status stanovanja na "Nevažeći" svim korisnicima čije adrese su zbog promjena podataka ili brisanja kvarta prestale biti važeće
-                            \item Baza podataka se ažurira
-                        \end{packed_enum}
-                        
-                    \end{packed_item}
+				\end{packed_item}
 						
 				\subsubsection{Dijagrami obrazaca uporabe}
 					
