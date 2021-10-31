@@ -19,7 +19,35 @@
 			
 			\textbf{\textit{dio 1. revizije}}\\
 			
-		\textit{Potrebno je opisati koju vrstu i implementaciju baze podataka ste odabrali, glavne komponente od kojih se sastoji i slično.}
+		
+Naš sustav koristi relacijsku bazu podataka, za koju smo se odlučili iz jednostavnog razloga. Razlog su bili podaci koji su vrlo povezani međusobno, zbog toga koristimo relacije. Relacija, odnosno tablica, je srž i glavna komponenta baze koja se sastoji od imena i skupa atributa.Baza podataka mora biti brza i efikasna u svojoj zadaći, to jest u pohranjivanju, dohvaćanju i izmjeni podataka.\\
+Naša baza podataka sastoji se od jedanaest entiteta:
+\begin{multicols}{3}
+
+\begin{itemize}
+\item User
+\item Event
+\item Thread
+\item Post
+
+\end{itemize}
+
+\columnbreak
+
+\begin{itemize}
+\item District
+\item Street
+\item Home
+\item Role
+
+\end{itemize}
+
+\begin{itemize}
+\item RoleRequest
+\item Meeting
+\item Council
+\end{itemize}
+\end{multicols}
 		
 			\subsection{Opis tablica}
 			
@@ -177,13 +205,13 @@
 					entry=none
 					]{
 						width = \textwidth,
-						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						colspec={|X[7,l]|X[6, l]|X[20, l]|}, 
 						rowhead = 1,
 					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
 					\hline \multicolumn{3}{|c|}{\textbf{Meeting}}	 \\ \hline[3pt]
 					\SetCell{LightGreen}IDMeeting & INT	&  	Identifikacijski ključ sastanka  	\\ \hline
-					\SetCell{LightBlue}IDCounil	 & INT & Identifikacijski ključ vijeća \\ \hline
-					\SetCell{LightBlue}IDDistrict	 & INT & Identifikacijski ključ četvrti \\ \hline
+					\SetCell{LightGreen}\underline{IDCounil}	 & INT & Identifikacijski ključ vijeća \\ \hline
+					\SetCell{LightGreen}\underline{IDDistrict}	 & INT & Identifikacijski ključ četvrti \\ \hline
 					\SetCell{LightBlue}IDThread	 & INT & Identifikacijski ključ dretve \\ \hline
 					meetingReport	& VARCHAR & Izvješće sastanka  	\\ \hline
 					reportAuthorId	& INT & Identifikacijski broj korisnika koji je sastavio izvješće  	\\ \hline
@@ -200,7 +228,7 @@
 					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
 					\hline \multicolumn{3}{|c|}{\textbf{Council}}	 \\ \hline[3pt]
 					\SetCell{LightGreen}IDCouncil & INT	&  	Identifikacijski ključ vijeća  	\\ \hline
-					\SetCell{LightBlue}IDMeeting	 & INT & Identifikacijski ključ sastanka  	\\ \hline
+					\SetCell{LightGreen}\underline{IDMeeting}	 & INT & Identifikacijski ključ sastanka  	\\ \hline
 							\end{longtblr}
 							
 							
