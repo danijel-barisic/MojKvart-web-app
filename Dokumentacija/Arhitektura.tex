@@ -51,8 +51,10 @@ Naša baza podataka sastoji se od jedanaest entiteta:
 		
 			\subsection{Opis tablica}
 			
-
-				\textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
+				
+	\textbf{\large User}\quad\quad Entitet User sadržava informacije o korisniku.
+				Atributi koje sadrži entitet su: Identifikacijski ključ korisnika, ime, prezime, email, "isBlocked" što pokazuje da li je korisnik blokiran, "isAddressValid" što pokazuje ima li korisnik ispravnu adresu na kojoj stanuje, šifru kuće u kojoj stanuje, šifru sastanaka ako je korisnik vijećnik te je prisustvovao sastanku vijeća, šifru vijeća ako je korisnik vijećnik te šifra četvrti kojoj korisnik pripada. Ovaj entitet u vezi je ´
+One-to-Many s entitetom Post preko atributa IDUser korisnika, u vezi Many-to-One s Meeting preko IDMeeting, u vezi One-to-Many s entitetom Event preko atributa IDUser. Također je u vezi One-to-Many s RoleRequest preko IDUser, u vezi Many-to-One s entitetom District preko atributa IDDistrict. U vezi je Many-to-One s entitetom Home preko IDHome te naposlijetku je u vezi Many-to-Many s Role preko atributa IDUser.
 				
 					
 				\begin{longtblr}[
@@ -76,6 +78,11 @@ Naša baza podataka sastoji se od jedanaest entiteta:
 					\SetCell{LightBlue}IDDistrict	& INT & Identifikacijski ključ četvrti kojoj korisnik pripada  	\\ \hline
 					\end{longtblr}
 					
+					
+		\textbf{\large Event}\quad\quad Ovaj entitet sadržava sve informacije vezane uz događaj.
+		Atributi koje sadrži entitet su: Identifikacijski ključ događaja, naziv događaja, opis, trajanje, vrijeme, lokaciju te status događaja. Entitet je u samo jednoj i to Many-to-One vezi s entitetom User preko atributa IDUser.
+					
+					
 					\begin{longtblr}[
 					label=none,
 					entry=none
@@ -95,6 +102,10 @@ Naša baza podataka sastoji se od jedanaest entiteta:
 					\SetCell{LightBlue}IDUser & INT & Identifikacijski ključ korisnika  	\\ \hline
 				
 				\end{longtblr}
+				
+				
+			\textbf{\large Thread}\quad\quad	Ovaj entitet sadržava sve informacije vezane uz dretvu na forumu. Sadrži atribute: Idetifikacijski ključ dretve, ime dretve te šifru(id) četvrti kako bi se utvrdilo kojem forumu pripada ta dretva, odnosno četvrti. Ovaj entitet je u One-to-One vezi s entitetom Meeting preko atributa IDThread te je u vezi One-to-Many s District preko šifre četvrti.
+				
 				\begin{longtblr}[
 					label=none,
 					entry=none
@@ -108,6 +119,8 @@ Naša baza podataka sastoji se od jedanaest entiteta:
 					threadName	& VARCHAR & Ime dretve  	\\ \hline 
 					\SetCell{LightBlue} IDDistrict	& INT & Identifikacijski ključ četvrti  	\\ \hline 
 				\end{longtblr}
+				
+				\textbf{\large Post}\quad\quad Ovaj entitet sadržava sve informacije vezane uz objavu na forumu. Sadrži atribute: Identifikacijski ključ objave, vrijeme objave, sadržaj objave, šifra odgovora na objavu(ako postoji), šifra dretve kojoj objava pripada te šifra korisnika koji je objavio objavu. Ovaj entitet je u dvije Many-to-One veze i to s entitetima User i Thread preko njihovih odgovarajućih identifikacijskih šifri(IDUser i IDThread).
 				
 				
 					\begin{longtblr}[
@@ -127,6 +140,9 @@ Naša baza podataka sastoji se od jedanaest entiteta:
 					\SetCell{LightBlue}IDUser	& INT & Identifikacijski ključ korisnika koji je objavio objavu  	\\ \hline
 				\end{longtblr}
 				
+				
+				\textbf{\large District}\quad\quad Ovaj entitet sadržava sve informacije vezane uz četvrt. Sadrži atribute: Identifikacijski ključ četvrti te naziv četvrti. Ovaj entitet je u tri One-to-Many veze i to s entitetima User, Post i Street preko vlastite identifikacijske šifre(IDDistrict). Također je u One-to-One vezi sa slabim entitetom Council preko atributa IDDistrict.
+				
 					\begin{longtblr}[
 					label=none,
 					entry=none
@@ -139,6 +155,8 @@ Naša baza podataka sastoji se od jedanaest entiteta:
 					\SetCell{LightGreen}IDDistrict & INT	&  	Identifikacijski ključ četvrti  	\\ \hline
 					districtName	& INT & Naziv četvrti  	\\ \hline
 				\end{longtblr}
+				
+				\textbf{\large Street}\quad\quad Ovaj entitet sadržava sve informacije vezane uz ulicu. Sadrži atribute: Identifikacijski ključ ulice, naziv ulice, najmanji kućanski broj u ulici, najveći kućanski broj u ulici te šifra četvrti u kojoj se ulica nalazi. Ovaj entitet je u Many-to-One vezi s entitetom District preko šifre četvrti. Također je u One-to-Many vezi s entitetom Home preko atributa IDStreet.
 				
 					\begin{longtblr}[
 					label=none,
@@ -155,8 +173,13 @@ Naša baza podataka sastoji se od jedanaest entiteta:
 					maxStreetNumber & INT & Najveći kućanski broj ulice \\ \hline
 					\SetCell{LightBlue}IDDistrict	 & INT & Identifikacijski ključ pripadajuće četvrti  	\\ \hline
 					\end{longtblr}
+					
+					
+					\textbf{\large Home}\quad\quad Ovaj entitet sadržava sve informacije vezane uz kuću korisnika. Sadrži atribute: Identifikacijski ključ kuće, kućni broj te šifra ulice u kojoj se kuća nalazi. Ovaj entitet je u Many-to-One vezi s entitetom Steet preko šifre ulice. Također je u One-to-Many vezi s entitetom User preko atributa IDUser.
+					
+					
 							
-									\begin{longtblr}[
+					\begin{longtblr}[
 					label=none,
 					entry=none
 					]{
@@ -169,6 +192,10 @@ Naša baza podataka sastoji se od jedanaest entiteta:
 					homeNumber	& INT & Kućanski broj  	\\ \hline
 					\SetCell{LightBlue}IDStreet	 & INT & Identifikacijski ključ pripadajuće ulice  	\\ \hline
 							\end{longtblr}
+							
+							
+							
+								\textbf{\large Role}\quad\quad Ovaj entitet sadržava sve informacije vezane uz ulogu korisnika. Sadrži atribute: Identifikacijski ključ uloge te naziv uloge. Ovaj entitet je u Many-to-Many vezi s entitetom User preko šifre uloge te u One-to-Many vezi s entitetom RoleRequest preko šifre uloge.
 							
 							\begin{longtblr}[
 					label=none,
@@ -185,6 +212,7 @@ Naša baza podataka sastoji se od jedanaest entiteta:
 							\end{longtblr}
 							
 							
+							\textbf{\large RoleRequest}\quad\quad Ovaj entitet sadržava sve informacije vezane uz zahtjev korisnika za ulogom. Sadrži atribute: Identifikacijski ključ zahtjeva, status zahtjeva te šifra korisnika koji je podnio zahtjev i šifra uloge koju korisnik zahtjeva. Ovaj entitet je u Many-to-One vezi s entitetom Role preko šifre uloge. Također je u Many-to-One vezi s entitetom User preko atributa IDUser.			
 							\begin{longtblr}[
 					label=none,
 					entry=none
@@ -199,6 +227,10 @@ Naša baza podataka sastoji se od jedanaest entiteta:
 					\SetCell{LightBlue}IDUser	 & INT & Identifikacijski ključ korisnika 	\\ \hline
 					\SetCell{LightBlue}IDRole	 & INT & Identifikacijski ključ uloge  	\\ \hline
 							\end{longtblr}
+							
+							
+						\textbf{\large Meeting}\quad\quad Ovaj slabi entitet sadržava sve informacije vezane uz sastanak vijeća. Sadrži atribute: Identifikacijski ključ sastanka, izvještaj te šifru autora izvještaja. Također sadrži šifru vijeća, šifru četvrti te šifru dretve na forumu ukoliko je otvorena na temu izvještaja. Ovaj entitet je u One-to-One vezi s entitetom Thread preko šifre dretve. Također je u Many-to-One vezi sa slabim entitetom Council preko šifre vijeća te u vezi	One-to-Many s entitetom User preko šifre sastanka.
+							
 							
 							\begin{longtblr}[
 					label=none,
@@ -218,6 +250,10 @@ Naša baza podataka sastoji se od jedanaest entiteta:
 					  	
 							\end{longtblr}
 							
+							
+							
+							\textbf{\large Council}\quad\quad Ovaj slabi entitet sadržava sve informacije vezane uz vijeće. Sadrži atribute: Identifikacijski ključ vijeća te šifru četvrti kojoj pripada. Ovaj entitet je u One-to-One vezi s entitetom District preko šifre četvrti. Također je u One-to-Many vezi sa slabim entitetom Meeting preko šifre vijeća.
+							
 							\begin{longtblr}[
 					label=none,
 					entry=none
@@ -228,7 +264,7 @@ Naša baza podataka sastoji se od jedanaest entiteta:
 					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
 					\hline \multicolumn{3}{|c|}{\textbf{Council}}	 \\ \hline[3pt]
 					\SetCell{LightGreen}IDCouncil & INT	&  	Identifikacijski ključ vijeća  	\\ \hline
-					\SetCell{LightGreen}\underline{IDMeeting}	 & INT & Identifikacijski ključ sastanka  	\\ \hline
+					\SetCell{LightGreen}\underline{IDDistrict}	 & INT & Identifikacijski ključ četvrti  	\\ \hline
 							\end{longtblr}
 							
 							
