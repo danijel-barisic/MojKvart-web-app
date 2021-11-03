@@ -53,8 +53,7 @@ Naša baza podataka sastoji se od jedanaest entiteta:
 			
 				
 	\textbf{\large User}\quad\quad Entitet User sadržava informacije o korisniku.
-				Atributi koje sadrži entitet su: Identifikacijski ključ korisnika, ime, prezime, email, "isBlocked" što pokazuje da li je korisnik blokiran, "isAddressValid" što pokazuje ima li korisnik ispravnu adresu na kojoj stanuje, šifru kuće u kojoj stanuje, šifru sastanaka ako je korisnik vijećnik te je prisustvovao sastanku vijeća, šifru vijeća ako je korisnik vijećnik te šifra četvrti kojoj korisnik pripada. Ovaj entitet u vezi je ´
-One-to-Many s entitetom Post preko atributa IDUser korisnika, u vezi Many-to-One s Meeting preko IDMeeting, u vezi One-to-Many s entitetom Event preko atributa IDUser. Također je u vezi One-to-Many s RoleRequest preko IDUser, u vezi Many-to-One s entitetom District preko atributa IDDistrict. U vezi je Many-to-One s entitetom Home preko IDHome te naposlijetku je u vezi Many-to-Many s Role preko atributa IDUser.
+				Atributi koje sadrži entitet su: Identifikacijski ključ korisnika, ime, prezime, email, "isBlocked" što pokazuje da li je korisnik blokiran, "isAddressValid" što pokazuje ima li korisnik ispravnu adresu na kojoj stanuje, šifru kuće u kojoj stanuje, šifru sastanaka ako je korisnik vijećnik te je prisustvovao sastanku vijeća, šifru vijeća ako je korisnik vijećnik te šifra četvrti kojoj korisnik pripada. Ovaj entitet u vezi je One-to-Many s entitetom Post preko atributa IDUser korisnika, u vezi Many-to-One s Meeting preko IDMeeting, u vezi One-to-Many s entitetom Event preko atributa IDUser. Također je u vezi One-to-Many s RoleRequest preko IDUser, u vezi Many-to-One s entitetom District preko atributa IDDistrict. U vezi je Many-to-One s entitetom Home preko IDHome te naposlijetku je u vezi Many-to-Many s Role preko atributa IDUser.
 				
 					
 				\begin{longtblr}[
@@ -79,7 +78,7 @@ One-to-Many s entitetom Post preko atributa IDUser korisnika, u vezi Many-to-One
 					\end{longtblr}
 					
 					
-		\textbf{\large Event}\quad\quad Ovaj entitet sadržava sve informacije vezane uz događaj.
+	\textbf{\large Event}\quad\quad Ovaj entitet sadržava sve informacije vezane uz događaj.
 		Atributi koje sadrži entitet su: Identifikacijski ključ događaja, naziv događaja, opis, trajanje, vrijeme, lokaciju te status događaja. Entitet je u samo jednoj i to Many-to-One vezi s entitetom User preko atributa IDUser.
 					
 					
@@ -104,7 +103,7 @@ One-to-Many s entitetom Post preko atributa IDUser korisnika, u vezi Many-to-One
 				\end{longtblr}
 				
 				
-			\textbf{\large Thread}\quad\quad	Ovaj entitet sadržava sve informacije vezane uz dretvu na forumu. Sadrži atribute: Idetifikacijski ključ dretve, ime dretve te šifru(id) četvrti kako bi se utvrdilo kojem forumu pripada ta dretva, odnosno četvrti. Ovaj entitet je u One-to-One vezi s entitetom Meeting preko atributa IDThread te je u vezi One-to-Many s District preko šifre četvrti.
+	\textbf{\large Thread}\quad\quad	Ovaj entitet sadržava sve informacije vezane uz dretvu na forumu. Sadrži atribute: Identifikacijski ključ dretve, ime dretve te šifru četvrti kako bi se utvrdilo kojem forumu pripada ta dretva, odnosno četvrti. Ovaj entitet je u One-to-One vezi s entitetom Meeting preko atributa IDThread te je u vezi One-to-Many s District preko šifre četvrti.
 				
 				\begin{longtblr}[
 					label=none,
@@ -120,7 +119,7 @@ One-to-Many s entitetom Post preko atributa IDUser korisnika, u vezi Many-to-One
 					\SetCell{LightBlue} IDDistrict	& INT & Identifikacijski ključ četvrti  	\\ \hline 
 				\end{longtblr}
 				
-				\textbf{\large Post}\quad\quad Ovaj entitet sadržava sve informacije vezane uz objavu na forumu. Sadrži atribute: Identifikacijski ključ objave, vrijeme objave, sadržaj objave, šifra odgovora na objavu(ako postoji), šifra dretve kojoj objava pripada te šifra korisnika koji je objavio objavu. Ovaj entitet je u dvije Many-to-One veze i to s entitetima User i Thread preko njihovih odgovarajućih identifikacijskih šifri(IDUser i IDThread).
+	\textbf{\large Post}\quad\quad Ovaj entitet sadržava sve informacije vezane uz objavu na forumu. Sadrži atribute: Identifikacijski ključ objave, vrijeme objave, sadržaj objave, šifra odgovora na objavu(ako postoji), šifra dretve kojoj objava pripada te šifra korisnika koji je objavio objavu. Ovaj entitet je u dvije Many-to-One veze i to s entitetima User i Thread preko njihovih odgovarajućih identifikacijskih šifri(IDUser i IDThread).
 				
 				
 					\begin{longtblr}[
@@ -141,7 +140,7 @@ One-to-Many s entitetom Post preko atributa IDUser korisnika, u vezi Many-to-One
 				\end{longtblr}
 				
 				
-				\textbf{\large District}\quad\quad Ovaj entitet sadržava sve informacije vezane uz četvrt. Sadrži atribute: Identifikacijski ključ četvrti te naziv četvrti. Ovaj entitet je u tri One-to-Many veze i to s entitetima User, Post i Street preko vlastite identifikacijske šifre(IDDistrict). Također je u One-to-One vezi sa slabim entitetom Council preko atributa IDDistrict.
+	\textbf{\large District}\quad\quad Ovaj entitet sadržava sve informacije vezane uz četvrt. Sadrži atribute: Identifikacijski ključ četvrti te naziv četvrti. Ovaj entitet je u tri One-to-Many veze i to s entitetima User, Post i Street preko vlastite identifikacijske šifre(IDDistrict). Također je u One-to-One vezi sa slabim entitetom Council preko atributa IDDistrict.
 				
 					\begin{longtblr}[
 					label=none,
@@ -175,7 +174,7 @@ One-to-Many s entitetom Post preko atributa IDUser korisnika, u vezi Many-to-One
 					\end{longtblr}
 					
 					
-					\textbf{\large Home}\quad\quad Ovaj entitet sadržava sve informacije vezane uz kuću korisnika. Sadrži atribute: Identifikacijski ključ kuće, kućni broj te šifra ulice u kojoj se kuća nalazi. Ovaj entitet je u Many-to-One vezi s entitetom Steet preko šifre ulice. Također je u One-to-Many vezi s entitetom User preko atributa IDUser.
+	\textbf{\large Home}\quad\quad Ovaj entitet sadržava sve informacije vezane uz kuću korisnika. Sadrži atribute: Identifikacijski ključ kuće, kućni broj te šifra ulice u kojoj se kuća nalazi. Ovaj entitet je u Many-to-One vezi s entitetom Steet preko šifre ulice. Također je u One-to-Many vezi s entitetom User preko atributa IDUser.
 					
 					
 							
@@ -195,7 +194,7 @@ One-to-Many s entitetom Post preko atributa IDUser korisnika, u vezi Many-to-One
 							
 							
 							
-								\textbf{\large Role}\quad\quad Ovaj entitet sadržava sve informacije vezane uz ulogu korisnika. Sadrži atribute: Identifikacijski ključ uloge te naziv uloge. Ovaj entitet je u Many-to-Many vezi s entitetom User preko šifre uloge te u One-to-Many vezi s entitetom RoleRequest preko šifre uloge.
+	\textbf{\large Role}\quad\quad Ovaj entitet sadržava sve informacije vezane uz ulogu korisnika. Sadrži atribute: Identifikacijski ključ uloge te naziv uloge. Ovaj entitet je u Many-to-Many vezi s entitetom User preko šifre uloge te u One-to-Many vezi s entitetom RoleRequest preko šifre uloge.
 							
 							\begin{longtblr}[
 					label=none,
@@ -226,6 +225,23 @@ One-to-Many s entitetom Post preko atributa IDUser korisnika, u vezi Many-to-One
 					roleRequestStatus	& VARCHAR & Status zahtjeva za ulogu  	\\ \hline
 					\SetCell{LightBlue}IDUser	 & INT & Identifikacijski ključ korisnika 	\\ \hline
 					\SetCell{LightBlue}IDRole	 & INT & Identifikacijski ključ uloge  	\\ \hline
+							\end{longtblr}
+							
+\textbf{\large UserRole}\quad\quad Ova join tablica koja je posljedično nastala spajanjem entiteta User s entitetom Role vezom Many-to-Many sadržava informacije o ulozi korisnika. Sadrži 2 atributa koja su ključ entiteta User i ključ entiteta Role.	
+							
+								\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[7,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \multicolumn{3}{|c|}{\textbf{UserRole}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}\underline{IDUser} & INT	&  	Identifikacijski ključ korisnika  	\\ \hline
+					\SetCell{LightGreen}\underline{IDRole}	 & INT & Identifikacijski ključ uloge \\ \hline
+
+					  	
 							\end{longtblr}
 							
 							
@@ -271,10 +287,14 @@ One-to-Many s entitetom Post preko atributa IDUser korisnika, u vezi Many-to-One
 				
 			
 			\subsection{Dijagram baze podataka}
-				\textit{ U ovom potpoglavlju potrebno je umetnuti dijagram baze podataka. Primarni i strani ključevi moraju biti označeni, a tablice povezane. Bazu podataka je potrebno normalizirati. Podsjetite se kolegija "Baze podataka".}
+	\begin{figure}[h]
+	\centering
+  \includegraphics[width=1.2\linewidth]{Relacijska_shema.png}
+  \caption{Relacijska shema}
+  \label{Relacijska_shema}
+\end{figure}
 			
 			\eject
-			
 			
 		\section{Dijagram razreda}
 		
