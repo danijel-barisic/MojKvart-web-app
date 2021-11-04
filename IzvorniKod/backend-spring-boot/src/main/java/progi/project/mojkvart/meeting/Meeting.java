@@ -24,7 +24,7 @@ public class Meeting {
     @JoinColumn(name = "district_id")
     private Council council;
 
-    @OneToMany
+    @OneToMany(mappedBy = "meeting")
     private List<User> users;
 
 }

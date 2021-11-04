@@ -1,6 +1,7 @@
 package progi.project.mojkvart.user;
 
 import progi.project.mojkvart.event.Event;
+import progi.project.mojkvart.meeting.Meeting;
 import progi.project.mojkvart.role.Role;
 import progi.project.mojkvart.role_request.RoleRequest;
 import progi.project.mojkvart.post.Post;
@@ -48,6 +49,10 @@ public class User {
 
 //    @OneToMany(mappedBy = "user")
 //    private List<Event> events;
+
+    @ManyToOne
+    @JoinColumn(name = "meeting_id")
+    private Meeting meeting;
 
 //    @ManyToOne
 //    @JoinColumn(name = "home_id")
