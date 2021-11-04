@@ -1,0 +1,8 @@
+body {
+  font-size: 20px;
+  background-color: #7b7b7b;
+  margin: 0;
+  padding-top: 40px;
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
