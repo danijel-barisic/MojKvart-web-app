@@ -43,6 +43,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<RoleRequest> roleRequests;
 
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
+
 //    @OneToMany(mappedBy = "user")
 //    private List<Event> events;
 

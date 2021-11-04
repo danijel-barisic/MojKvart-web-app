@@ -28,6 +28,7 @@ public class Post {
     private PostThread thread;
 
     @ManyToOne
+    @JoinColumn(name="user_id")
     private User user;
 
     public Long getId() {
