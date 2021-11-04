@@ -26,12 +26,12 @@ public class StreetController {
         return streetService.fetch(id);
     }
 
-    //post i put trenutno ne postavljaju district_id
     @PostMapping("")
     public ResponseEntity<Street> createStreet(@RequestBody Street street) {
-        if(streetService.existsById(street.getId()) == true) {
+        if(street.getId() != null && streetService.existsById(street.getId()) == true) {
             throw new IllegalArgumentException("Street with id: " + street.getId() + " already exist");
-        } else {
+        }
+        else {
             Street saved = streetService.createStreet(street);
             return ResponseEntity.created(URI.create("/streets/"+ saved.getId())).body(saved);
         }
@@ -39,8 +39,11 @@ public class StreetController {
 
     @PutMapping("/{id}")
     public Street updateStreet(@PathVariable("id") Long id, @RequestBody Street street) {
-        if(streetService.existsById(street.getId()) == false) {
+        if(street.getId() != null && streetService.existsById(street.getId()) == false) {
             throw new IllegalArgumentException("Street with id: " + street.getId() + " does not exist");
+        }
+        else if(street.getId() == null){
+            throw new IllegalArgumentException("Street id must be given");
         } else {
             if (!street.getId().equals(id))
                 throw new IllegalArgumentException("Street id must be preserved");
