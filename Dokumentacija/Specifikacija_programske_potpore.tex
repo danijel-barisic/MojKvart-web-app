@@ -1529,7 +1529,7 @@
 				\eject	
 				
 			\subsection{Sekvencijski dijagrami}
-		\noindent \textbf{TODO 7}
+		\noindent \textbf{Stvaranje, uređivanje, prihvaćanje i brisanje prijedloga događaja - obrasci uporabe UC9, UC10, UC11, UC12, UC13}
 			
 			
 		\noindent Korisnik šalje zahtjev za stvaranjem prijedloga događaja. Poslužitelj prikazuje obrazac korisniku sa poljima naziv, mjesto, vrijeme, trajanje, kratak opis. Nakon što korisnik ispuni polja, poslužitelj traži potvrdu ispune prijedloga te korisnik potvrđuje spremanje prijedloga. Dok sva polja u obrascu nisu ispunjena poslužitelj upozorava korisnika. Ispunom praznih polja od strane korisnika, poslužitelj traži potvrdu promjene prijedloga te korisnik potvrđuje spremanje prijedloga poslužitelju. Baza podataka prima prijedlog od poslužitelja i pohranjuje promjene, vraća potvrdu izmjene poslužitelju, a poslužitelj potvrđuje spremanje prijedloga korisniku. Moderator započinje pregled prijedloga događaja, slanjem zahtjeva za prikaz prijedloga događaja poslužitelju.Poslužitelj dohvaća prijedloge događaja iz baze podataka te ih prikazuje moderatoru. Moderator odabire prijedlog događaja te poslužitelj prikazuje odabrani prijedlog. Dok sva polja nisu ispunjena poslužitelj upozorava moderatora da polja nisu ispunjena, moderator ispunjava prazna polja, poslužitelj traži potvrdu promjene te moderator sprema promjene. Ako prijedlog ne zadovoljava jezični standard, moderator mijenja polja, poslužitelj traži potvrdu promjene te moderator šalje zahtjev za spremanjem promjena poslužitelju. Poslužitelj nakon provedenih provjera i izmjena pohranjuje promjene na bazi podataka i vraća potvrdu spremanja moderatoru. Moderator šalje zahtjev za objavu prijedloga, poslužitelj pohranjuje promjene na bazi podataka i vraća potvrdu objave. Ukoliko Moderator šalje zahtjev za brisanje prijedloga, poslužitelj pohranjuje promjene na bazi podataka i vraća potvrdu
@@ -1537,10 +1537,10 @@ brisanja.
 				\begin{figure}[H]
 					\centering
 					\includegraphics[width=\textwidth,keepaspectratio]{Dijagram_07.png}
-					\caption{Sekvencijski dijagram 7}
+					\caption{Sekvencijski dijagram za UC9, UC10, UC11, UC12, UC13}
 				\end{figure}	
 				\newpage			
-		\noindent \textbf{TODO 8}
+		\noindent \textbf{Stvaranje, prihvaćanje i odbijanje zahtjeva za dodjelu uloge - obrasci uporabe UC27, UC32, UC33, UC34}
 			
 			
 		\noindent Korisnik šalje poslužitelju zahtjev za stvaranje uloge, poslužitelj vraća 						prikaz zahtjeva. Nakon ispune zahtjeva poslužitelj traži potvrdu ispune zahtjeva 					te korisnik šalje zahtjev za dodjelu uloge. Poslužitelj pohranjuje 
@@ -1558,11 +1558,11 @@ brisanja.
 				\begin{figure}[H]
 					\centering
 					\includegraphics[width=\textwidth,keepaspectratio]{Dijagram_08.png}
-					\caption{Sekvencijski dijagram 8}
+					\caption{Sekvencijski dijagram za UC27, UC32, UC33, UC34}
 				\end{figure}		
 				\newpage		
 		
-		\noindent \textbf{Obrazac uporabe UC30 - Dodjela uloge }
+		\noindent \textbf{Dodjela uloge - obrazac uporabe UC30}
 			
 			
 		\noindent Administrator odabire željenu ulogu, poslužitelj vraća prikaz uloge te 							  administrator šalje zahtjev za dodijelu 
@@ -1575,10 +1575,10 @@ brisanja.
 				\begin{figure}[H]
 					\centering
 					\includegraphics[width=\textwidth,keepaspectratio]{Dijagram_09.png}
-					\caption{Sekvencijski dijagram 3}
+					\caption{Sekvencijski dijagram za UC30}
 				\end{figure}			
 				\newpage	
-		\noindent \textbf{TODO 10}
+		\noindent \textbf{Brisanje kvarta i promjena nevažećih adresa - obrasci uporabe UC43, UC7}
 			
 			
 		\noindent Administrator šalje zahtjev poslužitelju za brisanjem kvarta. Poslužitelj 						odgovara sa upozorenjem o trajnosti 
@@ -1602,7 +1602,7 @@ brisanja.
 				\begin{figure}[H]
 					\centering
 					\includegraphics[width=\textwidth,keepaspectratio]{Dijagram_10.png}
-					\caption{Sekvencijski dijagram 4}
+					\caption{Sekvencijski dijagram za UC43, UC7}
 				\end{figure}		
 				
 		
