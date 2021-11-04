@@ -1490,37 +1490,37 @@
 				
 				\begin{packed_item}					
 					\item[] 
-					\begin{figure}[bp]
+					\begin{figure}[H]
 					\centering
 					\includegraphics[width=\textwidth]{Dijagram_01.png}
 					\caption{Dijagram obrazaca uporabe, osnovne funkcionalnosti}
 					\end{figure}
 					
-					\item[] \begin{figure}[bp]
+					\item[] \begin{figure}[H]
 					\centering
 					\includegraphics[width=\textwidth]{Dijagram_02.png}
 					\caption{Dijagram obrazaca uporabe, funkcionalnosti upravljanja osobnim podacima}
 					\end{figure}
 					
-					\begin{figure}[bp]
+					\begin{figure}[H]
 					\centering
 					\includegraphics[width=\textwidth]{Dijagram_03.png}
 					\caption{Dijagram obrazaca uporabe, funkcionalnosti sekcije događaji}
 					\end{figure}
 					
-					\begin{figure}[bp]
+					\begin{figure}[H]
 					\centering
 					\includegraphics[width=\textwidth]{Dijagram_04.png}
 					\caption{Dijagram obrazaca uporabe, funkcionalnosti sekcije "Forum"}
 					\end{figure}
 					
-					\begin{figure}[bp]
+					\begin{figure}[H]
 					\centering
 					\includegraphics[width=\textwidth]{Dijagram_05.png}
 					\caption{Dijagram obrazaca uporabe, funkcionalnosti sekcije "Vijeće četvrti"}
 					\end{figure}
 					
-					\begin{figure}[bp]
+					\begin{figure}[H]
 					\centering
 					\includegraphics[width=\textwidth]{Dijagram_06.png}
 					\caption{Dijagram obrazaca uporabe, funkcionalnosti Administratora}
@@ -1532,9 +1532,9 @@
 		\noindent \textbf{TODO 7}
 			
 			
-		\noindent Neki text 
-						
-				\begin{figure}[bp]
+		\noindent Korisnik šalje zahtjev za stvaranjem prijedloga događaja. Poslužitelj prikazuje obrazac korisniku sa poljima naziv, mjesto, vrijeme, trajanje, kratak opis. Nakon što korisnik ispuni polja, poslužitelj traži potvrdu ispune prijedloga te korisnik potvrđuje spremanje prijedloga. Dok sva polja u obrascu nisu ispunjena poslužitelj upozorava korisnika. Ispunom praznih polja od strane korisnika, poslužitelj traži potvrdu promjene prijedloga te korisnik potvrđuje spremanje prijedloga poslužitelju. Baza podataka prima prijedlog od poslužitelja i pohranjuje promjene, vraća potvrdu izmjene poslužitelju, a poslužitelj potvrđuje spremanje prijedloga korisniku. Moderator započinje pregled prijedloga događaja, slanjem zahtjeva za prikaz prijedloga događaja poslužitelju.Poslužitelj dohvaća prijedloge događaja iz baze podataka te ih prikazuje moderatoru. Moderator odabire prijedlog događaja te poslužitelj prikazuje odabrani prijedlog. Dok sva polja nisu ispunjena poslužitelj upozorava moderatora da polja nisu ispunjena, moderator ispunjava prazna polja, poslužitelj traži potvrdu promjene te moderator sprema promjene. Ako prijedlog ne zadovoljava jezični standard, moderator mijenja polja, poslužitelj traži potvrdu promjene te moderator šalje zahtjev za spremanjem promjena poslužitelju. Poslužitelj nakon provedenih provjera i izmjena pohranjuje promjene na bazi podataka i vraća potvrdu spremanja moderatoru. Moderator šalje zahtjev za objavu prijedloga, poslužitelj pohranjuje promjene na bazi podataka i vraća potvrdu objave. Ukoliko Moderator šalje zahtjev za brisanje prijedloga, poslužitelj pohranjuje promjene na bazi podataka i vraća potvrdu
+brisanja.  		
+				\begin{figure}[H]
 					\centering
 					\includegraphics[width=\textwidth,keepaspectratio]{Dijagram_07.png}
 					\caption{Sekvencijski dijagram 7}
@@ -1543,34 +1543,65 @@
 		\noindent \textbf{TODO 8}
 			
 			
-		\noindent Neki text 
+		\noindent Korisnik šalje poslužitelju zahtjev za stvaranje uloge, poslužitelj vraća 						prikaz zahtjeva. Nakon ispune zahtjeva poslužitelj traži potvrdu ispune zahtjeva 					te korisnik šalje zahtjev za dodjelu uloge. Poslužitelj pohranjuje 
+				promjene na bazi podataka i nakon što baza potvrdi izmjene, 
+				šalje potvrdu slanja zahtjeva korisniku. Administrator
+				šalje zahtjev za prikaz zahtjeva za uloge. 
+				Poslužitelj dohvaća zahtjeve iz baze podataka te ih prikazuje 
+				administratoru. Administrator odabire željeni zahtjev te ga poslužitelj 							prikazuje. Administrator prihvaća odabrani
+				zahtjev, poslužitelj pohranjuje promjene na bazi podataka i vraća potvrdu 						prihvata administratoru. Ukoliko 
+				administrator odbije zahtjev, poslužitelj pohranjuje promjene 
+				na bazi podataka te vraća potvrdu odbijanja 
+				zahtjeva administratoru.
+ 
 						
-				\begin{figure}[bp]
+				\begin{figure}[H]
 					\centering
-					\includegraphics[width=\textwidth,keepaspectratio]{Dijagram_07.png}
+					\includegraphics[width=\textwidth,keepaspectratio]{Dijagram_08.png}
 					\caption{Sekvencijski dijagram 8}
 				\end{figure}		
 				\newpage		
 		
-		\noindent \textbf{TODO 9}
+		\noindent \textbf{Obrazac uporabe UC30 - Dodjela uloge }
 			
 			
-		\noindent Neki text
+		\noindent Administrator odabire željenu ulogu, poslužitelj vraća prikaz uloge te 							  administrator šalje zahtjev za dodijelu 
+				  uloge. Poslužitelj provjerava postojanje zahtjeva jednakoj dodijeljenoj 
+				  ulozi u bazi podataka. Ako zahtjev postoji
+				  baza podataka vraća traženi zahtjev, poslužitelj mijenja status zahtjeva u 						  "prihvaćen" te baza podataka vraća
+                   potvrdu izmjene. Ukoliko takav zahtjev ne postoji baza podataka vraća 								informaciju o nepostojanju traženog 
+					zahtjeva. Poslužitelj vraća administratoru potvrdu izmjene.	
 						
-				\begin{figure}[bp]
+				\begin{figure}[H]
 					\centering
-					\includegraphics[width=\textwidth,keepaspectratio]{Dijagram_07.png}
+					\includegraphics[width=\textwidth,keepaspectratio]{Dijagram_09.png}
 					\caption{Sekvencijski dijagram 3}
 				\end{figure}			
 				\newpage	
 		\noindent \textbf{TODO 10}
 			
 			
-		\noindent Neki text
+		\noindent Administrator šalje zahtjev poslužitelju za brisanjem kvarta. Poslužitelj 						odgovara sa upozorenjem o trajnosti 
+				i nepovratnosti odabrane akcije. Ako administrator odabere odustati od brisanja 					kvarta, šalje zahtjev za
+				odustajanjem poslužitelju te poslužitelj odgovara s potvrdom
+ 				odustajanja od brisanja kvarta. Ukoliko administrator
+				odabere opciju potvrdi, šalje potvrdu za brisanjem poslužitelju. 
+				Poslužitelj šalje zahtjev za brisanjem svih tema, događaja 
+				i izvješća vezanih uz kvart na bazi podataka, baza vraća potvrdu izmjene te
+ 				poslužitelj šalje zahtjev za dohvat svih stanovnika obrisanog kvarta. 
+ 				Ako postoje takvi stanovnici, baza vraća
+				tražene stanovnike, poslužitelj mijenja svim stanovnicima status stanovanja u 					neispravan, baza podataka šalje
+				potvrdu izmjene poslužitelju. Ukoliko ne postoje takvi stanovnici, baza podataka 					šalje poslužitelju
+ 				informaciju o nepostojanju takvih stanovnika. Poslužitelj briše kvart, a baza 					podataka vraća potvrdu izmjene koju
+				poslužitelj prosljeđuje do administratora. Korisnik koji ispravlja status 						nevažećeg statusa stanovanja
+				 unosi novu adresu, poslužitelj šalje potvrdu te korisnik potvrđuje promjene. Dok 				unesena adresa nije validna
+				poslužitelj upozorava korisnika da adresa nije valjana. Nakon što korisnik 						promijeni adresu, poslužitelj šalje
+				potvrdu promjene adrese te korisnik sprema promjene. Poslužitelj pohranjuje 						promjene na bazi podataka, te nakon
+				primitka potvrde izmjene, šalje potvrdu promjene adrese korisniku.
 						
-				\begin{figure}[bp]
+				\begin{figure}[H]
 					\centering
-					\includegraphics[width=\textwidth,keepaspectratio]{Dijagram_07.png}
+					\includegraphics[width=\textwidth,keepaspectratio]{Dijagram_10.png}
 					\caption{Sekvencijski dijagram 4}
 				\end{figure}		
 				
