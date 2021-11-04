@@ -18,6 +18,18 @@ public class Role {
     @Column(name = "role_name")
     private String roleName;
 
+    // lazy FetchType because we don't want to immediately fetch all users that have the role we're fetching
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.DETACH, CascadeType.MERGE,
+                    CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List<User> users;
+
+    @OneToMany(mappedBy = "role")
+    private List<RoleRequest> roleRequests;
+
     public Role(){
 
     }
@@ -41,18 +53,6 @@ public class Role {
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
-
-    // lazy FetchType because we don't want to immediately fetch all users that have the role we're fetching
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.DETACH, CascadeType.MERGE,
-            CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> users;
-
-    @OneToMany(mappedBy = "role")
-    private List<RoleRequest> roleRequests;
 
     @Override
     public String toString() {
