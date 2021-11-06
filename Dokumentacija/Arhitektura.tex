@@ -245,7 +245,7 @@ Naša baza podataka sastoji se od jedanaest entiteta:
 							\end{longtblr}
 							
 							
-						\textbf{\large Meeting}\quad\quad Ovaj slabi entitet sadržava sve informacije vezane uz sastanak vijeća. Sadrži atribute: Identifikacijski ključ sastanka, izvještaj te šifru autora izvještaja. Također sadrži šifru vijeća, šifru četvrti te šifru dretve na forumu ukoliko je otvorena na temu izvještaja. Ovaj entitet je u One-to-One vezi s entitetom Thread preko šifre dretve. Također je u Many-to-One vezi sa slabim entitetom Council preko šifre vijeća te u vezi	One-to-Many s entitetom User preko šifre sastanka.
+						\textbf{\large Meeting}\quad\quad Ovaj slabi entitet sadržava sve informacije vezane uz sastanak vijeća. Sadrži atribute: Identifikacijski ključ sastanka, naziv sastanka, izvještaj te šifru autora izvještaja. Također sadrži šifru vijeća, šifru četvrti te šifru dretve na forumu ukoliko je otvorena na temu izvještaja. Ovaj entitet je u One-to-One vezi s entitetom Thread preko šifre dretve. Također je u Many-to-One vezi sa slabim entitetom Council preko šifre vijeća te u vezi	One-to-Many s entitetom User preko šifre sastanka.
 							
 							
 							\begin{longtblr}[
@@ -262,7 +262,8 @@ Naša baza podataka sastoji se od jedanaest entiteta:
 					\SetCell{LightGreen}\underline{IDDistrict}	 & INT & Identifikacijski ključ četvrti \\ \hline
 					\SetCell{LightBlue}IDThread	 & INT & Identifikacijski ključ dretve \\ \hline
 					meetingReport	& VARCHAR & Izvješće sastanka  	\\ \hline
-					reportAuthorId	& INT & Identifikacijski broj korisnika koji je sastavio izvješće  	\\ \hline
+					reportAuthorId	& INT & Identifikacijski broj korisnika koji je sastavio izvješće\\ \hline
+					meetingTitle & VARCHAR & Naziv sastanka \\ \hline 
 					  	
 							\end{longtblr}
 							
@@ -284,7 +285,7 @@ Naša baza podataka sastoji se od jedanaest entiteta:
 							\end{longtblr}
 							
 							
-				
+			\eject	
 			
 			\subsection{Dijagram baze podataka}
 	\begin{figure}[h]
