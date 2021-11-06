@@ -7,24 +7,40 @@ import progi.project.mojkvart.post.Post;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity(name = "Thread")
+@Entity
+@Table(name = "thread")
 public class PostThread {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "thread_id")
     private Long id;
 
     @Column(name = "thread_name")
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "thread")
     private List<Post> posts;
 
     @OneToOne
+    @JoinColumn(name = "meeting_id")
     private Meeting meeting;
 
     @ManyToOne
+    @JoinColumn(name = "district_id")
     private District district;
+
+    public PostThread(){
+
+    }
+    
+    public PostThread(Long id, String name, List<Post> posts, Meeting meeting, District district) {
+        this.id = id;
+        this.name = name;
+        this.posts = posts;
+        this.meeting = meeting;
+        this.district = district;
+    }
 
     public Long getId() {
         return id;

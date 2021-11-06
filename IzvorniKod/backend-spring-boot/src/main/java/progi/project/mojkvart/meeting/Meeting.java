@@ -8,16 +8,18 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "meeting")
 public class Meeting {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "meeting_id")
     private Long id;
 
-    @Column
+    @Column(name = "report")
     private String report;
 
-    @OneToOne
+    @OneToOne(mappedBy = "thread")
     private PostThread postThread;
 
     @ManyToOne
@@ -26,6 +28,18 @@ public class Meeting {
 
     @OneToMany(mappedBy = "meeting")
     private List<User> users;
+
+    public Meeting(){
+
+    }
+
+    public Meeting(Long id, String report, PostThread postThread, Council council, List<User> users) {
+        this.id = id;
+        this.report = report;
+        this.postThread = postThread;
+        this.council = council;
+        this.users = users;
+    }
 
     public Long getId() {
         return id;
