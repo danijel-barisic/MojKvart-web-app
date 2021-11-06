@@ -1,8 +1,9 @@
 package progi.project.mojkvart.thread;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import progi.project.mojkvart.post.PostRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PostThreadService {
 
     private final PostThreadRepository postThreadRepository;
