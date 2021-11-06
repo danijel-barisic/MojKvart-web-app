@@ -33,7 +33,7 @@ public class PostThread {
     public PostThread(){
 
     }
-    
+
     public PostThread(Long id, String name, List<Post> posts, Meeting meeting, District district) {
         this.id = id;
         this.name = name;
