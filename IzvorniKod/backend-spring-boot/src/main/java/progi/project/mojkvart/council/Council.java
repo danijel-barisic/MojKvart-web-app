@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 
 @Entity
+@Table(name = "council")
 public class Council{
 
     @Id
@@ -20,8 +21,10 @@ public class Council{
     @JoinColumn(name = "district_id")
     private District district;
 
-    @OneToMany(mappedBy = "district")
+    @OneToMany(mappedBy = "council")
     private List<Meeting> meetings;
+
+    public Council() {}
 
     public Long getId() {
         return id;

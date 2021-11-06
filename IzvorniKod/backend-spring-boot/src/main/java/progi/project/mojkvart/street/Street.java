@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 
 @Entity
+@Table(name = "street")
 public class Street {
 
     @Id
@@ -26,6 +27,14 @@ public class Street {
     @ManyToOne
     @JoinColumn(name = "district_id")
     private District district;
+
+    public Street() {}
+
+    public Street(String name, Integer minStreetNo, Integer maxStreetNo) {
+        this.name = name;
+        this.minStreetNo = minStreetNo;
+        this.maxStreetNo = maxStreetNo;
+    }
 
     public Long getId() {
         return id;

@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import java.util.List;
 
 @Entity
+@Table(name="district")
 public class District {
 
     @Id
@@ -23,12 +24,17 @@ public class District {
     @OneToMany(mappedBy = "district")
     private List<Street> streets;
 
-    //*veza district - council bi trebala biti slaba*
     @OneToOne(mappedBy = "district")
     private Council council;
 
     @OneToMany(mappedBy = "district")
     private List<PostThread> threads;
+
+    public District() {}
+
+    public District(String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
