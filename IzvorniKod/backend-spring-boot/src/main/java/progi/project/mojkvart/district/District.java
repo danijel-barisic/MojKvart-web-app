@@ -2,6 +2,7 @@ package progi.project.mojkvart.district;
 
 import progi.project.mojkvart.council.Council;
 import progi.project.mojkvart.street.Street;
+import progi.project.mojkvart.thread.PostThread;
 
 import javax.persistence.*;
 import javax.persistence.Column;
@@ -25,6 +26,9 @@ public class District {
     //*veza district - council bi trebala biti slaba*
     @OneToOne(mappedBy = "district")
     private Council council;
+
+    @OneToMany(mappedBy = "district")
+    private List<PostThread> threads;
 
     public Long getId() {
         return id;
