@@ -17,7 +17,7 @@ public class Post {
     @Column(name = "post_id")
     private Long id;
 
-    @Column(name = "content")
+    @Column(name = "content", length = 5000)
     private String content;
 
     @Column(name = "date_time")

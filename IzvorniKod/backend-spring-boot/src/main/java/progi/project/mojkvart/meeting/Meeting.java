@@ -19,7 +19,7 @@ public class Meeting {
     @Column(name = "report")
     private String report;
 
-    @OneToOne(mappedBy = "thread")
+    @OneToOne(mappedBy = "meeting")
     private PostThread postThread;
 
     @ManyToOne
