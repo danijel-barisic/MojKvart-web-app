@@ -53,7 +53,7 @@ Naša baza podataka sastoji se od jedanaest entiteta:
 			
 				
 	\textbf{\large User}\quad\quad Entitet User sadržava informacije o korisniku.
-				Atributi koje sadrži entitet su: Identifikacijski ključ korisnika, ime, prezime, email, "isBlocked" što pokazuje da li je korisnik blokiran, "isAddressValid" što pokazuje ima li korisnik ispravnu adresu na kojoj stanuje, šifru kuće u kojoj stanuje, šifru sastanaka ako je korisnik vijećnik te je prisustvovao sastanku vijeća, šifru vijeća ako je korisnik vijećnik te šifra četvrti kojoj korisnik pripada. Ovaj entitet u vezi je One-to-Many s entitetom Post preko atributa IDUser korisnika, u vezi Many-to-One s Meeting preko IDMeeting, u vezi One-to-Many s entitetom Event preko atributa IDUser. Također je u vezi One-to-Many s RoleRequest preko IDUser, u vezi Many-to-One s entitetom District preko atributa IDDistrict. U vezi je Many-to-One s entitetom Home preko IDHome te naposlijetku je u vezi Many-to-Many s Role preko atributa IDUser.
+				Atributi koje sadrži entitet su: Identifikacijski ključ korisnika, email, ime, prezime, password, "isBlocked" što pokazuje da li je korisnik blokiran, "isAddressValid" što pokazuje ima li korisnik ispravnu adresu na kojoj stanuje, šifru kuće u kojoj stanuje, šifru sastanaka ako je korisnik vijećnik te je prisustvovao sastanku vijeća, šifru vijeća ako je korisnik vijećnik te šifra četvrti kojoj korisnik pripada. Ovaj entitet u vezi je One-to-Many s entitetom Post preko atributa IDUser korisnika, u vezi Many-to-One s Meeting preko IDMeeting, u vezi One-to-Many s entitetom Event preko atributa IDUser. Također je u vezi One-to-Many s RoleRequest preko IDUser, u vezi Many-to-One s entitetom District preko atributa IDDistrict. U vezi je Many-to-One s entitetom Home preko IDHome te naposlijetku je u vezi Many-to-Many s Role preko atributa IDUser.
 				
 					
 				\begin{longtblr}[
@@ -69,6 +69,7 @@ Naša baza podataka sastoji se od jedanaest entiteta:
 					email	& VARCHAR & Email korisnika  	\\ \hline
 					firstName & VARCHAR & Ime korisnika \\ \hline
 					lastName & VARCHAR & Prezime korisnika \\ \hline
+					password & VARCHAR & Lozinka korisnika \\ \hline
 					isBlocked & BOOLEAN & Oznaka je li korisnik blokiran \\ \hline
 					isAddressValid & BOOLEAN & Oznaka je li adresa korisnika valjana \\ \hline
 					\SetCell{LightBlue}IDHome & INT & Identifikacijski ključ korisnikove kuće  	\\ \hline
