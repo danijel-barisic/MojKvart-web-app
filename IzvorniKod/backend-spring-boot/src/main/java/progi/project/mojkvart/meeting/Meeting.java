@@ -1,9 +1,10 @@
 package progi.project.mojkvart.meeting;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import progi.project.mojkvart.account.Account;
 import progi.project.mojkvart.council.Council;
 import progi.project.mojkvart.thread.PostThread;
-import progi.project.mojkvart.user.User;
+import progi.project.mojkvart.account.Account;
 
 import javax.persistence.*;
 import java.util.List;
@@ -32,19 +33,19 @@ public class Meeting {
 
     @JsonIgnore
     @OneToMany(mappedBy = "meeting")
-    private List<User> users;
+    private List<Account> accounts;
 
     public Meeting(){
 
     }
 
-    public Meeting(Long id, String title, String report, PostThread postThread, Council council, List<User> users) {
+    public Meeting(Long id, String title, String report, PostThread postThread, Council council, List<Account> accounts) {
         this.id = id;
         this.title = title;
         this.report = report;
         this.postThread = postThread;
         this.council = council;
-        this.users = users;
+        this.accounts = accounts;
     }
 
     public Long getId() {
@@ -79,8 +80,8 @@ public class Meeting {
         this.council = council;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public List<Account> getAccounts() {
+        return accounts;
     }
 
     public String getTitle() {
@@ -91,8 +92,8 @@ public class Meeting {
         this.title = title;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 
 }

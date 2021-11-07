@@ -1,7 +1,7 @@
 package progi.project.mojkvart.role;
 
 import progi.project.mojkvart.role_request.RoleRequest;
-import progi.project.mojkvart.user.User;
+import progi.project.mojkvart.account.Account;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,14 +18,14 @@ public class Role {
     @Column(name = "role_name")
     private String roleName;
 
-    // lazy FetchType because we don't want to immediately fetch all users that have the role we're fetching
+    // lazy FetchType because we don't want to immediately fetch all accounts that have the role we're fetching
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH, CascadeType.MERGE,
                     CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(name = "user_role",
+    @JoinTable(name = "account_role",
             joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> users;
+            inverseJoinColumns = @JoinColumn(name = "account_id"))
+    private List<Account> accounts;
 
     @OneToMany(mappedBy = "role")
     private List<RoleRequest> roleRequests;
@@ -60,5 +60,13 @@ public class Role {
                 "id=" + id +
                 ", roleName='" + roleName + '\'' +
                 '}';
+    }
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 }

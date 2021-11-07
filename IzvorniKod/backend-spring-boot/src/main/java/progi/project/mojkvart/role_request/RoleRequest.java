@@ -1,7 +1,8 @@
 package progi.project.mojkvart.role_request;
 
+import progi.project.mojkvart.account.Account;
 import progi.project.mojkvart.role.Role;
-import progi.project.mojkvart.user.User;
+import progi.project.mojkvart.account.Account;
 
 import javax.persistence.*;
 
@@ -18,8 +19,8 @@ public class RoleRequest {
     private String roleRequestStatus;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
-    private User user;
+    @JoinColumn(name="account_id")
+    private Account account;
 
     @ManyToOne
     @JoinColumn(name="role_id")

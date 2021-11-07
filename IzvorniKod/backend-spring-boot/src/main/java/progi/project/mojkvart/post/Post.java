@@ -1,7 +1,7 @@
 package progi.project.mojkvart.post;
 
 import progi.project.mojkvart.thread.PostThread;
-import progi.project.mojkvart.user.User;
+import progi.project.mojkvart.account.Account;
 
 import javax.persistence.*;
 import javax.persistence.Column;
@@ -31,20 +31,20 @@ public class Post {
     private PostThread thread;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
-    private User user;
+    @JoinColumn(name="account_id")
+    private Account account;
 
     public Post(){
 
     }
 
-    public Post(Long id, String content, LocalDate dateTime, Long replyId, PostThread thread, User user) {
+    public Post(Long id, String content, LocalDate dateTime, Long replyId, PostThread thread, Account account) {
         this.id = id;
         this.content = content;
         this.dateTime = dateTime;
         this.replyId = replyId;
         this.thread = thread;
-        this.user = user;
+        this.account = account;
     }
 
     public Long getId() {
@@ -79,12 +79,12 @@ public class Post {
         this.replyId = replyId;
     }
 
-    public User getUser() {
-        return user;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     @Override
