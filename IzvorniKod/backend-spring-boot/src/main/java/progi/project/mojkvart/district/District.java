@@ -1,5 +1,6 @@
 package progi.project.mojkvart.district;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import progi.project.mojkvart.council.Council;
 import progi.project.mojkvart.street.Street;
 import progi.project.mojkvart.thread.PostThread;
@@ -21,6 +22,7 @@ public class District {
     @Column(name = "district_name")
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "district")
     private List<Street> streets;
 
