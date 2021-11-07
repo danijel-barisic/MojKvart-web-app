@@ -28,6 +28,10 @@ public class StreetController {
 
     @PostMapping("")
     public ResponseEntity<Street> createStreet(@RequestBody Street street) {
+        if(!streetService.districtExistsById(street.getDistrict().getId()))
+            throw new IllegalArgumentException("District id: " + street.getDistrict().getId() + " does not exist");
+        if(street.getDistrict() == null)
+            throw new IllegalArgumentException("District object must be given");
         if(street.getId() != null && streetService.existsById(street.getId()) == true) {
             throw new IllegalArgumentException("Street with id: " + street.getId() + " already exist");
         }

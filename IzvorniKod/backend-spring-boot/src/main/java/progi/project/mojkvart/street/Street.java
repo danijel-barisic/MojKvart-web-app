@@ -11,7 +11,7 @@ import javax.persistence.GeneratedValue;
 public class Street {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, name = "street_id")
     private Long id;
 

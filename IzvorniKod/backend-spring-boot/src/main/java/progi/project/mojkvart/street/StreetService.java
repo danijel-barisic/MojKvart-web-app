@@ -52,4 +52,6 @@ public interface StreetService {
      * @return true if present, else false
      */
     boolean existsById(long id);
+
+    boolean districtExistsById(long id);
 }

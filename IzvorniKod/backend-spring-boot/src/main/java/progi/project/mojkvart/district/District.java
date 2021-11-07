@@ -15,7 +15,7 @@ import java.util.List;
 public class District {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, name = "district_id")
     private Long id;
 

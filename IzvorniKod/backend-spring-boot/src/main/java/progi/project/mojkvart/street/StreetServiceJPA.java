@@ -3,6 +3,8 @@ package progi.project.mojkvart.street;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import progi.project.mojkvart.district.DistrictRepository;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +12,12 @@ import java.util.Optional;
 public class StreetServiceJPA implements StreetService{
     @Autowired
     private StreetRepository streetRepo;
+
+    private DistrictRepository districtRepo;
+
+    public StreetServiceJPA(DistrictRepository districtRepo) {
+        this.districtRepo = districtRepo;
+    }
 
     @Override
     public List<Street> listAll() {
@@ -25,6 +33,11 @@ public class StreetServiceJPA implements StreetService{
     @Override
     public boolean existsById(long id) {
         return findById(id).isPresent();
+    }
+
+    @Override
+    public boolean districtExistsById(long id) {
+        return districtRepo.existsById(id);
     }
 
     @Override
