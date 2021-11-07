@@ -44,7 +44,7 @@ public interface DistrictService {
      * @param district new object
      * @return updated district
      */
-    District deleteDistrict(long district);
+    District deleteDistrict(long districtId);
 
     /**
      * checks if district exists with a given id

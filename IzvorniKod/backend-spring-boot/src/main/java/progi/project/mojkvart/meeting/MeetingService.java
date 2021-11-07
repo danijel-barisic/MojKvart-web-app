@@ -1,15 +1,21 @@
 package progi.project.mojkvart.meeting;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
 
-@Service
-public class MeetingService {
+public interface MeetingService {
 
-    private final MeetingRepository meetingRepository;
+    List<Meeting> listAll();
 
-    @Autowired
-    public MeetingService(MeetingRepository meetingRepository){
-        this.meetingRepository = meetingRepository;
-    }
+    Meeting fetch(long meetingId);
+
+    Optional<Meeting> findById(long meetingId);
+
+    Meeting createMeeting(Meeting meeting);
+
+    Meeting updateMeeting(Meeting meeting);
+
+    Meeting deleteMeeting(long meetingId);
+
+    boolean existsById(long id);
 }
