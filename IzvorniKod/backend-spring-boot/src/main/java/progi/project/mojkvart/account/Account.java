@@ -1,6 +1,7 @@
 package progi.project.mojkvart.account;
 
 import progi.project.mojkvart.event.Event;
+import progi.project.mojkvart.home.Home;
 import progi.project.mojkvart.meeting.Meeting;
 import progi.project.mojkvart.role.Role;
 import progi.project.mojkvart.role_request.RoleRequest;
@@ -57,9 +58,9 @@ public class Account {
     @JoinColumn(name = "meeting_id")
     private Meeting meeting;
 
-//    @ManyToOne
-//    @JoinColumn(name = "home_id")
-//    private Home home;
+    @ManyToOne
+    @JoinColumn(name = "home_id")
+    private Home home;
 
     public Account() {
 

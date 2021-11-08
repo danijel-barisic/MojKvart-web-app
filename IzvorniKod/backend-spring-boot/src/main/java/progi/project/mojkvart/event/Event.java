@@ -110,7 +110,7 @@ public class Event {
         return account;
     }
 
-    public void setAccounts(Account account) {
+    public void setAccount(Account account) {
         this.account = account;
     }
 
