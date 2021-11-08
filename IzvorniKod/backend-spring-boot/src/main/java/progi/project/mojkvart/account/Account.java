@@ -1,5 +1,6 @@
 package progi.project.mojkvart.account;
 
+import progi.project.mojkvart.event.Event;
 import progi.project.mojkvart.meeting.Meeting;
 import progi.project.mojkvart.role.Role;
 import progi.project.mojkvart.role_request.RoleRequest;
@@ -49,8 +50,8 @@ public class Account {
     @OneToMany(mappedBy = "account")
     private List<Post> posts;
 
-//    @OneToMany(mappedBy = "account")
-//    private List<Event> events;
+    @OneToMany(mappedBy = "account")
+    private List<Event> events;
 
     @ManyToOne
     @JoinColumn(name = "meeting_id")
