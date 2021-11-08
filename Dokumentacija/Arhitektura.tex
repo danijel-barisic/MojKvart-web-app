@@ -1,14 +1,29 @@
 \chapter{Arhitektura i dizajn sustava}
 		
-		\textbf{\textit{dio 1. revizije}}\\
-
-		\textit{ Potrebno je opisati stil arhitekture te identificirati: podsustave, preslikavanje na radnu platformu, spremišta podataka, mrežne protokole, globalni upravljački tok i sklopovsko-programske zahtjeve. Po točkama razraditi i popratiti odgovarajućim skicama:}
-	\begin{itemize}
-		\item 	\textit{izbor arhitekture temeljem principa oblikovanja pokazanih na predavanjima (objasniti zašto ste baš odabrali takvu arhitekturu)}
-		\item 	\textit{organizaciju sustava s najviše razine apstrakcije (npr. klijent-poslužitelj, baza podataka, datotečni sustav, grafičko sučelje)}
-		\item 	\textit{organizaciju aplikacije (npr. slojevi frontend i backend, MVC arhitektura) }		
-	\end{itemize}
-
+		Arhitektura sustava se sastoji od tri glavna podsustava, a to su web preglednik, web poslužitelj i baza podataka.
+		
+		\begin{itemize}
+		
+		\item  \textbf{Web preglednik} je program s pomoću kojeg korisnik pristupa sustavu, odnosno sva korisnička interakcija se odvija preko web-preglednika. Korisnik putem web preglednika šalje zahtjeve za resursima, koje web preglednik dohvaća od web poslužitelja, i onda se ti resursi na ispravan način interpretiraju i prikazuju. Korisnik također može i slati podatke preko web aplikacije, najčešće korištenjem formi.
+		
+		\item \textbf{Web poslužitelj} je centralni dio web aplikacije. Zasniva se na protokolu HTTP, komunicira i s korisnikom i s bazom podataka, te na zahtjeve korisnika dohvaća resurse ili obrađuje podatke poslane korištenjem forme i ažurira bazu podataka.
+		
+		\item \textbf{Baza podataka} služi za pohranu podataka sustava. Gotovo svi scenariji korištenja web aplikacije podrazumijevaju dohvaćanje podataka iz baze, i spremanje podataka u bazu.
+		\end{itemize}
+		
+		Aplikacija je izgrađena na principu arhitekture zasnovane na događajima, i shodno tome, aplikacija se temelji na MVC konceptu. MVC se sastoji od tri komponente:	
+		
+		\begin{itemize}
+		
+		\item \textbf{Model} sadrži razrede čiji objekti se obrađuju.
+		
+		\item \textbf{View} (hrv. pogled) sadrži razrede čiji objekti služe za prikaz podataka.
+		
+		\item \textbf{Controller} (hrv. nadglednik) sadrži razrede koji upravljaju i rukuju korisničkom interakcijom s pogledom i modelom.
+		
+		\end{itemize}
+		
+		Aplikacija je izgrađena korištenjem objektno orijentirane paradigme. Za backend je korišten radni okvir Java Spring. Za frontend je korišten React. Od vanjskih servisa, integrirana je podrška sinkronizacije događaja s Google Kalendarom.
 	
 		
 
