@@ -109,9 +109,9 @@ Naša baza podataka sastoji se od jedanaest entiteta:
 					\hline \multicolumn{3}{|c|}{\textbf{Event}}	 \\ \hline[3pt]
 					\SetCell{LightGreen}IDEvent & INT	&  	Identifikacijski ključ događaja  	\\ \hline
 					eventName	& VARCHAR & Naziv događaja  	\\ \hline
-					eventDatetime & DATE & Vrijeme događaja \\ \hline
+					eventDatetime & DATETIME & Vrijeme događaja \\ \hline
 					eventLocation & VARCHAR & Lokacija događaja \\ \hline
-					eventDuration & FLOAT & Trajanje događaja \\ \hline
+					eventDuration & INTERVAL & Trajanje događaja \\ \hline
 					eventDescription & VARCHAR & Opis događaja \\ \hline
 					eventStatus & VARCHAR & Status događaja \\ \hline
 					\SetCell{LightBlue}IDAccount & INT & Identifikacijski ključ korisnika  	\\ \hline
@@ -148,7 +148,7 @@ Naša baza podataka sastoji se od jedanaest entiteta:
 					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
 					\hline \multicolumn{3}{|c|}{\textbf{Post}}	 \\ \hline[3pt]
 					\SetCell{LightGreen}IDPost & INT	&  	Identifikacijski ključ objave  	\\ \hline
-					postDatetime	& DATE & Vrijeme postavljanja objave  	\\ \hline
+					postDatetime	& DATETIME & Vrijeme postavljanja objave  	\\ \hline
 					postContent & VARCHAR & Sadržaj objave \\ \hline
 					replyId & INT & Identifikacijski ključ odgovora na objavu \\ \hline
 					\SetCell{LightBlue}IdThread	 & INT & Identifikacijski ključ pripadajuće dretve  	\\ \hline
