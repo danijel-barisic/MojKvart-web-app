@@ -34,12 +34,12 @@ public class Event {
 
     @ManyToOne
     @JoinColumn(name = "account_id")
-    private Account accounts;
+    private Account account;
 
     public Event(){
     }
 
-    public Event(Long id, String name, String description, Duration duration, LocalDate datetime, String location, String status, Account accounts) {
+    public Event(Long id, String name, String description, Duration duration, LocalDate datetime, String location, String status, Account account) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -47,7 +47,7 @@ public class Event {
         this.datetime = datetime;
         this.location = location;
         this.status = status;
-        this.accounts = accounts;
+        this.account = account;
     }
 
     public Long getId() {
@@ -106,12 +106,12 @@ public class Event {
         this.status = status;
     }
 
-    public Account getAccounts() {
-        return accounts;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setAccounts(Account accounts) {
-        this.accounts = accounts;
+    public void setAccounts(Account account) {
+        this.account = account;
     }
 
 }
