@@ -10,14 +10,14 @@ import java.time.LocalDate;
 public class Event {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "event_id")
     private Long id;
 
     @Column(name = "event_name")
     private String name;
 
-    @Column(name = "event_description")
+    @Column(name = "event_description", length = 5000)
     private String description;
 
     @Column(name = "event_duration")
@@ -29,7 +29,7 @@ public class Event {
     @Column(name = "event_location")
     private String location;
 
-    @Column(name = "event_status")
+    @Column(name = "event_status", nullable = true)
     private String status;
 
     @ManyToOne
