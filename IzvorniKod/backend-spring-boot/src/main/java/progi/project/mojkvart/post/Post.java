@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "post")
@@ -21,7 +22,7 @@ public class Post {
     private String content;
 
     @Column(name = "date_time")
-    private LocalDate dateTime;
+    private LocalDateTime dateTime;
 
     @Column(name = "reply_id", nullable = true)
     private Long replyId;
@@ -38,7 +39,7 @@ public class Post {
 
     }
 
-    public Post(Long id, String content, LocalDate dateTime, Long replyId, PostThread thread, Account account) {
+    public Post(Long id, String content, LocalDateTime dateTime, Long replyId, PostThread thread, Account account) {
         this.id = id;
         this.content = content;
         this.dateTime = dateTime;
@@ -63,11 +64,11 @@ public class Post {
         this.content = content;
     }
 
-    public LocalDate getDateTime() {
+    public LocalDateTime getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(LocalDate dateTime) {
+    public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
 
