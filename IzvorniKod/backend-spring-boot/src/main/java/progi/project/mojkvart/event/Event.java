@@ -1,10 +1,9 @@
 package progi.project.mojkvart.event;
-
 import progi.project.mojkvart.account.Account;
 
 import javax.persistence.*;
+import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Entity
 @Table(name = "event")
@@ -15,27 +14,41 @@ public class Event {
     private Long id;
 
     @Column(name = "event_name")
-    private Long name;
+    private String name;
 
     @Column(name = "event_datetime")
     private LocalDateTime dateTime;
+
+    @Column(name = "event_description", length = 5000)
+    private String description;
 
     @Column(name = "event_location")
     private String location;
 
     @Column(name = "event_duration")
-    private LocalTime duration;
-
-    @Column(name = "event_description")
-    private String description;
-
-    @Column(name = "event_status")
-    private String status;
+    private Duration duration;
 
     @Column(name = "account_id")
     @ManyToOne
     @JoinColumn(name = "account_id", table = "account")
     private Account account;
+
+    @Column(name = "event_status", nullable = true)
+    private String status;
+
+    public Event(){
+    }
+
+    public Event(Long id, String name, String description, Duration duration, LocalDate datetime, String location, String status, Account account) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.duration = duration;
+        this.datetime = datetime;
+        this.location = location;
+        this.status = status;
+        this.account = account;
+    }
 
     public Long getId() {
         return id;
@@ -43,14 +56,6 @@ public class Event {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getName() {
-        return name;
-    }
-
-    public void setName(Long name) {
-        this.name = name;
     }
 
     public LocalDateTime getDateTime() {
@@ -69,11 +74,11 @@ public class Event {
         this.location = location;
     }
 
-    public LocalTime getDuration() {
+    public Duration getDuration() {
         return duration;
     }
 
-    public void setDuration(LocalTime duration) {
+    public void setDuration(Duration duration) {
         this.duration = duration;
     }
 
@@ -83,6 +88,14 @@ public class Event {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getStatus() {

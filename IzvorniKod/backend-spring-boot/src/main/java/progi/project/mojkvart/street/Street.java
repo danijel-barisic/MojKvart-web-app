@@ -1,10 +1,13 @@
 package progi.project.mojkvart.street;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import progi.project.mojkvart.district.District;
+import progi.project.mojkvart.home.Home;
 
 import javax.persistence.*;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
+import java.util.List;
 
 @Entity
 @Table(name = "street")
@@ -27,6 +30,10 @@ public class Street {
     @ManyToOne
     @JoinColumn(name = "district_id")
     private District district;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "street")
+    private List<Home> homes;
 
     public Street() {}
 

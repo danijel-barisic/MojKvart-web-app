@@ -1,10 +1,13 @@
 package progi.project.mojkvart.home;
 
-
 import org.springframework.lang.NonNull;
 import progi.project.mojkvart.street.Street;
 
 import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import progi.project.mojkvart.account.Account;
+
+import java.util.List;
 
 @Entity
 @Table(name = "home")
@@ -14,14 +17,17 @@ public class Home {
     @Column(name = "home_id")
     private Long id;
 
-    @Column(name = "home_number")
-//    @NonNull
-    private Long homeNumber;
-
     @ManyToOne
     @JoinColumn(name = "street_id", table = "street")
     private Street street;
 
+    @Column(name = "home_number", nullable = false)
+    private Long number;
+    
+    @JsonIgnore
+    @OneToMany(mappedBy = "home")
+    private List<Account> accounts;
+    
     public Long getId() {
         return this.id;
     }
@@ -30,13 +36,21 @@ public class Home {
         this.id = id;
     }
 
-    public Long getHomeNumber() {
-        return this.homeNumber;
-    }
+public Long getNumber() {
+    return this.number;
+}
 
-    public void setHomeNumber(Long home_number) {
-        this.homeNumber = home_number;
-    }
+public void setNumber(Long number) {
+    this.number = number;
+}
+
+public List<Account> getAccounts() {
+    return this.accounts;
+}
+
+public void setAccounts(List<Account> accounts) {
+    this.accounts = accounts;
+}
 
     public Street getStreet() {
         return this.street;
@@ -45,7 +59,6 @@ public class Home {
     public void setStreet(Street street) {
         this.street = street;
     }
-
 }
 
 /*CREATE TABLE home
