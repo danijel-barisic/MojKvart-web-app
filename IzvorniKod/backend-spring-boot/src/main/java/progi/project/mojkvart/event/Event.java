@@ -3,11 +3,12 @@ import progi.project.mojkvart.account.Account;
 
 import javax.persistence.*;
 import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "event")
 public class Event {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "event_id")
@@ -16,25 +17,24 @@ public class Event {
     @Column(name = "event_name")
     private String name;
 
-    @Column(name = "event_datetime")
-    private LocalDateTime dateTime;
-
     @Column(name = "event_description", length = 5000)
     private String description;
-
-    @Column(name = "event_location")
-    private String location;
 
     @Column(name = "event_duration")
     private Duration duration;
 
-    @Column(name = "account_id")
-    @ManyToOne
-    @JoinColumn(name = "account_id", table = "account")
-    private Account account;
+    @Column(name = "event_datetime")
+    private LocalDate datetime;
+
+    @Column(name = "event_location")
+    private String location;
 
     @Column(name = "event_status", nullable = true)
     private String status;
+
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
 
     public Event(){
     }
@@ -58,20 +58,20 @@ public class Event {
         this.id = id;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public String getName() {
+        return name;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLocation() {
-        return location;
+    public String getDescription() {
+        return description;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Duration getDuration() {
@@ -82,20 +82,20 @@ public class Event {
         this.duration = duration;
     }
 
-    public String getDescription() {
-        return description;
+    public LocalDate getDatetime() {
+        return datetime;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    
-    public String getName() {
-        return name;
+    public void setDatetime(LocalDate datetime) {
+        this.datetime = datetime;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getStatus() {
@@ -113,22 +113,5 @@ public class Event {
     public void setAccount(Account account) {
         this.account = account;
     }
+
 }
-
-
-/*
-CREATE TABLE event
-(
-  event_id INT NOT NULL,
-  event_name VARCHAR(150) NOT NULL,
-  event_datetime DATETIME NOT NULL,
-  event_location VARCHAR(250) NOT NULL,
-  event_duration INTERVAL NOT NULL,
-  event_description VARCHAR(5000) NOT NULL,
-  event_status VARCHAR(25),
-  account_id INT NOT NULL,
-
-  PRIMARY KEY (event_id),
-  FOREIGN KEY (account_id) REFERENCES account(account_id)
-);
-*/
