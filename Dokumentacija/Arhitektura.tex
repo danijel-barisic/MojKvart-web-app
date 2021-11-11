@@ -313,8 +313,6 @@ Naša baza podataka sastoji se od jedanaest entiteta:
 			
 			\eject
 			
-		Na slici 4.2 prikazani su razredi koji odgovaraju \textit{backend} dijelu MVC arhitekture. Razred District označava kvartove i uz njega su vezani razredi Meeting (koji odgovara izvješćima s Vijeća četvrti), Thread (koji odgovara temi na Forumu), Event (koji odgovara događaju u sekciji Događaji) i Street (koji odgovara ulici koja pripada nekom kvartu). Uz razred Street vezan je razred Home, koji označava adrese na kojima neki stanovnik kvarta živi. Uz razred Home vezan je razred User, koji označava skup generičkih informacija o nekom korisniku aplikacije. U aplikaciji postoji i razred UnregisteredUser, i on odgovara u sebi sadrži sve mogućnosti neregistriranih tj. neprijavljenih korisnika. Razred Thread uz sebe veže razred Post, koji označava odgovore unutar pojedine teme na Forumu. Apstraktan razred Role označava uloge unutar aplikacije, a nasljeđuju ga razredi BasicUser, Councilor, Moderator i Administrator. Konačno, razred RoleRequest označava zahtjev za ulogu.
-			
 		\section{Dijagram razreda}
 		
 		\begin{figure}[H]
@@ -326,6 +324,8 @@ Naša baza podataka sastoji se od jedanaest entiteta:
 			
 			
 			\eject
+			
+			Na slici 4.2 prikazani su razredi koji odgovaraju \textit{backend} dijelu MVC arhitekture. Razred District označava kvartove i uz njega su vezani razredi Meeting (koji odgovara izvješćima s Vijeća četvrti), Thread (koji odgovara temi na Forumu), Event (koji odgovara događaju u sekciji Događaji) i Street (koji odgovara ulici koja pripada nekom kvartu). Uz razred Street vezan je razred Home, koji označava adrese na kojima neki stanovnik kvarta živi. Uz razred Home vezan je razred User, koji označava skup generičkih informacija o nekom korisniku aplikacije. U aplikaciji postoji i razred UnregisteredUser, i on odgovara u sebi sadrži sve mogućnosti neregistriranih tj. neprijavljenih korisnika. Razred Thread uz sebe veže razred Post, koji označava odgovore unutar pojedine teme na Forumu. Apstraktan razred Role označava uloge unutar aplikacije, a nasljeđuju ga razredi BasicUser, Councilor, Moderator i Administrator. Konačno, razred RoleRequest označava zahtjev za ulogu.
 		
 		\section{Dijagram stanja}
 			
