@@ -23,9 +23,9 @@ public class RegistrationController {
         return registrationService.register(request);
     }
 
-    @PostMapping("/user")
-    public Map<String, Object> home(@AuthenticationPrincipal Account account) {
-
-    }
+//    @PostMapping("/user")
+//    public Map<String, Object> home(@AuthenticationPrincipal Account account) {
+//
+//    }
 
 }
