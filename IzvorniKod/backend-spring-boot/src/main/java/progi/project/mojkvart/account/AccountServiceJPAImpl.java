@@ -26,6 +26,13 @@ public class AccountServiceJPAImpl implements AccountService{
     }
 
     @Override
+    public Account fetch(String email) {
+        return findByEmail(email).orElseThrow(
+                () -> new IllegalArgumentException()
+        );
+    }
+
+    @Override
     public Optional<Account> findById(long accountId) {
         Assert.notNull(accountId, "ID must be given");
         return accountRepo.findById(accountId);
@@ -60,6 +67,12 @@ public class AccountServiceJPAImpl implements AccountService{
     public List<String> getEmailsFromAccounts() {
         var res = (List<String>) accountRepo.getEmailsFromAccounts();
         return res;
+    }
+
+    @Override
+    public Optional<Account> findByEmail(String email) {
+        Assert.notNull(email, "Email must be given");
+        return accountRepo.findByEmail(email);
     }
 
 

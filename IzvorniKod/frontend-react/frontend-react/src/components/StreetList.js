@@ -1,7 +1,6 @@
 import React from "react";
-import Header from "./Header";
+import Card from "./Card";
 import Street from "./Street";
-import './StreetList.css';
 
 function StreetList() {
    const [streets, setStreets] = React.useState([]);
@@ -13,9 +12,11 @@ function StreetList() {
    }, []);
 
    return (
-      <div className='StreetList'>
-         {streets.map(street => <Street key={street.id } street={street} />)}
-      </div>
+      <Card title="Streets">
+         <div className='StreetList'>
+            {streets.map(street => <Street key={street.id } street={street} />)}
+         </div>
+      </Card>
    );
 
 }

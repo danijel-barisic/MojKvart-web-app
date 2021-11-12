@@ -2,6 +2,7 @@ package progi.project.mojkvart.account;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -29,7 +30,7 @@ public class AccountController {
         }
         else {
             Account saved = AccountService.createAccount(Account);
-            return ResponseEntity.created(URI.create("/Accounts/" + saved.getId())).body(saved);
+            return ResponseEntity.created(URI.create("/accounts/" + saved.getId())).body(saved);
         }
     }
 
