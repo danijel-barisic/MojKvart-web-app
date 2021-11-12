@@ -2,11 +2,11 @@ package progi.project.mojkvart.meeting;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import progi.project.mojkvart.account.Account;
-import progi.project.mojkvart.council.Council;
+import progi.project.mojkvart.district.District;
 import progi.project.mojkvart.thread.PostThread;
-import progi.project.mojkvart.account.Account;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -18,33 +18,38 @@ public class Meeting {
     @Column(name = "meeting_id")
     private Long id;
 
-    @Column(name = "title")
+    @Column(name = "meeting_title")
     private String title;
 
-    @Column(name = "report")
+    @Column(name = "meeting_report")
     private String report;
 
-    @OneToOne(mappedBy = "meeting")
+    @Column(name = "meeting_datetime")
+    private LocalDate dateTime;
+
+    @OneToOne
+    @JoinColumn(name = "thread_id")
     private PostThread postThread;
 
     @ManyToOne
     @JoinColumn(name = "district_id")
-    private Council council;
+    private District district;
 
     @JsonIgnore
     @OneToMany(mappedBy = "meeting")
     private List<Account> accounts;
 
-    public Meeting(){
+    public Meeting() {
 
     }
 
-    public Meeting(Long id, String title, String report, PostThread postThread, Council council, List<Account> accounts) {
+    public Meeting(Long id, String title, String report, LocalDate dateTime, PostThread postThread, District district, List<Account> accounts) {
         this.id = id;
         this.title = title;
         this.report = report;
+        this.dateTime = dateTime;
         this.postThread = postThread;
-        this.council = council;
+        this.district = district;
         this.accounts = accounts;
     }
 
@@ -72,16 +77,24 @@ public class Meeting {
         this.postThread = postThread;
     }
 
-    public Council getCouncil() {
-        return council;
+    public District getDistrict() {
+        return district;
     }
 
-    public void setCouncil(Council council) {
-        this.council = council;
+    public void setDistrict(District district) {
+        this.district = district;
+    }
+
+    public void setCouncil(District district) {
+        this.district = district;
     }
 
     public List<Account> getAccounts() {
         return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 
     public String getTitle() {
@@ -92,8 +105,12 @@ public class Meeting {
         this.title = title;
     }
 
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
+    public LocalDate getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDate dateTime) {
+        this.dateTime = dateTime;
     }
 
 }

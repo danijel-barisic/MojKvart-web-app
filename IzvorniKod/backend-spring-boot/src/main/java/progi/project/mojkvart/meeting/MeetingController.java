@@ -1,17 +1,15 @@
-package progi.project.mojkvart.council;
+package progi.project.mojkvart.meeting;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import progi.project.mojkvart.meeting.Meeting;
-import progi.project.mojkvart.meeting.MeetingService;
 
 import java.net.URI;
 import java.util.List;
 
 @RestController
 @RequestMapping("/council")
-public class CouncilController {
+public class MeetingController {
 
     @Autowired
     private MeetingService meetingService;
@@ -24,7 +22,7 @@ public class CouncilController {
     //ne postavalja se district_id !*!*!*!
     @PostMapping("")
     public ResponseEntity<Meeting> createMeeting(@RequestBody Meeting meeting) {
-        if(meeting.getId() != null && meetingService.existsById(meeting.getId()) == true) {
+        if(meeting.getId() != null && meetingService.existsById(meeting.getId())) {
             throw new IllegalArgumentException("Meeting with id: " + meeting.getId() + " already exists");
         }
         else {
@@ -35,7 +33,7 @@ public class CouncilController {
 
     @PutMapping("/{id}")
     public Meeting updateMeeting(@PathVariable("id") Long id, @RequestBody Meeting meeting) {
-        if(meeting.getId() != null && meetingService.existsById(meeting.getId()) == false) {
+        if(meeting.getId() != null && !meetingService.existsById(meeting.getId())) {
             throw new IllegalArgumentException("Meeting with id: " + meeting.getId() + " does not exist");
         }
         else if(meeting.getId() == null) {
@@ -50,7 +48,7 @@ public class CouncilController {
 
     @DeleteMapping("/{id}")
     public Meeting deleteMeeting(@PathVariable("id") long meetingId) {
-        if(meetingService.existsById(meetingId) == false)
+        if(!meetingService.existsById(meetingId))
             throw new IllegalArgumentException("Meeting with id: " + meetingId + " does not exist");
         return meetingService.deleteMeeting(meetingId);
     }
