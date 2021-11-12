@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "post")
@@ -17,13 +18,13 @@ public class Post {
     @Column(name = "post_id")
     private Long id;
 
-    @Column(name = "content", length = 5000)
+    @Column(name = "post_content", length = 5000)
     private String content;
 
-    @Column(name = "date_time")
+    @Column(name = "post_datetime")
     private LocalDate dateTime;
 
-    @Column(name = "reply_id", nullable = true)
+    @Column(name = "post_reply_id", nullable = true)
     private Long replyId;
 
     @ManyToOne
@@ -31,10 +32,19 @@ public class Post {
     private PostThread thread;
 
     @ManyToOne
-    @JoinColumn(name="account_id")
+    @JoinColumn(name = "account_id")
     private Account account;
 
-    public Post(){
+    /* Bi-directional relationship may not be necessary though,
+     as we probably don't want to store all replies to a post in this list.*/
+    @OneToMany(mappedBy = "parentPost")
+    private List<Post> replyPosts;
+
+    @ManyToOne
+    @JoinColumn(name = "post_id", insertable = false, updatable = false)
+    private Post parentPost;
+
+    public Post() {
 
     }
 

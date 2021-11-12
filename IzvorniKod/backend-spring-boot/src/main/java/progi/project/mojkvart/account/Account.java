@@ -135,19 +135,6 @@ public class Account implements UserDetails {
     }
 
     @Override
-    public String toString() {
-        return "Account{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", isBlocked=" + isBlocked +
-                ", isAddressValid=" + isAddressValid +
-                ", roles='" + getRoles() + '\'' +
-                '}';
-    }
-
-    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         for (Role role : roles) {
@@ -195,6 +182,20 @@ public class Account implements UserDetails {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", password='" + password + '\'' +
+                ", isBlocked=" + isBlocked +
+                ", isAddressValid=" + isAddressValid +
+                ", roles='" + getRoles() + '\'' +
+                '}';
     }
 }
 

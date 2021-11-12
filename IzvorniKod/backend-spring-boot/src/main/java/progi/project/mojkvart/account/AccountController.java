@@ -21,38 +21,38 @@ public class AccountController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Account> createAccount(@RequestBody Account Account) {
-        if(AccountService.getEmailsFromAccounts().contains(Account.getEmail()) == true) {
-            throw new IllegalArgumentException("Email: " + Account.getEmail() + " is already used");
+    public ResponseEntity<Account> createAccount(@RequestBody Account account) {
+        if(AccountService.getEmailsFromAccounts().contains(account.getEmail())) {
+            throw new IllegalArgumentException("Email: " + account.getEmail() + " is already used");
         }
-        if(Account.getId() != null && AccountService.existsById(Account.getId()) == true) {
-            throw new IllegalArgumentException("Account with id: " + Account.getId() + " already exists");
+        if(account.getId() != null && AccountService.existsById(account.getId())) {
+            throw new IllegalArgumentException("Account with id: " + account.getId() + " already exists");
         }
         else {
-            Account saved = AccountService.createAccount(Account);
+            Account saved = AccountService.createAccount(account);
             return ResponseEntity.created(URI.create("/accounts/" + saved.getId())).body(saved);
         }
     }
 
     @PutMapping("/{id}")
-    public Account updateAccount(@PathVariable("id") Long id, @RequestBody Account Account) {
-        if(Account.getId() != null && AccountService.existsById(Account.getId()) == false) {
-            throw new IllegalArgumentException("Account with id: " + Account.getId() + " does not exist");
+    public Account updateAccount(@PathVariable("id") Long id, @RequestBody Account account) {
+        if(account.getId() != null && !AccountService.existsById(account.getId())) {
+            throw new IllegalArgumentException("Account with id: " + account.getId() + " does not exist");
         }
-        else if(Account.getId() == null) {
+        else if(account.getId() == null) {
             throw new IllegalArgumentException("Account id must be given");
         }
         else {
-            if(!Account.getId().equals(id))
+            if(!account.getId().equals(id))
                 throw new IllegalArgumentException("Account id must be preserved");
-            return AccountService.updateAccount(Account);
+            return AccountService.updateAccount(account);
         }
     }
 
     @DeleteMapping("/{id}")
-    public Account deleteAccount(@PathVariable("id") long AccountId) {
-        if(AccountService.existsById(AccountId) == false)
-            throw new IllegalArgumentException("Account with id: "+ AccountId + " does not exist");
-        return AccountService.deleteAccount(AccountId);
+    public Account deleteAccount(@PathVariable("id") long accountId) {
+        if(!AccountService.existsById(accountId))
+            throw new IllegalArgumentException("Account with id: "+ accountId + " does not exist");
+        return AccountService.deleteAccount(accountId);
     }
 }
