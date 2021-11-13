@@ -14,4 +14,8 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
 
     @Query(value = "select email from account", nativeQuery = true)
     List<String> getEmailsFromAccounts();
+
+    Optional<Account> findByEmail(String email);
+
+    String findPasswordByEmail(String email);
 }

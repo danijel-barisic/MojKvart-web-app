@@ -16,7 +16,7 @@ public class RoleRequest {
     private Long id;
 
     @Column(name="role_request_status")
-    private String roleRequestStatus;
+    private String status;
 
     @ManyToOne
     @JoinColumn(name="account_id")
@@ -30,8 +30,8 @@ public class RoleRequest {
 
     }
 
-    public RoleRequest(String roleRequestStatus) {
-        this.roleRequestStatus = roleRequestStatus;
+    public RoleRequest(String status) {
+        this.status = status;
     }
 
     public Long getId() {
@@ -42,19 +42,19 @@ public class RoleRequest {
         this.id = id;
     }
 
-    public String getRoleRequestStatus() {
-        return roleRequestStatus;
+    public String getStatus() {
+        return status;
     }
 
-    public void setRoleRequestStatus(String roleRequestStatus) {
-        this.roleRequestStatus = roleRequestStatus;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
     public String toString() {
         return "RoleRequest{" +
                 "id=" + id +
-                ", roleRequestStatus='" + roleRequestStatus + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }
