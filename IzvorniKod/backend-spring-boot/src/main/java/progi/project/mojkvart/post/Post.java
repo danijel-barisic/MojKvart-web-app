@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "post")
