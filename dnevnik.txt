@@ -1,0 +1,57 @@
+1. sastanak
+    datum: 3.10.2021.
+    prisustvovali: Andrija Banić, Danijel Barišić, Danko Čurlin, Bartol Hrg, Mihael Miličević, Dario Pavlović, Tomislav Žiger
+    teme sastanka:
+        formiranje tima
+        dogovor o imenu tima
+		dogovor o korištenim tehnologijama
+
+2. sastanak
+    datum: 13.10.2021.
+    prisustvovali: Andrija Banić, Danijel Barišić, Danko Čurlin i Dario Pavlović
+    teme sastanka:
+        s asistenticom grupe raspravljali o osnovnim pitanjima na projektu
+
+3. sastanak
+    datum: 14.10.2021.
+    prisustvovali: Andrija Banić, Danijel Barišić, Danko Čurlin, Bartol Hrg, Mihael Miličević, Dario Pavlović, Tomislav Žiger
+    teme sastanka:
+        okvirna podjela zadataka na projektu u prvom ciklusu predaje
+
+4. sastanak
+    datum: 15.10.2021.
+    prisustvovali: Andrija Banić, Danijel Barišić, Mihael Miličević
+    teme sastanka:
+        izrada prve inačice ER modela baze podataka
+
+5. sastanak
+    datum: 18.10.2021.
+    prisustvovali: Mihael Miličević, Tomislav Žiger
+    teme sastanka:
+        s asistenticom grupe raspravljali o izrađenom ER modelu baze podataka
+        s asistenticom grupe raspravljali o aktivnostima na projektu do prve predaje
+
+6. sastanak
+    datum: 27.10.2021.
+    prisustvovali: Mihael Miličević, Dario Pavlović
+    teme sastanka:
+        s asistenticom grupe raspravljali o izrađenim obrascima uporabe
+        s asistenticom grupe komentirali izborne tehnologije na projektu
+
+7. sastanak
+    datum: 30.10.2021.
+    prisustvovali: Andrija Banić, Danijel Barišić, Danko Čurlin, Bartol Hrg, Mihael Miličević, Dario Pavlović, Tomislav Žiger
+    teme sastanka:
+        raspravljali o aktivnostima na projektu do prve predaje
+
+8. sastanak
+    datum: 3.11.2021.
+    prisustvovali: Bartol Hrg, Mihael Miličević
+    teme sastanka:
+        s asistenticom grupe raspravljali o izrađenim UML dijagramima obrazaca uporabe i sekvencijskim dijagramima
+
+9. sastanak
+    datum: 10.11.2021.
+    prisustvovali: Danijel Barišić, Mihael Miličević, Tomislav Žiger
+    teme sastanka:
+        izrada dijagrama razreda
