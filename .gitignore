@@ -8,6 +8,7 @@
 /Dokumentacija/*.toc
 
 /IzvorniKod/backend-spring-boot/.idea/*
+.idea
 /IzvorniKod/backend-spring-boot/*.iws
 /IzvorniKod/backend-spring-boot/*.iml
 /IzvorniKod/backend-spring-boot/*.ipr
