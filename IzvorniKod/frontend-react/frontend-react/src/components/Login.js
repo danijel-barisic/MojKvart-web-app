@@ -44,11 +44,11 @@ function Login(props) {
             <form onSubmit={onSubmit}>
                <div className='FormRow'>
                   <label>Username</label>
-                  <input name='username' onChange={onChange} value={ loginForm.username}/>
+                  <input name='username' required onChange={onChange} value={ loginForm.username}/>
                </div>
                <div className='FormRow'>
                   <label>Password</label>
-                  <input name='password' type='password' onChange={onChange} value={ loginForm.password}/>
+                  <input name='password' type='password' required onChange={onChange} value={ loginForm.password}/>
                </div>
                <div className='error'>{error}</div>
                <button className='button' type='submit'>Login</button>

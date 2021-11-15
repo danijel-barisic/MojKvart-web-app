@@ -51,19 +51,19 @@ function Registration(props) {
             <form onSubmit={onSubmit}>
                <div className='FormRow'>
                   <label>FirstName</label>
-                  <input name='firstname' onChange={onChange}value={ registrationForm.firstname}/>
+                  <input name='firstname' required onChange={onChange}value={ registrationForm.firstname}/>
                </div>
                <div className='FormRow'>
                   <label>LastName</label>
-                  <input name='lastname' onChange={onChange} value={ registrationForm.lastname}/>
+                  <input name='lastname' required onChange={onChange} value={ registrationForm.lastname}/>
                </div>
                <div className='FormRow'>
                   <label>Email</label>
-                  <input name='username' onChange={onChange} value={ registrationForm.username}/>
+                  <input name='username' required onChange={onChange} value={ registrationForm.username}/>
                </div>
                <div className='FormRow'>
                   <label>Password</label>
-                  <input name='password' type='password' onChange={onChange} value={ registrationForm.password}/>
+                  <input name='password' required type='password' onChange={onChange} value={ registrationForm.password}/>
                </div>
                <div className='error'>{error}</div>
                <button className='submit' type='submit'>Register</button>
