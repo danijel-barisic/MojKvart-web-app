@@ -1,9 +1,12 @@
 import React from "react";
+import Header from "./Header";
 
-function Home() {
+function Home(props) {
+   const { state } = props;
 
+   //console.log("home->", {state})
    return (
-      <button 
+      <Header state={state}/>
    );
 }
 

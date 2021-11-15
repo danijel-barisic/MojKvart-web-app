@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 import java.security.KeyStore;
 
@@ -14,6 +15,14 @@ public class MojkvartApplication {
 	@Bean
 	public PasswordEncoder pswdEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	CharacterEncodingFilter characterEncodingFilter() {
+		CharacterEncodingFilter filter = new CharacterEncodingFilter();
+		filter.setEncoding("UTF-8");
+		filter.setForceEncoding(true);
+		return filter;
 	}
 
 	public static void main(String[] args) {
