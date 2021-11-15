@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import './Header.css';
-import Button from "./LogButton";
 
 
 function Header(props) {
+   const { state } = props;
+   let checkLogin = false;
 
    function logout() {
       fetch("/logout").then(() => {
@@ -12,20 +13,31 @@ function Header(props) {
       });
    }
 
+   //console.log("header->", { state });
+
+   if (state === false || state == null) {
+      checkLogin = false;
+   } else {
+      checkLogin = true;
+   }
+
+   const renderButton = () => {
+      return (checkLogin)
+         ? <Link to='/' className="logout" onClick={logout} >Logout</Link>
+         : <Link to='/login' className="login" >Login </Link>;
+   }
+
    return (
       <header className='header'>
-         <Link className='logo' className='active' to='/'>Home </Link>
+         <Link className='logo active' to='/'>Moj Kvart </Link>
          <div className='header-right'>
-            <Link to='/streets' >Streets </Link>
-            <Link to='/streets/add' >Add street </Link>
-            <Link to='/districts' >Districts </Link>
-            <Link to='/districts/add' >Add district </Link>
-            <Button onLogout={logout}/>
+            <Link to='/threads' >Forum </Link>
+            <Link to='/events' >Događanja </Link>
+            <Link to='/council' >Vijeće četvrti </Link>
+            {renderButton()}
          </div>
       </header>
-   );
-
-
+   ); 
 }
 
 export default Header;

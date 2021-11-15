@@ -1,11 +1,14 @@
 import React from "react";
 import Card from "./Card";
 import './Login.css';
+import { useHistory } from "react-router";
 
 
 function Login(props) {
    const [loginForm, setLoginForm] = React.useState({ username: '', password: ''});
    const [error, setError] = React.useState('');
+   const history = useHistory();
+
 
    function onChange(event) {
       const { name, value } = event.target;
@@ -30,6 +33,7 @@ function Login(props) {
                setError("Login failed");
             } else {
                props.onLogin();
+               history.push("/");
             }
          });
    }
@@ -47,7 +51,8 @@ function Login(props) {
                   <input name='password' type='password' onChange={onChange} value={ loginForm.password}/>
                </div>
                <div className='error'>{error}</div>
-               <button classname='submit'type='submit'>Login</button>
+               <button className='button' type='submit'>Login</button>
+               <button className='button' type="button" onClick={() => {history.push("/registration")}}>Registration</button>
             </form>
          </div>
       </Card>
