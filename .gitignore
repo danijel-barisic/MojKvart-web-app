@@ -11,3 +11,6 @@
 /IzvorniKod/backend-spring-boot/*.iws
 /IzvorniKod/backend-spring-boot/*.iml
 /IzvorniKod/backend-spring-boot/*.ipr
+IzvorniKod/backend-spring-boot/.settings/*
+IzvorniKod/backend-spring-boot/target/classes/*
+IzvorniKod/backend-spring-boot/target/test-classes/*
