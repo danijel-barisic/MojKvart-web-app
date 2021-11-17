@@ -22,8 +22,7 @@ public class PostThread {
     @OneToMany(mappedBy = "thread")
     private List<Post> posts;
 
-    @OneToOne
-    @JoinColumn(name = "meeting_id")
+    @OneToOne(mappedBy = "postThread")
     private Meeting meeting;
 
     @ManyToOne

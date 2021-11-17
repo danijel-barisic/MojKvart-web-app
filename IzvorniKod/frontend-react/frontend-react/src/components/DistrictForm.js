@@ -1,4 +1,5 @@
 import React from "react";
+import Card from "./Card";
 
 function DistrictForm(props) {
    const [form, setForm] = React.useState({ name: ''});
@@ -35,16 +36,17 @@ function DistrictForm(props) {
 
 
    return (
-      <div className='StreetForm'>
-         <h2>New Street</h2>
-         <form onSubmit={onSubmit}>
-            <div className='FormRow'>
-               <label>name</label>
-               <input required name='name' onChange={onChange} value={ form.name}/>
-            </div>
-            <button type='submit' disabled={!isValid()}>Add districs</button>
-         </form>
-      </div>
+      <Card title='New District'>
+         <div className='StreetForm'>
+            <form onSubmit={onSubmit}>
+               <div className='FormRow'>
+                  <label>name</label>
+                  <input required name='name' onChange={onChange} value={ form.name}/>
+               </div>
+               <button type='submit' disabled={!isValid()}>Add districs</button>
+            </form>
+         </div>
+      </Card>
    );
 }
 

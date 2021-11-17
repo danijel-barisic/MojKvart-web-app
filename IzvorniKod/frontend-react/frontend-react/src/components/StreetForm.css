@@ -2,7 +2,7 @@
    margin: 8px 0;
 }
 
-.StreetForm .FormRow:first-child {
+.StudentForm .FormRow:first-child {
    margin-top: 0;
 }
 
@@ -17,7 +17,7 @@
    border: 2px solid #aaa;
 }
 
-.StreetForm button {
+.StudentForm button {
    background: none;
    border: 2px solid #aaa;
    padding: 5px 12px;
@@ -25,18 +25,10 @@
    cursor: pointer;
 }
 
-.StreetForm button:hover {
+.StudentForm button:hover {
    background-color: #aaa;
 }
 
-.StreetForm button:disabled {
+.StudentForm button:disabled {
    color: #ddd;
-}
-
-.StreetForm {
-   margin: 10px;
-   padding: 15px;
-   box-shadow: 0 8px 10px 0 rgba(0,0,0,0.6);
-   display: block;
-   background-color: white;
 }

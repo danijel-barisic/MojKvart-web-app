@@ -1,11 +1,13 @@
 package progi.project.mojkvart.role;
 
+import org.springframework.stereotype.Repository;
 import progi.project.mojkvart.role_request.RoleRequest;
 import progi.project.mojkvart.account.Account;
 
 import javax.persistence.*;
 import java.util.List;
 
+@Repository
 @Entity
 @Table(name = "role")
 public class Role {

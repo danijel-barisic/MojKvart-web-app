@@ -1,4 +1,8 @@
 import React from "react";
+import "./StreetForm.css"
+import Card from "./Card";
+import './Card.css';
+
 
 function StreetForm(props) {
    const [form, setForm] = React.useState({ name: '', minStreetNo: '', maxStreetNo: '', districtId: ''});
@@ -40,28 +44,29 @@ function StreetForm(props) {
 
 
    return (
-      <div className='StreetForm'>
-         <h2>New Street</h2>
-         <form onSubmit={onSubmit}>
-            <div className='FormRow'>
-               <label>name</label>
-               <input required name='name' onChange={onChange} value={ form.name}/>
-            </div>
-            <div className='FormRow'>
-               <label>minStreetNo</label>
-               <input required name='minStreetNo' onChange={onChange} value={ form.minStreetNo}/>
-            </div>
-            <div className='FormRow'>
-               <label>maxStreetNo</label>
-               <input required name='maxStreetNo' onChange={onChange} value={ form.maxStreetNo}/>
-            </div>
-            <div className='FormRow'>
-               <label>districtId</label>
-               <input required name='districtId' onChange={onChange} value={ form.districtId}/>
-            </div>
-            <button type='submit' disabled={!isValid()}>Add street</button>
-         </form>
-      </div>
+      <Card title="New Street">
+         <div className='StreetForm'>
+            <form onSubmit={onSubmit}>
+               <div className='FormRow'>
+                  <label>name</label>
+                  <input required name='name' onChange={onChange} value={ form.name}/>
+               </div>
+               <div className='FormRow'>
+                  <label>minStreetNo</label>
+                  <input required name='minStreetNo' onChange={onChange} value={ form.minStreetNo}/>
+               </div>
+               <div className='FormRow'>
+                  <label>maxStreetNo</label>
+                  <input required name='maxStreetNo' onChange={onChange} value={ form.maxStreetNo}/>
+               </div>
+               <div className='FormRow'>
+                  <label>districtId</label>
+                  <input required name='districtId' onChange={onChange} value={ form.districtId}/>
+               </div>
+               <button classname='submit' type='submit' disabled={!isValid()}>Add street</button>
+            </form>
+         </div>
+      </Card>
    );
 }
 

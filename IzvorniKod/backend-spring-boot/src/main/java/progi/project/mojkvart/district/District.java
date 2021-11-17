@@ -1,7 +1,7 @@
 package progi.project.mojkvart.district;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import progi.project.mojkvart.council.Council;
+import progi.project.mojkvart.meeting.Meeting;
 import progi.project.mojkvart.street.Street;
 import progi.project.mojkvart.thread.PostThread;
 
@@ -26,11 +26,11 @@ public class District {
     @OneToMany(mappedBy = "district")
     private List<Street> streets;
 
-    @OneToOne(mappedBy = "district")
-    private Council council;
-
     @OneToMany(mappedBy = "district")
     private List<PostThread> threads;
+
+    @OneToMany(mappedBy = "district")
+    private List<Meeting> meetings;
 
     public District() {}
 
@@ -62,12 +62,20 @@ public class District {
         this.streets = streets;
     }
 
-    public Council getCouncil() {
-        return council;
+    public List<Meeting> getMeetings() {
+        return meetings;
     }
 
-    public void setCouncil(Council council) {
-        this.council = council;
+    public void setMeetings(List<Meeting> meetings) {
+        this.meetings = meetings;
+    }
+
+    public List<PostThread> getThreads() {
+        return threads;
+    }
+
+    public void setThreads(List<PostThread> threads) {
+        this.threads = threads;
     }
 
     @Override

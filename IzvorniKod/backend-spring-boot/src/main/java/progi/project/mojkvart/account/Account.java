@@ -1,5 +1,9 @@
 package progi.project.mojkvart.account;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import progi.project.mojkvart.event.Event;
 import progi.project.mojkvart.home.Home;
 import progi.project.mojkvart.meeting.Meeting;
@@ -8,11 +12,13 @@ import progi.project.mojkvart.role_request.RoleRequest;
 import progi.project.mojkvart.post.Post;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name = "account")
-public class Account {
+public class Account implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,10 +40,11 @@ public class Account {
     @Column(name = "is_blocked", columnDefinition = "boolean default false")
     private boolean isBlocked;
 
-    @Column(name = "is_address_valid")
+    @Column(name = "is_address_valid", columnDefinition = "boolean default true")
     private boolean isAddressValid;
 
     // only CascadeType.REMOVE is left out, because we don't want to remove accounts when we remove a role
+    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE,
                     CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinTable(name = "account_role",
@@ -66,12 +73,17 @@ public class Account {
 
     }
 
-    public Account(String email, String firstName, String lastName, boolean isBlocked, boolean isAddressValid) {
+    public Account(String firstName, String lastName, String email, String password, List<Role> roles) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.isBlocked = isBlocked;
-        this.isAddressValid = isAddressValid;
+        this.password = password;
+        this.roles = roles;
+    }
+
+    public Account(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
     public Long getId() {
@@ -123,19 +135,41 @@ public class Account {
     }
 
     @Override
-    public String toString() {
-        return "Account{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", isBlocked=" + isBlocked +
-                ", isAddressValid=" + isAddressValid +
-                '}';
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        for (Role role : roles) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
+        }
+        return authorities;
     }
 
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return !isBlocked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public void setPassword(String password) {
@@ -148,6 +182,20 @@ public class Account {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", password='" + password + '\'' +
+                ", isBlocked=" + isBlocked +
+                ", isAddressValid=" + isAddressValid +
+                ", roles='" + getRoles() + '\'' +
+                '}';
     }
 }
 
