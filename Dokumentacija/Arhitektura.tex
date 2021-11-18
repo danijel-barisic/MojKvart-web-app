@@ -1,14 +1,29 @@
 \chapter{Arhitektura i dizajn sustava}
 		
-		\textbf{\textit{dio 1. revizije}}\\
-
-		\textit{ Potrebno je opisati stil arhitekture te identificirati: podsustave, preslikavanje na radnu platformu, spremišta podataka, mrežne protokole, globalni upravljački tok i sklopovsko-programske zahtjeve. Po točkama razraditi i popratiti odgovarajućim skicama:}
-	\begin{itemize}
-		\item 	\textit{izbor arhitekture temeljem principa oblikovanja pokazanih na predavanjima (objasniti zašto ste baš odabrali takvu arhitekturu)}
-		\item 	\textit{organizaciju sustava s najviše razine apstrakcije (npr. klijent-poslužitelj, baza podataka, datotečni sustav, grafičko sučelje)}
-		\item 	\textit{organizaciju aplikacije (npr. slojevi frontend i backend, MVC arhitektura) }		
-	\end{itemize}
-
+		Arhitektura sustava se sastoji od tri glavna podsustava, a to su web preglednik, web poslužitelj i baza podataka.
+		
+		\begin{itemize}
+		
+		\item  \textbf{Web preglednik} je program s pomoću kojeg korisnik pristupa sustavu, odnosno sva korisnička interakcija se odvija preko web-preglednika. Korisnik putem web preglednika šalje zahtjeve za resursima, koje web preglednik dohvaća od web poslužitelja, i onda se ti resursi na ispravan način interpretiraju i prikazuju. Korisnik također može i slati podatke preko web aplikacije, najčešće korištenjem formi.
+		
+		\item \textbf{Web poslužitelj} je centralni dio web aplikacije. Zasniva se na protokolu HTTP, komunicira i s korisnikom i s bazom podataka, te na zahtjeve korisnika dohvaća resurse ili obrađuje podatke poslane korištenjem forme i ažurira bazu podataka.
+		
+		\item \textbf{Baza podataka} služi za pohranu podataka sustava. Gotovo svi scenariji korištenja web aplikacije podrazumijevaju dohvaćanje podataka iz baze, i spremanje podataka u bazu.
+		\end{itemize}
+		
+		Aplikacija je izgrađena na principu arhitekture zasnovane na događajima, i shodno tome, aplikacija se temelji na MVC konceptu. MVC se sastoji od tri komponente:	
+		
+		\begin{itemize}
+		
+		\item \textbf{Model} sadrži razrede čiji objekti se obrađuju.
+		
+		\item \textbf{View} (hrv. pogled) sadrži razrede čiji objekti služe za prikaz podataka.
+		
+		\item \textbf{Controller} (hrv. nadglednik) sadrži razrede koji upravljaju i rukuju korisničkom interakcijom s pogledom i modelom.
+		
+		\end{itemize}
+		
+		Aplikacija je izgrađena korištenjem objektno orijentirane paradigme. Za backend je korišten radni okvir Java Spring. Za frontend je korišten React. Od vanjskih servisa, integrirana je podrška sinkronizacije događaja s Google Kalendarom.
 	
 		
 
@@ -16,16 +31,90 @@
 
 				
 		\section{Baza podataka}
-			
-			\textbf{\textit{dio 1. revizije}}\\
-			
-		\textit{Potrebno je opisati koju vrstu i implementaciju baze podataka ste odabrali, glavne komponente od kojih se sastoji i slično.}
+						
+		
+Sustav koristi relacijsku bazu podataka, koja je odabrana jer su podaci kojima web aplikacija barata vrlo povezani, i zbog toga ima najviše smisla koristiti relacije. Relacija, odnosno tablica, je srž i glavna komponenta baze koja se sastoji od imena i skupa atributa. Baza podataka mora biti brza i efikasna u svojoj zadaći, to jest u pohranjivanju, dohvaćanju i izmjeni podataka.\\
+Baza podataka sastoji se od deset entiteta:
+\begin{multicols}{3}
+
+\begin{itemize}
+\item Account
+\item Event
+\item Thread
+\item Post
+
+\end{itemize}
+
+\columnbreak
+
+\begin{itemize}
+\item District
+\item Street
+\item Home
+\item Role
+\end{itemize}
+
+\begin{itemize}
+\item RoleRequest
+\item Meeting
+\end{itemize}
+\end{multicols}
 		
 			\subsection{Opis tablica}
 			
-
-				\textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
 				
+	\textbf{\large Account}\quad\quad Entitet Account sadržava informacije o korisniku.
+				Atributi koje sadrži entitet su: Identifikacijski ključ korisnika, email, ime, prezime, password, "isBlocked" što pokazuje da li je korisnik blokiran, "isAddressValid" što pokazuje ima li korisnik ispravnu adresu na kojoj stanuje, šifru kuće u kojoj stanuje, šifru sastanaka ako je korisnik vijećnik te je prisustvovao sastanku vijeća te šifra četvrti kojoj korisnik pripada. Ovaj entitet u vezi je One-to-Many s entitetom Post preko atributa IDAccount korisnika, u vezi Many-to-One s Meeting preko IDMeeting, u vezi One-to-Many s entitetom Event preko atributa IDAccount. Također je u vezi One-to-Many s RoleRequest preko IDAccount, u vezi Many-to-One s entitetom District preko atributa IDDistrict. U vezi je Many-to-One s entitetom Home preko IDHome te naposlijetku je u vezi Many-to-Many s Role preko atributa IDAccount.
+				
+					
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \multicolumn{3}{|c|}{\textbf{Account}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}IDAccount & INT	&  	Identifikacijski ključ korisnika  	\\ \hline
+					email	& VARCHAR & Email korisnika  	\\ \hline
+					firstName & VARCHAR & Ime korisnika \\ \hline
+					lastName & VARCHAR & Prezime korisnika \\ \hline
+					password & VARCHAR & Lozinka korisnika \\ \hline
+					isBlocked & BOOLEAN & Oznaka je li korisnik blokiran \\ \hline
+					isAddressValid & BOOLEAN & Oznaka je li adresa korisnika valjana \\ \hline
+					\SetCell{LightBlue}IDHome & INT & Identifikacijski ključ korisnikove kuće  	\\ \hline
+					\SetCell{LightBlue}IDMeeting	& INT & Identifikacijski ključ sastanka  	\\ \hline
+					\SetCell{LightBlue}IDDistrict	& INT & Identifikacijski ključ četvrti kojoj korisnik pripada  	\\ \hline
+					\end{longtblr}
+					
+					
+	\textbf{\large Event}\quad\quad Ovaj entitet sadržava sve informacije vezane uz događaj.
+		Atributi koje sadrži entitet su: Identifikacijski ključ događaja, naziv događaja, opis, trajanje, vrijeme, lokaciju te status događaja. Entitet je u samo jednoj i to Many-to-One vezi s entitetom Account preko atributa IDAccount.
+					
+					
+					\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[7,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \multicolumn{3}{|c|}{\textbf{Event}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}IDEvent & INT	&  	Identifikacijski ključ događaja  	\\ \hline
+					eventName	& VARCHAR & Naziv događaja  	\\ \hline
+					eventDatetime & TIMESTAMP & Vrijeme događaja \\ \hline
+					eventLocation & VARCHAR & Lokacija događaja \\ \hline
+					eventDuration & INTERVAL & Trajanje događaja \\ \hline
+					eventDescription & VARCHAR & Opis događaja \\ \hline
+					eventStatus & VARCHAR & Status događaja \\ \hline
+					\SetCell{LightBlue}IDAccount & INT & Identifikacijski ključ korisnika  	\\ \hline
+				
+				\end{longtblr}
+				
+				
+	\textbf{\large Thread}\quad\quad	Ovaj entitet sadržava sve informacije vezane uz dretvu na forumu. Sadrži atribute: Identifikacijski ključ dretve, ime dretve te šifru četvrti kako bi se utvrdilo kojem forumu pripada ta dretva, odnosno četvrti. Ovaj entitet je u One-to-One vezi s entitetom Meeting preko atributa IDThread te je u vezi One-to-Many s District preko šifre četvrti.
 				
 				\begin{longtblr}[
 					label=none,
@@ -35,35 +124,200 @@
 						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
 						rowhead = 1,
 					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
-					\hline \multicolumn{3}{|c|}{\textbf{korisnik - ime tablice}}	 \\ \hline[3pt]
-					\SetCell{LightGreen}IDKorisnik & INT	&  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  	\\ \hline
-					korisnickoIme	& VARCHAR &   	\\ \hline 
-					email & VARCHAR &   \\ \hline 
-					ime & VARCHAR	&  		\\ \hline 
-					\SetCell{LightBlue} primjer	& VARCHAR &   	\\ \hline 
+					\hline \multicolumn{3}{|c|}{\textbf{Thread}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}IDThread & INT	&  	Identifikacijski ključ dretve  	\\ \hline
+					threadName	& VARCHAR & Ime dretve  	\\ \hline 
+					\SetCell{LightBlue} IDDistrict	& INT & Identifikacijski ključ četvrti  	\\ \hline 
+				\end{longtblr}
+				
+	\textbf{\large Post}\quad\quad Ovaj entitet sadržava sve informacije vezane uz objavu na forumu. Sadrži atribute: Identifikacijski ključ objave, vrijeme objave, sadržaj objave, šifra odgovora na objavu(ako postoji), šifra dretve kojoj objava pripada te šifra korisnika koji je objavio objavu. Ovaj entitet je u dvije Many-to-One veze i to s entitetima Account i Thread preko njihovih odgovarajućih identifikacijskih šifri(IDAccount i IDThread). Također je u refleksivnoj vezi zbog mogućnosti odgovora na objavu.
+				
+				
+					\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \multicolumn{3}{|c|}{\textbf{Post}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}IDPost & INT	&  	Identifikacijski ključ objave  	\\ \hline
+					postDatetime	& TIMESTAMP & Vrijeme postavljanja objave  	\\ \hline
+					postContent & VARCHAR & Sadržaj objave \\ \hline
+					replyId & INT & Identifikacijski ključ odgovora na objavu \\ \hline
+					\SetCell{LightBlue}IdThread	 & INT & Identifikacijski ključ pripadajuće dretve  	\\ \hline
+					\SetCell{LightBlue}IDAccount	& INT & Identifikacijski ključ korisnika koji je objavio objavu  	\\ \hline
+					\SetCell{LightBlue}IDPostReply & INT & Identifikacijski ključ odgovora na objavu ako postoji  	\\ \hline
 				\end{longtblr}
 				
 				
+	\textbf{\large District}\quad\quad Ovaj entitet sadržava sve informacije vezane uz četvrt. Sadrži atribute: Identifikacijski ključ četvrti te naziv četvrti. Ovaj entitet je u tri One-to-Many veze i to s entitetima Account, Post i Street preko vlastite identifikacijske šifre(IDDistrict). Također je u One-to-Many vezi sa slabim entitetom Meeting preko atributa IDDistrict.
+				
+					\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \multicolumn{3}{|c|}{\textbf{District}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}IDDistrict & INT	&  	Identifikacijski ključ četvrti  	\\ \hline
+					districtName	& VARCHAR & Naziv četvrti  	\\ \hline
+				\end{longtblr}
+				
+				\textbf{\large Street}\quad\quad Ovaj entitet sadržava sve informacije vezane uz ulicu. Sadrži atribute: Identifikacijski ključ ulice, naziv ulice, najmanji kućanski broj u ulici, najveći kućanski broj u ulici te šifra četvrti u kojoj se ulica nalazi. Ovaj entitet je u Many-to-One vezi s entitetom District preko šifre četvrti. Također je u One-to-Many vezi s entitetom Home preko atributa IDStreet.
+				
+					\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[10,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \multicolumn{3}{|c|}{\textbf{Street}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}IDStreet & INT	&  	Identifikacijski ključ ulice  	\\ \hline
+					streetName	& VARCHAR & Naziv ulice  	\\ \hline
+					minStreetNumber & INT & Najmanji kućanski broj ulice \\ \hline
+					maxStreetNumber & INT & Najveći kućanski broj ulice \\ \hline
+					\SetCell{LightBlue}IDDistrict	 & INT & Identifikacijski ključ pripadajuće četvrti  	\\ \hline
+					\end{longtblr}
+					
+					
+	\textbf{\large Home}\quad\quad Ovaj entitet sadržava sve informacije vezane uz kuću korisnika. Sadrži atribute: Identifikacijski ključ kuće, kućni broj te šifra ulice u kojoj se kuća nalazi. Ovaj entitet je u Many-to-One vezi s entitetom Steet preko šifre ulice. Također je u One-to-Many vezi s entitetom Account preko atributa IDAccount.
+					
+					
+							
+					\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \multicolumn{3}{|c|}{\textbf{Home}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}IDHome & INT	&  	Identifikacijski ključ kuće  	\\ \hline
+					homeNumber	& INT & Kućanski broj  	\\ \hline
+					\SetCell{LightBlue}IDStreet	 & INT & Identifikacijski ključ pripadajuće ulice  	\\ \hline
+							\end{longtblr}
+							
+							
+							
+	\textbf{\large Role}\quad\quad Ovaj entitet sadržava sve informacije vezane uz ulogu korisnika. Sadrži atribute: Identifikacijski ključ uloge te naziv uloge. Ovaj entitet je u Many-to-Many vezi s entitetom Account preko šifre uloge te u One-to-Many vezi s entitetom RoleRequest preko šifre uloge.
+							
+							\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \multicolumn{3}{|c|}{\textbf{Role}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}IDRole & INT	&  	Identifikacijski ključ uloge  	\\ \hline
+					roleName	& VARCHAR & Naziv uloge 	\\ \hline
+					
+							\end{longtblr}
+							
+							
+							\textbf{\large RoleRequest}\quad\quad Ovaj entitet sadržava sve informacije vezane uz zahtjev korisnika za ulogom. Sadrži atribute: Identifikacijski ključ zahtjeva, status zahtjeva te šifra korisnika koji je podnio zahtjev i šifra uloge koju korisnik zahtjeva. Ovaj entitet je u Many-to-One vezi s entitetom Role preko šifre uloge. Također je u Many-to-One vezi s entitetom Account preko atributa IDAccount.			
+							\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[8,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \multicolumn{3}{|c|}{\textbf{RoleRequest}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}IDRoleRequest & INT	&  	Identifikacijski ključ zahtjeva za ulogu  	\\ \hline
+					roleRequestStatus	& VARCHAR & Status zahtjeva za ulogu  	\\ \hline
+					\SetCell{LightBlue}IDAccount	 & INT & Identifikacijski ključ korisnika 	\\ \hline
+					\SetCell{LightBlue}IDRole	 & INT & Identifikacijski ključ uloge  	\\ \hline
+							\end{longtblr}
+							
+\textbf{\large AccountRole}\quad\quad Ova join tablica koja je posljedično nastala spajanjem entiteta Account s entitetom Role vezom Many-to-Many sadržava informacije o ulozi korisnika. Sadrži 2 atributa koja su ključ entiteta Account i ključ entiteta Role.	
+							
+								\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[7,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \multicolumn{3}{|c|}{\textbf{AccountRole}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}\underline{IDAccount} & INT	&  	Identifikacijski ključ korisnika  	\\ \hline
+					\SetCell{LightGreen}\underline{IDRole}	 & INT & Identifikacijski ključ uloge \\ \hline
+
+					  	
+							\end{longtblr}
+							
+							
+						\textbf{\large Meeting}\quad\quad Ovaj slabi entitet sadržava sve informacije vezane uz sastanak vijeća. Sadrži atribute: Identifikacijski ključ sastanka, naziv sastanka, vrijeme sastanka, izvještaj te šifru autora izvještaja. Također sadrži šifru četvrti te šifru dretve na forumu ukoliko je otvorena na temu izvještaja. Ovaj entitet je u One-to-One vezi s entitetom Thread preko šifre dretve. Također je u Many-to-One vezi s entitetom District preko šifre četvrti te u vezi One-to-Many s entitetom Account preko šifre sastanka.
+							
+							
+							\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[8,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					} %definicija širine tablice, širine stupaca, poravnanje i broja redaka naslova tablice
+					\hline \multicolumn{3}{|c|}{\textbf{Meeting}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}IDMeeting & INT	&  	Identifikacijski ključ sastanka  	\\ \hline
+					\SetCell{LightGreen}\underline{IDDistrict}	 & INT & Identifikacijski ključ četvrti \\ \hline
+					\SetCell{LightBlue}IDThread	 & INT & Identifikacijski ključ dretve \\ \hline
+					meetingReport	& VARCHAR & Izvješće sastanka  	\\ \hline
+					reportAuthorId	& INT & Identifikacijski broj korisnika koji je sastavio izvješće\\ \hline
+					meetingTitle & VARCHAR & Naziv sastanka \\ \hline 
+					meetingDatetime & TIMESTAMP & Vrijeme sastanka \\ \hline
+					  	
+							\end{longtblr}
+							
+							
+							
+			\eject	
 			
 			\subsection{Dijagram baze podataka}
-				\textit{ U ovom potpoglavlju potrebno je umetnuti dijagram baze podataka. Primarni i strani ključevi moraju biti označeni, a tablice povezane. Bazu podataka je potrebno normalizirati. Podsjetite se kolegija "Baze podataka".}
+	\begin{figure}[h]
+	\centering
+  \hbox{\hspace{-2.2cm}\includegraphics[width = 200mm,scale = 3]{Dijagram_11.png}}
+  \caption{Relacijska shema baze podataka}
+  \label{Relacijska_shema}
+\end{figure}
 			
 			\eject
 			
-			
 		\section{Dijagram razreda}
 		
-			\textit{Potrebno je priložiti dijagram razreda s pripadajućim opisom. Zbog preglednosti je moguće dijagram razlomiti na više njih, ali moraju biti grupirani prema sličnim razinama apstrakcije i srodnim funkcionalnostima.}\\
-			
-			\textbf{\textit{dio 1. revizije}}\\
-			
-			\textit{Prilikom prve predaje projekta, potrebno je priložiti potpuno razrađen dijagram razreda vezan uz \textbf{generičku funkcionalnost} sustava. Ostale funkcionalnosti trebaju biti idejno razrađene u dijagramu sa sljedećim komponentama: nazivi razreda, nazivi metoda i vrste pristupa metodama (npr. javni, zaštićeni), nazivi atributa razreda, veze i odnosi između razreda.}\\
-			
-			\textbf{\textit{dio 2. revizije}}\\			
-			
-			\textit{Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije}
+		\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{Dijagram_12.png}
+		\caption{Dijagram razreda - modeli}
+		\end{figure}
 			
 			
+			
+			\eject
+			
+			Na slici 4.2 prikazani su razredi koji odgovaraju \textit{backend} dijelu MVC arhitekture. Razred \textit{District} označava kvartove i uz njega su vezani razredi \textit{Meeting} (koji odgovara izvješćima s Vijeća četvrti), \textit{Thread} (koji odgovara temi na Forumu), \textit{Event} (koji odgovara događaju u sekciji Događaji) i \textit{Street} (koji odgovara ulici koja pripada nekom kvartu). Uz razred \textit{Street} vezan je razred \textit{Home}, koji označava adrese na kojima neki stanovnik kvarta živi. Uz razred \textit{Home} vezan je razred \textit{Account}, koji odgovara korisnicima aplikacije. Razred \textit{Thread} uz sebe veže razred \textit{Post}, koji označava odgovore unutar pojedine teme na Forumu. Apstraktan razred \textit{Role} označava uloge unutar aplikacije, a nasljeđuju ga razredi \textit{BasicAccount}, \textit{Councilor}, \textit{Moderator} i \textit{Administrator}. Konačno, razred \textit{RoleRequest} označava zahtjev za ulogu.
+			
+			\eject
+			
+		\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{Dijagram_13.png}
+		\caption{Dijagram razreda - registracija}
+		\end{figure}
+		
+			\eject
+			
+			Na slici 4.3 prikazani su razredi koji odgovoraju funkcionalnosti registracije u aplikaciji. Centralni razred je \textit{RegistrationController}. \textit{RegistrationController} u funkciji \textit{register} prima objekte tipa \textit{RegistrationRequest}, te potom poziva funkciju \textit{register} objekta tipa \textit{RegistrationService}. Objekt tipa \textit{RegistrationService} u funkciji \textit{register} prvo poziva funkciju \textit{validate} objekta tipa \textit{EmailValidator} koja provjerava je li zadani email u ispravnom formatu. Ako je email u neispravnom formatu, funkcija baca \textit{IllegalStateException}, a inače poziva funkciju \textit{signupAccount} objekta tipa \textit{AccountDetailService}. Unutar funkcije \textit{singupAccount} se prvo provjerava postoji li već registriran korisnik s unesesnim mailom, pozivanjem funkcije \textit{findByEmail} objekta tipa \textit{AccountRepository}. Ako funkcija \textit{findByEmail} vrati logičku istinu, onda se baca \textit{IllegalArgumentException}. U protivnom se unesena lozinka kriptira korištenjem funkcije \textit{bCryptPasswordEncoder} objekta tipa \textit{PasswordEncoder}, a potom se kreira korisnički račun korištenjem funkcije \textit{createAccount} objekta tipa \textit{AccountService}.
 			
 			\eject
 		

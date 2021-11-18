@@ -1,16 +1,45 @@
 \chapter{Opis projektnog zadatka}
 		
-		\textbf{\textit{dio 1. revizije}}\\
+	Cilj ovog projekta je razviti web aplikaciju pod nazivom "MojKvart" koja će omogućiti poboljšanje komunikacije i razmjenu informacija među stanovnicima jednog kvarta. Sama web aplikacija se sastoji od tri glavna dijela: "Forum", "Događaji" i "Vijeće četvrti", te postoje tri primarne vrste korisnika: "Obični stanovnik", "Vijećnik" i "Moderator". Dodatno postoji i uloga "Administrator", iako administratori nisu stanovnici niti jedne četvrti, nego je njihova uloga održavanje sustava.
+	
+	Svaki stanovnik četvrti koji poželi koristiti aplikaciju morat će prvo stvoriti korisnički račun. Kada otvori aplikaciju, prikazat će mu se stranica "Prijava". S obzirom da on trenutno nema korisnički račun, odabrat će opciju "Registracija", i to će ga preusmjeriti na stranicu na kojoj će morati ispuniti obrazac za stvaranje korisničkog računa. U obrascu će morati unijeti svoje ime, prezime, adresu stanovanja i adresu e-pošte, i pritom će ga se u sustavu raspoznavati primarno po njegovoj adresi e-pošte. Dodatno morat će odabrati i lozinku. Ukoliko pri registraciji korisnik odabere e-mail s kojim je već povezan neki korisnički račun u sustavu, ili ne unese sve podatke, ili unese neki podatak u krivom formatu (npr. napiše ime ili prezime malim slovom, ili za adresu unese adresu koja nije validna), dobit će prikladnu poruku o pogrešci, i tada će moći ispraviti te podatke i ponovno pokušati dovršiti registraciju. Ako se uspješno registrira, sustav će automatski po njegovoj adresi prepoznati kojem kvartu pripada, i preusmjerit će ga na početnu stranicu njegovog kvarta.
+	
+	Svaki korisnik koji ima korisnički račun će se na stranici "Prijava" moći prijaviti u sustav i time dobiti pristup korisničkom dijelu sustava tako da unese svoj e-mail i lozinku. Ukoliko korisnik napravi neku pogrešku u ovom koraku, recimo unese e-mail s kojim nije povezan niti jedan korisnički račun u sustavu, ili unese lozinku koja nije ispravna, dobit će prikladnu poruku o pogrešci, i tada će moći ispraviti tražene podatke i ponovno se pokušati prijaviti. Ako se uspješno prijavi, bit će preusmjeren na početnu stranicu svog kvarta.
+	
+	Na početnoj stranici korisnik vidi poveznice na tri glavne cjeline sustava za svoj kvart: "Forum", "Događaji" i "Vijeće četvrti". Dodatno, korisnik vidi i poveznice "Osobni podaci" i "Odjava". Odabirom opcije "Odjava" korisnik gubi pristup korisničkom dijelu sustava i biva preusmjeren na stranicu "Prijava". Odabirom poveznice "Osobni podaci" korisnik biva preusmjeren na stranicu na kojoj vidi svoje osobne podatke - ime, prezime, adresa stanovanja, adresa e-pošte i lozinka. Korisnik može mijenjati sve osobne podatke osim e-pošte. Ako korisnik promijeni adresu stanovanja, i nova adresa se ne nalazi u istom kvartu kao i stara, korisnik će izgubiti uloge "Vijećnik" i "Moderator", ako ih ima. Dodatno, korisnik ovdje ima i opciju "Zahtjev za ulogom", kojom može administratorima sustava poslati zahtjev da mu se dodijeli uloga vijećnika ili moderatora. Konačno, korisnik ovdje ima opciju "Obriši korisnički račun", kojom može obrisati svoj korisnički račun, i tada gubi pristup korisničkom dijelu sustava i biva preusmjeren na stranicu "Prijava". 
+	
+	Na početnoj stranici, odabirom poveznice "Događaji", korisnik biva preusmjeren na stranicu sa svim potvrđenim događajima u svojoj četvrti. Ovdje može vidjeti vidjeti te događaje, te predložiti vlastite događaje, za što mora unijeti naziv događaja, mjesto, vrijeme, trajanje i kratak opis. Prijedloge događaja odobravaju moderatori pojedinih četvrti.
+	
+	Odabirom poveznice "Forum" na početnoj stranici, korisnik biva preusmjeren na stranicu "Forum" gdje dobije prikaz svih tema na forumu za svoju četvrt. Korisnik može čitati teme i objave u njima, stvarati vlastite teme, komentirati objave drugih korisnika, uređivati i brisati svoje odgovore. U slučaju da se u temi na forumu obrišu sve objave, tema se automatski obriše. Pri stvaranju teme, korisnik mora napisati prvu objavu u njoj.
+	
+	Konačno, odabirom poveznice "Vijeće četvrti" na početnoj stranici, korisnik biva preusmjeren na stranicu vijeća, gdje može vidjeti popis izvješća s prethodnih sjednica. Korisnik može odabrati pojedino izvješće za više detalja, a može i automatski otvoriti temu na forumu vezanu za pojedino izvješće. Takve teme je moguće otvoriti jednom po izvješću, i vizualno se razlikuju od ostalih tema na forumu, te u njima prva objava bude tekst izvješća. Tada se u tekst izvješća ugradi poveznica na raspravu na temu za to izvješće.
+	
+	Uz sve navedene mogućnosti, korisnici s ulogom "Vijećnik" mogu stvarati nova izvješća u cjelini "Vijeće četvrti", uređivati izvješća kojima su oni autori, i mogu brisati izvješća.
+	
+	Moderatori mogu pregledavati prijedloge događaja za svoj kvart, i te prijedloge mogu objaviti ili obrisati. Također mogu uređivati prijedloge koji ne zadovoljavaju jezični standard. Moderatori također mogu brisati objave u temama na forumu, te cijele teme.
+	
+	Kada se korisnici s ulogom "Administrator" prijave u sustav, dočeka ih drukčija početna stranica od one koju imaju korisnici koji su stanovnici nekog kvarta. Administratori na svojoj početnoj stranici imaju tri glavne cjeline, a to su "Korisnici", "Kvartovi", i "Zahtjevi uloga", te dodatno imaju opcije "Osobni podaci" i "Odjava". Odjava funkcionira isto kao i kod ostalih korisnika, administratori tada gube pristup korisničkom dijelu sučelja i bivaju preusmjereni na stranicu "Prijava". Pregled osobnih podataka za administratore je sličan pregledu osobnih podataka za ostale korisnike, a razlike su te da administratori nemaju adresu, odnosno nisu stanovnici niti jednog kvarta, te dodatno, administratori ne mogu obrisati svoj korisnički račun.
+	
+	Odabirom opcije "Korisnici", administratori bivaju preusmjereni na stranicu na kojoj vide popis svih registriranih korisnika u sustavu. Prikazani korisnici su sortirani po kvartovima, a unutar kvartova po ulogama, a administratori sustava su također prikazani u svojoj cjelini. Ovdje administratori mogu odabrati bilo kojeg korisnika i vidjeti njegove osobne podatke. Ovdje također mogu korisniku dodijeliti ili oduzeti ulogu "Vijećnik" ili "Administrator". Administratori ovdje mogu svakog pojedinog korisnika koji nema ulogu "Administrator" privremeno blokirati ili deblokirati, a mogu i trajno obrisati korisnički račun svakog korisnika koji nema ulogu "Administrator". Također, klikom na poveznicu "Blokirani korisnici", administratori mogu vidjeti popis svih blokiranih korisnika.
+	
+	Odabirom opcije "Zahtjevi uloga", administratori mogu vidjeti sve nerazriješene zahtjeve uloga. Ovdje mogu odabrati pojedini zahtjev, i prihvatiti ga ili odbiti. 
+	
+	Odabirom opcije "Kvartovi", administratori mogu vidjeti popis svih kvartova. Ovdje sada mogu odabrati pojedini kvart i pregledati sav korisnički sadržaj tog kvarta ("Forum", "Vijeće četvrti", "Događaji") onako kako taj sadržaj vide obični korisnici, s razlikom da administratori ne mogu stvarati teme i objave na forumu, te ne mogu predlagati događaje, već mogu samo pregledavati sadržaj pojedinog kvarta.
+	
+	Dodatno, pod opcijom "Kvartovi", administratori mogu odabrati opciju "Dodaj kvart", čime definiraju novi kvart u sustavu. Za kvart moraju odabrati ime, i to ime kvarta mora biti jedinstveno među imenima kvartova. Dodatno, moraju odabrati koje ulice pripadaju tom kvartu, te imena ulica također moraju biti jedinstvena, a za svaku ulicu moraju odabrati i raspon dozvoljenih brojeva.
+	
+	Konačno, pri pregledu kvartova, administratori mogu uređivati podatke za pojedine kvartove, te ih mogu i obrisati. Ukoliko promjenom podataka kvarta adresa nekog korisnika prestane biti validna, ili ukoliko se njegov kvart i time sve ulice u tom kvartu obrišu, pri idućoj prijavi korisnik će morati promijeniti svoju adresu prije nastavka korištenja sustava.
+	
+	Za ovu svrhu su stanovnici pojedinih kvartova mogli koristiti razne aplikacije općenitije namjene, npr. Facebook grupe ili Discord serveri, ali prednost ovakvog sustava je upravo prilagođenost toj specifičnoj namjeni spajanja ljudi pojedinog kvarta, te naglasak i jasnija definicija upravo onih funkcionalnosti koje su bitnije za neki kvart.
+	
+	Sustav bi se mogao prilagoditi i za mobilne uređaje, no svrha ovog projekta je napraviti web aplikaciju, a ideja izrade mobilne aplikacije je jedna od mogućnosti za kasnije faze projekta. Postoje također razne ideje manje važnosti koje nisu nužne za osnovno funkcioniranje projekta, ali bi poboljšale cjelokupni sustav, a neke od njih su:
+	
+	\begin{packed_item}
+		\item 	mogućnost da svaki korisnik može pregledati osobne podatke svakog drugog korisnika
+		\item	mogućnost da korisnici biraju svoje nadimke, i da se, umjesto njihovih imena i prezimena, ti nadimci prikazuju u sustavu
+		\item 	2FA prilikom prijave
+		\item 	primanje obavijesti na mail
+		\item 	mogućnost pregleda svih objava koje je korisnik imao na forumu
+		\item	mogućnost pregleda raznih statistika na forumu
 		
-		\textit{Na osnovi projektnog zadatka detaljno opisati korisničke zahtjeve. Što jasnije opisati cilj projektnog zadatka, razraditi problematiku zadatka, dodati nove aspekte problema i potencijalnih rješenja. Očekuje se minimalno 3, a poželjno 4-5 stranica opisa.	Teme koje treba dodatno razraditi u ovom poglavlju su:}
-		\begin{packed_item}
-			\item \textit{potencijalna korist ovog projekta}
-			\item \textit{postojeća slična rješenja (istražiti i ukratko opisati razlike u odnosu na zadani zadatak). Dodajte slike koja predočavaju slična rješenja.}
-			\item \textit{skup korisnika koji bi mogao biti zainteresiran za ostvareno rješenje.}
-			\item \textit{mogućnost prilagodbe rješenja }
-			\item \textit{opseg projektnog zadatka}
-			\item \textit{moguće nadogradnje projektnog zadatka}
-		\end{packed_item}
-		
-		\textit{Za pomoć pogledati reference navedene u poglavlju „Popis literature“, a po potrebi konzultirati sadržaj na internetu koji nudi dobre smjernice u tom pogledu.}
-		\eject
+	\end{packed_item}
