@@ -6,8 +6,6 @@ import { useHistory } from "react-router";
 import Select from 'react-select';
 
 
-
-
 //https://react-select.com/styles#styles
  const customStyles = {
    option: (provided, state) => ({
@@ -29,13 +27,15 @@ import Select from 'react-select';
      return { ...provided, opacity, transition };
    }
  }
+
+
+
+
+
+
  
-
-
-
-
 function Registration(props) {
-   const [registrationForm, setregistrationForm] = React.useState({ firstname: '', lastname: '', email: '', password: ''});
+   const [registrationForm, setregistrationForm] = React.useState({ firstname: '', lastname: '', email: '', password: '',streetnumber: ''});
    const [streets, setStreets] = React.useState([]);
    const [error, setError] = React.useState('');
    const [state,setState] = React.useState({selectedOption:null})
@@ -48,7 +48,7 @@ function Registration(props) {
       
    },[])
    const streets_array = []
-   streets.map((street)=> streets_array.push({label:street.name,value:street.name}))
+   streets.map((street)=> streets_array.push({label:street.name,value:street.name,minNum:street.minStreetNo,maxNum:street.maxStreetNo} ))
    //console.log(streets_array)
 
 
@@ -58,6 +58,7 @@ function Registration(props) {
 
    function onChange(event) {
       const { name, value } = event.target;
+      //console.log(event)
       setregistrationForm(oldForm => ({...oldForm, [name]: value}))
    }
 
@@ -76,6 +77,7 @@ function Registration(props) {
          lastname: registrationForm.lastname,
          email: registrationForm.username,
          password: registrationForm.password,
+         streetnumber:registrationForm.streetnumber,
          selectedOption:state.selectedOption
       }
       const options = {
@@ -124,6 +126,10 @@ function Registration(props) {
                    options={streets_array}
                />
                </div>
+               <div className='FormRow'>
+                  <label color="blue">Street number</label>
+                  <input type="number" name="streetnumber" required min={selectedOption ? selectedOption.minNum: 0} max={selectedOption ? selectedOption.maxNum: 0} onChange={onChange} />
+                  </div>
                <div className='error'>{error}</div>
                <button className='submit' type='submit'>Register</button>
                <button className='button' type="button" onClick={() => {history.push("/login")}}>Login</button>

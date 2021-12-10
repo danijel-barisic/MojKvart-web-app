@@ -18,6 +18,10 @@
    border-radius: 10px;
 }
 
+.FormRow input[name="streetnumber"]{
+   width: 50px;
+}
+
 .Login button {
    background: none;
    border: 2px solid #aaa;
