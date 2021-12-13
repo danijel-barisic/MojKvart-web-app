@@ -20,6 +20,14 @@ public class AccountController {
         return AccountService.listAll();
     }
 
+    @GetMapping("/{email}")
+    public Account getAccount(@PathVariable("email") String email) {
+        if(AccountService.findByEmail(email).isEmpty()) {
+            throw new IllegalArgumentException("Account with email: " + email + " does not exist");
+        }
+        return AccountService.fetch(email);
+    }
+
     @PostMapping("")
     public ResponseEntity<Account> createAccount(@RequestBody Account account) {
         if(AccountService.getEmailsFromAccounts().contains(account.getEmail())) {

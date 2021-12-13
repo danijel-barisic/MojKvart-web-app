@@ -99,7 +99,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                     }
                 }
                 httpServletResponse.getWriter().append(mainRole);
-                httpServletResponse.getWriter().append("|");
+                /*httpServletResponse.getWriter().append("|");*/
                 /*httpServletResponse.getWriter().append(generateNewToken());*/
                 httpServletResponse.setStatus(200);
             }
