@@ -2,22 +2,23 @@ import React from "react";
 import Header from "./Header";
 import { useHistory } from "react-router";
 import HeaderNotLoggedIn from "./HeaderNotLoggedIn";
+import ReactSession from "react-client-session/dist/ReactSession";
 
-function Home(props) {
+function Home() {
    const history = useHistory();
-   const { state } = props;
+   const isLoggedIn = ReactSession.get("username");
 
-   history.push("/");
-
-   console.log("home->", {state})
-   if (state === false) {
+   
+   console.log("home->", {isLoggedIn})
+   if (!isLoggedIn) {
+      history.push("/");
       return (
-         <HeaderNotLoggedIn state={state} />
+         <HeaderNotLoggedIn state={isLoggedIn} />
       )
    }
    else {
       return (
-         <Header state={state} />
+         <Header state={isLoggedIn} />
       );
    }
 

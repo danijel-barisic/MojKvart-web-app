@@ -63,11 +63,11 @@ function App() {
           <Header onLogout={onLogout} onLogin={onLogin} state={isLoggedIn}/>
           <div className='App'>
             <Switch>
-              <Route path='/' state={ isLoggedIn }/>
-              <Route path='/streets' exact component={StreetList} />
+              <Route path='/streets' state={ isLoggedIn } exact component={StreetList} />
               <Route path='/streets/add' exact component={StreetForm} />
               <Route path='/districts' exact component={DistrictList} />
               <Route path='/districts/add' exact component={DistrictForm} />
+              <Route path='/' state={ isLoggedIn }/>
               </Switch>
             </div>
         </BrowserRouter>
@@ -82,11 +82,11 @@ function App() {
           <HeaderAdmin onLogout={onLogout} onLogin={onLogin} state={isLoggedIn}/>
           <div className='App'>
             <Switch>
-              <Route path='/' state={ isLoggedIn }/>
               <Route path='/streets' exact component={StreetList} />
               <Route path='/streets/add' exact component={StreetForm} />
               <Route path='/districts' exact component={DistrictList} />
               <Route path='/districts/add' exact component={DistrictForm} />
+              <Route path='/' state={ isLoggedIn }/>
               </Switch>
             </div>
         </BrowserRouter>
