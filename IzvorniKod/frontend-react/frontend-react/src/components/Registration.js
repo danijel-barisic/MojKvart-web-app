@@ -4,6 +4,7 @@ import './Login.css';
 import './Card.css';
 import { useHistory } from "react-router";
 import Select from 'react-select';
+import ReactSession from "react-client-session/dist/ReactSession";
 
 
 //https://react-select.com/styles#styles
@@ -29,11 +30,6 @@ import Select from 'react-select';
  }
 
 
-
-
-
-
- 
 function Registration(props) {
    const [registrationForm, setregistrationForm] = React.useState({ firstname: '', lastname: '', email: '', password: '',streetnumber: ''});
    const [streets, setStreets] = React.useState([]);
@@ -52,10 +48,6 @@ function Registration(props) {
    //console.log(streets_array)
 
 
-
-
-
-
    function onChange(event) {
       const { name, value } = event.target;
       //console.log(event)
@@ -69,7 +61,7 @@ function Registration(props) {
      
     }
     
-   function onSubmit(e) {
+   async function onSubmit(e) {
       e.preventDefault();
       setError("");
       const data = {
@@ -80,25 +72,56 @@ function Registration(props) {
          streetnumber:registrationForm.streetnumber,
          selectedOption:state.selectedOption
       }
-      const options = {
+      const optionsreg = {
          method: 'POST',
          headers: {
             'Content-Type': 'application/json'
          },
          body: JSON.stringify(data)
       };
-      fetch('/registration', options)
+      const res = await fetch('/registration', optionsreg)
          .then(response => {
             console.log(response);
             if (!response.ok) {
                setError("Login Failed");
-            } else {
-               props.onLogin();
-               history.push("/");
             }
          });
+      if (error === "") {
+         nextfunction();
+      }
    }
 
+   async function nextfunction() {
+      const body = `username=${registrationForm.username}&password=${registrationForm.password}`;
+      const optionslog = {
+         method: 'POST',
+         headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+         },
+         body: body
+      };
+      fetch('/login', optionslog)
+         .then(response => {
+            console.log(response);
+            if (!response.ok) {
+            } else {
+               props.onLogin();
+               return response.text();
+            }
+         }).then(function (data) {
+            console.log(data);
+            var logedinfo = data.split("|");
+            console.log(logedinfo[0]);
+            console.log(logedinfo[1]);
+            ReactSession.set("username", registrationForm.username);
+            ReactSession.set(registrationForm.username, logedinfo[0]);
+            props.onLogin();
+            history.push("/");
+         }
+         ).catch(err => {console.log(err)});
+   }
+
+   
 
    return (
       <Card>
@@ -122,13 +145,13 @@ function Registration(props) {
                </div>
 			    <div className='FormRow'>
                   <label>Address</label>
-                  <Select value={selectedOption}  onChange = {handleChange} styles={customStyles} placeholder="Select your address"
+                  <Select value={selectedOption} onChange = {handleChange} styles={customStyles} placeholder="Select your address"
                    options={streets_array}
                />
                </div>
                <div className='FormRow'>
                   <label color="blue">Street number</label>
-                  <input type="number" name="streetnumber" required min={selectedOption ? selectedOption.minNum: 0} max={selectedOption ? selectedOption.maxNum: 0} onChange={onChange} />
+                  <input type="number" name="streetnumber" min={selectedOption ? selectedOption.minNum: 0} max={selectedOption ? selectedOption.maxNum: 0} onChange={onChange} />
                   </div>
                <div className='error'>{error}</div>
                <button className='submit' type='submit'>Register</button>

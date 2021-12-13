@@ -30,7 +30,7 @@ public class RegistrationService {
                         request.getLastname(),
                         request.getEmail(),
                         request.getPassword(),
-                        Arrays.asList(role = new Role("ROLE_USER"))
+                        Arrays.asList(role = new Role("USER"))
                 )
         );
     }

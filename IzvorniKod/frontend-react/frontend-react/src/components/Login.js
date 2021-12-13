@@ -2,6 +2,7 @@ import React from "react";
 import Card from "./Card";
 import './Login.css';
 import { useHistory } from "react-router";
+import { ReactSession } from "react-client-session";
 
 
 function Login(props) {
@@ -15,7 +16,7 @@ function Login(props) {
       setLoginForm(oldForm => ({...oldForm, [name]: value}))
    }
 
-   function onSubmit(e) {
+   async function onSubmit(e) {
       e.preventDefault();
       setError("");
       const body = `username=${loginForm.username}&password=${loginForm.password}`;
@@ -28,15 +29,28 @@ function Login(props) {
       };
       fetch('/login', options)
          .then(response => {
-            console.log(response);
+            /* console.log(response); */
             if (!response.ok) {
                setError("Login failed");
+               return "error";
             } else {
+               return response.text();
+            }
+         }).then(function (data) {
+            if (data !== "error") {
+               var splitted = data.split("|");
+               console.log(splitted[0]);
+               console.log(splitted[1]);
+               ReactSession.set("username", loginForm.username);
+               ReactSession.set(loginForm.username, splitted[0]);
                props.onLogin();
                history.push("/");
             }
-         });
+         }
+         );
    }
+
+
 
    return (
       <Card>
