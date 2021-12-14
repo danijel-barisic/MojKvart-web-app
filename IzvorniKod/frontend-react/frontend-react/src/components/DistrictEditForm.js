@@ -2,10 +2,12 @@ import React from "react";
 import Card from "./Card";
 import { useHistory } from "react-router-dom";
 
-function DistrictForm(props) {
+function DistrictEditForm(props) {
    const [form, setForm] = React.useState({ name: '' });
    const [error, setError] = React.useState('');
    const history = useHistory();
+   const { id } = props.location.state;
+   console.log({id});
 
    function onChange(event) {
       const { name, value } = event.target;
@@ -15,17 +17,18 @@ function DistrictForm(props) {
    function onSubmit(e) {
       e.preventDefault();
       const data = {
+         id: id,
          name: form.name
       };
       const options = {
-         method: 'POST',
+         method: 'PUT',
          headers: {
             'Content-Type': 'application/json'
          },
          body: JSON.stringify(data)
       };
 
-      return fetch('/districts', options).then(response => {
+      return fetch(`/districts/${id}`, options).then(response => {
          if (response.ok) {
             history.push('/kvartovi');
          }
@@ -43,7 +46,7 @@ function DistrictForm(props) {
 
 
    return (
-      <Card title='Novi Kvart'>
+      <Card title='Novi naziv'>
          <div className='StreetForm Login'>
             <form onSubmit={onSubmit}>
                <div className='FormRow'>
@@ -51,12 +54,12 @@ function DistrictForm(props) {
                   <input required name='name' onChange={onChange} value={ form.name}/>
                </div>
                <div className='error'>{error}</div>
-               <button type='submit' disabled={!isValid()}>Dodaj Kvart</button>
-               <button className='button' type="button" onClick={() => {history.push("/kvartovi")}}>Kvartovi</button>
+               <button type='submit' disabled={!isValid()}>Ažuriraj</button>
+               <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
             </form>
          </div>
       </Card>
    );
 }
 
-export default DistrictForm;
+export default DistrictEditForm;

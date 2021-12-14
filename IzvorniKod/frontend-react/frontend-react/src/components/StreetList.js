@@ -1,5 +1,4 @@
 import React from "react";
-import ReactSession from "react-client-session/dist/ReactSession";
 import Card from "./Card";
 import Street from "./Street";
 
@@ -11,7 +10,8 @@ function StreetList() {
          .then(data => data.json())
          .then(streets => setStreets(streets))
    }, []);
-   if (ReactSession.get("username") === false) {
+
+   /* if (ReactSession.get("username") === false) {
       return (
          <Card title="not logged in">
             <div className='StreetList'>
@@ -20,17 +20,15 @@ function StreetList() {
          </Card>
       );
    }
-   else {
+   else { */
       return (
-         <Card title="Streets">
+         <Card title="Ulice">
             <div className='StreetList'>
-               {streets.map(street => <Street key={street.id } street={street} />)}
+               {streets.map(street => <Street key={street.id} street={street} />)}
             </div>
          </Card>
       );
    }
 
-
-}
 
 export default StreetList;

@@ -1,13 +1,13 @@
 import React from "react";
-import "./Login.css"
 import Card from "./Card";
 import { useHistory } from "react-router-dom";
 
-
-function StreetForm(props) {
-   const [form, setForm] = React.useState({ name: '', minStreetNo: '', maxStreetNo: '', districtId: ''});
+function StreetEditForm(props) {
+   const [form, setForm] = React.useState({ name: '' });
    const [error, setError] = React.useState('');
    const history = useHistory();
+   const { id } = props.location.state;
+   console.log({id});
 
    function onChange(event) {
       const { name, value } = event.target;
@@ -17,6 +17,7 @@ function StreetForm(props) {
    function onSubmit(e) {
       e.preventDefault();
       const data = {
+         id: id,
          name: form.name,
          minStreetNo: form.minStreetNo,
          maxStreetNo: form.maxStreetNo,
@@ -24,32 +25,34 @@ function StreetForm(props) {
             id: form.districtId
          }
       };
+      console.log("data->>>>" + JSON.stringify(data))
       const options = {
-         method: 'POST',
+         method: 'PUT',
          headers: {
             'Content-Type': 'application/json'
          },
          body: JSON.stringify(data)
       };
 
-      return fetch('/streets', options).then(response => {
+      return fetch(`/streets/${id}`, options).then(response => {
          if (response.ok) {
             history.goBack();
-         } else {
-            setError("District with given id doesnt exist!");
+         }
+         else {
+            setError("District with given name already exist!");
             console.log(response.body);
          }
       });
    }
 
    function isValid() {
-      const { name, minStreetNo, maxStreetNo, districtId } = form;
-      return name.length > 0 && !isNaN(minStreetNo) && !isNaN(maxStreetNo) && !isNaN(districtId);
+      const { name } = form;
+      return name.length > 0;
    }
 
 
    return (
-      <Card title="Nova Ulica">
+      <Card title="Ažuriranje ulice">
          <div className='StreetForm Login'>
             <form onSubmit={onSubmit}>
                <div className='FormRow'>
@@ -66,15 +69,15 @@ function StreetForm(props) {
                </div>
                <div className='FormRow'>
                   <label>DistrictId</label>
-                  <input required name='districtId' onChange={onChange} placeholder value={ form.districtId}/>
+                  <input required name='districtId' onChange={onChange} placeholder={id} value={ form.districtId}/>
                </div>
                <div className='error'>{error}</div>
-               <button classname='submit' type='submit' disabled={!isValid()}>Dodaj ulicu</button>
-               <button className='button' type="button" onClick={() => {history.goBack()}}>Nartag</button>
+               <button classname='submit' type='submit' disabled={!isValid()}>Ažuriraj</button>
+               <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
             </form>
          </div>
       </Card>
    );
 }
 
-export default StreetForm;
+export default StreetEditForm;

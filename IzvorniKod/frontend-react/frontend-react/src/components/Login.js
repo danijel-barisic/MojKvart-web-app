@@ -50,8 +50,6 @@ function Login(props) {
          );
    }
 
-
-
    return (
       <Card>
          <div className='Login'>

@@ -1,11 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './Header.css';
 
 function District(props) {
-   const { id, name, council} = props.street;
+   const { id, name} = props.district;
    
    return (
-      <div>
-         <p>{id}- {name}</p>
+      <div className='headerdist'>
+         <Link to={{
+            pathname: `/kvartovi/${id}`,
+            state: { name },
+            className: 'header-right'
+         }}>{id}. {name}</Link>
       </div>
    );
 }

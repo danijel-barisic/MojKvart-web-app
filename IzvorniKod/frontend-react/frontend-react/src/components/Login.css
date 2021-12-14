@@ -44,3 +44,30 @@
    color: red;
    margin-bottom: 8px;
 }
+
+.wrapper {
+   display: block;
+   align-items: center;
+   text-align: center;
+}
+
+.inner {
+   display: inline-block;
+   vertical-align: middle;
+   margin: 0;
+}
+
+.delete {
+   border: none;
+   min-width: 20px;
+   min-height: 20px;
+   background-color: rgb(255, 101, 101);
+   border-radius: 100%;
+   text-align: center;
+   padding: 0;
+}
+
+.delete:hover {
+   background-color: red;
+   cursor: pointer;
+}
