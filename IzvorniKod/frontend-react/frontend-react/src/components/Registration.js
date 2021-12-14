@@ -34,7 +34,8 @@ function Registration(props) {
    const [registrationForm, setregistrationForm] = React.useState({ firstname: '', lastname: '', email: '', password: '',streetnumber: ''});
    const [streets, setStreets] = React.useState([]);
    const [error, setError] = React.useState('');
-   const [state,setState] = React.useState({selectedOption:null})
+   const [state, setState] = React.useState({ selectedOption: null })
+   let err = ""
    
    const history = useHistory();
    var { selectedOption } = state;
@@ -64,6 +65,7 @@ function Registration(props) {
    async function onSubmit(e) {
       e.preventDefault();
       setError("");
+      err = "";
       const data = {
          firstname: registrationForm.firstname,
          lastname: registrationForm.lastname,
@@ -83,10 +85,11 @@ function Registration(props) {
          .then(response => {
             console.log(response);
             if (!response.ok) {
-               setError("Login Failed");
+               setError("Registration Failed");
+               err = "Registration Failed";
             }
          });
-      if (error === "") {
+      if (err === "") {
          nextfunction();
       }
    }
@@ -111,11 +114,8 @@ function Registration(props) {
          }).then(function (data) {
             console.log(data);
             var logedinfo = data.split("|");
-            console.log(logedinfo[0]);
-            console.log(logedinfo[1]);
             ReactSession.set("username", registrationForm.username);
             ReactSession.set(registrationForm.username, logedinfo[0]);
-            props.onLogin();
             history.push("/");
          }
          ).catch(err => {console.log(err)});

@@ -40,10 +40,10 @@ function Login(props) {
             if (data !== "error") {
                var splitted = data.split("|");
                console.log(splitted[0]);
-               console.log(splitted[1]);
+               /* console.log(splitted[1]); */
                ReactSession.set("username", loginForm.username);
                ReactSession.set(loginForm.username, splitted[0]);
-               props.onLogin();
+               props.onLogin(splitted[0]);
                history.push("/");
             }
          }
