@@ -66,7 +66,7 @@ function StreetForm(props) {
                </div>
                <div className='FormRow'>
                   <label>DistrictId</label>
-                  <input required name='districtId' onChange={onChange} placeholder value={ form.districtId}/>
+                  <input required name='districtId' onChange={onChange} value={ form.districtId}/>
                </div>
                <div className='error'>{error}</div>
                <button classname='submit' type='submit' disabled={!isValid()}>Dodaj ulicu</button>

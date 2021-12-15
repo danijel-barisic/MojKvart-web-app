@@ -17,9 +17,11 @@ import StreetEditForm from './components/StreetEditForm';
 function App() {
   ReactSession.setStoreType("localStorage");
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  console.log("isLoggedIn-> ", isLoggedIn);
+  let user = "USER";
+  console.log("isLoggedIn-> ", isLoggedIn, user);
 
-  function onLogin() {
+  function onLogin(props) {
+    user = props;
     setIsLoggedIn(true);
   }
     
@@ -37,6 +39,10 @@ function App() {
     }
   }, []);
 
+  user = ReactSession.get(ReactSession.get("username"));
+  if (user === undefined) {
+    user = "USER";
+  }
   if (!isLoggedIn) {
     console.log(ReactSession.get(ReactSession.get("username")));
     return (
@@ -57,8 +63,8 @@ function App() {
       </div>
     )
   }
-  else if (isLoggedIn && ReactSession.get(ReactSession.get("username")) === 'USER') {
-    console.log(ReactSession.get(ReactSession.get("username")));
+  else if (isLoggedIn && (user === 'USER')) {
+    console.log("check user " + isLoggedIn, (user==="USER"));
     return (
       <div className='App'>
         <BrowserRouter>
@@ -82,7 +88,7 @@ function App() {
   }
     /* ADMIN */
   else {
-    console.log(isLoggedIn, ReactSession.get(ReactSession.get("username")));
+    console.log("admin"  + isLoggedIn, user);
     return (
       <div className='App'>
         <BrowserRouter>

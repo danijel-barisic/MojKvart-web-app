@@ -9,7 +9,7 @@ function Home() {
    const isLoggedIn = ReactSession.get("username");
 
    
-   console.log("home->", {isLoggedIn})
+   console.log("home->", isLoggedIn);
    if (!isLoggedIn) {
       history.push("/");
       return (
