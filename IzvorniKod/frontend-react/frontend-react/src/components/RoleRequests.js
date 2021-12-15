@@ -31,19 +31,19 @@ const RoleRequests = () => {
     } 
 
     function fetchData() {
-      fetch('/role-requests')
+      fetch('/accounts')
         .then(jsonResponse => jsonResponse.json())
         .then(response => {
-          setRequests(response);
+          setUsers(response);
         })
         .catch(e => {
           console.log("error", e);
         });
-        fetch('/accounts')
+        fetch('/role-requests')
         .then(jsonResponse => jsonResponse.json())
         .then(response => {
           setLoading(false);
-          setUsers(response);
+          setRequests(response);
         })
         .catch(e => {
           console.log("error", e);
@@ -56,6 +56,12 @@ const RoleRequests = () => {
     }, []);
 
     console.log(users)
+
+    if(isLoading){
+      return(
+        <p>Page is loading please wait.</p>
+      )
+    }
     return (
         <Card title = "Zahtjevi">
              
@@ -68,7 +74,7 @@ const RoleRequests = () => {
                     
                     
                         <div className="innerRR" >
-                           <p>{isLoading ? "Page is loading. Please wait" : users[0].email }</p>
+                           <p>{users[request.account.id-1].email }</p>
                         
                      
                            <p className={request.status == "Pending" ? "Pending" : request.status == "Denied" ? "Denied" : "Approved" }>  {request.status}</p>
