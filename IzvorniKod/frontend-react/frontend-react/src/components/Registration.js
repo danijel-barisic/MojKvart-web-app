@@ -34,8 +34,7 @@ function Registration(props) {
    const [registrationForm, setregistrationForm] = React.useState({ firstname: '', lastname: '', email: '', password: '',streetnumber: ''});
    const [streets, setStreets] = React.useState([]);
    const [error, setError] = React.useState('');
-   const [state, setState] = React.useState({ selectedOption: null })
-   let err = ""
+   const [state,setState] = React.useState({selectedOption:null})
    
    const history = useHistory();
    var { selectedOption } = state;
@@ -45,7 +44,7 @@ function Registration(props) {
       
    },[])
    const streets_array = []
-   streets.map((street)=> streets_array.push({label:street.name,value:street.name,minNum:street.minStreetNo,maxNum:street.maxStreetNo} ))
+   streets.map((street)=> streets_array.push({id:street.id, label:street.name,value:street.name,minNum:street.minStreetNo,maxNum:street.maxStreetNo} ))
    //console.log(streets_array)
 
 
@@ -65,14 +64,19 @@ function Registration(props) {
    async function onSubmit(e) {
       e.preventDefault();
       setError("");
-      err = "";
       const data = {
          firstname: registrationForm.firstname,
          lastname: registrationForm.lastname,
          email: registrationForm.username,
          password: registrationForm.password,
-         streetnumber:registrationForm.streetnumber,
-         selectedOption:state.selectedOption
+         streetnumber: registrationForm.streetnumber,
+         street: {
+            id: selectedOption.id,
+            label: selectedOption.label,
+            value: selectedOption.value,
+            minNum: selectedOption.minNum,
+            maxNum: selectedOption.maxNum
+         }
       }
       const optionsreg = {
          method: 'POST',
@@ -85,11 +89,10 @@ function Registration(props) {
          .then(response => {
             console.log(response);
             if (!response.ok) {
-               setError("Registration Failed");
-               err = "Registration Failed";
+               setError("Login Failed");
             }
          });
-      if (err === "") {
+      if (error === "") {
          nextfunction();
       }
    }
@@ -114,8 +117,11 @@ function Registration(props) {
          }).then(function (data) {
             console.log(data);
             var logedinfo = data.split("|");
+            console.log(logedinfo[0]);
+            console.log(logedinfo[1]);
             ReactSession.set("username", registrationForm.username);
             ReactSession.set(registrationForm.username, logedinfo[0]);
+            props.onLogin();
             history.push("/");
          }
          ).catch(err => {console.log(err)});
