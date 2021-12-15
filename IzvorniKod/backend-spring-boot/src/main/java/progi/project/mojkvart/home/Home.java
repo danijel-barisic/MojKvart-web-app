@@ -27,6 +27,15 @@ public class Home {
     @JoinColumn(name = "street_id")
     private Street street;
 
+    public Home(){
+
+    }
+
+    public Home(Long number, Street street) {
+        this.number = number;
+        this.street = street;
+    }
+
     public Long getId() {
         return id;
     }

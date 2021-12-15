@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import progi.project.mojkvart.district.District;
 import progi.project.mojkvart.event.Event;
 import progi.project.mojkvart.home.Home;
 import progi.project.mojkvart.meeting.Meeting;
@@ -46,7 +47,7 @@ public class Account implements UserDetails {
     // only CascadeType.REMOVE is left out, because we don't want to remove accounts when we remove a role
     @JsonIgnore
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE,
-                    CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
+            CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinTable(name = "account_role",
             joinColumns = @JoinColumn(name = "account_id"), // joinColumns is for THIS entity
             inverseJoinColumns = @JoinColumn(name = "role_id")) // inverse is for the OTHER entity
@@ -79,6 +80,16 @@ public class Account implements UserDetails {
         this.lastName = lastName;
         this.password = password;
         this.roles = roles;
+    }
+
+    public Account(String firstName, String lastName, String email, String password, Home home,
+                   List<Role> roles) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.roles = roles;
+        this.home = home;
     }
 
     public Account(String email, String password) {
@@ -182,6 +193,10 @@ public class Account implements UserDetails {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public District getDistrict(){
+        return home.getStreet().getDistrict();
     }
 
     @Override
