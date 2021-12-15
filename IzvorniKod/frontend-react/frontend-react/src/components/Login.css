@@ -71,3 +71,48 @@
    background-color: red;
    cursor: pointer;
 }
+
+.wrapperRR{
+   display: flex;
+   justify-content:space-around;
+   align-items: center;
+   margin-left: 50px;
+   width: 500px;
+
+}
+
+.wrapperRR > p{
+   font-weight: bold;
+   font-size:x-large;
+   
+}
+.innerRR {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   width: 700px;
+   margin-left: 325px;
+   
+   
+}
+ .innerRR p {
+    font-size: larger;
+    flex-basis: 100%;
+
+ }
+ .icons{
+    flex-basis:100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+ }
+
+.Pending{
+   color:#fbc736;
+}
+.Denied{
+   color:red;
+}
+.Approved{
+   color:#039487;
+}

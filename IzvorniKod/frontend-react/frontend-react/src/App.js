@@ -13,6 +13,7 @@ import DistrictView from './components/DistrictView';
 import StreetForm from './components/StreetFrom';
 import DistrictEditForm from './components/DistrictEditForm';
 import StreetEditForm from './components/StreetEditForm';
+import RoleRequests from './components/RoleRequests';
 
 function App() {
   ReactSession.setStoreType("localStorage");
@@ -101,6 +102,7 @@ function App() {
               {/* <Route path='/users' exact component={Users} />
               <Route path='/rolerequests' exact component={RoleRequests} />
               <Route path='/user' exact component={UserDetails} /> */}
+              <Route path='/zahtjeviUloga' exact component={RoleRequests}/>
               <Route path='/kvartovi' exact component={Districts} />
               <Route path='/kvartovi/novi' exact component={DistrictForm} />
               <Route path='/kvartovi/:id' exact component={DistrictView} />

@@ -150,7 +150,7 @@ function Registration(props) {
                />
                </div>
                <div className='FormRow'>
-                  <label color="blue">Street number</label>
+                  <label>Street number</label>
                   <input type="number" name="streetnumber" min={selectedOption ? selectedOption.minNum: 0} max={selectedOption ? selectedOption.maxNum: 0} onChange={onChange} />
                   </div>
                <div className='error'>{error}</div>
