@@ -151,13 +151,13 @@ function Registration(props) {
                </div>
 			    <div className='FormRow'>
                   <label>Address</label>
-                  <Select value={selectedOption} onChange = {handleChange} styles={customStyles} placeholder="Select your address"
+                  <Select value={selectedOption} required onChange = {handleChange} styles={customStyles} placeholder="Select your address"
                    options={streets_array}
                />
                </div>
                <div className='FormRow'>
                   <label>Street number</label>
-                  <input type="number" name="streetnumber" min={selectedOption ? selectedOption.minNum: 0} max={selectedOption ? selectedOption.maxNum: 0} onChange={onChange} />
+                  <input type="number" name="streetnumber" min={selectedOption ? selectedOption.minNum: 0} max={selectedOption ? selectedOption.maxNum: 0} required onChange={onChange} />
                   </div>
                <div className='error'>{error}</div>
                <button className='submit' type='submit'>Register</button>
