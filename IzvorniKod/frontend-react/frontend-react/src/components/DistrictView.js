@@ -18,7 +18,7 @@ function DistrictView(props) {
    
    return (
       <>
-         <div classname="centar">
+         <div className="centar">
             <Card id={id} title={name}>
             </Card>
          </div>
