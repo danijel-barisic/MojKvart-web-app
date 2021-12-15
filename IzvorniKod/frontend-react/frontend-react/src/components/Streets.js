@@ -4,6 +4,7 @@ import ReactSession from "react-client-session/dist/ReactSession";
 import { useHistory } from "react-router";
 import './Login.css';
 import Street from "./Street";
+import { FaTimes } from 'react-icons/fa';
 
 function Streets(props) {
    const [streets, setStreets] = React.useState([]);
@@ -49,7 +50,7 @@ function Streets(props) {
                               <Street key={street.id} street={street} props={props}/>
                            </div>
                            <div className="inner">
-                              <button key={street.id} className="delete" onClick={() => deleteStreet(street.id)}>X</button>
+                              <FaTimes style={{color:"red" ,cursor:"pointer"}} onClick={() => deleteStreet(street.id)}></FaTimes>
                            </div>
                         </div>
                      ]);

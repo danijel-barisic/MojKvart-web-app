@@ -4,6 +4,7 @@ import ReactSession from "react-client-session/dist/ReactSession";
 import { useHistory } from "react-router";
 import District from "./District";
 import './Login.css';
+import { FaTimes } from 'react-icons/fa';
 
 function Districts() {
    const [districts, setDistricts] = React.useState([]);
@@ -45,7 +46,7 @@ function Districts() {
                            <District key={district.id} district={district} />
                         </div>
                         <div className="inner">
-                           <button key={district.id} className="delete" onClick={() => deleteDistrict(district.id)}>X</button>
+                           <FaTimes style={{color:"red" ,cursor:"pointer"}} onClick={() => deleteDistrict(district.id)}></FaTimes>
                         </div>
                      </div>
                   ]);
