@@ -56,4 +56,9 @@ public class RoleServiceJPAImpl implements RoleService{
     public boolean existsById(long id) {
         return findById(id).isPresent();
     }
+
+    @Override
+    public Optional<Role> findByName(String name){
+        return roleRepo.findByName(name);
+    }
 }

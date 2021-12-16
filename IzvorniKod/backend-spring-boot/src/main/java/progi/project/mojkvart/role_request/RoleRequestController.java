@@ -34,8 +34,8 @@ public class RoleRequestController {
         if (roleRequest.getId() != null && roleRequestService.existsById(roleRequest.getId())) {
             throw new IllegalArgumentException("Role request with id: " + roleRequest.getId() + " already exists");
         } else if (roleRequestService.findByAccountIdAndRoleName(roleRequest.getAccount().getId(),
-                roleRequest.getRole().getRoleName()).isPresent()) {
-            throw new IllegalArgumentException("Request for role: " + roleRequest.getRole().getRoleName() + " already exists " +
+                roleRequest.getRole().getName()).isPresent()) {
+            throw new IllegalArgumentException("Request for role: " + roleRequest.getRole().getName() + " already exists " +
                     "for user: " + roleRequest.getAccount().getUsername());
         } else {
             RoleRequest saved = roleRequestService.createRoleRequest(roleRequest);

@@ -93,8 +93,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 String mainRole = "USER";
                 List<Role> roles = accountDetails.getRoles();
                 for (Role role : roles) {
-                    System.out.println(role.getRoleName());
-                    if(role.getRoleName().equals("ADMIN")) {
+                    System.out.println(role.getName());
+                    if(role.getName().equals("ADMIN")) {
                         mainRole = "ADMIN";
                     }
                 }

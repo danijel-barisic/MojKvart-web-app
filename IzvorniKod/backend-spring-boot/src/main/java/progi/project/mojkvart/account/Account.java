@@ -149,7 +149,7 @@ public class Account implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
         }
         return authorities;
     }

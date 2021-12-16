@@ -18,4 +18,6 @@ public interface RoleService {
     Role deleteRole(long roleId);
 
     boolean existsById(long id);
+
+    Optional<Role> findByName(String name);
 }

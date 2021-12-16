@@ -10,5 +10,5 @@ public interface RoleRequestRepository extends JpaRepository<RoleRequest, Long> 
 
     boolean existsById(Long id);
 
-    Optional<RoleRequest> findByAccountIdAndRole_RoleName(long accountId, String roleName);
+    Optional<RoleRequest> findByAccountIdAndRoleName(long accountId, String roleName);
 }

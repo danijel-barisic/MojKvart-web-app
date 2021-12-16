@@ -60,6 +60,6 @@ public class RoleRequestServiceJPAImpl implements RoleRequestService {
     @Override
     public Optional<RoleRequest> findByAccountIdAndRoleName(long accountId, String roleName) {
         Assert.notNull(accountId, "Account ID must be given");
-        return roleRequestRepo.findByAccountIdAndRole_RoleName(accountId, roleName);
+        return roleRequestRepo.findByAccountIdAndRoleName(accountId, roleName);
     }
 }

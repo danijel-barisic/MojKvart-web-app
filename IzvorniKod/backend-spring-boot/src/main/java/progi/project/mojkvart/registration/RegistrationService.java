@@ -8,6 +8,8 @@ import progi.project.mojkvart.account.AccountDetailService;
 import progi.project.mojkvart.home.Home;
 import progi.project.mojkvart.home.HomeService;
 import progi.project.mojkvart.role.Role;
+import progi.project.mojkvart.role.RoleRepository;
+import progi.project.mojkvart.role.RoleService;
 import progi.project.mojkvart.street.Street;
 import progi.project.mojkvart.street.StreetService;
 
@@ -19,8 +21,9 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class RegistrationService {
+
     @Autowired
-    private Role role; //?
+    private final RoleService roleService;
 
     @Autowired
     private final AccountDetailService accountDetailService;
@@ -70,14 +73,19 @@ public class RegistrationService {
             return tmpHome;
         });
 
+
+        Role role = roleService.findByName("USER").orElseThrow(
+                () -> new IllegalArgumentException("No such role."));
+
         Account account = new Account(
                 request.getFirstname(),
                 request.getLastname(),
                 request.getEmail(),
                 request.getPassword(),
                 home,
-                Arrays.asList(role = new Role("USER"))
+                Arrays.asList(role)
         );
+//        role.getAccounts().add(account);
 
         if (home.getAccounts() == null || home.getAccounts().isEmpty()) {
             List<Account> accounts = new ArrayList<>();
