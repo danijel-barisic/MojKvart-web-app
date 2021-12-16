@@ -31,12 +31,10 @@ function HeaderAdmin(props) {
       <header className='header'>
          <Link className='logo active' to='/'>Moj Kvart </Link>
          <div className='header-right'>
-            <Link to='/threads' >Forum </Link>
-            <Link to='/events' >Događanja </Link>
-            <Link to='/council' >Vijeće četvrti </Link>
             <Link to='/korisnici' >Korisnici </Link>
             <Link to='/zahtjeviUloga' >Zahtjevi uloga </Link>
             <Link to='/kvartovi' >Kvartovi </Link>
+            <Link to='/personal' >Osobni podaci </Link>
             {renderButton()}
          </div>
       </header>
