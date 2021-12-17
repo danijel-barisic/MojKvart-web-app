@@ -83,13 +83,14 @@ public class Account implements UserDetails {
     }
 
     public Account(String firstName, String lastName, String email, String password, Home home,
-                   List<Role> roles) {
+                   List<Role> roles, boolean isAddressValid) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.roles = roles;
         this.home = home;
+        this.isAddressValid = isAddressValid;
     }
 
     public Account(String email, String password) {
@@ -195,7 +196,7 @@ public class Account implements UserDetails {
         this.roles = roles;
     }
 
-    public District getDistrict(){
+    public District getDistrict() {
         return home.getStreet().getDistrict();
     }
 
