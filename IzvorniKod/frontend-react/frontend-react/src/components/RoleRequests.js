@@ -8,26 +8,51 @@ const RoleRequests = () => {
     const [users,setUsers] = React.useState([]);
     const [isLoading,setLoading] = React.useState([true])
     const role = ReactSession.get(ReactSession.get("username"));
+    var roles = {
+      '1' : "ADMIN",
+      '2' : "Moderator",
+      '3' : "Vijećnik",
+      '4' : "Stanovnik"
+    }
 
-    function onDeny(id){
+    function onDeny(idR,idA){
       const options = {
          method: 'DELETE',
       };
       //fetch(`/role-requests/${id}`, options)
-      setRequests(requests.map(request => request.id === id? { ...request, status: 'Denied' }: request))
-      //setRequests(requests.filter((request) => request.id !== id ))
+      setRequests(requests.map(request => request.id === idR? { ...request, status: 'Denied' }: request))
+      setTimeout(() =>{
+      setRequests(requests.filter((request) => request.id !== idR ))
+      },3000)
 
-      console.log(requests)
     } 
 
-    function onApprove(id){
-      const options = {
-         method: 'DELETE',
-      };
-      //fetch(`/role-requests/${id}`, options)
-      //setRequests(requests.filter((request) => request.id !== id ))
-      setRequests(requests.map(request => request.id === id? { ...request, status: 'Approved' }: request))
-      console.log(requests)
+    function onApprove(idR,idA,idRR){
+      var result = users.find(user => {
+        return user.id === idA
+      })
+      const data = {
+        id: idA,
+        email : result.email,
+        firstName : result.firstName,
+        lastName : result.lastName,
+        password : result.password,
+        roles: roles[idRR]
+     };
+     const options = {
+        method: 'PUT',
+        headers: {
+           'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+     };
+    
+      fetch(`/accounts/${idA}`, options)
+      console.log(users)
+      setTimeout(() =>{
+        setRequests(requests.filter((request) => request.id !== idR ))
+        },3000)
+      setRequests(requests.map(request => request.id === idR? { ...request, status: 'Approved' }: request)) 
     } 
 
     function fetchData() {
@@ -55,7 +80,7 @@ const RoleRequests = () => {
       fetchData();
     }, []);
 
-    console.log(users)
+    console.log(requests)
 
     if(isLoading){
       return(
@@ -67,26 +92,26 @@ const RoleRequests = () => {
              
              
                  <div className="wrapperRR">
-                        <p>Username</p> <p>Status</p> <p> AccountId </p>
+                        <p>Username</p> <p >Status</p> <p> Role Requested </p>  <p></p>
                         </div>
                {requests.map( (request) => {
                   return ([
                     
                     
                         <div className="innerRR" >
-                           <p>{users[request.account.id-1].email }</p>
+                           <p>{users[request.account.id-1].email} </p>
                         
                      
-                           <p className={request.status == "Pending" ? "Pending" : request.status == "Denied" ? "Denied" : "Approved" }>  {request.status}</p>
+                           <p className={request.status == "" ? "Pending" : request.status == "Denied" ? "Denied" : "Approved" }>  {request.status == "" ? "Pending" : request.status == "Denied" ? "Denied" : "Approved"}</p>
                         
                         
-                           <p> {request.account.id}</p>
+                           <p > {roles[request.role.id]}</p>
                            <div className="icons">
 
-                           <FaCheck style={{color:"#039487" ,cursor:"pointer"}} onClick={() => {if(window.confirm('Are you sure u want to approve this role request?')) {onApprove(request.id)}}}></FaCheck>
+                           <FaCheck style={{color:"#039487" ,cursor:"pointer"}} onClick={() => {if(window.confirm('Are you sure u want to approve this role request?')) {onApprove(request.id,request.account.id,request.role.id)}}}></FaCheck>
 
 
-                           <FaTimes style={{color:"red" ,cursor:"pointer"}} onClick={() => {if(window.confirm('Are you sure u want to deny this role request?')) {onDeny(request.id)}}}></FaTimes>
+                           <FaTimes style={{color:"red" ,cursor:"pointer"}} onClick={() => {if(window.confirm('Are you sure u want to deny this role request?')) {onDeny(request.id,request.account.id)}}}></FaTimes>
                            </div>
 
                         

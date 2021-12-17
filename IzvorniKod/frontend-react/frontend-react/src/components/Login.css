@@ -74,39 +74,51 @@
 
 .wrapperRR{
    display: flex;
-   justify-content:space-around;
+   justify-content:center;
    align-items: center;
-   margin-left: 50px;
-   width: 500px;
+   width: 100%;
+   
 
 }
 
 .wrapperRR > p{
    font-weight: bold;
    font-size:x-large;
-   
+   margin: 10px 50px 10px 50px;
+   text-align: center;
+   width: 100%;
 }
+
+
+
 .innerRR {
    display: flex;
-   justify-content: space-between;
+   justify-content: center;
    align-items: center;
-   width: 700px;
-   margin-left: 325px;
+   width: 100%;
+   
    
    
 }
  .innerRR p {
-    font-size: larger;
-    flex-basis: 100%;
+   font-size: larger;
+   text-align: center;   
+   width:100%
+
 
  }
  .icons{
-    flex-basis:100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
  }
 
+.icons svg{
+   width: 100%;
+
+}
 .Pending{
    color:#fbc736;
 }
