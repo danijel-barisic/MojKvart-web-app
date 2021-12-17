@@ -64,6 +64,7 @@ function Registration(props) {
    async function onSubmit(e) {
       e.preventDefault();
       setError("");
+      let err = "";
       const data = {
          firstname: registrationForm.firstname,
          lastname: registrationForm.lastname,
@@ -89,10 +90,11 @@ function Registration(props) {
          .then(response => {
             console.log(response);
             if (!response.ok) {
+               err = "error";
                setError("Login Failed");
             }
          });
-      if (error === "") {
+      if (err === "") {
          nextfunction();
       }
    }
