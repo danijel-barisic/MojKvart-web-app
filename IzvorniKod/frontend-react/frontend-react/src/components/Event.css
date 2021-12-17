@@ -1,0 +1,11 @@
+.Event {
+    border-radius: 25px;
+    display: flex;
+    flex: 0 0 1;
+    align-items: flex-start;
+    flex-direction: column;
+    margin: 20px;
+    padding: 15px;
+    box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.6);
+    background-color: powderblue;
+}

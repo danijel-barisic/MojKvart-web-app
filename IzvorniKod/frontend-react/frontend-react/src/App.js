@@ -14,6 +14,7 @@ import StreetForm from './components/StreetFrom';
 import DistrictEditForm from './components/DistrictEditForm';
 import StreetEditForm from './components/StreetEditForm';
 import RoleRequests from './components/RoleRequests';
+import Events from "./components/Events";
 
 function App() {
   ReactSession.setStoreType("localStorage");
@@ -80,6 +81,7 @@ function App() {
               <Route path='/events' exact component={Events} />
               <Route path='/council' exact component={Council} />
               <Route path='/user' exact component={UserDetails} /> */}
+              <Route path='/dogadjaji' exact component={Events} />
               <Route path='/' />
               </Switch>
             </div>
