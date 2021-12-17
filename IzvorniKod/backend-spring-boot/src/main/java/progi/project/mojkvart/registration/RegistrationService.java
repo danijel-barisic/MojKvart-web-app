@@ -73,8 +73,7 @@ public class RegistrationService {
             return tmpHome;
         });
 
-
-        Role role = roleService.findByName("USER").orElseThrow(
+        Role role = roleService.findByName("Stanovnik").orElseThrow(
                 () -> new IllegalArgumentException("No such role."));
 
         Account account = new Account(
@@ -83,8 +82,10 @@ public class RegistrationService {
                 request.getEmail(),
                 request.getPassword(),
                 home,
-                Arrays.asList(role)
+                Arrays.asList(role),
+                true
         );
+
 //        role.getAccounts().add(account);
 
         if (home.getAccounts() == null || home.getAccounts().isEmpty()) {

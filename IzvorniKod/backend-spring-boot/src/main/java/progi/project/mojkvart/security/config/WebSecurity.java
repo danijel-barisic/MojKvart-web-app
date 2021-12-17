@@ -90,7 +90,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                                                 HttpServletResponse httpServletResponse,
                                                 Authentication authentication) throws IOException, ServletException {
                 Account accountDetails = (Account) authentication.getPrincipal();
-                String mainRole = "USER";
+                String mainRole = "Stanovnik";
                 List<Role> roles = accountDetails.getRoles();
                 for (Role role : roles) {
                     System.out.println(role.getName());

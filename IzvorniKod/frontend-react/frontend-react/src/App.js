@@ -18,7 +18,7 @@ import RoleRequests from './components/RoleRequests';
 function App() {
   ReactSession.setStoreType("localStorage");
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  let user = "USER";
+  let user = "Stanovnik";
   console.log("isLoggedIn-> ", isLoggedIn, user);
 
   function onLogin(props) {
@@ -42,7 +42,7 @@ function App() {
 
   user = ReactSession.get(ReactSession.get("username"));
   if (user === undefined) {
-    user = "USER";
+    user = "Stanovnik";
   }
   if (!isLoggedIn) {
     console.log(ReactSession.get(ReactSession.get("username")));
@@ -64,8 +64,8 @@ function App() {
       </div>
     )
   }
-  else if (isLoggedIn && (user === 'USER')) {
-    console.log("check user " + isLoggedIn, (user==="USER"));
+  else if (isLoggedIn && (user === 'Stanovnik')) {
+    console.log("check user " + isLoggedIn, (user==="Stanovnik"));
     return (
       <div className='App'>
         <BrowserRouter>
