@@ -4,6 +4,7 @@ import Card from './Card';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import Streets from './Streets';
+import Users from './Users';
 
 function DistrictView(props) {
    const { id } = useParams();
@@ -13,7 +14,7 @@ function DistrictView(props) {
    const linkstreet = readMoreStreets ? "Ulice" : "Ulice"
    const [readMoreUsers, setReadMoreUsers] = useState(false);
    /* Streets --> Users */
-   const users = <Streets currentId = {id} currentName = {name}></Streets>
+   const users = <Users currentId = {id} currentName = {name}></Users>
    const linkuser=readMoreUsers?"Korisnici":"Korisnici"
    
    return (
