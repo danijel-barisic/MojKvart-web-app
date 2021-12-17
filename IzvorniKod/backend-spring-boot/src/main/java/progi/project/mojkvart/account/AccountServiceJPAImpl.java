@@ -75,5 +75,4 @@ public class AccountServiceJPAImpl implements AccountService{
         return accountRepo.findByEmail(email);
     }
 
-
 }
