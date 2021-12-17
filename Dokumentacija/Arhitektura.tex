@@ -295,7 +295,10 @@ Baza podataka sastoji se od deset entiteta:
 			
 		\section{Dijagram razreda}
 		
-		\begin{figure}[H]
+			
+			Na slici 4.2 prikazani su razredi koji odgovaraju \textit{backend} dijelu MVC arhitekture. Razred \textit{District} označava kvartove i uz njega su vezani razredi \textit{Meeting} (koji odgovara izvješćima s Vijeća četvrti), \textit{Thread} (koji odgovara temi na Forumu), \textit{Event} (koji odgovara događaju u sekciji Događaji) i \textit{Street} (koji odgovara ulici koja pripada nekom kvartu). Uz razred \textit{Street} vezan je razred \textit{Home}, koji označava adrese na kojima neki stanovnik kvarta živi. Uz razred \textit{Home} vezan je razred \textit{Account}, koji odgovara korisnicima aplikacije. Razred \textit{Thread} uz sebe veže razred \textit{Post}, koji označava odgovore unutar pojedine teme na Forumu. Apstraktan razred \textit{Role} označava uloge unutar aplikacije, a nasljeđuju ga razredi \textit{BasicAccount}, \textit{Councilor}, \textit{Moderator} i \textit{Administrator}. Konačno, razred \textit{RoleRequest} označava zahtjev za ulogu.
+			
+			\begin{figure}[H]
 		\centering
 		\includegraphics[width=\textwidth]{Dijagram_12.png}
 		\caption{Dijagram razreda - modeli}
@@ -305,20 +308,16 @@ Baza podataka sastoji se od deset entiteta:
 			
 			\eject
 			
-			Na slici 4.2 prikazani su razredi koji odgovaraju \textit{backend} dijelu MVC arhitekture. Razred \textit{District} označava kvartove i uz njega su vezani razredi \textit{Meeting} (koji odgovara izvješćima s Vijeća četvrti), \textit{Thread} (koji odgovara temi na Forumu), \textit{Event} (koji odgovara događaju u sekciji Događaji) i \textit{Street} (koji odgovara ulici koja pripada nekom kvartu). Uz razred \textit{Street} vezan je razred \textit{Home}, koji označava adrese na kojima neki stanovnik kvarta živi. Uz razred \textit{Home} vezan je razred \textit{Account}, koji odgovara korisnicima aplikacije. Razred \textit{Thread} uz sebe veže razred \textit{Post}, koji označava odgovore unutar pojedine teme na Forumu. Apstraktan razred \textit{Role} označava uloge unutar aplikacije, a nasljeđuju ga razredi \textit{BasicAccount}, \textit{Councilor}, \textit{Moderator} i \textit{Administrator}. Konačno, razred \textit{RoleRequest} označava zahtjev za ulogu.
+		
 			
-			\eject
+			Na slici 4.3 prikazani su razredi koji odgovoraju funkcionalnosti registracije u aplikaciji. Centralni razred je \textit{RegistrationController}. \textit{RegistrationController} u funkciji \textit{register} prima objekte tipa \textit{RegistrationRequest}, te potom poziva funkciju \textit{register} objekta tipa \textit{RegistrationService}. Objekt tipa \textit{RegistrationService} u funkciji \textit{register} prvo poziva funkciju \textit{validate} objekta tipa \textit{EmailValidator} koja provjerava je li zadani email u ispravnom formatu. Ako je email u neispravnom formatu, funkcija baca \textit{IllegalStateException}, a inače poziva funkciju \textit{signupAccount} objekta tipa \textit{AccountDetailService}. Unutar funkcije \textit{singupAccount} se prvo provjerava postoji li već registriran korisnik s unesesnim mailom, pozivanjem funkcije \textit{findByEmail} objekta tipa \textit{AccountRepository}. Ako funkcija \textit{findByEmail} vrati logičku istinu, onda se baca \textit{IllegalArgumentException}. U protivnom se unesena lozinka kriptira korištenjem funkcije \textit{bCryptPasswordEncoder} objekta tipa \textit{PasswordEncoder}, a potom se kreira korisnički račun korištenjem funkcije \textit{createAccount} objekta tipa \textit{AccountService}.
 			
-		\begin{figure}[H]
+			\begin{figure}[H]
 		\centering
 		\includegraphics[width=\textwidth]{Dijagram_13.png}
 		\caption{Dijagram razreda - registracija}
 		\end{figure}
 		
-			\eject
-			
-			Na slici 4.3 prikazani su razredi koji odgovoraju funkcionalnosti registracije u aplikaciji. Centralni razred je \textit{RegistrationController}. \textit{RegistrationController} u funkciji \textit{register} prima objekte tipa \textit{RegistrationRequest}, te potom poziva funkciju \textit{register} objekta tipa \textit{RegistrationService}. Objekt tipa \textit{RegistrationService} u funkciji \textit{register} prvo poziva funkciju \textit{validate} objekta tipa \textit{EmailValidator} koja provjerava je li zadani email u ispravnom formatu. Ako je email u neispravnom formatu, funkcija baca \textit{IllegalStateException}, a inače poziva funkciju \textit{signupAccount} objekta tipa \textit{AccountDetailService}. Unutar funkcije \textit{singupAccount} se prvo provjerava postoji li već registriran korisnik s unesesnim mailom, pozivanjem funkcije \textit{findByEmail} objekta tipa \textit{AccountRepository}. Ako funkcija \textit{findByEmail} vrati logičku istinu, onda se baca \textit{IllegalArgumentException}. U protivnom se unesena lozinka kriptira korištenjem funkcije \textit{bCryptPasswordEncoder} objekta tipa \textit{PasswordEncoder}, a potom se kreira korisnički račun korištenjem funkcije \textit{createAccount} objekta tipa \textit{AccountService}.
-			
 			\eject
 		
 		\section{Dijagram stanja}
