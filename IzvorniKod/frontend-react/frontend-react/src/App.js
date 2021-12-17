@@ -81,7 +81,7 @@ function App() {
               <Route path='/events' exact component={Events} />
               <Route path='/council' exact component={Council} />
               <Route path='/user' exact component={UserDetails} /> */}
-              <Route path='/dogadjaji' exact component={Events} />
+              <Route path='/events' exact component={Events} />
               <Route path='/' />
               </Switch>
             </div>

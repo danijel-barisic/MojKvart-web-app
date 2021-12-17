@@ -32,7 +32,7 @@ function Header(props) {
          <Link className='logo active' to='/'>Moj Kvart </Link>
          <div className='header-right'>
             <Link to='/threads' >Forum </Link>
-            <Link to='/dogadjaji' >Događanja </Link>
+            <Link to='/events' >Događanja </Link>
             <Link to='/council' >Vijeće četvrti </Link>
             <Link to='/personal' >Osobni podaci </Link>
             {renderButton()}
