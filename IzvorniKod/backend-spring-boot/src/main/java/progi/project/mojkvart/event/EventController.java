@@ -36,4 +36,11 @@ public class EventController {
             return ResponseEntity.created(URI.create("/events/" + saved.getId())).body(saved);
         }
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteEvent(@PathVariable("id") long eventId) {
+        if(eventService.existsById(eventId))
+            throw new IllegalArgumentException("Event with id: " + eventId + " does not exist");
+        eventService.deleteEvent(eventId);
+    }
 }
