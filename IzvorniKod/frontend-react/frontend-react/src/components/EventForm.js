@@ -31,7 +31,9 @@ function EventForm(props) {
             datetime: eventForm.datetime,
             duration: "PT0.000036S",
             status: 0,
-            account: account
+            account: {
+                id: account["id"]
+            }
         }
         const options = {
             method: "POST",
