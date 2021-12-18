@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
+import progi.project.mojkvart.district.District;
 import progi.project.mojkvart.role.Role;
 import progi.project.mojkvart.role.RoleService;
 
@@ -32,6 +33,14 @@ public class AccountController {
             throw new IllegalArgumentException("Account with email: " + email + " does not exist");
         }
         return AccountService.fetch(email);
+    }
+
+    @GetMapping("/{id}/district")
+    public District getDistrict(@PathVariable("id") long id) {
+        if(!AccountService.existsById(id)) {
+            throw new IllegalArgumentException("Account with id: " + id + " does not exist");
+        }
+        return AccountService.fetch(id).getDistrict();
     }
 
     @PostMapping("")
