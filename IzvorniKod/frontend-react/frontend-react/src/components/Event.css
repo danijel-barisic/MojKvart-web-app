@@ -9,3 +9,8 @@
     box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.6);
     background-color: powderblue;
 }
+
+.innerEvent {
+    display: grid;
+    grid-template-columns: 100%;
+}

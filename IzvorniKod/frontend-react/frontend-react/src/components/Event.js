@@ -3,6 +3,7 @@ import "./Event.css";
 
 function Event(props) {
     const {id, name, description, duration, datetime, location, status, account} = props.event;
+    console.log(duration)
     return (
         <div className='Event'>
             <div>
