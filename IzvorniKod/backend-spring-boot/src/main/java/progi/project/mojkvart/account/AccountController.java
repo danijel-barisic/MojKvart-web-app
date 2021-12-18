@@ -1,9 +1,12 @@
 package progi.project.mojkvart.account;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
+import progi.project.mojkvart.role.Role;
+import progi.project.mojkvart.role.RoleService;
 
 import java.net.URI;
 import java.util.List;
@@ -14,6 +17,9 @@ public class AccountController {
 
     @Autowired
     private AccountService AccountService;
+
+    @Autowired
+    private RoleService RoleService;
 
     @GetMapping("")
     public List<Account> listAccounts() {
@@ -55,6 +61,33 @@ public class AccountController {
                 throw new IllegalArgumentException("Account id must be preserved");
             return AccountService.updateAccount(account);
         }
+    }
+
+    @PutMapping("/grantRole/{id}")
+    public Role grantRole(@PathVariable("id") Long accountId, @RequestBody String roleName) {
+        Role role = null;
+        roleName = roleName.replace("\"","");
+
+        if(accountId==null){
+            throw new IllegalArgumentException("Account id must be given");
+        }
+        else if(!AccountService.existsById(accountId)){
+            throw new IllegalArgumentException("Account with id: "+ accountId + " does not exist");
+        }
+        else{
+            role = RoleService.findByName(roleName).orElseThrow(()-> new IllegalArgumentException("No such role."));
+
+            Account account = AccountService.fetch(accountId);
+            account.getRoles().add(role);
+            RoleService.updateRole(role);
+
+        }
+
+
+        return role;
+
+
+
     }
 
     @DeleteMapping("/{id}")
