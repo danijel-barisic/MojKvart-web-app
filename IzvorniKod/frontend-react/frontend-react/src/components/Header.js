@@ -34,6 +34,7 @@ function Header(props) {
             <Link to='/threads' >Forum </Link>
             <Link to='/events' >Događanja </Link>
             <Link to='/council' >Vijeće četvrti </Link>
+            <Link to='/personal' >Osobni podaci </Link>
             {renderButton()}
          </div>
       </header>

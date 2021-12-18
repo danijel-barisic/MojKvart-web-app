@@ -1,15 +1,22 @@
 import React from 'react';
-import Card from './Card';
+import './Header.css';
+import { Link } from 'react-router-dom';
 
 function Street(props) {
-   const { id, maxStreetNo, minStreetNo, name, districtId} = props.street;
+   /* console.log(props); */
+   const { id, maxStreetNo, minStreetNo, name } = props.street;
+   const { district } = props.street;
+   const { currentId, currentName } = props.props;
+   /* console.log(id, maxStreetNo, minStreetNo, name, district.id, currentId); */
    
    return (
-      <Card>
-         <div>
-            <p>{id} {name} ({minStreetNo}-{maxStreetNo}) {districtId}</p>
-         </div>
-      </Card>
+      <div className='headerdist'>
+         <Link to={{
+            pathname: `/ulice/${id}/edit`,
+            state: {id},
+            className: 'header-right'
+         }}>{id}. {name} ({minStreetNo}-{maxStreetNo})</Link>
+      </div>
    );
 }
 

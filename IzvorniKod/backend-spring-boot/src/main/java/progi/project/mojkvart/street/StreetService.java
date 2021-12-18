@@ -54,4 +54,6 @@ public interface StreetService {
     boolean existsById(long id);
 
     boolean districtExistsById(long id);
+
+    Optional<Street> findByName(String name);
 }

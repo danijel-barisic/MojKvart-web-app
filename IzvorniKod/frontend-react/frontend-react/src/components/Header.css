@@ -16,6 +16,17 @@
   border-radius: 10px;
 }
 
+.headerdist a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 10px;
+}
+
 /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
 .header a.logo {
   font-size: 25px;
@@ -24,6 +35,11 @@
 
 /* Change the background color on mouse-over */
 .header a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.headerdist a:hover {
   background-color: #ddd;
   color: black;
 }
@@ -47,6 +63,28 @@
 .header-right a.login {
   background-color: green;
   color: white;
+}
+
+.link {
+  border: none;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 22px;
+  line-height: 0px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.link:hover {
+  cursor: pointer;
+  background-color: #ddd;
+  color: black;
+}
+
+.centar {
+  align-items: center;
 }
 
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */

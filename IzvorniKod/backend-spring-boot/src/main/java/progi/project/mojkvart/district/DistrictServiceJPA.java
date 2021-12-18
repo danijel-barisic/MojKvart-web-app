@@ -53,4 +53,11 @@ public class DistrictServiceJPA implements DistrictService{
     public boolean existsById(long id) {
         return findById(id).isPresent();
     }
+
+    @Override
+    public Optional<District> findByName(String name) {
+        Assert.notNull(name, "Name must be given");
+        return districtrepo.findByName(name);
+    }
+
 }

@@ -18,7 +18,7 @@ public class Role {
     private Long id;
 
     @Column(name = "role_name")
-    private String roleName;
+    private String name;
 
     // lazy FetchType because we don't want to immediately fetch all accounts that have the role we're fetching
     @ManyToMany(fetch = FetchType.LAZY,
@@ -36,8 +36,8 @@ public class Role {
 
     }
 
-    public Role(String roleName) {
-        this.roleName = roleName;
+    public Role(String name) {
+        this.name = name;
     }
 
     public Long getId() {
@@ -48,19 +48,19 @@ public class Role {
         this.id = id;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getName() {
+        return name;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
         return "Role{" +
                 "id=" + id +
-                ", roleName='" + roleName + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 

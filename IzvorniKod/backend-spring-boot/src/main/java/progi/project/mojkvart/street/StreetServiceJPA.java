@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import progi.project.mojkvart.district.DistrictRepository;
+import progi.project.mojkvart.role_request.RoleRequest;
 
 import java.util.List;
 import java.util.Optional;
@@ -66,5 +67,11 @@ public class StreetServiceJPA implements StreetService{
                 "Street ID must be null, not: " + street.getId()
         );
         return streetRepo.save(street);
+    }
+
+    @Override
+    public Optional<Street> findByName(String name) {
+        Assert.notNull(name, "Street name must be given");
+        return streetRepo.findByName(name);
     }
 }
