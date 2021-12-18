@@ -4,11 +4,18 @@ import "./Login.css";
 import { useHistory } from "react-router";
 import { ReactSession } from "react-client-session";
 
-function EventSuggestion(props) {
+function EventForm(props) {
     const [eventForm, setEventForm] = React.useState(
         {name: '', description: '', location: '', datetime: '', duration: ''})
     const [error, setError] = React.useState('');
     const history = useHistory();
+    const acc_username = ReactSession.get("username");
+    const [account, setAccount] = React.useState({id: ''});
+    React.useEffect(() => {
+        fetch(`/accounts/${acc_username}`)
+        .then(data => data.json())
+        .then(account => setAccount(account));
+    }, []);
 
     function onChange(event) {
         const {name, value} = event.target;
@@ -17,8 +24,37 @@ function EventSuggestion(props) {
 
     async function onSubmit(e) {
         e.preventDefault();
-        setError("");
-        const body = `name=`;
+        const data = {
+            name: eventForm.name,
+            description: eventForm.description,
+            location: eventForm.location,
+            datetime: eventForm.datetime,
+            duration: "PT0.000036S",
+            status: 0,
+            account: account
+        }
+        const options = {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }
+        return fetch("/events", options).then(response => {
+            if (response.ok) {
+                history.push('/events');
+            }
+            else {
+                setError("Prijedlog događaja nije moguće objaviti.");
+                console.log(response.body);
+            }
+        });
+    }
+
+    function isValid() {
+        const {name, description, location, duration, datetime} = eventForm;
+        return name.length > 0 && description.length > 0 && 
+            location.length > 0 && duration.length > 0 && datetime.length > 0;
     }
 
     return (
@@ -46,7 +82,9 @@ function EventSuggestion(props) {
                         <input name="duration" required onChange={onChange} value={ eventForm.duration}/>
                     </div>
                     <div>
-                        <button className="button" type="submit">Pošalji prijedlog</button>
+                        <div className='error'>{error}</div>
+                        <button className="button" type="submit" disabled={!isValid()}>Pošalji prijedlog</button>
+                        <button className="button" type="button" onClick={() => {history.push("/events")}}>Događaji</button>
                     </div>
                 </form>
             </div>
@@ -54,4 +92,4 @@ function EventSuggestion(props) {
     );
 }
 
-export default EventSuggestion;
+export default EventForm;

@@ -4,12 +4,12 @@ import Card from "./Card";
 import { useHistory } from "react-router";
 
 function Events() {
-    const [events, setEvents] = React.useState([])
+    const [events, setEvents] = React.useState([]);
     const history = useHistory();
     React.useEffect(() => {
-        fetch('/events').then(data => data.json()
-            .then(events => setEvents(events)))
-    })
+        fetch('/events').then(data => data.json())
+            .then(e => setEvents(e))
+    }, [])
     console.log(events[0])
     const confirmed = events.filter((event) => event["status"] === "1")
     const unconfirmed = events.filter((event) => event["status"] === "0")
