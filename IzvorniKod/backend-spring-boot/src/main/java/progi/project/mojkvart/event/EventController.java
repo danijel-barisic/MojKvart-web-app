@@ -2,8 +2,10 @@ package progi.project.mojkvart.event;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import progi.project.mojkvart.account.Account;
+import progi.project.mojkvart.account.AccountService;
+
 import java.net.URI;
 import java.util.List;
 
@@ -13,6 +15,9 @@ public class EventController {
 
     @Autowired
     EventService eventService;
+
+    @Autowired
+    AccountService accountService;
 
     @GetMapping("")
     public List<Event> listEvents() {
@@ -32,6 +37,8 @@ public class EventController {
         if(event.getId() != null && eventService.existsById(event.getId())) {
             throw new IllegalArgumentException("Event with id: " + event.getId() + " already exists");
         } else {
+            Account account = accountService.fetch(event.getAccount().getId());
+            event.setAccount(account);
             Event saved = eventService.createEvent(event);
             return ResponseEntity.created(URI.create("/events/" + saved.getId())).body(saved);
         }

@@ -43,6 +43,14 @@ public class AccountController {
         return AccountService.fetch(id).getDistrict();
     }
 
+    @GetMapping("/roles/{id}")
+    public List<Role> getRoles(@PathVariable("id") long id) {
+        if(!AccountService.existsById(id)) {
+            throw new IllegalArgumentException("Account with id: " + id + " does not exist");
+        }
+        return AccountService.fetch(id).getRoles();
+    }
+
     @PostMapping("")
     public ResponseEntity<Account> createAccount(@RequestBody Account account) {
         if(AccountService.getEmailsFromAccounts().contains(account.getEmail())) {
@@ -56,6 +64,13 @@ public class AccountController {
             return ResponseEntity.created(URI.create("/accounts/" + saved.getId())).body(saved);
         }
     }
+
+    /*@PostMapping("/roles/{id}")
+    public List<Role> createRoles(@PathVariable("id") long id, @RequestBody List<Role> roleList) {
+
+
+        return AccountService.fetch(id).getRoles();
+    }*/
 
     @PutMapping("/{id}")
     public Account updateAccount(@PathVariable("id") Long id, @RequestBody Account account) {
@@ -89,14 +104,8 @@ public class AccountController {
             Account account = AccountService.fetch(accountId);
             account.getRoles().add(role);
             RoleService.updateRole(role);
-
         }
-
-
         return role;
-
-
-
     }
 
     @DeleteMapping("/{id}")

@@ -114,4 +114,16 @@ public class Event {
         this.account = account;
     }
 
+    @Override
+    public String toString() {
+        return "Event{account{" +
+                getAccount().toString() + "}" +
+                "datetime: " +getDatetime()+
+                "description: " +getDescription()+
+                "duration: " +getDuration()+
+                "location: " +getLocation()+
+                "name: " +getName()+
+                "status" + getStatus();
+    }
+
 }
