@@ -10,7 +10,9 @@ import progi.project.mojkvart.role.Role;
 import progi.project.mojkvart.role.RoleService;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/accounts")
@@ -65,12 +67,26 @@ public class AccountController {
         }
     }
 
-    /*@PostMapping("/roles/{id}")
-    public List<Role> createRoles(@PathVariable("id") long id, @RequestBody List<Role> roleList) {
-
-
-        return AccountService.fetch(id).getRoles();
-    }*/
+    @PostMapping("/roles/{id}")
+    public List<Role> createRoles(@PathVariable("id") long id, @RequestBody ArrayList<String> roleList) {
+        Account account = AccountService.fetch(id);
+        if(!AccountService.existsById(id)) {
+            throw new IllegalArgumentException("Account with id: " + id + " does not exist");
+        } else {
+            List<Role> listOfRoles = new ArrayList<Role>();
+            account.getRoles().clear();
+            roleList.forEach(role -> {
+                Role newRole = RoleService.findByName(role).orElseThrow(() -> new IllegalArgumentException("No such role."));
+                listOfRoles.add(newRole);
+            });
+            listOfRoles.forEach(role -> {
+                account.getRoles().add(role);
+                RoleService.updateRole(role);
+            });
+            account.setRoles(listOfRoles);
+            return account.getRoles();
+        }
+    }
 
     @PutMapping("/{id}")
     public Account updateAccount(@PathVariable("id") Long id, @RequestBody Account account) {
@@ -85,6 +101,27 @@ public class AccountController {
                 throw new IllegalArgumentException("Account id must be preserved");
             return AccountService.updateAccount(account);
         }
+    }
+
+    @PutMapping("/roles/{id}")
+    public List<Role> updateRoles(@PathVariable("id") Long accountId, @RequestBody String roleName) {
+        Account account = AccountService.fetch(accountId);
+        Role role = null;
+        roleName = roleName.replace("\"","");
+
+        if(accountId==null){
+            throw new IllegalArgumentException("Account id must be given");
+        }
+        else if(!AccountService.existsById(accountId)){
+            throw new IllegalArgumentException("Account with id: "+ accountId + " does not exist");
+        }
+        else{
+            role = RoleService.findByName(roleName).orElseThrow(()-> new IllegalArgumentException("No such role."));
+            account.getRoles().add(role);
+            RoleService.updateRole(role);
+        }
+
+        return account.getRoles();
     }
 
     @PutMapping("/grantRole/{id}")
@@ -113,5 +150,26 @@ public class AccountController {
         if(!AccountService.existsById(accountId))
             throw new IllegalArgumentException("Account with id: "+ accountId + " does not exist");
         return AccountService.deleteAccount(accountId);
+    }
+
+    @DeleteMapping("/roles/{id}")
+    public List<Role> deleteRole(@PathVariable("id") Long accountId, @RequestBody String roleName) {
+        Account account = AccountService.fetch(accountId);
+        Role role = null;
+        roleName = roleName.replace("\"","");
+
+        if(accountId==null){
+            throw new IllegalArgumentException("Account id must be given");
+        }
+        else if(!AccountService.existsById(accountId)){
+            throw new IllegalArgumentException("Account with id: "+ accountId + " does not exist");
+        }
+        else{
+            role = RoleService.findByName(roleName).orElseThrow(()-> new IllegalArgumentException("No such role."));
+            account.getRoles().remove(role);
+            RoleService.updateRole(role);
+        }
+
+        return account.getRoles();
     }
 }
