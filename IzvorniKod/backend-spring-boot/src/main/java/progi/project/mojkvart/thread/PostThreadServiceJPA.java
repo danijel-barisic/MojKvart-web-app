@@ -40,8 +40,13 @@ public class PostThreadServiceJPA implements PostThreadService{
     }
 
     @Override
-    public PostThread deletePostThread(PostThread postThread) {
-        postThreadRepo.delete(postThread);
-        return postThread;
+    public long deletePostThread(long postThreadId) {
+        postThreadRepo.deleteById(postThreadId);
+        return postThreadId;
+    }
+
+    @Override
+    public boolean existsById(long id) {
+        return postThreadRepo.findById(id).isPresent();
     }
 }

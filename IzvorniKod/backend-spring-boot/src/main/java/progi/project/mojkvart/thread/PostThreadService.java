@@ -20,6 +20,7 @@ public interface PostThreadService {
 
     PostThread updatePostThread(PostThread postThread);
 
-    PostThread deletePostThread(PostThread postThread);
+    long deletePostThread(long postThread);
 
+    boolean existsById(long id);
 }
