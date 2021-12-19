@@ -14,13 +14,32 @@ function CouncilMeetingReport() {
         .then(data => setMeeting(data))
     }, [])
 
-    console.log(meeting)
-
+    if (meeting.account === undefined)
     return (
         <Card title={meeting.title}>
             <div>
                 <b>Datum: </b>
                 <span>{meeting.dateTime}</span>
+            </div>
+            <div>
+                <b>Autor: </b>
+                <span></span>
+            </div>
+            <div>
+                <b>Izvješće: </b>
+                <span>{meeting.report}</span>
+            </div>
+        </Card>
+    )
+    else return (
+        <Card title={meeting.title}>
+            <div>
+                <b>Datum: </b>
+                <span>{meeting.dateTime}</span>
+            </div>
+            <div>
+                <b>Autor: </b>
+                <span>{meeting.account.firstName} {meeting.account.lastName}</span>
             </div>
             <div>
                 <b>Izvješće: </b>
