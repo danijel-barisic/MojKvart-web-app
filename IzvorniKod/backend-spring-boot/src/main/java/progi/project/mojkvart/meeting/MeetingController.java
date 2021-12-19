@@ -3,6 +3,7 @@ package progi.project.mojkvart.meeting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import progi.project.mojkvart.event.Event;
 
 import java.net.URI;
 import java.util.List;
@@ -17,6 +18,14 @@ public class MeetingController {
     @GetMapping("")
     public List<Meeting> listMeetings() {
         return meetingService.listAll();
+    }
+
+    @GetMapping("/{id}")
+    public Meeting getMeeting(@PathVariable("id") long id) {
+        if(!meetingService.existsById(id)) {
+            throw new IllegalArgumentException("Event with id: " + id + " does not exist");
+        }
+        return meetingService.fetch(id);
     }
 
     //ne postavalja se district_id !*!*!*!

@@ -10,8 +10,9 @@ function Events() {
     const [error, setError] = React.useState('');
     const history = useHistory();
     React.useEffect(() => {
-        fetch('/events').then(data => data.json())
-            .then(e => setEvents(e))
+        fetch('/events')
+        .then(data => data.json())
+        .then(e => setEvents(e))
     }, [updated])
     const confirmed = events.filter((event) => event["status"] === "1")
     const unconfirmed = events.filter((event) => event["status"] === "0")

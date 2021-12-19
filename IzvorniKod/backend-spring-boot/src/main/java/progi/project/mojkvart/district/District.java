@@ -29,6 +29,7 @@ public class District {
     @OneToMany(mappedBy = "district")
     private List<PostThread> threads;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "district")
     private List<Meeting> meetings;
 
