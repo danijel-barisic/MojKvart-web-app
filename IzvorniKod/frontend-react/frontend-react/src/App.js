@@ -23,6 +23,7 @@ import EventEditForm from './components/EventEditForm';
 import Council from './components/Council';
 import CouncilMeetingReport from './components/CouncilMeetingReport';
 import CouncilForm from './components/CouncilForm';
+import CouncilFormEdit from './components/CouncilFormEdit';
 
 function App() {
   ReactSession.setStoreType("localStorage");
@@ -95,6 +96,7 @@ function App() {
               <Route path='/council' exact component={Council} />
               <Route path='/council/report/:id' exact component={CouncilMeetingReport} />
               <Route path='/council/new_report' exact component={CouncilForm} />
+              <Route path='/council/report/edit/:id' exact component={CouncilFormEdit} />
               <Route path='/' />
               </Switch>
             </div>
