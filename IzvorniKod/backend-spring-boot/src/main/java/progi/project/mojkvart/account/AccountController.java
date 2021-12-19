@@ -29,6 +29,14 @@ public class AccountController {
         return AccountService.listAll();
     }
 
+    @GetMapping("/id/{id}")
+    public Account getAccount(@PathVariable("id") long id) {
+        if(AccountService.findById(id).isEmpty()) {
+            throw new IllegalArgumentException("Account with id: " + id + " does not exist");
+        }
+        return AccountService.fetch(id);
+    }
+
     @GetMapping("/{email}")
     public Account getAccount(@PathVariable("email") String email) {
         if(AccountService.findByEmail(email).isEmpty()) {
