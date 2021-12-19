@@ -46,17 +46,29 @@ public class MeetingController {
             throw new IllegalArgumentException("Meeting with id: " + meeting.getId() + " already exists");
         }
         else {
-            Long postThreadId = meeting.getPostThread().getId();
-            Long districtId = meeting.getDistrict().getId();
-            Long accountId = meeting.getAccount().getId();
-            PostThread postThread = postThreadService.fetch(postThreadId);
-            District district = districtService.fetch(districtId);
-            Account account = accountService.fetch(accountId);
-            Meeting saved = meetingService.createMeeting(meeting);
-            saved.setPostThread(postThread);
-            saved.setDistrict(district);
-            saved.setAccounts(account);
-            return ResponseEntity.created(URI.create("/council/" + saved.getId())).body(saved);
+            if(meeting.getPostThread() != null) {
+                Long postThreadId = meeting.getPostThread().getId();
+                Long districtId = meeting.getDistrict().getId();
+                Long accountId = meeting.getAccount().getId();
+                PostThread postThread = postThreadService.fetch(postThreadId);
+                District district = districtService.fetch(districtId);
+                Account account = accountService.fetch(accountId);
+                Meeting saved = meetingService.createMeeting(meeting);
+                saved.setPostThread(postThread);
+                saved.setDistrict(district);
+                saved.setAccounts(account);
+                return ResponseEntity.created(URI.create("/council/" + saved.getId())).body(saved);
+            } else {
+                Long districtId = meeting.getDistrict().getId();
+                Long accountId = meeting.getAccount().getId();
+                District district = districtService.fetch(districtId);
+                Account account = accountService.fetch(accountId);
+                Meeting saved = meetingService.createMeeting(meeting);
+                saved.setPostThread(null);
+                saved.setDistrict(district);
+                saved.setAccounts(account);
+                return ResponseEntity.created(URI.create("/council/" + saved.getId())).body(saved);
+            }
         }
     }
 
