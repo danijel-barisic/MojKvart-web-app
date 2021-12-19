@@ -57,6 +57,10 @@
    margin: 0;
 }
 
+.innerReply{
+   display: flex;
+}
+
 .delete {
    border: none;
    min-width: 20px;
