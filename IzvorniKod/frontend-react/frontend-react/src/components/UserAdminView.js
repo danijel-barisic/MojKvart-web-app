@@ -2,7 +2,8 @@ import React from "react";
 import Card from "./Card";
 import ReactSession from "react-client-session/dist/ReactSession";
 import './Login.css';
-import User from "./User";
+import User from "./User"
+import RoleManagement from "./RoleManagement";
 
 /* user
 accountNonExpired: true
@@ -73,6 +74,7 @@ export default class UserAdminView extends React.Component {
                     <tr><td>credentials not expired:</td><td>{user.credentialsNonExpired.toString()}      </td></tr>
                     <tr><td>enabled:                </td><td>{user.enabled.toString()}                    </td></tr>
                 </tbody></table>
+                <RoleManagement user={user}></RoleManagement>
             </Card>
         );
     }
