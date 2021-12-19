@@ -3,16 +3,18 @@ import './Header.css';
 import { Link } from 'react-router-dom';
 
 function Post(props) {
-   const { id, email } = props.post;
-   const { district } = props.post;
+   console.log(props.post)
+   const { id, content, account } = props.post;
+   const { district } = account;
+  console.log(district)
    
    return (
       <div className='headerdist'>
          <Link to={{
-            pathname: `/korisnici/${id}`,
-            state: { id,email,district },
+            pathname: `/forum/`,
+            state: { id,district },
             className: 'header-right'
-         }}>{id}. {email} </Link>
+         }}>{content} </Link>
       </div>
    );
 }
