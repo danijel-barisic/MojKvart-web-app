@@ -11,6 +11,7 @@ import progi.project.mojkvart.meeting.Meeting;
 import progi.project.mojkvart.role.Role;
 import progi.project.mojkvart.role_request.RoleRequest;
 import progi.project.mojkvart.post.Post;
+import progi.project.mojkvart.thread.PostThread;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -58,6 +59,9 @@ public class Account implements UserDetails {
 
     @OneToMany(mappedBy = "account")
     private List<Post> posts;
+
+    @OneToMany(mappedBy = "account")
+    private List<PostThread> threads;
 
     @OneToMany(mappedBy = "account")
     private List<Event> events;
