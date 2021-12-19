@@ -4,50 +4,75 @@ import "./Login.css";
 import { useHistory } from "react-router";
 import { ReactSession } from "react-client-session";
 
-function CouncilForm() {
+function CouncilFormEdit() {
+    const currentURL = window.location.href
+    const splitURL = currentURL.split("/")
+    const report_id = splitURL.at(-1)
 
-    const [error, setError] = React.useState('');
-    const history = useHistory();
-
-    const acc_username = ReactSession.get("username");
-    const [account, setAccount] = React.useState({id: ''});
+    const [oldReport, setOldReport] = React.useState([])
     React.useEffect(() => {
-        fetch(`/accounts/${acc_username}`)
+        fetch(`/council/${report_id}`)
         .then(data => data.json())
-        .then(account => setAccount(account));
-    }, []);
+        .then(data => setOldReport(data))
+    }, [])
 
     const [meetingForm, setMeetingForm] = React.useState(
         {title: '', report: ''}
     )
+
+    React.useEffect(() => {
+        fetch(`/council/${report_id}`)
+        .then(data => data.json())
+        .then(data => {
+            setMeetingForm({
+                title: data.title,
+                report: data.report
+            })
+        })
+    }, [])
+
+    const [error, setError] = React.useState('');
+    const history = useHistory();
 
     function onChange(event) {
         const {name, value} = event.target;
         setMeetingForm(oldForm => ({...oldForm, [name]: value}))
     }
 
-    async function onSubmit(e) {
+    function isValid() {
+        const {title, report} = meetingForm;
+        return title.length > 0 && report.length > 0;
+    }
+
+    function deleteMeeting(id) {
+        const options = {
+            method: 'DELETE',
+        };
+        fetch(`/council/${id}`, options).then(response => {
+            if (!response.ok) {
+                console.log(response.body)
+            } else {
+                console.log("deleted");
+                history.push("/council")
+            }
+        })
+    }
+
+    function onSubmit(e) {
         e.preventDefault();
-        
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = today.getFullYear();
-
-        today = `${yyyy}-${mm}-${dd}`;
-        console.log(today)
-
         const data = {
             title: meetingForm.title,
             report: meetingForm.report,
-            dateTime: today,
+            dateTime: oldReport.dateTime,
             district: {
-                id: account.district.id
+                id: oldReport.district.id
             },
             account: {
-                id: account.id
+                id: oldReport.account.id
             }
         }
+
+        deleteMeeting(report_id)
 
         const options = {
             method: "POST",
@@ -59,23 +84,18 @@ function CouncilForm() {
 
         return fetch("/council", options).then(response => {
             if (response.ok) {
-                history.push('/council');
+                console.log(response)
+                history.push("/council");
             }
             else {
                 setError("Prijedlog događaja nije moguće objaviti.");
                 console.log(response.body);
             }
         });
-
-    }
-
-    function isValid() {
-        const {title, report} = meetingForm;
-        return title.length > 0 && report.length > 0;
     }
 
     return (
-        <Card title="Novo izvješće">
+        <Card title="Uredi izvješće">
             <div className="Login">
                 <form onSubmit={onSubmit}>
                     <div className="FormRow">
@@ -88,8 +108,8 @@ function CouncilForm() {
                     </div>
                     <div>
                         <div className='error'>{error}</div>
-                        <button className="button" type="submit" disabled={!isValid()}>Objavi izvješće</button>
-                        <button className="button" type="button" onClick={() => {history.push("/council")}}>Povratak</button>
+                        <button className="button" type="submit" disabled={!isValid()}>Spremi promjene</button>
+                        <button className="button" type="button" onClick={() => {history.push("/council")}}>Odustani</button>
                     </div>
                 </form>
             </div>
@@ -97,4 +117,4 @@ function CouncilForm() {
     )
 }
 
-export default CouncilForm;
+export default CouncilFormEdit

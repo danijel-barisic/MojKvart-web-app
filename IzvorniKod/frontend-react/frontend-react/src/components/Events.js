@@ -9,33 +9,30 @@ function Events() {
     const [updated, setUpdated] = React.useState(new Date());
     const [error, setError] = React.useState('');
     const history = useHistory();
-    const acc_username = ReactSession.get("username");
-    console.log(acc_username);
-    const [account, setAccount] = React.useState({id: ''});
+    React.useEffect(() => {
+        fetch('/events')
+        .then(data => data.json())
+        .then(e => setEvents(e))
+    }, [updated])
     const confirmed = events.filter((event) => event["status"] === "1")
     const unconfirmed = events.filter((event) => event["status"] === "0")
-    const [roles, setRoles] = React.useState([]);
 
+    const acc_username = ReactSession.get("username");
+    const [account, setAccount] = React.useState({id: ''});
+    const [roles, setRoles] = React.useState([{name: "temp"}]);
 
     React.useEffect(() => {
-        const fetchData = async () => {
-          const ev = await fetch('/events').then(data => data.json());
-          const acc = await fetch(`/accounts/${acc_username}`).then(data => data.json());
+        fetch(`/accounts/${acc_username}`)
+        .then(data => data.json())
+        .then(account => setAccount(account));
+    }, []);
 
-          const rol = await fetch(`/roles/${account.id}`).then(data => data.json());
-          setEvents(ev);
-          setAccount(acc);
-
-          setRoles(rol)
-
-        };
-
-        fetchData()
-
-    }, [updated]);
-    console.log("events: " + events);
-      console.log("acc:" + account);
-      console.log("role:" + roles);
+    React.useEffect(() => {
+        fetch(`/roles/${account.id}`)
+        .then(data => data.json())
+        .then(data => data.name)
+        .then(roles => setRoles(roles))
+    }, [account])
 
     function deleteEvent(id) {
         const options = {
@@ -82,7 +79,7 @@ function Events() {
         });
     }
 
-    if (true) {
+    if (roles !== undefined && roles.includes("Moderator")) {
         return (
             <>
                 <Card title='Događaji'>
@@ -94,8 +91,7 @@ function Events() {
                     <div>
                         <div className='innerEvent'>
                             <div className='wrapper'>
-                                {confirmed.map(function (event) {
-                                    console.log("vdjhvkjsdhvksdjhk"+roles);
+                                {confirmed.map(function (event){
                                     return (
                                         <div className='inner'>
                                             <Event event={event}/>
@@ -130,8 +126,7 @@ function Events() {
                 </Card>
             </>
         );
-    } else {
-        return (
+    } else return (
             <Card title='Događaji'>
                 <div>
                     <div className='Login'>
@@ -153,7 +148,6 @@ function Events() {
                 </div>
             </Card>
         );
-    }
 }
 
 export default Events;
