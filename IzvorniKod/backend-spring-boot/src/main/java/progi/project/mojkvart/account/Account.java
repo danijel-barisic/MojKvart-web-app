@@ -199,6 +199,14 @@ public class Account implements UserDetails {
         return home.getStreet().getDistrict();
     }
 
+    public Home getHome() {
+        return home;
+    }
+
+    public void setHome(Home home) {
+        this.home = home;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
