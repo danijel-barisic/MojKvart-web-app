@@ -54,6 +54,11 @@ function Personal() {
                                 <b>Dodatne uloge: </b>
                                 <span>{specialRoles()}</span>
                             </div>
+                            <div>
+                            <div className='Login'>
+                                <button className='button' type="button" >Izmjena osobnih podataka</button>
+                            </div>
+                        </div>
                         </div>
                     </div>
                 </Card>
@@ -88,6 +93,11 @@ function Personal() {
                                 <b>Dodatne uloge: </b>
                                 <span>{specialRoles()}</span>
                             </div>
+                            <div className='Login'>
+                                <button className='button' type="button" >Izmjena osobnih podataka</button>
+                                <button className='button' type="button" >Brisanje korisničkog računa</button>
+                                <button className='button' type="button" >Zahtjevi za ulogom</button>
+                            </div>
                         </div>
                     </div>
                 </Card>
@@ -116,6 +126,11 @@ function Personal() {
                             <div>
                                 <b>Adresa: </b>
                                 <span>{`${account.home.street.name} ${account.home.number}`}</span>
+                            </div>
+                            <div className='Login'>
+                                <button className='button' type="button" >Izmjena osobnih podataka</button>
+                                <button className='button' type="button" >Brisanje korisničkog računa</button>
+                                <button className='button' type="button" >Zahtjevi za ulogom</button>
                             </div>
                         </div>
                     </div>
