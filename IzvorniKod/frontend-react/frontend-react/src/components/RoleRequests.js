@@ -31,23 +31,15 @@ const RoleRequests = () => {
       var result = users.find(user => {
         return user.id === idA
       })
-      const data = {
-        id: idA,
-        email : result.email,
-        firstName : result.firstName,
-        lastName : result.lastName,
-        password : result.password,
-        roles: roles[idRR]
-     };
      const options = {
         method: 'PUT',
         headers: {
            'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(roles[idRR])
      };
-    
-      fetch(`/accounts/${idA}`, options)
+      
+      fetch(`/accounts/grantRole/${idA}`, options)
       console.log(users)
       setTimeout(() =>{
         setRequests(requests.filter((request) => request.id !== idR ))

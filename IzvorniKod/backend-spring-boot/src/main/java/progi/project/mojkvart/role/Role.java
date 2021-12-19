@@ -1,5 +1,6 @@
 package progi.project.mojkvart.role;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Repository;
 import progi.project.mojkvart.role_request.RoleRequest;
 import progi.project.mojkvart.account.Account;
@@ -27,6 +28,7 @@ public class Role {
     @JoinTable(name = "account_role",
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "account_id"))
+    @JsonIgnore
     private List<Account> accounts;
 
     @OneToMany(mappedBy = "role")

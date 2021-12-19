@@ -3,6 +3,8 @@ package progi.project.mojkvart.event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import progi.project.mojkvart.district.District;
+
 import java.util.List;
 
 
@@ -36,4 +38,9 @@ public class EventService {
         return eventRepository.save(event);
     }
 
+    public Event deleteEvent(long eventId) {
+        Event event = fetch(eventId);
+        eventRepository.delete(event);
+        return event;
+    }
 }

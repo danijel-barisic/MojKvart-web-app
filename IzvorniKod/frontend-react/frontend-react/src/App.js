@@ -17,6 +17,7 @@ import RoleRequests from './components/RoleRequests';
 import Events from "./components/Events";
 import Users from './components/Users';
 import UserAdminView from "./components/UserAdminView";
+import EventForm from "./components/EventForm";
 
 function App() {
   ReactSession.setStoreType("localStorage");
@@ -84,6 +85,7 @@ function App() {
               <Route path='/council' exact component={Council} />
               <Route path='/user' exact component={UserDetails} /> */}
               <Route path='/events' exact component={Events} />
+              <Route path='/events/suggestion' exact component={EventForm} />
               <Route path='/' />
               </Switch>
             </div>
