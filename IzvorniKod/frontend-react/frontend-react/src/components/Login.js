@@ -30,7 +30,11 @@ function Login(props) {
       fetch('/login', options)
          .then(response => {
             /* console.log(response); */
-            if (!response.ok) {
+            if (response.status === 401) {
+               setError("Username is banned!");
+               return "error";
+            }
+            else if (!response.ok) {
                setError("Login failed");
                return "error";
             } else {

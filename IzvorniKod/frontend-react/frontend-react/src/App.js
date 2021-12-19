@@ -18,6 +18,7 @@ import Events from "./components/Events";
 import Users from './components/Users';
 import UserAdminView from "./components/UserAdminView";
 import EventForm from "./components/EventForm";
+import UserAdminView2 from './components/UserAdminView2';
 
 function App() {
   ReactSession.setStoreType("localStorage");
@@ -116,7 +117,7 @@ function App() {
               <Route path='/ulice/novi' exact component={StreetForm} />
               <Route path='/ulice/:id/edit' exact component={StreetEditForm} />
               <Route path='/korisnici' exact component={Users} />
-              <Route path='/korisnici/:id' exact component={UserAdminView} />
+              <Route path='/korisnici/:id' exact component={UserAdminView2} />
               <Route path='/'/>
               </Switch>
             </div>

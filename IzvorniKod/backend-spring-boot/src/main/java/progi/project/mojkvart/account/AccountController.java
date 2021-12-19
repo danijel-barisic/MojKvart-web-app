@@ -45,6 +45,12 @@ public class AccountController {
         return AccountService.fetch(id).getDistrict();
     }
 
+    @GetMapping("/{id}/banned")
+    public boolean checkIfBanned(@PathVariable("id") Long id) {
+        Account account = AccountService.fetch(id);
+        return account.isBlocked();
+    }
+
     @GetMapping("/roles/{id}")
     public List<Role> getRoles(@PathVariable("id") long id) {
         if(!AccountService.existsById(id)) {
@@ -65,6 +71,22 @@ public class AccountController {
             Account saved = AccountService.createAccount(account);
             return ResponseEntity.created(URI.create("/accounts/" + saved.getId())).body(saved);
         }
+    }
+
+    @PostMapping("/{id}/banned")
+    public boolean setBanned(@PathVariable("id") Long id) {
+        Account account = AccountService.fetch(id);
+        account.setBlocked(true);
+        AccountService.updateAccount(account);
+        return account.isBlocked();
+    }
+
+    @PostMapping("/{id}/unbanned")
+    public boolean setUnBanned(@PathVariable("id") Long id) {
+        Account account = AccountService.fetch(id);
+        account.setBlocked(false);
+        AccountService.updateAccount(account);
+        return account.isBlocked();
     }
 
     @PostMapping("/roles/{id}")

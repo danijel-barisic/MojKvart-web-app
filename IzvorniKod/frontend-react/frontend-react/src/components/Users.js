@@ -3,7 +3,8 @@ import Card from "./Card";
 import ReactSession from "react-client-session/dist/ReactSession";
 import { useHistory } from "react-router";
 import './Login.css';
-import { FaTimes } from 'react-icons/fa';
+import { FaLock, FaLockOpen } from 'react-icons/fa';
+import { MdDelete } from 'react-icons/md';
 import User from "./User";
 
 function Users(props) {
@@ -11,7 +12,7 @@ function Users(props) {
    const [updated, setUpdated] = React.useState(new Date());
    const role = ReactSession.get(ReactSession.get("username"));
    const history = useHistory();
-   const { currentId, currentName } = props;
+   const { currentId } = props;
 
    function deleteUser(id) {
       const options = {
@@ -29,6 +30,34 @@ function Users(props) {
          });
    }
 
+   function banUser(id) {
+      const options = {
+         method: 'POST',
+      };
+      fetch(`/accounts/${id}/banned`, options).then(response => {
+         if (!response.ok) {
+            console.log(response.body);
+         } else {
+            console.log("banned");
+            setUpdated(new Date());
+         }
+      })
+   }
+
+   function UnbanUser(id) {
+      const options = {
+         method: 'POST',
+      };
+      fetch(`/accounts/${id}/unbanned`, options).then(response => {
+         if (!response.ok) {
+            console.log(response.body);
+         } else {
+            console.log("unbanned");
+            setUpdated(new Date());
+         }
+      })
+   }
+
    React.useEffect(() => {
       fetch('/accounts')
          .then(data => data.json())
@@ -37,19 +66,32 @@ function Users(props) {
 
    if (role === "ADMIN") {
       return (
-         <Card title='Korisnici'>
+         <>
+         <Card title='Svi korisnici'>
             <div className='StreetList'>
                {users.map(function (user) {
                   let district = user.district;
                   console.log(district.id);
-                  if (district.id == currentId) {
+                  if (district.id === currentId) {
                      return ([
                         <div className="wrapper">
                            <div className="inner">
                               <User key={user.id} user={user} props={props}/>
                            </div>
                            <div className="inner">
-                              <FaTimes style={{color:"red" ,cursor:"pointer"}} onClick={() => deleteUser(user.id)}></FaTimes>
+                              <>
+                              {
+                                 (user.blocked === true)
+                                    ?  <>
+                                          <FaLockOpen style={{color:"green" ,cursor:"pointer", margin: "0px 10px 0px 0px" }} onClick={() => UnbanUser(user.id)}></FaLockOpen>
+                                          <MdDelete style={{cursor: "pointer"}} onClick={() => deleteUser(user.id)}></MdDelete>
+                                       </>
+                                    :  <>
+                                          <FaLock style={{color:"red" ,cursor:"pointer", margin: "0px 10px 0px 0px" }} onClick={() => banUser(user.id)}></FaLock>
+                                          <MdDelete style={{cursor: "pointer"}} onClick={() => deleteUser(user.id)}></MdDelete>
+                                       </>
+                              }
+                              </>
                            </div>
                         </div>
                      ]);
@@ -60,7 +102,19 @@ function Users(props) {
                               <User key={user.id} user={user} props={props}/>
                            </div>
                            <div className="inner">
-                              <FaTimes style={{color:"red" ,cursor:"pointer"}} onClick={() => deleteUser(user.id)}></FaTimes>
+                              <>
+                              {
+                                 (user.blocked === true)
+                                    ?  <>
+                                          <FaLockOpen style={{color:"green" ,cursor:"pointer", margin: "0px 10px 0px 0px" }} onClick={() => UnbanUser(user.id)}></FaLockOpen>
+                                          <MdDelete style={{cursor: "pointer"}} onClick={() => deleteUser(user.id)}></MdDelete>
+                                       </>
+                                    :  <>
+                                          <FaLock style={{color:"red" ,cursor:"pointer", margin: "0px 10px 0px 0px" }} onClick={() => banUser(user.id)}></FaLock>
+                                          <MdDelete style={{cursor: "pointer"}} onClick={() => deleteUser(user.id)}></MdDelete>
+                                       </>
+                              }
+                              </>
                            </div>
                         </div>
                      ])
@@ -72,6 +126,66 @@ function Users(props) {
                })}
             </div>
          </Card>
+         <Card title='Blokirani korisnici'>
+         <div className='StreetList'>
+            {users.map(function (user) {
+               let district = user.district;
+               console.log(district.id);
+               if (district.id === currentId && user.blocked === true) {
+                  return ([
+                     <div className="wrapper">
+                        <div className="inner">
+                           <User key={user.id} user={user} props={props}/>
+                        </div>
+                        <div className="inner">
+                           <>
+                           {
+                              (user.blocked === true)
+                                 ?  <>
+                                       <FaLockOpen style={{color:"green" ,cursor:"pointer", margin: "0px 10px 0px 0px" }} onClick={() => UnbanUser(user.id)}></FaLockOpen>
+                                       <MdDelete style={{cursor: "pointer"}} onClick={() => deleteUser(user.id)}></MdDelete>
+                                    </>
+                                 :  <>
+                                       <FaLock style={{color:"red" ,cursor:"pointer", margin: "0px 10px 0px 0px" }} onClick={() => banUser(user.id)}></FaLock>
+                                       <MdDelete style={{cursor: "pointer"}} onClick={() => deleteUser(user.id)}></MdDelete>
+                                    </>
+                           }
+                           </>
+                        </div>
+                     </div>
+                  ]);
+               } else if (currentId === undefined && user.blocked === true){
+                  return ([
+                     <div className="wrapper">
+                        <div className="inner">
+                           <User key={user.id} user={user} props={props}/>
+                        </div>
+                        <div className="inner">
+                        <>
+                        {
+                           (user.blocked === true)
+                              ?  <>
+                                    <FaLockOpen style={{color:"green" ,cursor:"pointer", margin: "0px 10px 0px 0px" }} onClick={() => UnbanUser(user.id)}></FaLockOpen>
+                                    <MdDelete style={{cursor: "pointer"}} onClick={() => deleteUser(user.id)}></MdDelete>
+                                 </>
+                              :  <>
+                                    <FaLock style={{color:"red" ,cursor:"pointer", margin: "0px 10px 0px 0px" }} onClick={() => banUser(user.id)}></FaLock>
+                                    <MdDelete style={{cursor: "pointer"}} onClick={() => deleteUser(user.id)}></MdDelete>
+                                 </>
+                        }
+                           </>
+                        </div>
+                     </div>
+                  ])
+               } else {
+                  return ([
+                     <></>
+                  ]);
+               }
+            })}
+         </div>
+            </Card>
+            </>
       );
    } 
    else {
