@@ -19,24 +19,20 @@ function Events() {
 
     const acc_username = ReactSession.get("username");
     const [account, setAccount] = React.useState({id: ''});
+    const [roles, setRoles] = React.useState([{name: "temp"}]);
+
     React.useEffect(() => {
         fetch(`/accounts/${acc_username}`)
         .then(data => data.json())
         .then(account => setAccount(account));
     }, []);
 
-    const id = account.id
-
-    console.log(id)
-
-    const [roles, setRoles] = React.useState([]);
     React.useEffect(() => {
-        fetch(`/roles/${id}`)
+        fetch(`/roles/${account.id}`)
         .then(data => data.json())
+        .then(data => data.name)
         .then(roles => setRoles(roles))
-    }, [updated])
-
-    console.log(roles)
+    }, [account])
 
     function deleteEvent(id) {
         const options = {
@@ -83,7 +79,7 @@ function Events() {
         });
     }
 
-    if (true) {
+    if (roles !== undefined && roles.includes("Moderator")) {
         return (
             <>
                 <Card title='Događaji'>

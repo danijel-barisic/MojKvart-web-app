@@ -9,6 +9,7 @@ function CouncilMeetingCard(props) {
     const report = props.meeting.report
     const datetime = props.meeting.dateTime
     const id = props.meeting.id
+    const author = props.meeting.account
 
     const history = useHistory();
 
@@ -22,8 +23,12 @@ function CouncilMeetingCard(props) {
                 <b>Datum: </b>
                 <span>{datetime}</span>
             </div>
+            <div>
+                <b>Autor: </b>
+                <span>{author.firstName} {author.lastName}</span>
+            </div>
             <div className='Login'>
-                <button className='button' type="button" onClick={() => {history.push(`/council/${id}`)}}>Više informacija</button>
+                <button className='button' type="button" onClick={() => {history.push(`/council/report/${id}`)}}>Više informacija</button>
             </div>
         </div>
     )
