@@ -31,7 +31,7 @@ function Login(props) {
          .then(response => {
             /* console.log(response); */
             if (response.status === 401) {
-               setError("Username is banned or doesnt exist!");
+               setError("Login Failed!");
                return "error";
             }
             else if (!response.ok) {

@@ -24,6 +24,9 @@ import Council from './components/Council';
 import CouncilMeetingReport from './components/CouncilMeetingReport';
 import CouncilForm from './components/CouncilForm';
 import CouncilFormEdit from './components/CouncilFormEdit';
+import Forum from './components/Forum';
+import ForumNewThread from './components/ForumNewThread';
+import ThreadView from './components/ThreadView';
 
 function App() {
   ReactSession.setStoreType("localStorage");
@@ -90,6 +93,9 @@ function App() {
               <Route path='/events' exact component={Events} />
               <Route path='/council' exact component={Council} />
               <Route path='/user' exact component={UserDetails} /> */}
+              <Route path='/forum' exact component={Forum} />
+              <Route path='/forum/:id' exact component={ThreadView} />
+              <Route path='/novatema' exact component={ForumNewThread}/>
               <Route path='/events' exact component={Events} />
               <Route path='/events/suggestion' exact component={EventForm} />
               <Route path='/events/edit/:id' exact component={EventEditForm} />

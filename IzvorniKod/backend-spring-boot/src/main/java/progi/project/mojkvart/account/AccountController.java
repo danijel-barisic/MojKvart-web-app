@@ -37,6 +37,14 @@ public class AccountController {
         return AccountService.fetch(email);
     }
 
+    @GetMapping("/{email}/getdistrict")
+    public District getAccountDistrict(@PathVariable("email") String email) {
+        if(AccountService.findByEmail(email).isEmpty()) {
+            throw new IllegalArgumentException("Account with email: " + email + " does not exist");
+        }
+        return AccountService.fetch(email).getDistrict();
+    }
+
     @GetMapping("/{id}/district")
     public District getDistrict(@PathVariable("id") long id) {
         if(!AccountService.existsById(id)) {

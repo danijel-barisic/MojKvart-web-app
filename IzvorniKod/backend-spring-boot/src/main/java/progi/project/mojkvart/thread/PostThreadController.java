@@ -3,6 +3,8 @@ package progi.project.mojkvart.thread;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import progi.project.mojkvart.account.AccountService;
+import progi.project.mojkvart.district.DistrictService;
 
 import java.net.URI;
 import java.util.List;
@@ -14,6 +16,10 @@ public class PostThreadController {
 
     @Autowired
     PostThreadService postThreadService;
+    @Autowired
+    DistrictService districtService;
+    @Autowired
+    AccountService accountService;
 
     @GetMapping("")
     public List<PostThread> listPosts() {
@@ -34,7 +40,11 @@ public class PostThreadController {
             throw new IllegalArgumentException("PostThread with id: " + postThread.getId() + " already exists");
         }
         else {
+            Long accountId = postThread.getAccount().getId();
+            Long districtId = postThread.getDistrict().getId();
             PostThread saved = postThreadService.createPostThread(postThread);
+            saved.setAccount(accountService.fetch(accountId));
+            saved.setDistrict(districtService.fetch(districtId));
             return ResponseEntity.created(URI.create("/postThread/" + saved.getId())).body(saved);
         }
     }
