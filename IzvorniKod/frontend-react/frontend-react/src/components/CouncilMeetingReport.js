@@ -29,7 +29,7 @@ function CouncilMeetingReport() {
     }, []);
 
     React.useEffect(() => {
-        fetch(`/roles/${account.id}`)
+        fetch(`/accounts/roles/${account.id}`)
         .then(data => data.json())
         .then(data => data.name)
         .then(roles => setRoles(roles))

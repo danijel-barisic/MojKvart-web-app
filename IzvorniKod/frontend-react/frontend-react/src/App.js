@@ -100,10 +100,10 @@ function App() {
               <Route path='/forum' exact component={Forum} />
               <Route path='/forum/:id' exact component={ThreadView} />
               <Route path='/novatema' exact component={ForumNewThread}/>
-              <Route path='/personal/password' exact component={PersonalPassword} />
-              <Route path='/personal/delete' exact component={PersonalDelete} />
               <Route path='/personal' exact component={Personal} />
               <Route path='/personal/edit' exact component={PersonalEdit} />
+              <Route path='/personal/password' exact component={PersonalPassword} />
+              <Route path='/personal/delete' exact component={PersonalDelete} />
               <Route path='/events' exact component={Events} />
               <Route path='/events/suggestion' exact component={EventForm} />
               <Route path='/events/edit/:id' exact component={EventEditForm} />
@@ -142,6 +142,9 @@ function App() {
               <Route path='/ulice/:id/edit' exact component={StreetEditForm} />
               <Route path='/korisnici' exact component={Users} />
               <Route path='/korisnici/:id' exact component={UserAdminView2} />
+              <Route path='/personal' exact component={Personal} />
+              <Route path='/personal/edit' exact component={PersonalEdit} />
+              <Route path='/personal/password' exact component={PersonalPassword} />
               <Route path='/'/>
               </Switch>
             </div>

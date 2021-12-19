@@ -18,8 +18,9 @@ function Events() {
     const unconfirmed = events.filter((event) => event["status"] === "0")
 
     const acc_username = ReactSession.get("username");
+
     const [account, setAccount] = React.useState({id: ''});
-    const [roles, setRoles] = React.useState([{name: "temp"}]);
+    const [roles, setRoles] = React.useState();
 
     React.useEffect(() => {
         fetch(`/accounts/${acc_username}`)
@@ -28,9 +29,8 @@ function Events() {
     }, []);
 
     React.useEffect(() => {
-        fetch(`/roles/${account.id}`)
+        fetch((account.id === undefined ? "/roles" : `/accounts/roles/${account.id}`))
         .then(data => data.json())
-        .then(data => data.name)
         .then(roles => setRoles(roles))
     }, [account])
 
@@ -79,9 +79,56 @@ function Events() {
         });
     }
 
-    if (roles !== undefined && roles.includes("Moderator")) {
-        return (
-            <>
+    if (roles !== undefined && roles.length > 0) {
+        if (roles.filter(r => r.name === "Moderator").length > 0)
+            return (
+                <>
+                    <Card title='Događaji'>
+                        <div>
+                            <div className='Login'>
+                                <button className='button' type="button" onClick={() => {history.push("/events/suggestion")}}>Predloži događaj</button>
+                            </div>
+                        </div>
+                        <div>
+                            <div className='innerEvent'>
+                                <div className='wrapper'>
+                                    {confirmed.map(function (event){
+                                        return (
+                                            <div className='inner'>
+                                                <Event event={event}/>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+                    </Card>
+                    <Card title='Prijedlozi događaja'>
+                        <div>
+                            <div className='innerEvent'>
+                                <div className='wrapper'>
+                                    {unconfirmed.map(function (event){
+                                        return (
+                                            <>
+                                                <div className='inner'>
+                                                    <Event event={event}/>
+                                                </div>
+                                                <div className='Login'>
+                                                    <button className='button' type="button" onClick={() => submitEvent(event)}>Objavi</button>
+                                                    <button className='button' type="button" onClick={() => deleteEvent(event["id"])}>Obriši</button>
+                                                    <button className='button' type="button" onClick={() => {history.push(`/events/edit/${event["id"]}`)}}>Uredi</button>
+                                                </div>
+                                            </>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+                    </Card>
+                </>
+            )
+        else 
+            return (
                 <Card title='Događaji'>
                     <div>
                         <div className='Login'>
@@ -102,52 +149,12 @@ function Events() {
                         </div>
                     </div>
                 </Card>
-                <Card title='Prijedlozi događaja'>
-                    <div>
-                        <div className='innerEvent'>
-                            <div className='wrapper'>
-                                {unconfirmed.map(function (event){
-                                    return (
-                                        <>
-                                            <div className='inner'>
-                                                <Event event={event}/>
-                                            </div>
-                                            <div className='Login'>
-                                                <button className='button' type="button" onClick={() => submitEvent(event)}>Objavi</button>
-                                                <button className='button' type="button" onClick={() => deleteEvent(event["id"])}>Obriši</button>
-                                                <button className='button' type="button" onClick={() => {history.push(`/events/edit/${event["id"]}`)}}>Uredi</button>
-                                            </div>
-                                        </>
-                                    )
-                                })}
-                            </div>
-                        </div>
-                    </div>
-                </Card>
-            </>
-        );
-    } else return (
-            <Card title='Događaji'>
-                <div>
-                    <div className='Login'>
-                        <button className='button' type="button" onClick={() => {history.push("/events/suggestion")}}>Predloži događaj</button>
-                    </div>
-                </div>
-                <div>
-                    <div className='innerEvent'>
-                        <div className='wrapper'>
-                            {confirmed.map(function (event){
-                                return (
-                                    <div className='inner'>
-                                        <Event event={event}/>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </div>
-                </div>
-            </Card>
-        );
+            )
+    }
+    else return (
+        <>
+        </>
+    )
 }
 
 export default Events;
