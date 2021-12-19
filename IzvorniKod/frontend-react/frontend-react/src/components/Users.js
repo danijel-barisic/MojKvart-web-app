@@ -72,7 +72,7 @@ function Users(props) {
                {users.map(function (user) {
                   let district = user.district;
                   console.log(district.id);
-                  if (district.id === currentId) {
+                  if (district.id == currentId) {
                      return ([
                         <div className="wrapper">
                            <div className="inner">
@@ -131,7 +131,7 @@ function Users(props) {
             {users.map(function (user) {
                let district = user.district;
                console.log(district.id);
-               if (district.id === currentId && user.blocked === true) {
+               if (district.id == currentId && user.blocked === true) {
                   return ([
                      <div className="wrapper">
                         <div className="inner">

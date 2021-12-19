@@ -43,7 +43,7 @@ function Streets(props) {
                {streets.map(function (street) {
                   let district = street.district;
                   console.log(district.id);
-                  if (district.id === currentId) {
+                  if (district.id == currentId) {
                      return ([
                         <div className="wrapper">
                            <div className="inner">
