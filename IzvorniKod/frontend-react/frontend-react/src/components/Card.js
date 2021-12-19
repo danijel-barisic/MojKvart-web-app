@@ -5,7 +5,6 @@ import './Header.css';
 
 function Card(props) {
   const { children, id, title } = props;
-  console.log(id, title);
 
   if (id && title) {
     return (

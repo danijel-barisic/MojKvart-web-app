@@ -4,9 +4,36 @@ import "./Login.css";
 import { useHistory } from "react-router";
 import { ReactSession } from "react-client-session";
 
-function EventForm() {
+function EventEditForm() {
+
+    const currentURL = window.location.href
+    const splitURL = currentURL.split("/")
+    const event_id = splitURL.at(-1)
+
+    const [oldEvent, setOldEvent] = React.useState([])
+    React.useEffect(() => {
+        fetch(`/events/${event_id}`)
+        .then(data => data.json())
+        .then(data => setOldEvent(data))
+    }, [])
+
     const [eventForm, setEventForm] = React.useState(
         {name: '', description: '', location: '', datetime: '', duration: ''})
+
+    React.useEffect(() => {
+        fetch(`/events/${event_id}`)
+        .then(data => data.json())
+        .then(data => {
+            setEventForm({
+                name: data.name, 
+                description: data.description, 
+                location: data.location, 
+                datetime: data.datetime, 
+                duration: data.duration
+            })
+        });
+    }, [])
+
     const [error, setError] = React.useState('');
     const history = useHistory();
     const acc_username = ReactSession.get("username");
@@ -22,6 +49,19 @@ function EventForm() {
         setEventForm(oldForm => ({...oldForm, [name]: value}))
     }
 
+    function deleteEvent(id) {
+        const options = {
+            method: 'DELETE',
+        };
+        fetch(`/events/${id}`, options).then(response => {
+            if (!response.ok) {
+                console.log(response.body)
+            } else {
+                console.log("deleted");
+            }
+        })
+    }
+
     async function onSubmit(e) {
         e.preventDefault();
         const data = {
@@ -32,9 +72,10 @@ function EventForm() {
             duration: "PT0.000036S",
             status: 0,
             account: {
-                id: account["id"]
+                id: oldEvent.account.id
             }
         }
+        deleteEvent(event_id)
         const options = {
             method: "POST",
             headers: {
@@ -53,7 +94,7 @@ function EventForm() {
         });
     }
 
-    function isValid() {
+    function isValid() { 
         const {name, description, location, duration, datetime} = eventForm;
         return name.length > 0 && description.length > 0 && 
             location.length > 0 && duration.length > 0 && datetime.length > 0;
@@ -85,8 +126,8 @@ function EventForm() {
                     </div>
                     <div>
                         <div className='error'>{error}</div>
-                        <button className="button" type="submit" disabled={!isValid()}>Pošalji prijedlog</button>
-                        <button className="button" type="button" onClick={() => {history.push("/events")}}>Događaji</button>
+                        <button className="button" type="submit" disabled={!isValid()}>Spremi promjene</button>
+                        <button className="button" type="button" onClick={() => {history.push("/events")}}>Odustani</button>
                     </div>
                 </form>
             </div>
@@ -94,4 +135,4 @@ function EventForm() {
     );
 }
 
-export default EventForm;
+export default EventEditForm;

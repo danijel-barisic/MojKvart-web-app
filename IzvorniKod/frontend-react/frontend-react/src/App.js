@@ -19,6 +19,7 @@ import Users from './components/Users';
 import UserAdminView from "./components/UserAdminView";
 import EventForm from "./components/EventForm";
 import UserAdminView2 from './components/UserAdminView2';
+import EventEditForm from './components/EventEditForm';
 
 function App() {
   ReactSession.setStoreType("localStorage");
@@ -87,6 +88,7 @@ function App() {
               <Route path='/user' exact component={UserDetails} /> */}
               <Route path='/events' exact component={Events} />
               <Route path='/events/suggestion' exact component={EventForm} />
+              <Route path='/events/edit/:id' exact component={EventEditForm} />
               <Route path='/' />
               </Switch>
             </div>
