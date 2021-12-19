@@ -13,7 +13,7 @@ import java.util.Optional;
 public class StreetServiceJPA implements StreetService{
     @Autowired
     private StreetRepository streetRepo;
-
+    @Autowired
     private DistrictRepository districtRepo;
 
     public StreetServiceJPA(DistrictRepository districtRepo) {

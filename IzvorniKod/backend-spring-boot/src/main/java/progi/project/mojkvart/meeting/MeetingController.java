@@ -3,7 +3,13 @@ package progi.project.mojkvart.meeting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import progi.project.mojkvart.account.Account;
+import progi.project.mojkvart.account.AccountService;
+import progi.project.mojkvart.district.District;
+import progi.project.mojkvart.district.DistrictService;
 import progi.project.mojkvart.event.Event;
+import progi.project.mojkvart.thread.PostThread;
+import progi.project.mojkvart.thread.PostThreadService;
 
 import java.net.URI;
 import java.util.List;
@@ -14,6 +20,12 @@ public class MeetingController {
 
     @Autowired
     private MeetingService meetingService;
+    @Autowired
+    private PostThreadService postThreadService;
+    @Autowired
+    private DistrictService districtService;
+    @Autowired
+    private AccountService accountService;
 
     @GetMapping("")
     public List<Meeting> listMeetings() {
@@ -28,14 +40,22 @@ public class MeetingController {
         return meetingService.fetch(id);
     }
 
-    //ne postavalja se district_id !*!*!*!
     @PostMapping("")
     public ResponseEntity<Meeting> createMeeting(@RequestBody Meeting meeting) {
         if(meeting.getId() != null && meetingService.existsById(meeting.getId())) {
             throw new IllegalArgumentException("Meeting with id: " + meeting.getId() + " already exists");
         }
         else {
+            Long postThreadId = meeting.getPostThread().getId();
+            Long districtId = meeting.getDistrict().getId();
+            Long accountId = meeting.getAccount().getId();
+            PostThread postThread = postThreadService.fetch(postThreadId);
+            District district = districtService.fetch(districtId);
+            Account account = accountService.fetch(accountId);
             Meeting saved = meetingService.createMeeting(meeting);
+            saved.setPostThread(postThread);
+            saved.setDistrict(district);
+            saved.setAccounts(account);
             return ResponseEntity.created(URI.create("/council/" + saved.getId())).body(saved);
         }
     }

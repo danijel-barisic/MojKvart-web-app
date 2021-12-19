@@ -1,5 +1,6 @@
 package progi.project.mojkvart.thread;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import progi.project.mojkvart.district.District;
 import progi.project.mojkvart.meeting.Meeting;
 import progi.project.mojkvart.post.Post;
@@ -22,6 +23,7 @@ public class PostThread {
     @OneToMany(mappedBy = "thread")
     private List<Post> posts;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "postThread")
     private Meeting meeting;
 
