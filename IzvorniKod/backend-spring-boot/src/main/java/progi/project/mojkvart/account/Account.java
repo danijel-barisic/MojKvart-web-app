@@ -62,9 +62,8 @@ public class Account implements UserDetails {
     @OneToMany(mappedBy = "account")
     private List<Event> events;
 
-    @ManyToOne
-    @JoinColumn(name = "meeting_id")
-    private Meeting meeting;
+    @OneToMany(mappedBy = "account")
+    private List<Meeting> meetings;
 
     @ManyToOne
     @JoinColumn(name = "home_id")
