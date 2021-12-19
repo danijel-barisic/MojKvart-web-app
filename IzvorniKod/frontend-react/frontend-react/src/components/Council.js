@@ -25,13 +25,14 @@ function Council() {
     }, []);
 
     React.useEffect(() => {
-        fetch(`/roles/${account.id}`)
+        fetch((account.id === undefined ? "/roles" : `/accounts/roles/${account.id}`))
         .then(data => data.json())
-        .then(data => data.name)
         .then(roles => setRoles(roles))
     }, [account])
 
-    if (roles !== undefined && roles.includes("Vijecnik"))
+    if (roles !== undefined 
+        && roles.length > 0
+        && (roles.filter(r => r.name === "Vijecnik").length > 0))
         return (
         <Card title="Izvješća s Vijeća četvrti">
             <div>
