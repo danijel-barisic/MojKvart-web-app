@@ -1,13 +1,12 @@
 import React from 'react'
-import ReactSession from 'react-client-session/dist/ReactSession'
 import Card from './Card'
 import {FaTimes,FaCheck} from 'react-icons/fa'
+import RoleRequestUser from './RoleRequestUser'
+import './RoleRequest.css'
 
 const RoleRequests = () => {
     const [requests,setRequests] = React.useState([]);
     const [users,setUsers] = React.useState([]);
-    const [isLoading,setLoading] = React.useState([true])
-    const role = ReactSession.get(ReactSession.get("username"));
     var roles = {
       '1' : "ADMIN",
       '2' : "Moderator",
@@ -28,9 +27,6 @@ const RoleRequests = () => {
     } 
 
     function onApprove(idR,idA,idRR){
-      var result = users.find(user => {
-        return user.id === idA
-      })
      const options = {
         method: 'PUT',
         headers: {
@@ -47,66 +43,43 @@ const RoleRequests = () => {
       setRequests(requests.map(request => request.id === idR? { ...request, status: 'Approved' }: request)) 
     } 
 
-    function fetchData() {
-      fetch('/accounts')
-        .then(jsonResponse => jsonResponse.json())
-        .then(response => {
-          setUsers(response);
-        })
-        .catch(e => {
-          console.log("error", e);
-        });
-        fetch('/role-requests')
-        .then(jsonResponse => jsonResponse.json())
-        .then(response => {
-          setLoading(false);
-          setRequests(response);
-        })
-        .catch(e => {
-          console.log("error", e);
-          setLoading(false);
-        });
-    }
   
     React.useEffect(() => {
-      fetchData();
+      const fetchData = async () => {
+        const respGlobal = await fetch('/accounts').then(data => data.json());
+        const respRepos = await fetch('/role-requests').then(data => data.json());
+  
+        setUsers(respGlobal);
+        setRequests(respRepos);
+      };
+  
+      fetchData()
+  
     }, []);
 
-    console.log(requests)
+    //console.log(users)
 
-    if(isLoading){
-      return(
-        <p>Page is loading please wait.</p>
-      )
-    }
+    
     return (
         <Card title = "Zahtjevi">
-             
-             
                  <div className="wrapperRR">
                         <p>Username</p> <p >Status</p> <p> Role Requested </p>  <p></p>
                         </div>
                {requests.map( (request) => {
+                 var user = users.find(x => x.id === request.account.id)
                   return ([
-                    
-                    
+
                         <div className="innerRR" >
-                           <p>{users[request.account.id-1].email} </p>
-                        
-                     
+                           <p> <RoleRequestUser key={request.account.id-1} user={user} /> </p>
                            <p className={request.status == "" ? "Pending" : request.status == "Denied" ? "Denied" : "Approved" }>  {request.status == "" ? "Pending" : request.status == "Denied" ? "Denied" : "Approved"}</p>
-                        
-                        
                            <p > {roles[request.role.id]}</p>
+
                            <div className="icons">
-
                            <FaCheck style={{color:"#039487" ,cursor:"pointer"}} onClick={() => {if(window.confirm('Are you sure u want to approve this role request?')) {onApprove(request.id,request.account.id,request.role.id)}}}></FaCheck>
-
-
                            <FaTimes style={{color:"red" ,cursor:"pointer"}} onClick={() => {if(window.confirm('Are you sure u want to deny this role request?')) {onDeny(request.id,request.account.id)}}}></FaTimes>
                            </div>
 
-                        
+                      
                         </div>
                      
                      
