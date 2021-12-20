@@ -11,7 +11,7 @@ function Home() {
    
    console.log("home->", isLoggedIn);
    if (!isLoggedIn) {
-      history.push("/");
+      // history.push("/"); // ovo ne bi trebalo biti tu, daje grešku cannot change state in render function
       return (
          <HeaderNotLoggedIn state={isLoggedIn} />
       )
