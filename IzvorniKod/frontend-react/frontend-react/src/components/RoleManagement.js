@@ -92,6 +92,14 @@ export default class RoleManagement extends React.Component {
                 <Card title="Greška">Vi niste ADMIN</Card>
             );
         }
+        if (this.state.roles === undefined) {
+            return null;
+        }
+        for (const role of this.state.roles) {
+            if (role.name === "ADMIN") {
+                return null;
+            }
+        }
         return (
             <div className="RoleManagement">
                 <Card title="Uloge">
@@ -149,7 +157,7 @@ export default class RoleManagement extends React.Component {
                         {b !== undefined
                             ? <td>
                                 {b.name}
-                                {b.name !== "ADMIN"
+                                {b.name !== "Stanovnik" && b.name !== "ADMIN"
                                     ? <button onClick={() => this.addRole   (b)}>Dodaj </button>
                                     : null
                                 }
