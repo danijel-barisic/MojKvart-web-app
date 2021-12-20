@@ -60,8 +60,12 @@ function Users(props) {
 
    React.useEffect(() => {
       fetch('/accounts')
-         .then(data => data.json())
-         .then(users => setUsers(users))
+         .then(data => {
+            if (!data.ok) {
+               return;
+            }
+            data.json().then(users => setUsers(users));
+         })
    }, [updated]);
 
    if (role === "ADMIN") {
