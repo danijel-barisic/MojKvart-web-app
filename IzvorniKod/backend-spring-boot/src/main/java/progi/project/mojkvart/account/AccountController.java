@@ -126,17 +126,18 @@ public class AccountController {
         }
     }
 
-    @PutMapping("/{id}")
-    public Account updateAccount(@PathVariable("id") Long id, @RequestBody Account account) {
-        if(account.getId() != null && !AccountService.existsById(account.getId())) {
+    @PutMapping("/{email}")
+    public Account updateAccount(@PathVariable("email") String email, @RequestBody Account account) {
+        if(account.getEmail() != null && AccountService.findByEmail(account.getEmail()).isEmpty()) {
             throw new IllegalArgumentException("Account with id: " + account.getId() + " does not exist");
         }
-        else if(account.getId() == null) {
+        else if(account.getEmail() == null) {
             throw new IllegalArgumentException("Account id must be given");
         }
         else {
-            if(!account.getId().equals(id))
+            if(!account.getEmail().equals(email))
                 throw new IllegalArgumentException("Account id must be preserved");
+            System.out.println(account);
             return AccountService.updateAccount(account);
         }
     }
