@@ -6,8 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import progi.project.mojkvart.district.District;
+import progi.project.mojkvart.home.Home;
 import progi.project.mojkvart.role.Role;
 import progi.project.mojkvart.role.RoleService;
+import progi.project.mojkvart.street.Street;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -17,6 +19,13 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/accounts")
 public class AccountController {
+
+    static private Home generateDummyHome() {
+        var h = new Home(-1L, new Street("", 0, 0));
+        h.getStreet().setDistrict(new District(""));
+        return h;
+    }
+    static private final Home dummyHome = generateDummyHome();
 
     @Autowired
     private AccountService AccountService;
@@ -34,7 +43,13 @@ public class AccountController {
         if(AccountService.findById(id).isEmpty()) {
             throw new IllegalArgumentException("Account with id: " + id + " does not exist");
         }
-        return AccountService.fetch(id);
+        var a = AccountService.fetch(id);
+        for (var role : a.getRoles()) {
+            if (role.getName().equals("ADMIN")) {
+                a.setHome(dummyHome);
+            }
+        }
+        return a;
     }
 
     @GetMapping("/{email}")
