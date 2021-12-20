@@ -64,7 +64,7 @@ function EventEditForm() {
             body: JSON.stringify(data)
         }
 
-        return fetch("/events", options).then(response => {
+        return fetch(`/events/${data.id}`, options).then(response => {
 
             if (response.ok) {
                 history.push('/events')
