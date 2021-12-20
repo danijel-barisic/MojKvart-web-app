@@ -1,9 +1,7 @@
 import React from "react";
-import Card from "./Card";
 import ReactSession from "react-client-session/dist/ReactSession";
-import './Login.css';
+import Card from "./Card";
 import './RoleManagement.css'
-import User from "./User";
 
 function trueEquals(a, b) {
     if (a === b) return true;
@@ -30,6 +28,10 @@ function trueContains(o, e) {
 }
 
 export function addRole(admin_id, user_id, username, role_name) {
+    if (role_name === "ADMIN") {
+        alert("Ne možete dodati ulogu ADMINA");
+        return undefined;
+    }
     // prompt if sure
     if (!window.confirm(`Jeste li sigurni da želite korisniku ${username} dodati ${role_name}?`)) {
         return undefined;
@@ -44,6 +46,9 @@ export function addRole(admin_id, user_id, username, role_name) {
 }
 
 export function removeRole(admin_id, user_id, username, role_name) {
+    if (role_name === "Stanovnik") {
+        alert("Nikome se ne može oduzeti Stanovnik");
+    }
     // prompt if sure
     if (!window.confirm(`Jeste li sigurni da želite korisniku ${username} oduzeti ${role_name}?`)) {
         return undefined;
@@ -81,6 +86,11 @@ export default class RoleManagement extends React.Component {
     render() {
         if (this.state.error !== undefined) {
             return <Card title="Greška!">{this.state.error.message}</Card>
+        }
+        if (ReactSession.get(ReactSession.get("username")) !== "ADMIN") {
+            return (
+                <Card title="Greška">Vi niste ADMIN</Card>
+            );
         }
         return (
             <div className="RoleManagement">
@@ -126,8 +136,26 @@ export default class RoleManagement extends React.Component {
             <tbody>
                 {role_pairs.map(([a, b]) =>
                     <tr>
-                        {a !== undefined ? <td>{a.name}<button onClick={() => this.removeRole(a)}>Oduzmi</button></td> : <td></td>}
-                        {b !== undefined ? <td>{b.name}<button onClick={() => this.addRole   (b)}>Dodaj </button></td> : <td></td>}
+                        {a !== undefined
+                            ? <td>
+                                {a.name}
+                                {a.name !== "Stanovnik" && a.name !== "ADMIN"
+                                    ? <button onClick={() => this.removeRole(a)}>Oduzmi</button>
+                                    : null
+                                }
+                              </td>
+                            : null
+                        }
+                        {b !== undefined
+                            ? <td>
+                                {b.name}
+                                {b.name !== "ADMIN"
+                                    ? <button onClick={() => this.addRole   (b)}>Dodaj </button>
+                                    : null
+                                }
+                              </td>
+                            : null
+                        }
                     </tr>
                 )}
             </tbody>
@@ -215,7 +243,9 @@ export default class RoleManagement extends React.Component {
     }
 }
 
-// export default function RoleManagement(props) {
-//     const user = props.user;
-//     return <div></div>;
-// }
+/* exports
+* default: RoleManagement
+*
+* addRole
+* removeRole
+* */
