@@ -59,6 +59,10 @@
 
 .innerReply{
    display: flex;
+   align-items: center;
+}
+.innerReplyWho{
+   margin-right: 10px;
 }
 
 .delete {
