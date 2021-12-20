@@ -105,6 +105,7 @@ public class AccountController {
         return account.isBlocked();
     }
 
+    /*brise sve postojece i dodaje nove*/
     @PostMapping("/roles/{id}")
     public List<Role> createRoles(@PathVariable("id") long id, @RequestBody ArrayList<String> roleList) {
         Account account = AccountService.fetch(id);
@@ -142,6 +143,7 @@ public class AccountController {
         }
     }
 
+    /*dodaje na postojece novi role*/
     @PutMapping("/roles/{id}")
     public List<Role> updateRoles(@PathVariable("id") Long accountId, @RequestBody String roleName) {
         Account account = AccountService.fetch(accountId);
