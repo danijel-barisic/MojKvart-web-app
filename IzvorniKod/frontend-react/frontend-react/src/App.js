@@ -143,7 +143,7 @@ function App() {
               <Route path='/ulice/novi' exact component={StreetForm} />
               <Route path='/ulice/:id/edit' exact component={StreetEditForm} />
               <Route path='/korisnici' exact component={Users} />
-              <Route path='/korisnici/:id' exact component={UserAdminView2} />
+              <Route path='/korisnici/:id' exact component={UserAdminView} />
               <Route path='/personal' exact component={Personal} />
               <Route path='/personal/edit' exact component={PersonalEdit} />
               <Route path='/personal/password' exact component={PersonalPassword} />

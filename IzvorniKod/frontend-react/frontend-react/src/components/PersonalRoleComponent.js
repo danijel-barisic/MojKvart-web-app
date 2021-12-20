@@ -1,6 +1,7 @@
-import React from "react";
+import React from "react"
 
 function PersonalRoleComponent(props) {
+
     const account = props.account
     const roles = props.roles
     const target = props.target
@@ -17,14 +18,18 @@ function PersonalRoleComponent(props) {
             .filter(r => r.role.name === target)))
     }, [])
 
-    console.log(roleRequests)
-
     function sendRoleRequest() {
+
         const data = {
-            account_id: account.id,
-            role_id: targetId,
-            role_request_status: "Pending"
+            account: {
+                id: account.id
+            },
+            role: {
+                id: targetId
+            },
+            status: "Pending"
         }
+
         const options = {
             method: "POST",
             headers: {
@@ -32,30 +37,30 @@ function PersonalRoleComponent(props) {
             },
             body: JSON.stringify(data)
         }
+        
         return fetch("/role-requests", options).then(response => {
             if (!response.ok) {
                 console.log(response.body)
+            } else {
+                window.location.reload()
             }
         })
     }
 
     if (roleRequests !== undefined) {
-        if (roles.filter(r => r.name === target).length > 0) 
-        return (
+        if (roles.filter(r => r.name === target).length > 0) return (
             <div>
                 <b>{target}: </b>
                 <span>Dodijeljena Vam je ova uloga!</span>
             </div>
         )
-        else if (roleRequests.length > 0)
-        return (
+        else if (roleRequests.length > 0)return (
             <div>
                 <b>{target}: </b>
                 <span>Vaš zahtjev je poslan!</span>
             </div>
         )
-        else
-        return (
+        else return (
             <div>
                 <b>{target}: </b>
                 <button className='button' type="button" onClick={() => {sendRoleRequest()}}>Zatraži ovu ulogu</button>
@@ -63,9 +68,8 @@ function PersonalRoleComponent(props) {
         )
     }
     else return (
-        <>
-        </>
+        <></>
     )
 }
 
-export default PersonalRoleComponent;
+export default PersonalRoleComponent

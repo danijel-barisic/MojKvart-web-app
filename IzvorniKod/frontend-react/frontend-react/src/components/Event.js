@@ -1,8 +1,8 @@
-import React from "react";
-import "./Event.css";
+import React from "react"
+import "./Event.css"
 
 function Event(props) {
-    const {id, name, description, duration, datetime, location, status, account} = props.event;
+    const {id, name, description, duration, datetime, location, status, account} = props.event
     return (
         <div className='Event'>
             <div>
@@ -27,10 +27,10 @@ function Event(props) {
             </div>
             <div>
                 <b>Organizator: </b>
-                <span>{account["firstName"]} {account["lastName"]}</span>
+                <span>{account.firstName} {account.lastName}</span>
             </div>
         </div>
-    );
+    )
 }
 
-export default Event;
+export default Event
