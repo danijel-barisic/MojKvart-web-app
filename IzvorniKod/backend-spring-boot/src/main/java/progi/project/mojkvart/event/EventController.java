@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import progi.project.mojkvart.account.Account;
 import progi.project.mojkvart.account.AccountService;
+import progi.project.mojkvart.meeting.Meeting;
 
 import java.net.URI;
 import java.util.List;
@@ -41,6 +42,21 @@ public class EventController {
             event.setAccount(account);
             Event saved = eventService.createEvent(event);
             return ResponseEntity.created(URI.create("/events/" + saved.getId())).body(saved);
+        }
+    }
+
+    @PutMapping("/{id}")
+    public Event updateEvent(@PathVariable("id") Long id, @RequestBody Event event) {
+        if(event.getId() != null && !eventService.existsById(event.getId())) {
+            throw new IllegalArgumentException("Event with id: " + event.getId() + " does not exist");
+        }
+        else if(event.getId() == null) {
+            throw new IllegalArgumentException("Event id must be given");
+        }
+        else {
+            if(!event.getId().equals(id))
+                throw new IllegalArgumentException("Event id must be preserved");
+            return eventService.updateEvent(event);
         }
     }
 
