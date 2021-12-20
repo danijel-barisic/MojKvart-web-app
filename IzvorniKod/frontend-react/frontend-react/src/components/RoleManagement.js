@@ -152,7 +152,7 @@ export default class RoleManagement extends React.Component {
                                     : null
                                 }
                               </td>
-                            : null
+                            : <td></td>
                         }
                         {b !== undefined
                             ? <td>
@@ -162,7 +162,7 @@ export default class RoleManagement extends React.Component {
                                     : null
                                 }
                               </td>
-                            : null
+                            : <td></td>
                         }
                     </tr>
                 )}
