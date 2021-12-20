@@ -4,6 +4,7 @@ import Card from "./Card"
 import { useHistory } from "react-router"
 import { ReactSession } from "react-client-session"
 import EventSuggestion from "./EventSuggestion"
+import EventSuggestionUser from "./EventSuggestionUser"
 
 function Events() {
 
@@ -111,7 +112,7 @@ function Events() {
                                 {my_unconfirmed.map(function (event){
                                     return (
                                         <div className='inner'>
-                                            <Event event={event}/>
+                                            <EventSuggestionUser event={event}/>
                                         </div>
                                     )
                                 })}

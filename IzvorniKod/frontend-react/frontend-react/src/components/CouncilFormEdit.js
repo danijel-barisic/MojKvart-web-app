@@ -63,28 +63,26 @@ function CouncilFormEdit() {
         e.preventDefault();
 
         const data = {
+            id: oldReport.id,
             title: meetingForm.title,
             report: meetingForm.report,
             dateTime: oldReport.dateTime,
-            district: {
-                id: oldReport.district.id
-            },
-            account: {
-                id: oldReport.account.id
-            }
+            postThread: oldReport.postThread,
+            district: oldReport.district,
+            account: oldReport.account
         }
 
-        deleteMeeting(report_id)
+        console.log(data)
 
         const options = {
-            method: "POST",
+            method: "PUT",
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         }
 
-        return fetch("/council", options).then(response => {
+        return fetch(`/council/${data.id}`, options).then(response => {
 
             if (response.ok) {
                 console.log(response)
@@ -92,7 +90,7 @@ function CouncilFormEdit() {
             }
             
             else {
-                setError("Prijedlog događaja nije moguće objaviti.");
+                setError("Izvješće nije moguće promijeniti.");
                 console.log(response.body);
             }
         })

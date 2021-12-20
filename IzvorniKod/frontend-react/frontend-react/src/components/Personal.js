@@ -42,27 +42,45 @@ function Personal() {
             <Card title="Osobni podaci">
                 <div>
                     <div className='Login'>
+                        <table><tbody>
+                            <tr>
+                                <td>
+                                    <b>E-mail: </b>
+                                </td>
+                                <td>
+                                    <span>{acc_username}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Ime: </b>
+                                </td>
+                                <td>
+                                    <span>{account.firstName}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Prezime: </b>
+                                </td>
+                                <td>
+                                    <span>{account.lastName}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Dodatne uloge: </b>
+                                </td>
+                                <td>
+                                    <span>{specialRoles()}</span>
+                                </td>
+                            </tr>
+                        </tbody></table>
                         <div>
-                            <b>E-mail: </b>
-                            <span>{acc_username}</span>
+                            <div className='Login'>
+                                <button className='button' type="button" >Izmjena osobnih podataka</button>
+                            </div>
                         </div>
-                        <div>
-                            <b>Ime: </b>
-                            <span>{account.firstName}</span>
-                        </div>
-                        <div>
-                            <b>Prezime: </b>
-                            <span>{account.lastName}</span>
-                        </div>
-                        <div>
-                            <b>Dodatne uloge: </b>
-                            <span>{specialRoles()}</span>
-                        </div>
-                        <div>
-                        <div className='Login'>
-                            <button className='button' type="button" >Izmjena osobnih podataka</button>
-                        </div>
-                    </div>
                     </div>
                 </div>
             </Card>
@@ -71,30 +89,56 @@ function Personal() {
             <Card title="Osobni podaci">
                 <div>
                     <div className='Login'>
-                        <div>
-                            <b>E-mail: </b>
-                            <span>{acc_username}</span>
-                        </div>
-                        <div>
-                            <b>Ime: </b>
-                            <span>{account.firstName}</span>
-                        </div>
-                        <div>
-                            <b>Prezime: </b>
-                            <span>{account.lastName}</span>
-                        </div>
-                        <div>
-                            <b>Kvart: </b>
-                            <span>{account.district.name}</span>
-                        </div>
-                        <div>
-                            <b>Adresa: </b>
-                            <span>{`${account.home.street.name} ${account.home.number}`}</span>
-                        </div>
-                        <div>
-                            <b>Dodatne uloge: </b>
-                            <span>{specialRoles()}</span>
-                        </div>
+                        <table><tbody>
+                            <tr>
+                                <td>
+                                    <b>E-mail: </b>
+                                </td>
+                                <td>
+                                    <span>{acc_username}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Ime: </b>
+                                </td>
+                                <td>
+                                    <span>{account.firstName}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Prezime: </b>
+                                </td>
+                                <td>
+                                    <span>{account.lastName}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Kvart: </b>
+                                </td>
+                                <td>
+                                    <span>{account.district.name}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Adresa: </b>
+                                </td>
+                                <td>
+                                    <span>{`${account.home.street.name} ${account.home.number}`}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Dodatne uloge: </b>
+                                </td>
+                                <td>
+                                    <span>{specialRoles()}</span>
+                                </td>
+                            </tr>
+                        </tbody></table>
                         <div className='Login'>
                             <button className='button' type="button" >Izmjena osobnih podataka</button>
                             <button className='button' type="button" >Brisanje korisničkog računa</button>
@@ -108,26 +152,48 @@ function Personal() {
             <Card title="Osobni podaci">
                 <div>
                     <div className='Login'>
-                        <div>
-                            <b>E-mail: </b>
-                            <span>{acc_username}</span>
-                        </div>
-                        <div>
-                            <b>Ime: </b>
-                            <span>{account.firstName}</span>
-                        </div>
-                        <div>
-                            <b>Prezime: </b>
-                            <span>{account.lastName}</span>
-                        </div>
-                        <div>
-                            <b>Kvart: </b>
-                            <span>{account.district.name}</span>
-                        </div>
-                        <div>
-                            <b>Adresa: </b>
-                            <span>{`${account.home.street.name} ${account.home.number}`}</span>
-                        </div>
+                    <table><tbody>
+                            <tr>
+                                <td>
+                                    <b>E-mail: </b>
+                                </td>
+                                <td>
+                                    <span>{acc_username}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Ime: </b>
+                                </td>
+                                <td>
+                                    <span>{account.firstName}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Prezime: </b>
+                                </td>
+                                <td>
+                                    <span>{account.lastName}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Kvart: </b>
+                                </td>
+                                <td>
+                                    <span>{account.district.name}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Adresa: </b>
+                                </td>
+                                <td>
+                                    <span>{`${account.home.street.name} ${account.home.number}`}</span>
+                                </td>
+                            </tr>
+                        </tbody></table>
                         <div className='Login'>
                             <button className='button' type="button" >Izmjena osobnih podataka</button>
                             <button className='button' type="button" >Brisanje korisničkog računa</button>

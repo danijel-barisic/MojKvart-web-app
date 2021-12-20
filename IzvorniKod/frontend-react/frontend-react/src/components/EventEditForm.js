@@ -2,7 +2,6 @@ import React from "react"
 import Card from "./Card"
 import "./Login.css"
 import { useHistory } from "react-router"
-import { ReactSession } from "react-client-session"
 
 function EventEditForm() {
 
@@ -42,42 +41,23 @@ function EventEditForm() {
         setEventForm(oldForm => ({...oldForm, [name]: value}))
     }
 
-    function deleteEvent(id) {
-
-        const options = {
-            method: 'DELETE',
-        }
-
-        fetch(`/events/${id}`, options).then(response => {
-
-            if (!response.ok) {
-                console.log(response.body)
-            } else {
-                console.log("deleted")
-            }
-        })
-    }
-
     async function onSubmit(e) {
 
         e.preventDefault()
 
         const data = {
+            id: oldEvent.id,
             name: eventForm.name,
             description: eventForm.description,
-            location: eventForm.location,
+            duration: eventForm.duration,
             datetime: eventForm.datetime,
-            duration: "PT0.000036S",
-            status: 0,
-            account: {
-                id: oldEvent.account.id
-            }
+            location: eventForm.location,
+            status: oldEvent.status,
+            account: oldEvent.account
         }
 
-        deleteEvent(event_id)
-
         const options = {
-            method: "POST",
+            method: "PUT",
             headers: {
                 'Content-Type': 'application/json'
             },
