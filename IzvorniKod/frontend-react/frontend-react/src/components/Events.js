@@ -3,6 +3,7 @@ import Event from "./Event";
 import Card from "./Card";
 import { useHistory } from "react-router";
 import { ReactSession } from "react-client-session";
+import EventSuggestion from "./EventSuggestion";
 
 function Events() {
     const [events, setEvents] = React.useState([]);
@@ -34,51 +35,6 @@ function Events() {
         .then(roles => setRoles(roles))
     }, [account])
 
-    function deleteEvent(id) {
-        const options = {
-            method: 'DELETE',
-        };
-        fetch(`/events/${id}`, options).then(response => {
-            if (!response.ok) {
-                console.log(response.body)
-            } else {
-                console.log("deleted");
-                setUpdated(new Date());
-            }
-        })
-    }
-
-    function submitEvent(event) {
-        const data = {
-            name: event.name,
-            description: event.description,
-            location: event.location,
-            datetime: event.datetime,
-            duration: event.duration,
-            status: 1,
-            account: {
-                id: event.account.id
-            }
-        }
-        deleteEvent(event.id) 
-        const options = {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        }
-        return fetch("/events", options).then(response => {
-            if (response.ok) {
-                history.push('/events');
-            }
-            else {
-                setError("Prijedlog događaja nije moguće objaviti.");
-                console.log(response.body);
-            }
-        });
-    }
-
     if (roles !== undefined && roles.length > 0) {
         if (roles.filter(r => r.name === "Moderator").length > 0)
             return (
@@ -107,18 +63,11 @@ function Events() {
                         <div>
                             <div className='innerEvent'>
                                 <div className='wrapper'>
-                                    {unconfirmed.map(function (event){
+                                    {unconfirmed.map(function (ev){
                                         return (
-                                            <>
-                                                <div className='inner'>
-                                                    <Event event={event}/>
-                                                </div>
-                                                <div className='Login'>
-                                                    <button className='button' type="button" onClick={() => submitEvent(event)}>Objavi</button>
-                                                    <button className='button' type="button" onClick={() => deleteEvent(event["id"])}>Obriši</button>
-                                                    <button className='button' type="button" onClick={() => {history.push(`/events/edit/${event["id"]}`)}}>Uredi</button>
-                                                </div>
-                                            </>
+                                            <div className='inner'>
+                                                <EventSuggestion event={ev}/>
+                                            </div>
                                         )
                                     })}
                                 </div>
