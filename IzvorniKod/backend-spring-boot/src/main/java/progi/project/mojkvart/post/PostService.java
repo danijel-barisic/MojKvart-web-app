@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import progi.project.mojkvart.district.District;
 import progi.project.mojkvart.event.Event;
+import progi.project.mojkvart.role_request.RoleRequest;
 
 import java.util.List;
 
@@ -32,13 +33,19 @@ public class PostService {
         );
     }
 
-    public Post createPost(Post post) {
+    public Post createPost(Post post, Long threadId) {
         Assert.isNull(post.getId(), "Post ID must be null, not: " + post.getId());
-        return postRepository.save(post);
+        Post saved = post;
+        saved.setThreadId(threadId);
+        return postRepository.save(saved);
     }
     public Post deletePost(long postId) {
         Post post = fetch(postId);
         postRepository.delete(post);
         return post;
+    }
+
+    public Post updatePost(Post post) {
+        return postRepository.save(post);
     }
 }

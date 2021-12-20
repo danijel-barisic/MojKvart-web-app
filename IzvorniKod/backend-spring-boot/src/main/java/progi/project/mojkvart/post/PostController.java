@@ -3,6 +3,9 @@ package progi.project.mojkvart.post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import progi.project.mojkvart.role_request.RoleRequest;
+import progi.project.mojkvart.thread.PostThread;
+import progi.project.mojkvart.thread.PostThreadService;
 
 import java.net.URI;
 import java.util.List;
@@ -13,6 +16,8 @@ public class PostController {
 
     @Autowired
     PostService postService;
+    @Autowired
+    PostThreadService postThreadService;
 
     @GetMapping("")
     public List<Post> listPosts() {
@@ -27,13 +32,38 @@ public class PostController {
         return postService.fetch(id);
     }
 
-    @PostMapping("")
-    public ResponseEntity<Post> createPost(@RequestBody Post post) {
+    /* id je postthread id*/
+    @PostMapping("/{id}")
+    public ResponseEntity<Post> createPost(@PathVariable("id")Long threadId, @RequestBody Post post) {
         if(post.getId() != null && postService.existsById(post.getId())) {
             throw new IllegalArgumentException("Post with id: " + post.getId() + " already exists");
-        } else {
-            Post saved = postService.createPost(post);
+        } else if(!post.getThreadId().equals(threadId)){
+            throw new IllegalArgumentException("Post id must be preserved");
+        } else if(!postThreadService.existsById(threadId)) {
+            throw new IllegalArgumentException("Thread with id: "+ threadId + " doesnt exist");
+        }
+        else {
+            Post saved = post;
+            PostThread postThread = postThreadService.fetch(threadId);
+            saved.setThread(postThread);
+            saved = postService.createPost(saved, threadId);
             return ResponseEntity.created(URI.create("/posts/" + saved.getId())).body(saved);
+        }
+    }
+
+    @PutMapping("/{id}")
+    public Post updatePost(@PathVariable("id") Long id, @RequestBody Post post) {
+        if (post.getId() != null && !postService.existsById(post.getId())) {
+            throw new IllegalArgumentException("Post request with id: " + post.getId() + " does not exist");
+        } else if (post.getId() == null) {
+            throw new IllegalArgumentException("Post id must be given");
+        } else {
+            if (!post.getId().equals(id))
+                throw new IllegalArgumentException("Post request id must be preserved");
+            Long threadId = post.getThreadId();
+            PostThread postThread = postThreadService.fetch(threadId);
+            post.setThread(postThread);
+            return postService.updatePost(post);
         }
     }
 
