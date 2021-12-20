@@ -1,0 +1,23 @@
+.RoleManagement table{
+    border-collapse: collapse;
+    width: 500px;
+}
+
+.RoleManagement thead {
+    border-bottom: 2px solid black;
+}
+
+.RoleManagement tr>td:first-child, .RoleManagement tr>th:first-child {
+    border-right: 1px solid black;
+    width: 50%;
+}
+
+.RoleManagement td>button {
+    float: right;
+}
+
+.RoleManagement td::after {
+    content: "";
+    clear: both;
+    display: table;
+}
