@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import progi.project.mojkvart.district.District;
+import progi.project.mojkvart.meeting.Meeting;
 
 import java.util.List;
 
@@ -42,5 +43,9 @@ public class EventService {
         Event event = fetch(eventId);
         eventRepository.delete(event);
         return event;
+    }
+
+    public Event updateEvent(Event event) {
+        return eventRepository.save(event);
     }
 }
