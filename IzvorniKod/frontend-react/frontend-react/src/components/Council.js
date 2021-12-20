@@ -6,17 +6,14 @@ import { useHistory } from "react-router";
 import { ReactSession } from "react-client-session";
 
 function Council() {
-    const [meetings, setMeetings] = React.useState([])
-    React.useEffect(() => {
-        fetch('/council')
-        .then(data => data.json())
-        .then(data => setMeetings(data))
-    }, [])
+
     const history = useHistory()
 
     const acc_username = ReactSession.get("username");
-    const [account, setAccount] = React.useState({id: ''});
-    const [roles, setRoles] = React.useState([{name: "temp"}]);
+
+    const [account, setAccount] = React.useState();
+    const [roles, setRoles] = React.useState([]);
+    const [meetings, setMeetings] = React.useState()
 
     React.useEffect(() => {
         fetch(`/accounts/${acc_username}`)
@@ -25,52 +22,71 @@ function Council() {
     }, []);
 
     React.useEffect(() => {
-        fetch((account.id === undefined ? "/roles" : `/accounts/roles/${account.id}`))
-        .then(data => data.json())
-        .then(roles => setRoles(roles))
+        if (account !== undefined) {
+            fetch((`/accounts/roles/${account.id}`))
+            .then(data => data.json())
+            .then(roles => setRoles(roles))
+        }
     }, [account])
 
-    if (roles !== undefined 
-        && roles.length > 0
-        && (roles.filter(r => r.name === "Vijecnik").length > 0))
-        return (
-        <Card title="Izvješća s Vijeća četvrti">
-            <div>
-                <div className='Login'>
-                    <button className='button' type="button" onClick={() => {history.push("/council/new_report")}}>Novo izvješće</button>
-                </div>
-            </div>
-            <div>
-                <div className='innerEvent'>
-                    <div className='wrapper'>
-                        {meetings.map(function (meeting) {
-                            return (
-                                <div className="inner">
-                                    <CouncilMeetingCard meeting={meeting}/>
-                                </div>
-                            );
-                        })}
+    React.useEffect(() => {
+        if (account !== undefined) {
+            fetch('/council')
+            .then(data => data.json())
+            .then(data => setMeetings(data
+                .filter(m => m.district.id === account.district.id)))
+        }
+    }, [account])
+
+    console.log(meetings)
+
+    if (meetings !== undefined) {
+        if (roles !== undefined 
+            && roles.length > 0
+            && (roles.filter(r => r.name === "Vijecnik").length > 0))
+            return (
+            <Card title="Izvješća s Vijeća četvrti">
+                <div>
+                    <div className='Login'>
+                        <button className='button' type="button" onClick={() => {history.push("/council/new_report")}}>Novo izvješće</button>
                     </div>
                 </div>
-            </div>
-        </Card>
-    )
+                <div>
+                    <div className='innerEvent'>
+                        <div className='wrapper'>
+                            {meetings.map(function (meeting) {
+                                return (
+                                    <div className="inner">
+                                        <CouncilMeetingCard meeting={meeting}/>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+            </Card>
+        )
+        else return (
+            <Card title="Izvješća s Vijeća četvrti">
+                <div>
+                    <div className='innerEvent'>
+                        <div className='wrapper'>
+                            {meetings.map(function (meeting) {
+                                return (
+                                    <div className="inner">
+                                        <CouncilMeetingCard meeting={meeting}/>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+            </Card>
+        )
+    }
     else return (
-        <Card title="Izvješća s Vijeća četvrti">
-            <div>
-                <div className='innerEvent'>
-                    <div className='wrapper'>
-                        {meetings.map(function (meeting) {
-                            return (
-                                <div className="inner">
-                                    <CouncilMeetingCard meeting={meeting}/>
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
-            </div>
-        </Card>
+        <>
+        </>
     )
 }
 
