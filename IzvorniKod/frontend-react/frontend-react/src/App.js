@@ -31,6 +31,7 @@ import PersonalEdit from './components/PersonalEdit';
 import Personal from "./components/Personal";
 import PersonalDelete from './components/PersonalDelete';
 import PersonalPassword from  './components/PersonalPassword';
+import PerosnalRoleRequest from './components/PersonalRoleRequest';
 
 function App() {
   ReactSession.setStoreType("localStorage");
@@ -101,6 +102,7 @@ function App() {
               <Route path='/forum/:id' exact component={ThreadView} />
               <Route path='/novatema' exact component={ForumNewThread}/>
               <Route path='/personal' exact component={Personal} />
+              <Route path='/personal/role_requests' exact component={PerosnalRoleRequest} />
               <Route path='/personal/edit' exact component={PersonalEdit} />
               <Route path='/personal/password' exact component={PersonalPassword} />
               <Route path='/personal/delete' exact component={PersonalDelete} />

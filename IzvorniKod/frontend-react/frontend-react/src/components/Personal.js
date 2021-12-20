@@ -2,6 +2,7 @@ import React from "react";
 import Card from "./Card";
 import { ReactSession } from "react-client-session";
 import "./Login.css";
+import { useHistory } from "react-router";
 
 function Personal() {
 
@@ -9,6 +10,8 @@ function Personal() {
     
     const [account, setAccount] = React.useState({id: ''});
     const [roles, setRoles] = React.useState();
+
+    const history = useHistory();
 
     React.useEffect(() => {
         fetch(`/accounts/${acc_username}`)
@@ -96,7 +99,7 @@ function Personal() {
                             <div className='Login'>
                                 <button className='button' type="button" >Izmjena osobnih podataka</button>
                                 <button className='button' type="button" >Brisanje korisničkog računa</button>
-                                <button className='button' type="button" >Zahtjevi za ulogom</button>
+                                <button className='button' type="button" onClick={() => {history.push("/personal/role_requests")}} >Zahtjevi za ulogama</button>
                             </div>
                         </div>
                     </div>
@@ -130,7 +133,7 @@ function Personal() {
                             <div className='Login'>
                                 <button className='button' type="button" >Izmjena osobnih podataka</button>
                                 <button className='button' type="button" >Brisanje korisničkog računa</button>
-                                <button className='button' type="button" >Zahtjevi za ulogom</button>
+                                <button className='button' type="button" onClick={() => {history.push("/personal/role_requests")}} >Zahtjevi za ulogama</button>
                             </div>
                         </div>
                     </div>
