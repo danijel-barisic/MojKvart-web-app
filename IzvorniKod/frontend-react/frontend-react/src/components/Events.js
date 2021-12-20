@@ -11,13 +11,15 @@ function Events() {
     const [error, setError] = React.useState('');
     const history = useHistory();
     
-    const confirmed = events.filter((event) => event["status"] === "1")
-    const unconfirmed = events.filter((event) => event["status"] === "0")
-
+    
     const acc_username = ReactSession.get("username");
-
+    
     const [account, setAccount] = React.useState({id: ''});
     const [roles, setRoles] = React.useState();
+
+    const confirmed = events.filter((event) => event["status"] === "1")
+    const unconfirmed = events.filter((event) => event["status"] === "0")
+    const my_unconfirmed = unconfirmed.filter((event) => event.account.id === account.id)
 
     React.useEffect(() => {
         fetch(`/accounts/${acc_username}`)
@@ -85,29 +87,68 @@ function Events() {
                         </Card>
                     </>
                 )
-            else 
+            else if (my_unconfirmed !== undefined && my_unconfirmed.length > 0)
                 return (
-                    <Card title='Događaji'>
-                        <div>
-                            <div className='Login'>
-                                <button className='button' type="button" onClick={() => {history.push("/events/suggestion")}}>Predloži događaj</button>
-                            </div>
-                        </div>
-                        <div>
-                            <div className='innerEvent'>
-                                <div className='wrapper'>
-                                    {confirmed.map(function (event){
-                                        return (
-                                            <div className='inner'>
-                                                <Event event={event}/>
-                                            </div>
-                                        )
-                                    })}
+                    <>
+                        <Card title='Događaji'>
+                            <div>
+                                <div className='Login'>
+                                    <button className='button' type="button" onClick={() => {history.push("/events/suggestion")}}>Predloži događaj</button>
                                 </div>
                             </div>
-                        </div>
-                    </Card>
+                            <div>
+                                <div className='innerEvent'>
+                                    <div className='wrapper'>
+                                        {confirmed.map(function (event){
+                                            return (
+                                                <div className='inner'>
+                                                    <Event event={event}/>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                </div>
+                            </div>
+                        </Card>
+                        <Card title="Moji nepotvrđeni događaji">
+                            <div>
+                                <div className='innerEvent'>
+                                    <div className='wrapper'>
+                                        {my_unconfirmed.map(function (event){
+                                            return (
+                                                <div className='inner'>
+                                                    <Event event={event}/>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                </div>
+                            </div>
+                        </Card>
+                    </>
                 )
+            else return (
+                <Card title='Događaji'>
+                    <div>
+                        <div className='Login'>
+                            <button className='button' type="button" onClick={() => {history.push("/events/suggestion")}}>Predloži događaj</button>
+                        </div>
+                    </div>
+                    <div>
+                        <div className='innerEvent'>
+                            <div className='wrapper'>
+                                {confirmed.map(function (event){
+                                    return (
+                                        <div className='inner'>
+                                            <Event event={event}/>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    </div>
+                </Card>
+            )
         }
         else return (
             <>
