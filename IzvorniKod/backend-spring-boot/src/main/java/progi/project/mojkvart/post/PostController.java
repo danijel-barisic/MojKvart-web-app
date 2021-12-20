@@ -3,6 +3,8 @@ package progi.project.mojkvart.post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import progi.project.mojkvart.account.Account;
+import progi.project.mojkvart.account.AccountService;
 import progi.project.mojkvart.role_request.RoleRequest;
 import progi.project.mojkvart.thread.PostThread;
 import progi.project.mojkvart.thread.PostThreadService;
@@ -18,6 +20,8 @@ public class PostController {
     PostService postService;
     @Autowired
     PostThreadService postThreadService;
+    @Autowired
+    AccountService accountService;
 
     @GetMapping("")
     public List<Post> listPosts() {
@@ -44,7 +48,11 @@ public class PostController {
         }
         else {
             Post saved = post;
+            Account account = post.getAccount();
+            Long accountId = account.getId();
+            account = accountService.fetch(accountId);
             PostThread postThread = postThreadService.fetch(threadId);
+            saved.setAccount(account);
             saved.setThread(postThread);
             saved = postService.createPost(saved, threadId);
             return ResponseEntity.created(URI.create("/posts/" + saved.getId())).body(saved);
@@ -60,8 +68,12 @@ public class PostController {
         } else {
             if (!post.getId().equals(id))
                 throw new IllegalArgumentException("Post request id must be preserved");
+            Account account = post.getAccount();
+            Long accountId = account.getId();
+            account = accountService.fetch(accountId);
             Long threadId = post.getThreadId();
             PostThread postThread = postThreadService.fetch(threadId);
+            post.setAccount(account);
             post.setThread(postThread);
             return postService.updatePost(post);
         }
