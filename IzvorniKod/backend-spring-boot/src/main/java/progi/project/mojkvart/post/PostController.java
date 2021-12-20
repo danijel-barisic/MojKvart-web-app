@@ -37,4 +37,11 @@ public class PostController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public void deletePost(@PathVariable("id") long postId) {
+        if(postService.existsById(postId) == false)
+            throw new IllegalArgumentException("Post with id: " + postId + " does not exist");
+        postService.deletePost(postId);
+    }
+
 }

@@ -1,6 +1,7 @@
 package progi.project.mojkvart.thread;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import progi.project.mojkvart.account.Account;
 import progi.project.mojkvart.district.District;
 import progi.project.mojkvart.meeting.Meeting;
 import progi.project.mojkvart.post.Post;
@@ -31,8 +32,11 @@ public class PostThread {
     @JoinColumn(name = "district_id")
     private District district;
 
-    public PostThread(){
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
 
+    public PostThread(){
     }
 
     public PostThread(Long id, String name, List<Post> posts, Meeting meeting, District district) {
@@ -41,6 +45,14 @@ public class PostThread {
         this.posts = posts;
         this.meeting = meeting;
         this.district = district;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public Long getId() {

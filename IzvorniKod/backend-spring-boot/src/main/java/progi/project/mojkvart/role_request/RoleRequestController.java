@@ -3,7 +3,11 @@ package progi.project.mojkvart.role_request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import progi.project.mojkvart.account.Account;
+import progi.project.mojkvart.account.AccountService;
 import progi.project.mojkvart.meeting.Meeting;
+import progi.project.mojkvart.role.Role;
+import progi.project.mojkvart.role.RoleService;
 import progi.project.mojkvart.street.Street;
 import progi.project.mojkvart.street.StreetService;
 
@@ -16,6 +20,10 @@ public class RoleRequestController {
 
     @Autowired
     private RoleRequestService roleRequestService;
+    @Autowired
+    private AccountService accountService;
+    @Autowired
+    private RoleService roleService;
 
     @GetMapping("")
     public List<RoleRequest> listRoleRequests() {
@@ -38,7 +46,13 @@ public class RoleRequestController {
             throw new IllegalArgumentException("Request for role: " + roleRequest.getRole().getName() + " already exists " +
                     "for user: " + roleRequest.getAccount().getUsername());
         } else {
+            Long accountId = roleRequest.getAccount().getId();
+            Long roleId = roleRequest.getRole().getId();
+            Account account = accountService.fetch(accountId);
+            Role role = roleService.fetch(roleId);
             RoleRequest saved = roleRequestService.createRoleRequest(roleRequest);
+            saved.setAccount(account);
+            saved.setRole(role);
             return ResponseEntity.created(URI.create("/role-requests/" + saved.getId())).body(saved);
         }
     }

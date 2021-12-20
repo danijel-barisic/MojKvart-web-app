@@ -5,6 +5,7 @@ import { useHistory } from "react-router";
 import District from "./District";
 import './Login.css';
 import { FaTimes } from 'react-icons/fa';
+import { MdDelete } from 'react-icons/md';
 
 function Districts() {
    const [districts, setDistricts] = React.useState([]);
@@ -46,7 +47,7 @@ function Districts() {
                            <District key={district.id} district={district} />
                         </div>
                         <div className="inner">
-                           <FaTimes style={{color:"red" ,cursor:"pointer"}} onClick={() => deleteDistrict(district.id)}></FaTimes>
+                           <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deleteDistrict(district.id)}></MdDelete>
                         </div>
                      </div>
                   ]);

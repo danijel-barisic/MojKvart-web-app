@@ -36,4 +36,9 @@ public class PostService {
         Assert.isNull(post.getId(), "Post ID must be null, not: " + post.getId());
         return postRepository.save(post);
     }
+    public Post deletePost(long postId) {
+        Post post = fetch(postId);
+        postRepository.delete(post);
+        return post;
+    }
 }

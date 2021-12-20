@@ -29,9 +29,8 @@ function CouncilMeetingReport() {
     }, []);
 
     React.useEffect(() => {
-        fetch(`/roles/${account.id}`)
+        fetch((account.id === undefined ? "/roles" : `/accounts/roles/${account.id}`))
         .then(data => data.json())
-        .then(data => data.name)
         .then(roles => setRoles(roles))
     }, [account])
 
@@ -51,41 +50,50 @@ function CouncilMeetingReport() {
 
     if (meeting.account !== undefined) {
 
-        if (roles !== undefined && roles.includes("Vijecnik"))
+        if (roles !== undefined && roles.length > 0 
+            && (roles.filter(r => r.name === "Vijecnik").length > 0))
         return (
             <Card title={meeting.title}>
-            <div>
-                <b>Datum: </b>
-                <span>{meeting.dateTime}</span>
-            </div>
-            <div>
-                <b>Autor: </b>
-                <span>{`${meeting.account.firstName} ${meeting.account.lastName}`}</span>
-            </div>
-            <div>
-                <b>Izvješće: </b>
-                <span>{meeting.report}</span>
-            </div>
-            <div className='Login'>
-                <button className='button' type="button" onClick={() => history.push(`/council/report/edit/${id}`)}>Uredi</button>
-                <button className='button' type="button" onClick={() => deleteMeeting(meeting.id)}>Obriši</button>
-            </div>
+                <div className="inner">
+                    <div class="Event">
+                        <div>
+                            <b>Datum: </b>
+                            <span>{meeting.dateTime}</span>
+                        </div>
+                        <div>
+                            <b>Autor: </b>
+                            <span>{`${meeting.account.firstName} ${meeting.account.lastName}`}</span>
+                        </div>
+                        <div>
+                            <b>Izvješće: </b>
+                            <span>{meeting.report}</span>
+                        </div>
+                        <div className='Login'>
+                            <button className='button' type="button" onClick={() => history.push(`/council/report/edit/${id}`)}>Uredi</button>
+                            <button className='button' type="button" onClick={() => deleteMeeting(meeting.id)}>Obriši</button>
+                        </div>
+                    </div>        
+                </div>
         </Card>
         )
         else return (
             <Card title={meeting.title}>
-            <div>
-                <b>Datum: </b>
-                <span>{meeting.dateTime}</span>
-            </div>
-            <div>
-                <b>Autor: </b>
-                <span>{`${meeting.account.firstName} ${meeting.account.lastName}`}</span>
-            </div>
-            <div>
-                <b>Izvješće: </b>
-                <span>{meeting.report}</span>
-            </div>
+                <div className="inner">
+                    <div class="Event">
+                        <div>
+                            <b>Datum: </b>
+                            <span>{meeting.dateTime}</span>
+                        </div>
+                        <div>
+                            <b>Autor: </b>
+                            <span>{`${meeting.account.firstName} ${meeting.account.lastName}`}</span>
+                        </div>
+                        <div>
+                            <b>Izvješće: </b>
+                            <span>{meeting.report}</span>
+                        </div>
+                    </div>
+                </div> 
         </Card>
         )
 
