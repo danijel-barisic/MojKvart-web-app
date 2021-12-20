@@ -32,29 +32,6 @@ export default class UserAdminView extends React.Component {
             error: undefined,
         }
     }
-    fetchUser(id) {
-        const options = {
-            method: "GET",
-        };
-        fetch(`/accounts/id/${id}`, options)
-            .then(response => {
-                /* console.log(response); */
-                if (!response.ok) {
-                    console.log("error fetchig");
-                    this.setError({ message: "Korisnik se nije mogao učitati", });
-                } else {
-                    console.log("fetched user");
-                    response.json().then(data => this.setUser(data));
-                }
-            })
-        ;
-    }
-    setUser(user) {
-        this.setState({ user: user });
-    }
-    setError(error) {
-        this.setState({ error: error });
-    }
 
     render() {
         if (this.state.error !== undefined) {
@@ -74,18 +51,18 @@ export default class UserAdminView extends React.Component {
         return (
             <Card title={user.username}>
                 <table><tbody>
-                    <tr><td>first name:             </td><td>{user.firstName}                    </td></tr>
-                    <tr><td>last name:              </td><td>{user.lastName}                     </td></tr>
-                    <tr><td>username:               </td><td>{user.username}                     </td></tr>
-                    <tr><td>email:                  </td><td>{user.email}                        </td></tr>
-                    <tr><td>id:                     </td><td>{user.id}                           </td></tr>
-                    <tr><td>district:               </td><td>{district.name} (id: {district.id}) </td></tr>
-                    {/*<tr><td>account not expired:    </td><td>{user.accountNonExpired + ""}       </td></tr>*/}
-                    {/*<tr><td>account not locked:     </td><td>{user.accountNonLocked + ""}        </td></tr>*/}
-                    <tr><td>address is valid:       </td><td>{user.addressValid + ""}            </td></tr>
-                    <tr><td>blocked:                </td><td>{user.blocked + ""}                 </td></tr>
-                    {/*<tr><td>credentials not expired:</td><td>{user.credentialsNonExpired + ""}   </td></tr>*/}
-                    {/*<tr><td>enabled:                </td><td>{user.enabled + ""}                 </td></tr>*/}
+                <tr><td>first name:             </td><td>{user.firstName}                    </td></tr>
+                <tr><td>last name:              </td><td>{user.lastName}                     </td></tr>
+                <tr><td>username:               </td><td>{user.username}                     </td></tr>
+                <tr><td>email:                  </td><td>{user.email}                        </td></tr>
+                <tr><td>id:                     </td><td>{user.id}                           </td></tr>
+                <tr><td>district:               </td><td>{district.name} (id: {district.id}) </td></tr>
+                {/*<tr><td>account not expired:    </td><td>{user.accountNonExpired + ""}       </td></tr>*/}
+                {/*<tr><td>account not locked:     </td><td>{user.accountNonLocked + ""}        </td></tr>*/}
+                <tr><td>address is valid:       </td><td>{user.addressValid + ""}            </td></tr>
+                <tr><td>blocked:                </td><td>{user.blocked + ""}                 </td></tr>
+                {/*<tr><td>credentials not expired:</td><td>{user.credentialsNonExpired + ""}   </td></tr>*/}
+                {/*<tr><td>enabled:                </td><td>{user.enabled + ""}                 </td></tr>*/}
                 </tbody></table>
                 <RoleManagement user={user}></RoleManagement>
             </Card>
@@ -103,7 +80,29 @@ export default class UserAdminView extends React.Component {
         }
     }
 
-    myComponentDidRender() {
+    fetchUser(id) {
+        const options = {
+            method: "GET",
+        };
+        fetch(`/accounts/id/${id}`, options)
+            .then(response => {
+                /* console.log(response); */
+                if (!response.ok) {
+                    console.log("error fetchig");
+                    this.setError({ message: "Korisnik se nije mogao učitati", });
+                } else {
+                    console.log("fetched user");
+                    response.json().then(data => this.setUser(data));
+                }
+            })
         ;
     }
+    setUser(user) {
+        this.setState({ user });
+    }
+    setError(error) {
+        this.setState({ error });
+    }
+
+    myComponentDidRender() {}
 }
