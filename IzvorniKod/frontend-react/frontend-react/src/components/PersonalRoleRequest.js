@@ -1,25 +1,22 @@
-import React from "react";
-import Card from "./Card";
-import { ReactSession } from "react-client-session";
-import "./Login.css";
-import { useHistory } from "react-router";
-import PersonalRoleComponent from "./PersonalRoleComponent";
-import "./Event.css";
+import React from "react"
+import Card from "./Card"
+import { ReactSession } from "react-client-session"
+import "./Login.css"
+import PersonalRoleComponent from "./PersonalRoleComponent"
+import "./Event.css"
 
 function PerosnalRoleRequest() {
 
-    const acc_username = ReactSession.get("username");
+    const [account, setAccount] = React.useState({id: ''})
+    const [roles, setRoles] = React.useState()
     
-    const [account, setAccount] = React.useState({id: ''});
-    const [roles, setRoles] = React.useState();
-
-    const history = useHistory();
+    const acc_username = ReactSession.get("username")
 
     React.useEffect(() => {
         fetch(`/accounts/${acc_username}`)
         .then(data => data.json())
-        .then(account => setAccount(account));
-    }, []);
+        .then(account => setAccount(account))
+    }, [])
 
     React.useEffect(() => {
         fetch((account.id === undefined ? "/roles" : `/accounts/roles/${account.id}`))
@@ -40,9 +37,8 @@ function PerosnalRoleRequest() {
         </Card>
     }
     else return (
-        <>
-        </>
+        <></>
     )
 }
 
-export default PerosnalRoleRequest;
+export default PerosnalRoleRequest

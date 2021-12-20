@@ -1,29 +1,34 @@
-import React from "react";
-import Card from "./Card";
-import "./Login.css";
-import { useHistory } from "react-router";
-import { ReactSession } from "react-client-session";
+import React from "react"
+import Card from "./Card"
+import "./Login.css"
+import { useHistory } from "react-router"
+import { ReactSession } from "react-client-session"
 
 function EventForm() {
     const [eventForm, setEventForm] = React.useState(
         {name: '', description: '', location: '', datetime: '', duration: ''})
-    const [error, setError] = React.useState('');
-    const history = useHistory();
-    const acc_username = ReactSession.get("username");
-    const [account, setAccount] = React.useState({id: ''});
+    const [error, setError] = React.useState('')
+    const [account, setAccount] = React.useState({id: ''})
+
+    const history = useHistory()
+    
+    const acc_username = ReactSession.get("username")
+    
     React.useEffect(() => {
         fetch(`/accounts/${acc_username}`)
         .then(data => data.json())
-        .then(account => setAccount(account));
-    }, []);
+        .then(account => setAccount(account))
+    }, [])
 
     function onChange(event) {
-        const {name, value} = event.target;
+        const {name, value} = event.target
         setEventForm(oldForm => ({...oldForm, [name]: value}))
     }
 
     async function onSubmit(e) {
-        e.preventDefault();
+
+        e.preventDefault()
+
         const data = {
             name: eventForm.name,
             description: eventForm.description,
@@ -35,6 +40,7 @@ function EventForm() {
                 id: account["id"]
             }
         }
+
         const options = {
             method: "POST",
             headers: {
@@ -42,21 +48,25 @@ function EventForm() {
             },
             body: JSON.stringify(data)
         }
+
         return fetch("/events", options).then(response => {
+            
             if (response.ok) {
-                history.push('/events');
+                history.push('/events')
             }
+
             else {
-                setError("Prijedlog događaja nije moguće objaviti.");
-                console.log(response.body);
+                setError("Prijedlog događaja nije moguće objaviti.")
+                console.log(response.body)
             }
-        });
+
+        })
     }
 
     function isValid() {
-        const {name, description, location, duration, datetime} = eventForm;
+        const {name, description, location, duration, datetime} = eventForm
         return name.length > 0 && description.length > 0 && 
-            location.length > 0 && duration.length > 0 && datetime.length > 0;
+            location.length > 0 && duration.length > 0 && datetime.length > 0
     }
 
     return (
@@ -91,7 +101,7 @@ function EventForm() {
                 </form>
             </div>
         </Card>
-    );
+    )
 }
 
-export default EventForm;
+export default EventForm
