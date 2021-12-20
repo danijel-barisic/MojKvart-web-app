@@ -46,7 +46,6 @@ public class Account implements UserDetails {
     private boolean isAddressValid;
 
     // only CascadeType.REMOVE is left out, because we don't want to remove accounts when we remove a role
-    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinTable(name = "account_role",
