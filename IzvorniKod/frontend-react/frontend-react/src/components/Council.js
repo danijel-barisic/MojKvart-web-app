@@ -23,7 +23,7 @@ function Council() {
 
     React.useEffect(() => {
         if (account !== undefined) {
-            fetch((`/accounts/roles/${account.id}`))
+            fetch(`/accounts/roles/${account.id}`)
             .then(data => data.json())
             .then(roles => setRoles(roles))
         }

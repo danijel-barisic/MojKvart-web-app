@@ -21,10 +21,15 @@ function PersonalRoleComponent(props) {
 
     function sendRoleRequest() {
         const data = {
-            account_id: account.id,
-            role_id: targetId,
-            role_request_status: "Pending"
+            account: {
+                id: account.id
+            },
+            role: {
+                id: targetId
+            },
+            status: "Pending"
         }
+        console.log(data)
         const options = {
             method: "POST",
             headers: {
@@ -35,6 +40,8 @@ function PersonalRoleComponent(props) {
         return fetch("/role-requests", options).then(response => {
             if (!response.ok) {
                 console.log(response.body)
+            } else {
+                window.location.reload()
             }
         })
     }
