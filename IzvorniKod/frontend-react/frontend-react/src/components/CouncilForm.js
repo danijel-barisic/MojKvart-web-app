@@ -1,25 +1,23 @@
-import React from "react";
-import Card from "./Card";
-import "./Login.css";
-import { useHistory } from "react-router";
-import { ReactSession } from "react-client-session";
+import React from "react"
+import Card from "./Card"
+import "./Login.css"
+import { useHistory } from "react-router"
+import { ReactSession } from "react-client-session"
 
 function CouncilForm() {
 
-    const [error, setError] = React.useState('');
-    const history = useHistory();
+    const [error, setError] = React.useState('')
+    const [account, setAccount] = React.useState({id: ''})
+    const [meetingForm, setMeetingForm] = React.useState({title: '', report: ''})
 
-    const acc_username = ReactSession.get("username");
-    const [account, setAccount] = React.useState({id: ''});
+    const history = useHistory()
+    const acc_username = ReactSession.get("username")
+
     React.useEffect(() => {
         fetch(`/accounts/${acc_username}`)
         .then(data => data.json())
-        .then(account => setAccount(account));
-    }, []);
-
-    const [meetingForm, setMeetingForm] = React.useState(
-        {title: '', report: ''}
-    )
+        .then(account => setAccount(account))
+    }, [])
 
     function onChange(event) {
         const {name, value} = event.target;
@@ -27,15 +25,15 @@ function CouncilForm() {
     }
 
     async function onSubmit(e) {
-        e.preventDefault();
-        
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = today.getFullYear();
 
-        today = `${yyyy}-${mm}-${dd}`;
-        console.log(today)
+        e.preventDefault()
+        
+        var today = new Date()
+        var dd = String(today.getDate()).padStart(2, '0')
+        var mm = String(today.getMonth() + 1).padStart(2, '0')
+        var yyyy = today.getFullYear()
+
+        today = `${yyyy}-${mm}-${dd}`
 
         const data = {
             title: meetingForm.title,
@@ -59,19 +57,19 @@ function CouncilForm() {
 
         return fetch("/council", options).then(response => {
             if (response.ok) {
-                history.push('/council');
+                history.push('/council')
             }
             else {
                 setError("Prijedlog događaja nije moguće objaviti.");
-                console.log(response.body);
+                console.log(response.body)
             }
-        });
+        })
 
     }
 
     function isValid() {
-        const {title, report} = meetingForm;
-        return title.length > 0 && report.length > 0;
+        const {title, report} = meetingForm
+        return title.length > 0 && report.length > 0
     }
 
     return (
@@ -97,4 +95,4 @@ function CouncilForm() {
     )
 }
 
-export default CouncilForm;
+export default CouncilForm

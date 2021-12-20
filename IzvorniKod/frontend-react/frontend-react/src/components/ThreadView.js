@@ -5,7 +5,7 @@ import ReactSession from "react-client-session/dist/ReactSession";
 import { useHistory } from "react-router";
 import { useParams } from 'react-router-dom';
 import { MdDelete } from 'react-icons/md';
-import { FaReply } from 'react-icons/fa';
+import {GoReply} from 'react-icons/go';
 import Post from './Post';
 function ThreadView(props) {
    const { id } = useParams();
@@ -14,6 +14,7 @@ function ThreadView(props) {
    const [posts, setPosts] = React.useState([]);
    const [updated, setUpdated] = React.useState(new Date());
    const [users,setUsers] = React.useState([]);
+   const history = useHistory();
    const user = ReactSession.get("username");
 
 
@@ -46,8 +47,11 @@ function ThreadView(props) {
    return (
       <>
          <div className="centar">
-            <Card title={name}>
-            </Card>
+         <Card title={name}>
+            <div className='Login'>
+               <button className='button' type="button" onClick={() => {history.push("/novaobjava")}}>Dodaj Objavu</button>
+            </div>
+         </Card>
          </div>
          <div>
             <Card>
@@ -58,9 +62,14 @@ function ThreadView(props) {
                         {
                         (post.replyId !== null) ? <>
                         <div className="innerReply">
-                           
+                           <div className='innerReplyWho'>
+                              
+                        <GoReply href='' ></GoReply>
+                        ({(post.replyId)})
+                        </div>
+
                            <Post key={post.id} post={post} />
-                           <FaReply></FaReply>
+                         
                         </div>
                         </>
                         : <>

@@ -51,16 +51,15 @@ export default class UserAdminView extends React.Component {
         return (
             <Card title={user.username}>
                 <table><tbody>
-                <tr><td>first name:             </td><td>{user.firstName}                    </td></tr>
-                <tr><td>last name:              </td><td>{user.lastName}                     </td></tr>
-                <tr><td>username:               </td><td>{user.username}                     </td></tr>
-                <tr><td>email:                  </td><td>{user.email}                        </td></tr>
-                <tr><td>id:                     </td><td>{user.id}                           </td></tr>
-                <tr><td>district:               </td><td>{district.name} (id: {district.id}) </td></tr>
-                {/*<tr><td>account not expired:    </td><td>{user.accountNonExpired + ""}       </td></tr>*/}
-                {/*<tr><td>account not locked:     </td><td>{user.accountNonLocked + ""}        </td></tr>*/}
-                <tr><td>address is valid:       </td><td>{user.addressValid + ""}            </td></tr>
-                <tr><td>blocked:                </td><td>{user.blocked + ""}                 </td></tr>
+                <tr><td><b>E-mail:</b>                  </td><td>{user.email}                        </td></tr>
+                <tr><td><b>Ime:</b>                     </td><td>{user.firstName}                    </td></tr>
+                <tr><td><b>Prezime:</b>                 </td><td>{user.lastName}                     </td></tr>
+                <tr><td><b>id:</b>                      </td><td>{user.id}                           </td></tr>
+                <tr><td><b>Kvart:</b>                   </td><td>{district.name} (id: {district.id}) </td></tr>
+                {/*<tr><td>account not expired:         </td><td>{user.accountNonExpired + ""}       </td></tr>*/}
+                {/*<tr><td>account not locked:          </td><td>{user.accountNonLocked + ""}        </td></tr>*/}
+                <tr><td><b>Adresa valjana:</b>          </td><td>{user.addressValid + ""}            </td></tr>
+                <tr><td><b>Korisnik blokiran:</b>       </td><td>{user.blocked + ""}                 </td></tr>
                 {/*<tr><td>credentials not expired:</td><td>{user.credentialsNonExpired + ""}   </td></tr>*/}
                 {/*<tr><td>enabled:                </td><td>{user.enabled + ""}                 </td></tr>*/}
                 </tbody></table>

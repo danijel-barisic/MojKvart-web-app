@@ -1,32 +1,32 @@
-import React from "react";
-import Card from "./Card";
-import { useHistory } from "react-router";
-import { ReactSession } from "react-client-session";
+import React from "react"
+import Card from "./Card"
+import { useHistory } from "react-router"
+import { ReactSession } from "react-client-session"
 
 function CouncilMeetingReport() {
+
+    const [meeting, setMeeting] = React.useState([])
+    const [account, setAccount] = React.useState({id: ''})
+    const [roles, setRoles] = React.useState([{name: "temp"}])
 
     const currentURL = window.location.href
     const splitURL = currentURL.split("/")
     const id = splitURL.at(-1)
 
-    const [meeting, setMeeting] = React.useState([])
+    const history = useHistory()
+    const acc_username = ReactSession.get("username")
+
     React.useEffect(() => {
         fetch(`/council/${id}`)
         .then(data => data.json())
         .then(data => setMeeting(data))
     }, [])
 
-    const history = useHistory();
-
-    const acc_username = ReactSession.get("username");
-    const [account, setAccount] = React.useState({id: ''});
-    const [roles, setRoles] = React.useState([{name: "temp"}]);
-
     React.useEffect(() => {
         fetch(`/accounts/${acc_username}`)
         .then(data => data.json())
-        .then(account => setAccount(account));
-    }, []);
+        .then(account => setAccount(account))
+    }, [])
 
     React.useEffect(() => {
         fetch((account.id === undefined ? "/roles" : `/accounts/roles/${account.id}`))
@@ -35,9 +35,11 @@ function CouncilMeetingReport() {
     }, [account])
 
     function deleteMeeting(id) {
+
         const options = {
             method: 'DELETE',
-        };
+        }
+        
         fetch(`/council/${id}`, options).then(response => {
             if (!response.ok) {
                 console.log(response.body)
@@ -50,9 +52,7 @@ function CouncilMeetingReport() {
 
     if (meeting.account !== undefined) {
 
-        if (roles !== undefined && roles.length > 0 
-            && (roles.filter(r => r.name === "Vijecnik").length > 0))
-        return (
+        if (roles !== undefined && roles.length > 0 && roles.filter(r => r.name === "Vijecnik").length > 0) return (
             <Card title={meeting.title}>
                 <div className="inner">
                     <div class="Event">
@@ -99,9 +99,8 @@ function CouncilMeetingReport() {
 
     }
     else return (
-        <>
-        </>
+        <></>
     )
 }
 
-export default CouncilMeetingReport;
+export default CouncilMeetingReport

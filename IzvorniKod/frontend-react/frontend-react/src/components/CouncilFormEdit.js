@@ -1,24 +1,25 @@
-import React from "react";
-import Card from "./Card";
-import "./Login.css";
-import { useHistory } from "react-router";
-import { ReactSession } from "react-client-session";
+import React from "react"
+import Card from "./Card"
+import "./Login.css"
+import { useHistory } from "react-router"
 
 function CouncilFormEdit() {
+
     const currentURL = window.location.href
     const splitURL = currentURL.split("/")
     const report_id = splitURL.at(-1)
 
     const [oldReport, setOldReport] = React.useState([])
+    const [error, setError] = React.useState('')
+    const [meetingForm, setMeetingForm] = React.useState({title: '', report: ''})
+    
+    const history = useHistory()
+
     React.useEffect(() => {
         fetch(`/council/${report_id}`)
         .then(data => data.json())
         .then(data => setOldReport(data))
     }, [])
-
-    const [meetingForm, setMeetingForm] = React.useState(
-        {title: '', report: ''}
-    )
 
     React.useEffect(() => {
         fetch(`/council/${report_id}`)
@@ -31,67 +32,68 @@ function CouncilFormEdit() {
         })
     }, [])
 
-    const [error, setError] = React.useState('');
-    const history = useHistory();
-
     function onChange(event) {
-        const {name, value} = event.target;
+        const {name, value} = event.target
         setMeetingForm(oldForm => ({...oldForm, [name]: value}))
     }
 
     function isValid() {
-        const {title, report} = meetingForm;
-        return title.length > 0 && report.length > 0;
+        const {title, report} = meetingForm
+        return title.length > 0 && report.length > 0
     }
 
     function deleteMeeting(id) {
+
         const options = {
             method: 'DELETE',
         };
+
         fetch(`/council/${id}`, options).then(response => {
             if (!response.ok) {
                 console.log(response.body)
             } else {
-                console.log("deleted");
+                console.log("deleted")
                 history.push("/council")
             }
         })
     }
 
     function onSubmit(e) {
+
         e.preventDefault();
+
         const data = {
+            id: oldReport.id,
             title: meetingForm.title,
             report: meetingForm.report,
             dateTime: oldReport.dateTime,
-            district: {
-                id: oldReport.district.id
-            },
-            account: {
-                id: oldReport.account.id
-            }
+            postThread: oldReport.postThread,
+            district: oldReport.district,
+            account: oldReport.account
         }
 
-        deleteMeeting(report_id)
+        console.log(data)
 
         const options = {
-            method: "POST",
+            method: "PUT",
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         }
 
-        return fetch("/council", options).then(response => {
+        return fetch(`/council/${data.id}`, options).then(response => {
+
             if (response.ok) {
                 console.log(response)
                 history.push("/council");
             }
+            
             else {
-                setError("Prijedlog događaja nije moguće objaviti.");
+                setError("Izvješće nije moguće promijeniti.");
                 console.log(response.body);
             }
-        });
+        })
     }
 
     return (

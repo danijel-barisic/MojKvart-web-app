@@ -49,24 +49,29 @@ function Forum(props) {
          </Card>
          <Card title='Teme'>
             {threads.map(function (thread) {
-               console.log("grjkgrhgrhjg: " + users.id);
-               console.log("grhjkghrkjhgk: " + thread.account.id);
-                     return ([
-                        <div className="wrapper">
-                           <div className="inner">
-                              <Thread key={thread.id} thread={thread} />
-                           </div>
-                           {
-                                 (users.id === thread.account.id)
-                                 ?  <>
-                                       <div className="inner">
-                                          <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deleteThread(thread.id)}></MdDelete>
-                                       </div>
-                                    </>
-                                 :  <></>
-                              }
+               if(users.district.id === thread.district.id) {
+                  return ([
+                     <div className="wrapper">
+                        <div className="inner">
+                           <Thread key={thread.id} thread={thread} />
                         </div>
-                     ]);
+                        {
+                              (users.id === thread.account.id)
+                              ?  <>
+                                    <div className="inner">
+                                       <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deleteThread(thread.id)}></MdDelete>
+                                    </div>
+                                 </>
+                              :  <></>
+                           }
+                     </div>
+                  ]);
+               } else {
+                  return ([
+                     <>
+                     </>
+                  ])
+               }
                   })}
          </Card>
       </>

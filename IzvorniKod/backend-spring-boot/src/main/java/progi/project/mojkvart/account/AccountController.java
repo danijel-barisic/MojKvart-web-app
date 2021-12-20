@@ -105,6 +105,7 @@ public class AccountController {
         return account.isBlocked();
     }
 
+    /*brise sve postojece i dodaje nove*/
     @PostMapping("/roles/{id}")
     public List<Role> createRoles(@PathVariable("id") long id, @RequestBody ArrayList<String> roleList) {
         Account account = AccountService.fetch(id);
@@ -126,21 +127,23 @@ public class AccountController {
         }
     }
 
-    @PutMapping("/{id}")
-    public Account updateAccount(@PathVariable("id") Long id, @RequestBody Account account) {
-        if(account.getId() != null && !AccountService.existsById(account.getId())) {
+    @PutMapping("/{email}")
+    public Account updateAccount(@PathVariable("email") String email, @RequestBody Account account) {
+        if(account.getEmail() != null && AccountService.findByEmail(account.getEmail()).isEmpty()) {
             throw new IllegalArgumentException("Account with id: " + account.getId() + " does not exist");
         }
-        else if(account.getId() == null) {
+        else if(account.getEmail() == null) {
             throw new IllegalArgumentException("Account id must be given");
         }
         else {
-            if(!account.getId().equals(id))
+            if(!account.getEmail().equals(email))
                 throw new IllegalArgumentException("Account id must be preserved");
+            System.out.println(account);
             return AccountService.updateAccount(account);
         }
     }
 
+    /*dodaje na postojece novi role*/
     @PutMapping("/roles/{id}")
     public List<Role> updateRoles(@PathVariable("id") Long accountId, @RequestBody String roleName) {
         Account account = AccountService.fetch(accountId);
