@@ -14,8 +14,8 @@ function ThreadNewPost(props) {
    const [account, setAccount] = React.useState('');
    const user = ReactSession.get("username");
    const history = useHistory();
-   const {id : idD} = useParams();
-
+   const {idT, idP} = useParams()
+   console.log(idT,idP)
    function onChange(event) {
        console.log(event.target)
       const { name, value } = event.target;
@@ -32,9 +32,7 @@ function ThreadNewPost(props) {
          account: {
             id: account.id
          },
-         thread: {
-            id: idD        
-         }
+         threadId:idT
       };
       const options = {
          method: 'POST',
@@ -44,9 +42,40 @@ function ThreadNewPost(props) {
          body: JSON.stringify(data)
       };
 
-      return fetch('/posts', options).then(response => {
+      return fetch(`/posts/${idT}`, options).then(response => {
+         console.log(JSON.stringify(data))
          if (response.ok) {
-            history.goBack();
+           console.log("Nice")
+         } else {
+            setError("Something went wrong! Try again");
+            console.log(response.body);
+         }
+      });
+   }
+
+   function onSubmitReply(e) {
+      e.preventDefault();
+      const data = {
+         content: form.content,
+         datetime:null,
+         reply_id:idP,
+         account: {
+            id: account.id
+         },
+         threadId:idT
+      };
+      const options = {
+         method: 'POST',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         body: JSON.stringify(data)
+      };
+
+      return fetch(`/posts/${idT}`, options).then(response => {
+         console.log(JSON.stringify(data))
+         if (response.ok) {
+           console.log("Nice")
          } else {
             setError("Something went wrong! Try again");
             console.log(response.body);
@@ -67,19 +96,34 @@ function ThreadNewPost(props) {
    }, []);
    
    return (
+      idP == undefined ? 
       <Card title="Nova Objava">
          <div className='StreetForm Login'>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmitReply}>
                <div className='FormRow'>
                   <label>Raspiši se...</label>
                   <textarea required name='content' onChange={onChange} value={ form.content}/>
                </div>
                <div className='error'>{error}</div>
-               <button classname='submit' type='submit' disabled={!isValid()}>Stvori objavu</button>
+               <button classname='submit' type='submit' disabled={!isValid()} >Stvori objavu</button>
                <button className='button' type="button" onClick={() => {history.goBack()}}>Nartag</button>
             </form>
          </div>
       </Card>
+      :
+      <Card title="Odgovori na objavu">
+      <div className='StreetForm Login'>
+         <form onSubmit={onSubmit}>
+            <div className='FormRow'>
+               <label>Raspiši se...</label>
+               <textarea required name='content' onChange={onChange} value={ form.content}/>
+            </div>
+            <div className='error'>{error}</div>
+            <button classname='submit' type='submit' disabled={!isValid()} onClick={() => {history.goBack()}}>Odgovori</button>
+            <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
+         </form>
+      </div>
+   </Card>
    );
 }
 

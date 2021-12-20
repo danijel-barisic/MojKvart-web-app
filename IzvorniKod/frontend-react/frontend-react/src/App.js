@@ -101,9 +101,9 @@ function App() {
               <Route path='/council' exact component={Council} />
               <Route path='/user' exact component={UserDetails} /> */}
               <Route path='/forum' exact component={Forum} />
-              <Route path='/forum/:id' exact component={ThreadView} />
+              <Route path='/forum/:idT' exact component={ThreadView} />
               <Route path='/novatema' exact component={ForumNewThread}/>
-              <Route path='/novaobjava' exact component={ThreadNewPost}/>
+              <Route path='/novaobjava/:idT/:idP' exact component={ThreadNewPost}/>
               <Route path='/personal' exact component={Personal} />
               <Route path='/personal/role_requests' exact component={PerosnalRoleRequest} />
               <Route path='/personal/edit' exact component={PersonalEdit} />
