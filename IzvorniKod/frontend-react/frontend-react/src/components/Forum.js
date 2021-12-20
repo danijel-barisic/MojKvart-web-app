@@ -40,6 +40,8 @@ function Forum(props) {
          .then(users => setUsers(users));
    }, [updated]);
 
+   
+
    return (
       <>
          <Card title='Forum'>
