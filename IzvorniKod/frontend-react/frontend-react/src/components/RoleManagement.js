@@ -1,3 +1,10 @@
+/** exports
+ * default: RoleManagement
+ *
+ * addRole
+ * removeRole
+ */
+
 import React from "react";
 import ReactSession from "react-client-session/dist/ReactSession";
 import Card from "./Card";
@@ -152,7 +159,7 @@ export default class RoleManagement extends React.Component {
                                     : null
                                 }
                               </td>
-                            : <td></td>
+                            : <td> </td>
                         }
                         {b !== undefined
                             ? <td>
@@ -162,7 +169,7 @@ export default class RoleManagement extends React.Component {
                                     : null
                                 }
                               </td>
-                            : <td></td>
+                            : <td> </td>
                         }
                     </tr>
                 )}
@@ -171,8 +178,6 @@ export default class RoleManagement extends React.Component {
     }
 
     addRole(role) {
-        console.log("addaddaddaddaddaddaddaddaddaddadd");
-        console.log(role);
         const owned = this.state.roles;
         if (trueContains(owned, role)) {
             return;
@@ -184,8 +189,6 @@ export default class RoleManagement extends React.Component {
     }
 
     removeRole(role) {
-        console.log("rmrmrmrmrrmrmrmrmrmrmrmrmrmrmr");
-        console.log(role);
         const owned = this.state.roles;
         if (!trueContains(owned, role)) {
             return;
@@ -200,8 +203,6 @@ export default class RoleManagement extends React.Component {
         this.fetchOwnedRoles().then(success => {
             if (success) {
                 this._fetchAllRoles();
-            } else {
-                console.log("wut?");
             }
         });
     }
@@ -214,11 +215,11 @@ export default class RoleManagement extends React.Component {
         const response = await fetch(`/accounts/roles/${id}` /* GET */);
 
         if (!response.ok) {
-            console.log("error fetchig roles");
+            console.log("RoleManagement.js: error fetchig roles");
             this.setError({ message: "Uloge se misu mogle učitati", });
             return false;
         } else {
-            console.log("fetched roles");
+            console.log("RoleManagement.js: fetched roles");
             response.json().then(data => this.setRoles(data));
             return true;
         }
@@ -227,23 +228,19 @@ export default class RoleManagement extends React.Component {
         fetch(`/roles` /* GET */)
             .then(response => {
                 if (!response.ok) {
-                    console.log("error fetchig all roles");
+                    console.log("RoleManagement.js: error fetchig all roles");
                     this.setError({ message: "Uloge se misu mogle učitati", });
                 } else {
-                    console.log("fetched all roles");
+                    console.log("RoleManagement.js: fetched all roles");
                     response.json().then(data => this.setAllRoles(data));
                 }
             })
         ;
     }
     setRoles(roles) {
-        console.log("rllllllllllllllrrrrrrrrrrrrrr");
-        console.log(roles);
         this.setState({ roles });
     }
     setAllRoles(roles) {
-        console.log("raaaaaaaaaaaaaarrrrrrrrrrrrrr");
-        console.log(roles);
         this.setState({ all_roles: roles });
     }
     setError(error) {
@@ -251,9 +248,9 @@ export default class RoleManagement extends React.Component {
     }
 }
 
-/* exports
-* default: RoleManagement
-*
-* addRole
-* removeRole
-* */
+/** exports
+ * default: RoleManagement
+ *
+ * addRole
+ * removeRole
+ */

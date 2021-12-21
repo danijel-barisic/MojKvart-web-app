@@ -1,9 +1,8 @@
 import React from "react";
 import Card from "./Card";
 import ReactSession from "react-client-session/dist/ReactSession";
-import './Login.css';
-import User from "./User"
 import RoleManagement from "./RoleManagement";
+import * as authentication from "../authentication" // iako, mislim da se odmah na routerima onemogučio pristup
 
 /* user
 accountNonExpired: true
@@ -30,7 +29,9 @@ export default class UserAdminView extends React.Component {
             user: undefined,
             user_id: id,
             error: undefined,
+            is_admin: undefined,
         }
+        this.has_already_fetched_user = false;
     }
 
     render() {
@@ -38,16 +39,21 @@ export default class UserAdminView extends React.Component {
             return <Card title="Greška"><span>{this.state.error.message + ""}</span></Card>;
         }
         const role = ReactSession.get(ReactSession.get("username"));
-        if (role !== "ADMIN") {
-            this.props.history.push("/");
+        // if (role !== "ADMIN") {
+        //     this.props.history.push("/");
+        // }
+        if (this.state.is_admin === undefined) {
+            return <Card title="Pričekajte">Provjeravamo jeste li admin</Card>;
+        } else if (!this.state.is_admin) {
+            console.log("UserAdminView.js: nije admin");
+            //     this.props.history.push("/");
+            return null;
         }
         const user = this.state.user;
-        // console.log(user);
         if (!user || !user.username) {
-            return <Card title="Čekajte da se korisnik učita"></Card>;
+            return <Card title="Čekajte da se korisnik učita" />;
         }
         const district = user.district || { name: "nema informacije", id: "?" };
-        // console.log(user);
         return (
             <Card title={user.username}>
                 <table><tbody>
@@ -63,34 +69,35 @@ export default class UserAdminView extends React.Component {
                 {/*<tr><td>credentials not expired:</td><td>{user.credentialsNonExpired + ""}   </td></tr>*/}
                 {/*<tr><td>enabled:                </td><td>{user.enabled + ""}                 </td></tr>*/}
                 </tbody></table>
-                <RoleManagement user={user}></RoleManagement>
+                <RoleManagement user={user} />
             </Card>
         );
     }
 
     componentDidMount() {
+        authentication.asyncCurrentUserHasRole("ADMIN").then(is_admin => this.setState({ is_admin }));
         this.myComponentDidRender();
-        this.fetchUser(this.state.user_id);
+        // this.fetchUser(this.state.user_id);
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
         this.myComponentDidRender();
-        if (this.state.user_id !== prevState.user_id) {
+        if (this.state.is_admin && (!this.has_already_fetched_user || this.state.user_id !== prevState.user_id)) {
             this.fetchUser(this.state.user_id);
         }
     }
 
     fetchUser(id) {
+        this.has_already_fetched_user = true;
         const options = {
             method: "GET",
         };
         fetch(`/accounts/id/${id}`, options)
             .then(response => {
-                /* console.log(response); */
                 if (!response.ok) {
-                    console.log("error fetchig");
+                    console.log("UserAdminView.js: error fetchig account");
                     this.setError({ message: "Korisnik se nije mogao učitati", });
                 } else {
-                    console.log("fetched user");
+                    console.log("UserAdminView.js: fetched user");
                     response.json().then(data => this.setUser(data));
                 }
             })
