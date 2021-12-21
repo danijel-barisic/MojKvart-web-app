@@ -6,7 +6,7 @@ import { useHistory } from "react-router"
 
 function Personal() {
     
-    const [account, setAccount] = React.useState({id: ''})
+    const [account, setAccount] = React.useState({id: undefined})
     const [roles, setRoles] = React.useState()
     
     const acc_username = ReactSession.get("username")
@@ -19,9 +19,11 @@ function Personal() {
     }, [])
 
     React.useEffect(() => {
-        fetch((account.id === undefined ? "/roles" : `/accounts/roles/${account.id}`))
-        .then(data => data.json())
-        .then(roles => setRoles(roles))
+        if (account !== undefined && account.id !== undefined) {
+            fetch(`/accounts/roles/${account.id}`)
+            .then(data => data.json())
+            .then(roles => setRoles(roles))
+        }
     }, [account])
 
     function specialRoles() {
@@ -37,7 +39,7 @@ function Personal() {
         return ret_val.slice(0, -2)
     }
 
-    if (account.id != '' && roles !== undefined && roles.length > 0) {
+    if (account.id !== undefined && roles !== undefined && roles.length > 0) {
         if (roles.filter(r => r.name === "ADMIN").length > 0) return (
             <Card title="Osobni podaci">
                 <div>
