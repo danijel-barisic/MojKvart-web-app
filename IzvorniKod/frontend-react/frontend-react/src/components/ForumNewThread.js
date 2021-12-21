@@ -41,7 +41,7 @@ function ForumNewThread(props) {
          if (response.ok) {
             history.goBack();
          } else {
-            setError("Something went wrong! Try again");
+            setError("Došlo je do pogreške! Pokušaj ponovo!");
             console.log(response.body);
          }
       });
