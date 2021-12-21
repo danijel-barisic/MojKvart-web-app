@@ -22,7 +22,7 @@ public class Event {
     private String description;
 
     @Column(name = "event_duration")
-    private String duration;
+    private Long duration;
 
     @Column(name = "event_date")
     private LocalDate date;
@@ -43,7 +43,7 @@ public class Event {
     public Event(){
     }
 
-    public Event(Long id, String name, String description, String duration, LocalDate date, Time time, String location, String status, Account account) {
+    public Event(Long id, String name, String description, Long duration, LocalDate date, Time time, String location, String status, Account account) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -79,11 +79,11 @@ public class Event {
         this.description = description;
     }
 
-    public String getDuration() {
+    public Long getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(Long duration) {
         this.duration = duration;
     }
 
