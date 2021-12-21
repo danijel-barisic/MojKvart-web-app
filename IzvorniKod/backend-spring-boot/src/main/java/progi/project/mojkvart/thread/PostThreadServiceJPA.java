@@ -14,7 +14,7 @@ public class PostThreadServiceJPA implements PostThreadService{
 
     @Override
     public List<PostThread> listAll() {
-        return postThreadRepo.findAll();
+        return postThreadRepo.findByOrderById();
     }
 
     @Override

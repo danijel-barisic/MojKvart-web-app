@@ -20,7 +20,7 @@ public class HomeServiceJPA implements HomeService{
 
     @Override
     public List<Home> listAll() {
-        return homeRepository.findAll();
+        return homeRepository.findByOrderById();
     }
 
     @Override

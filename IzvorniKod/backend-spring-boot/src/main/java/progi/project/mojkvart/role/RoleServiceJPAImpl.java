@@ -15,7 +15,7 @@ public class RoleServiceJPAImpl implements RoleService{
 
     @Override
     public List<Role> listAll() {
-        return roleRepo.findAll();
+        return roleRepo.findByOrderById();
     }
 
     @Override

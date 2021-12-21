@@ -20,7 +20,7 @@ public class PostService {
     }
 
     public List<Post> listAll() {
-        return postRepository.findAll();
+        return postRepository.findByOrderByIdDesc();
     }
 
     public boolean existsById(long id) {

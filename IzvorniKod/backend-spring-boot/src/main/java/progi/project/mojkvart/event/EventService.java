@@ -21,7 +21,7 @@ public class EventService {
     }
 
     public List<Event> listAll() {
-        return eventRepository.findAll();
+        return eventRepository.findByOrderById();
     }
 
     public boolean existsById(long id) {

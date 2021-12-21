@@ -22,7 +22,7 @@ public class StreetServiceJPA implements StreetService{
 
     @Override
     public List<Street> listAll() {
-        return streetRepo.findAll();
+        return streetRepo.findByOrderById();
     }
 
     @Override

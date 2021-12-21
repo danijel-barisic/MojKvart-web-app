@@ -15,7 +15,7 @@ public class AccountServiceJPAImpl implements AccountService{
 
     @Override
     public List<Account> listAll() {
-        return accountRepo.findAll();
+        return accountRepo.findByOrderById();
     }
 
     @Override
