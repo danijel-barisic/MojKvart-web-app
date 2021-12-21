@@ -56,7 +56,7 @@ function ThreadView(props) {
        
          </Card>
          </div>
-         <div>
+         <div className='wrapperCard'>
             <Card>
                <div className='StreetList'>
                   {posts.map(function (post) {
@@ -72,7 +72,8 @@ function ThreadView(props) {
                         </div>
 
                            <Post key={post.id} post={post} />
-                         
+                           <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deletePost(post.id)}></MdDelete>
+
                         </div>
                         </>
                         : <>
@@ -84,7 +85,7 @@ function ThreadView(props) {
                         }
                      
                         {
-                              (users.id === post.account.id)
+                              (users.id === post.account.id && post.replyId == null)
                               ?  <>
                                     <div className="inner">
                                        <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deletePost(post.id)}></MdDelete>

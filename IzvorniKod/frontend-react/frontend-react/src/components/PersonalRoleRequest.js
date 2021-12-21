@@ -31,7 +31,7 @@ function PerosnalRoleRequest() {
                     <PersonalRoleComponent account={account} roles={roles} target={"Moderator"} targetId={2}/>
                 </div>
                 <div className='Event'>
-                    <PersonalRoleComponent account={account} roles={roles} target={"Vijecnik"} targetId={3}/>
+                    <PersonalRoleComponent account={account} roles={roles} target={"Vijećnik"} targetId={3}/>
                 </div>
             </div>
         </Card>
