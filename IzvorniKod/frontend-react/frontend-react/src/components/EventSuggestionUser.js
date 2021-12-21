@@ -1,5 +1,6 @@
 import React from "react"
 import { useHistory } from "react-router"
+import duration_parser from "./EventTimeParser"
 
 function EventSuggestionUser(props) {
 
@@ -31,7 +32,7 @@ function EventSuggestionUser(props) {
             </div>
             <div>
                 <b>Trajanje: </b>
-                <span>{event.duration}</span>
+                <span>{duration_parser(event.duration)}</span>
             </div>
             <div>
                 <b>Organizator: </b>

@@ -1,8 +1,10 @@
 import React from "react"
 import "./Event.css"
+import duration_parser from "./EventTimeParser"
 
 function Event(props) {
     const {id, name, description, duration, date, time, location, status, account} = props.event
+
     return (
         <div className='Event'>
             <div>
@@ -27,7 +29,7 @@ function Event(props) {
             </div>
             <div>
                 <b>Trajanje: </b>
-                <span>{duration}</span>
+                <span>{duration_parser(duration)}</span>
             </div>
             <div>
                 <b>Organizator: </b>

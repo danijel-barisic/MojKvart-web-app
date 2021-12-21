@@ -6,7 +6,7 @@ import { ReactSession } from "react-client-session"
 
 function EventForm() {
     const [eventForm, setEventForm] = React.useState(
-        {name: '', description: '', location: '', date: '', time: '', duration: ''})
+        {name: '', description: '', location: '', date: '', hours: '', minutes: '', time: ''})
     const [error, setError] = React.useState('')
     const [account, setAccount] = React.useState({id: ''})
 
@@ -35,7 +35,7 @@ function EventForm() {
             location: eventForm.location,
             date: eventForm.date,
             time: eventForm.time + ":00",
-            duration: eventForm.duration,
+            duration: parseInt(eventForm.hours) * 60 + parseInt(eventForm.minutes),
             status: 0,
             account: {
                 id: account.id
@@ -65,9 +65,10 @@ function EventForm() {
     }
 
     function isValid() {
-        const {name, description, location, duration, date, time} = eventForm
+        const {name, description, location, hours, minutes, date, time} = eventForm
         return name.length > 0 && description.length > 0 && 
-            location.length > 0 && duration.length > 0 && date.length > 0 && time.length > 0
+            location.length > 0 && date.length > 0 && time.length > 0 &&
+            parseInt(hours) >= 0 && parseInt(minutes) >= 0 && parseInt(minutes) < 60
     }
 
     return (
@@ -96,7 +97,11 @@ function EventForm() {
                     </div>
                     <div className="FormRow">
                         <label>Trajanje</label>
-                        <input name="duration" required onChange={onChange} value={ eventForm.duration}/>
+                        <span>
+                            <input name="hours" type="number" size="2" required onChange={onChange} min="0" value={ eventForm.hours}></input>
+                            :
+                            <input name="minutes" type="number" size="2" required onChange={onChange} min="0" max="59" value={ eventForm.minutes}></input>
+                        </span>
                     </div>
                     <div>
                         <div className='error'>{error}</div>
