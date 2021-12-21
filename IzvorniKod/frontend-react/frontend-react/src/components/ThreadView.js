@@ -7,8 +7,9 @@ import { useParams } from 'react-router-dom';
 import { MdDelete } from 'react-icons/md';
 import {GoReply} from 'react-icons/go';
 import Post from './Post';
+import ThreadNewPost from './ThreadNewPost';
 function ThreadView(props) {
-   const { id } = useParams();
+   const { idT:id } = useParams();
    console.log("hjkfshkfhskh" + id);
    const { name } = props.location.state;
    const [posts, setPosts] = React.useState([]);
@@ -48,9 +49,7 @@ function ThreadView(props) {
       <>
          <div className="centar">
          <Card title={name}>
-            <div className='Login'>
-               <button className='button' type="button" onClick={() => {history.push("/novaobjava")}}>Dodaj Objavu</button>
-            </div>
+       
          </Card>
          </div>
          <div>
@@ -89,11 +88,13 @@ function ThreadView(props) {
                                  </>
                               :  <></>
                            }
+                           
                      </div>
                   ]);
                   })}
                </div>
             </Card>
+            <ThreadNewPost></ThreadNewPost>
          </div>
       </>
    );
