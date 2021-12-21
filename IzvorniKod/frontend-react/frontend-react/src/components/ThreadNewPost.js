@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { ReactSession } from "react-client-session";
 import Thread from "./Thread";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import './ThreadNewPost.css';
 
 
 function ThreadNewPost(props) {
@@ -12,6 +13,7 @@ function ThreadNewPost(props) {
    const [error, setError] = React.useState('');
    const [district, setDistrict] = React.useState('');
    const [account, setAccount] = React.useState('');
+   const [posts, setPosts] = React.useState('');
    const user = ReactSession.get("username");
    const history = useHistory();
    const {idT, idP} = useParams()
@@ -42,10 +44,11 @@ function ThreadNewPost(props) {
          body: JSON.stringify(data)
       };
 
-      return fetch(`/posts/${idT}`, options).then(response => {
+      fetch(`/posts/${idT}`, options).then(response => {
          console.log(JSON.stringify(data))
          if (response.ok) {
-           console.log("Nice")
+            console.log("Nice");
+            props.onNewPost();
          } else {
             setError("Something went wrong! Try again");
             console.log(response.body);
@@ -72,10 +75,11 @@ function ThreadNewPost(props) {
          body: JSON.stringify(data)
       };
 
-      return fetch(`/posts/${idT}`, options).then(response => {
+      fetch(`/posts/${idT}`, options).then(response => {
          console.log(JSON.stringify(data))
          if (response.ok) {
-           console.log("Nice")
+            console.log("Nice");
+            props.onNewPost();
          } else {
             setError("Something went wrong! Try again");
             console.log(response.body);
@@ -92,38 +96,42 @@ function ThreadNewPost(props) {
       fetch(`/accounts/${user}/getdistrict`).then(data => data.json())
          .then(district => setDistrict(district));
       fetch(`/accounts/${user}`).then(data => data.json())
-      .then(account => setAccount(account));
+         .then(account => setAccount(account));
    }, []);
    
    return (
       idP == undefined ? 
-      <Card title="Nova Objava">
-         <div className='StreetForm Login'>
-            <form onSubmit={onSubmitReply}>
-               <div className='FormRow'>
-                  <label>Raspiši se...</label>
-                  <textarea required name='content' onChange={onChange} value={ form.content}/>
+         <div className="footer">
+            <Card title="Nova Objava">
+               <div className='StreetForm Login'>
+                  <form onSubmit={onSubmitReply}>
+                     <div className='FormRow'>
+                        <label>Raspiši se...</label>
+                        <textarea required name='content' onChange={onChange} value={ form.content}/>
+                     </div>
+                     <div className='error'>{error}</div>
+                     <button classname='submit' type='submit' disabled={!isValid()} >Stvori objavu</button>
+                     <button className='button' type="button" onClick={() => {history.goBack()}}>Nartag</button>
+                  </form>
                </div>
-               <div className='error'>{error}</div>
-               <button classname='submit' type='submit' disabled={!isValid()} >Stvori objavu</button>
-               <button className='button' type="button" onClick={() => {history.goBack()}}>Nartag</button>
-            </form>
+            </Card>
          </div>
-      </Card>
-      :
-      <Card title="Odgovori na objavu">
-      <div className='StreetForm Login'>
-         <form onSubmit={onSubmit}>
-            <div className='FormRow'>
-               <label>Raspiši se...</label>
-               <textarea required name='content' onChange={onChange} value={ form.content}/>
-            </div>
-            <div className='error'>{error}</div>
-            <button classname='submit' type='submit' disabled={!isValid()} onClick={() => {history.goBack()}}>Odgovori</button>
-            <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
-         </form>
-      </div>
-   </Card>
+         :
+         <div className="footer">
+            <Card title="Odgovori na objavu">
+               <div className='StreetForm Login'>
+                  <form onSubmit={onSubmit}>
+                     <div className='FormRow'>
+                        <label>Raspiši se...</label>
+                        <textarea required name='content' onChange={onChange} value={ form.content}/>
+                     </div>
+                     <div className='error'>{error}</div>
+                     <button classname='submit' type='submit' disabled={!isValid()} onClick={() => {history.goBack()}}>Odgovori</button>
+                     <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
+                  </form>
+               </div>
+            </Card>
+         </div>
    );
 }
 

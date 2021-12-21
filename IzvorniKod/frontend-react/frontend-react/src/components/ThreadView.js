@@ -34,6 +34,10 @@ function ThreadView(props) {
       })
    }
 
+   function onNewPost() {
+      setUpdated(new Date());
+   }
+
 
    React.useEffect(() => {
       fetch(`/threads/${id}`)
@@ -94,7 +98,7 @@ function ThreadView(props) {
                   })}
                </div>
             </Card>
-            <ThreadNewPost></ThreadNewPost>
+            <ThreadNewPost onNewPost={ onNewPost }/>
          </div>
       </>
    );
