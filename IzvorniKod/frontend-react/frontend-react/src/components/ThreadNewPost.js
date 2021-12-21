@@ -17,7 +17,8 @@ function ThreadNewPost(props) {
    const user = ReactSession.get("username");
    const history = useHistory();
    const {idT, idP} = useParams()
-   console.log(idT,idP)
+   console.log(idT, idP)
+   
    function onChange(event) {
        console.log(event.target)
       const { name, value } = event.target;
@@ -80,7 +81,7 @@ function ThreadNewPost(props) {
          console.log(JSON.stringify(data))
          if (response.ok) {
             console.log("Nice");
-            props.onNewPost();
+            history.goBack();
          } else {
             setError("Something went wrong! Try again");
             console.log(response.body);
@@ -127,7 +128,7 @@ function ThreadNewPost(props) {
                         <textarea required name='content' onChange={onChange} value={ form.content}/>
                      </div>
                      <div className='error'>{error}</div>
-                     <button classname='submit' type='submit' disabled={!isValid()} onClick={() => {history.goBack()}}>Odgovori</button>
+                     <button classname='submit' type='submit' disabled={!isValid()}>Odgovori</button>
                      <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
                   </form>
                </div>
