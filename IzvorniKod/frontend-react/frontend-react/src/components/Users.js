@@ -6,6 +6,7 @@ import './Login.css';
 import { FaLock, FaLockOpen } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import User from "./User";
+import RoleRequestUser from "./RoleRequestUser";
 
 function Users(props) {
    const [users, setUsers] = React.useState([]);
@@ -80,7 +81,7 @@ function Users(props) {
                      return ([
                         <div className="wrapper">
                            <div className="inner">
-                              <User key={user.id} user={user} props={props}/>
+                              <RoleRequestUser key={user.id} user={user} props={props}/>
                            </div>
                            <div className="inner">
                               <>
