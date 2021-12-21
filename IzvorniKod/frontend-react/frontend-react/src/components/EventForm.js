@@ -6,7 +6,7 @@ import { ReactSession } from "react-client-session"
 
 function EventForm() {
     const [eventForm, setEventForm] = React.useState(
-        {name: '', description: '', location: '', datetime: '', duration: ''})
+        {name: '', description: '', location: '', date: '', time: '', duration: ''})
     const [error, setError] = React.useState('')
     const [account, setAccount] = React.useState({id: ''})
 
@@ -33,11 +33,12 @@ function EventForm() {
             name: eventForm.name,
             description: eventForm.description,
             location: eventForm.location,
-            datetime: eventForm.datetime,
-            duration: "PT0.000036S",
+            date: eventForm.date,
+            time: eventForm.time + ":00",
+            duration: eventForm.duration,
             status: 0,
             account: {
-                id: account["id"]
+                id: account.id
             }
         }
 
@@ -64,9 +65,9 @@ function EventForm() {
     }
 
     function isValid() {
-        const {name, description, location, duration, datetime} = eventForm
+        const {name, description, location, duration, date, time} = eventForm
         return name.length > 0 && description.length > 0 && 
-            location.length > 0 && duration.length > 0 && datetime.length > 0
+            location.length > 0 && duration.length > 0 && date.length > 0 && time.length > 0
     }
 
     return (
@@ -87,7 +88,11 @@ function EventForm() {
                     </div>
                     <div className="FormRow">
                         <label>Datum</label>
-                        <input name="datetime" type="datetime-local" required onChange={onChange} value={ eventForm.datetime}/>
+                        <input name="date" type="date" required onChange={onChange} value={ eventForm.date}/>
+                    </div>
+                    <div className="FormRow">
+                        <label>Vrijeme početka</label>
+                        <input name="time" type="time" required onChange={onChange} value={ eventForm.time}/>
                     </div>
                     <div className="FormRow">
                         <label>Trajanje</label>

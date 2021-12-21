@@ -23,7 +23,11 @@ function EventSuggestionUser(props) {
             </div>
             <div>
                 <b>Datum: </b>
-                <span>{event.datetime}</span>
+                <span>{event.date}</span>
+            </div>
+            <div>
+                <b>Vrijeme početka: </b>
+                <span>{event.time}</span>
             </div>
             <div>
                 <b>Trajanje: </b>

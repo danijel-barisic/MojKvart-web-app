@@ -2,7 +2,7 @@ import React from "react"
 import "./Event.css"
 
 function Event(props) {
-    const {id, name, description, duration, datetime, location, status, account} = props.event
+    const {id, name, description, duration, date, time, location, status, account} = props.event
     return (
         <div className='Event'>
             <div>
@@ -19,7 +19,11 @@ function Event(props) {
             </div>
             <div>
                 <b>Datum: </b>
-                <span>{datetime}</span>
+                <span>{date}</span>
+            </div>
+            <div>
+                <b>Vrijeme početka: </b>
+                <span>{time}</span>
             </div>
             <div>
                 <b>Trajanje: </b>

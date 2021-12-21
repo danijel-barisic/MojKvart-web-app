@@ -11,7 +11,7 @@ function EventEditForm() {
 
     const [oldEvent, setOldEvent] = React.useState([])
     const [eventForm, setEventForm] = React.useState(
-        {name: '', description: '', location: '', datetime: '', duration: ''})
+        {name: '', description: '', location: '', date: '', time: '', duration: ''})
     const [error, setError] = React.useState('')
 
     const history = useHistory()
@@ -30,7 +30,8 @@ function EventEditForm() {
                 name: data.name, 
                 description: data.description, 
                 location: data.location, 
-                datetime: data.datetime, 
+                date: data.date,
+                time: data.time,
                 duration: data.duration
             })
         })
@@ -50,7 +51,8 @@ function EventEditForm() {
             name: eventForm.name,
             description: eventForm.description,
             duration: eventForm.duration,
-            datetime: eventForm.datetime,
+            date: eventForm.date,
+            time: eventForm.time,
             location: eventForm.location,
             status: oldEvent.status,
             account: oldEvent.account
@@ -78,9 +80,9 @@ function EventEditForm() {
     }
 
     function isValid() { 
-        const {name, description, location, duration, datetime} = eventForm
+        const {name, description, location, duration, date, time} = eventForm
         return name.length > 0 && description.length > 0 && 
-            location.length > 0 && duration.length > 0 && datetime.length > 0
+            location.length > 0 && duration.length > 0 && date.length > 0 && time.length > 0
     }
 
     return (
@@ -101,7 +103,11 @@ function EventEditForm() {
                     </div>
                     <div className="FormRow">
                         <label>Datum</label>
-                        <input name="datetime" type="datetime-local" required onChange={onChange} value={ eventForm.datetime}/>
+                        <input name="date" type="date" required onChange={onChange} value={ eventForm.date}/>
+                    </div>
+                    <div className="FormRow">
+                        <label>Vrijeme početka</label>
+                        <input name="time" type="time" required onChange={onChange} value={ eventForm.time}/>
                     </div>
                     <div className="FormRow">
                         <label>Trajanje</label>
