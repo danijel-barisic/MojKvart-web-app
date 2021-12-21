@@ -54,6 +54,7 @@ function ThreadNewPost(props) {
             console.log(response.body);
          }
       });
+      form.content = ''
    }
 
    function onSubmitReply(e) {
@@ -61,7 +62,7 @@ function ThreadNewPost(props) {
       const data = {
          content: form.content,
          datetime:null,
-         reply_id:idP,
+         replyId:idP,
          account: {
             id: account.id
          },
@@ -104,7 +105,7 @@ function ThreadNewPost(props) {
          <div className="footer">
             <Card title="Nova Objava">
                <div className='StreetForm Login'>
-                  <form onSubmit={onSubmitReply}>
+                  <form onSubmit={onSubmit}>
                      <div className='FormRow'>
                         <label>Raspiši se...</label>
                         <textarea required name='content' onChange={onChange} value={ form.content}/>
@@ -117,10 +118,10 @@ function ThreadNewPost(props) {
             </Card>
          </div>
          :
-         <div className="footer">
+         <div className="footer2">
             <Card title="Odgovori na objavu">
                <div className='StreetForm Login'>
-                  <form onSubmit={onSubmit}>
+                  <form onSubmit={onSubmitReply}>
                      <div className='FormRow'>
                         <label>Raspiši se...</label>
                         <textarea required name='content' onChange={onChange} value={ form.content}/>
