@@ -13,8 +13,6 @@ function Forum(props) {
    const [updated, setUpdated] = React.useState(new Date());
    const user = ReactSession.get("username");
    const history = useHistory();
-   const { currentId, currentName } = props;
-   console.log("vhakjvhakjhvakjhv "+currentId, currentName);
 
    function deleteThread(id) {
       const options = {
@@ -33,51 +31,69 @@ function Forum(props) {
    }
 
    React.useEffect(() => {
-      fetch('/threads')
-         .then(data => data.json())
-         .then(threads => setThreads(threads));
-      fetch(`/accounts/${user}`).then(data => data.json())
-         .then(users => setUsers(users));
+      const fetchData = async () => {
+         const fetchThreads = await fetch('/threads').then(data => data.json());
+         const fetchUsers = await fetch(`/accounts/${user}`).then(data => data.json());
+
+         setThreads(fetchThreads);
+         setUsers(fetchUsers);
+      };
+
+      fetchData();
    }, [updated]);
 
-   
+   if (users === undefined || threads === undefined || users.district === undefined) {
+      console.log("users: ", users, "threads: ", threads);
+      return ([ 
+         <>
+            <Card title='Forum'>
+               <div className='Login'>
+                  <button className='button' type="button" onClick={() => {history.push("/novatema")}}>Dodaj temu</button>
+               </div>
+            </Card>
+            <Card title='Please wait for data to load!'>
+            </Card>
+         </>
+      ]);
+   } else {
+      return (
+         <>
+            <Card title='Forum'>
+               <div className='Login'>
+                  <button className='button' type="button" onClick={() => {history.push("/novatema")}}>Dodaj temu</button>
+               </div>
+            </Card>
+            <Card title='Teme'>
+               {threads.map(function (thread) {
+                     if(users.district.id === thread.district.id) {
+                        return ([
+                           <div className="wrapper">
+                              <div className="inner">
+                                 <Thread key={thread.id} thread={thread} />
+                              </div>
+                              {
+                                    (users.id === thread.account.id)
+                                    ?  <>
+                                          <div className="inner">
+                                             <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deleteThread(thread.id)}></MdDelete>
+                                          </div>
+                                       </>
+                                    :  <></>
+                                 }
+                           </div>
+                        ]);
+                     } else {
+                        return ([
+                           <>
+                           </>
+                        ])
+                     }
+                     })}
+            </Card>
+         </>
+      );
+   }
 
-   return (
-      <>
-         <Card title='Forum'>
-            <div className='Login'>
-               <button className='button' type="button" onClick={() => {history.push("/novatema")}}>Dodaj temu</button>
-            </div>
-         </Card>
-         <Card title='Teme'>
-            {threads.map(function (thread) {
-               if(users.district.id === thread.district.id) {
-                  return ([
-                     <div className="wrapper">
-                        <div className="inner">
-                           <Thread key={thread.id} thread={thread} />
-                        </div>
-                        {
-                              (users.id === thread.account.id)
-                              ?  <>
-                                    <div className="inner">
-                                       <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deleteThread(thread.id)}></MdDelete>
-                                    </div>
-                                 </>
-                              :  <></>
-                           }
-                     </div>
-                  ]);
-               } else {
-                  return ([
-                     <>
-                     </>
-                  ])
-               }
-                  })}
-         </Card>
-      </>
-   );
 }
 
 export default Forum;
