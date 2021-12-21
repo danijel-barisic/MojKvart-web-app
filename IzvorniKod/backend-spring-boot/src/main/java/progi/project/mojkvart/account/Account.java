@@ -46,8 +46,8 @@ public class Account implements UserDetails {
     private boolean isAddressValid;
 
     // only CascadeType.REMOVE is left out, because we don't want to remove accounts when we remove a role
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE,
-            CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    @ManyToMany /*(cascade = {CascadeType.DETACH, CascadeType.MERGE,
+            CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)*/
     @JoinTable(name = "account_role",
             joinColumns = @JoinColumn(name = "account_id"), // joinColumns is for THIS entity
             inverseJoinColumns = @JoinColumn(name = "role_id")) // inverse is for the OTHER entity

@@ -22,9 +22,9 @@ public class Role {
     private String name;
 
     // lazy FetchType because we don't want to immediately fetch all accounts that have the role we're fetching
-    @ManyToMany(fetch = FetchType.LAZY,
+    @ManyToMany /*(fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH, CascadeType.MERGE,
-                    CascadeType.PERSIST, CascadeType.REFRESH})
+                    CascadeType.PERSIST, CascadeType.REFRESH})*/
     @JoinTable(name = "account_role",
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "account_id"))
