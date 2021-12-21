@@ -9,7 +9,7 @@ import EventSuggestionUser from "./EventSuggestionUser"
 function Events() {
 
     const [events, setEvents] = React.useState([])
-    const [account, setAccount] = React.useState({id: ''})
+    const [account, setAccount] = React.useState({id: undefined})
     const [roles, setRoles] = React.useState()
 
     const history = useHistory()
@@ -27,7 +27,7 @@ function Events() {
     }, [])
 
     React.useEffect(() => {
-        if (account !== undefined) {
+        if (account !== undefined && account.id !== undefined) {
             fetch(`/accounts/roles/${account.id}`)
             .then(data => data.json())
             .then(roles => setRoles(roles))
@@ -39,9 +39,18 @@ function Events() {
             fetch('/events')
             .then(data => data.json())
             .then(data => setEvents(data
-                .filter(e => e.account.district.id === account.district.id)))
+                .filter(e => e.account.district.id === account.district.id)
+                .filter(e => {
+                    var d1 = new Date(e.date)
+                    var d2 = new Date()
+                    d1.setHours(0,0,0,0)
+                    d2.setHours(0,0,0,0)
+                    return d1 - d2 >= 0;
+                })))
         }
     }, [account])
+
+    events.sort((a,b) => {return new Date(a.date) - new Date(b.date)})
 
     if (events !== undefined && roles !== undefined && roles.length > 0) {
         if (roles.filter(r => r.name === "Moderator").length > 0) return (

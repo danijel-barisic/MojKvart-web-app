@@ -37,7 +37,8 @@ function EventSuggestion(props) {
             name: event.name,
             description: event.description,
             location: event.location,
-            datetime: event.datetime,
+            date: event.date,
+            time: event.time,
             duration: event.duration,
             status: 1,
             account: {
