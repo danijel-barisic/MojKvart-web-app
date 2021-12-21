@@ -26,6 +26,14 @@ public class AccountController {
         return h;
     }
     static private final Home dummyHome = generateDummyHome();
+    static private Account fillWithDummyIfAdmin(Account a) {
+        for (var role : a.getRoles()) {
+            if (role.getName().equals("ADMIN")) {
+                a.setHome(dummyHome);
+            }
+        }
+        return a;
+    }
 
     @Autowired
     private AccountService AccountService;
@@ -43,13 +51,8 @@ public class AccountController {
         if(AccountService.findById(id).isEmpty()) {
             throw new IllegalArgumentException("Account with id: " + id + " does not exist");
         }
-        var a = AccountService.fetch(id);
-        for (var role : a.getRoles()) {
-            if (role.getName().equals("ADMIN")) {
-                a.setHome(dummyHome);
-            }
-        }
-        return a;
+        return fillWithDummyIfAdmin(AccountService.fetch(id));
+
     }
 
     @GetMapping("/{email}")
@@ -57,7 +60,7 @@ public class AccountController {
         if(AccountService.findByEmail(email).isEmpty()) {
             throw new IllegalArgumentException("Account with email: " + email + " does not exist");
         }
-        return AccountService.fetch(email);
+        return fillWithDummyIfAdmin(AccountService.fetch(email));
     }
 
     @GetMapping("/{email}/getdistrict")
