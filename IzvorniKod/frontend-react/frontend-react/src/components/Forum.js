@@ -51,7 +51,7 @@ function Forum(props) {
                   <button className='button' type="button" onClick={() => {history.push("/novatema")}}>Dodaj temu</button>
                </div>
             </Card>
-            <Card title='Please wait for data to load!'>
+            <Card title='Molimo pričekajte dok se podaci ne učitaju!'>
             </Card>
          </>
       ]);
