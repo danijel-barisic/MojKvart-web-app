@@ -7,7 +7,7 @@ import "./Event.css"
 
 function PerosnalRoleRequest() {
 
-    const [account, setAccount] = React.useState({id: ''})
+    const [account, setAccount] = React.useState({id: undefined})
     const [roles, setRoles] = React.useState()
     
     const acc_username = ReactSession.get("username")
@@ -24,14 +24,14 @@ function PerosnalRoleRequest() {
         .then(roles => setRoles(roles))
     }, [account])
 
-    if (account.id != '' && roles !== undefined && roles.length > 0) {
+    if (account.id != undefined && roles !== undefined && roles.length > 0) {
         return <Card title="Moji zahtjevi za ulogama">
             <div className="Login">
                 <div className='Event'>
                     <PersonalRoleComponent account={account} roles={roles} target={"Moderator"} targetId={2}/>
                 </div>
                 <div className='Event'>
-                    <PersonalRoleComponent account={account} roles={roles} target={"Vijećnik"} targetId={3}/>
+                    <PersonalRoleComponent account={account} roles={roles} target={"Vijecnik"} targetId={3}/>
                 </div>
             </div>
         </Card>
