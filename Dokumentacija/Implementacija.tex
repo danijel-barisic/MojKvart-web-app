@@ -12,12 +12,7 @@
 		
 	
 		\section{Ispitivanje programskog rješenja}
-			
-			\textbf{\textit{dio 2. revizije}}\\
-			
-			 \textit{U ovom poglavlju je potrebno opisati provedbu ispitivanja implementiranih funkcionalnosti na razini komponenti i na razini cijelog sustava s prikazom odabranih ispitnih slučajeva. Studenti trebaju ispitati temeljnu funkcionalnost i rubne uvjete.}
-	
-			
+					
 			\subsection{Ispitivanje komponenti}
 			\textit{Potrebno je provesti ispitivanje jedinica (engl. unit testing) nad razredima koji implementiraju temeljne funkcionalnosti. Razraditi \textbf{minimalno 6 ispitnih slučajeva} u kojima će se ispitati redovni slučajevi, rubni uvjeti te izazivanje pogreške (engl. exception throwing). Poželjno je stvoriti i ispitni slučaj koji koristi funkcionalnosti koje nisu implementirane. Potrebno je priložiti izvorni kôd svih ispitnih slučajeva te prikaz rezultata izvođenja ispita u razvojnom okruženju (prolaz/pad ispita). }
 			
@@ -25,21 +20,127 @@
 			
 			\subsection{Ispitivanje sustava}
 			
-			 \textit{Potrebno je provesti i opisati ispitivanje sustava koristeći radni okvir Selenium\footnote{\url{https://www.seleniumhq.org/}}. Razraditi \textbf{minimalno 4 ispitna slučaja} u kojima će se ispitati redovni slučajevi, rubni uvjeti te poziv funkcionalnosti koja nije implementirana/izaziva pogrešku kako bi se vidjelo na koji način sustav reagira kada nešto nije u potpunosti ostvareno. Ispitni slučaj se treba sastojati od ulaza (npr. korisničko ime i lozinka), očekivanog izlaza ili rezultata, koraka ispitivanja i dobivenog izlaza ili rezultata.\\ }
-			 
-			 \textit{Izradu ispitnih slučajeva pomoću radnog okvira Selenium moguće je provesti pomoću jednog od sljedeća dva alata:}
-			 \begin{itemize}
-			 	\item \textit{dodatak za preglednik \textbf{Selenium IDE} - snimanje korisnikovih akcija radi automatskog ponavljanja ispita	}
-			 	\item \textit{\textbf{Selenium WebDriver} - podrška za pisanje ispita u jezicima Java, C\#, PHP koristeći posebno programsko sučelje.}
-			 \end{itemize}
-		 	\textit{Detalji o korištenju alata Selenium bit će prikazani na posebnom predavanju tijekom semestra.}
+			Ispitivanje sustava ostvareno je korištenjem Selenium WebDrivera i programskog jezika Python. U nastavku su opisani provedeni testovi, te su priloženi kodovi.
 			
+			U prvom ispitnom slučaju ispitan je pokušaj prijave s emailom koji nije povezan niti jedan račun, tj. emailom koji ne postoji u sustavu. Očekivani izlaz je neuspjeh pri pokušaju prijave.
+			
+			\begin{lstlisting}[language=Python, breaklines=true]
+def test1() -> bool:
+    driver = webdriver.Firefox()
+    driver.get("http://localhost:3000/login")
+    driver.find_element_by_name("username").send_keys("stanovnik@stanovnik.com")
+    driver.find_element_by_name("password").send_keys("stanovnik")
+    driver.find_element_by_css_selector("button[type='submit']").click()
+    try:
+        driver.find_element_by_class_name("logout")
+    except NoSuchElementException:
+        driver.close()
+        return True
+    driver.close()
+    return False		
+			\end{lstlisting}
+
+			U drugom ispitnom slučaju ispitan je pokušaj registracije s neispravnim podacima, konkretno s emailom koji je zadan u krivom formatu. Očekivani izlaz je neuspjeh pri pokušaju registracije.
+		
+			\begin{lstlisting}[language=Python, breaklines=true]
+def test2() -> bool:
+    driver = webdriver.Firefox()
+    driver.get("http://localhost:3000/login")
+    driver.find_element_by_css_selector("button[type='button']").click()
+    driver.find_element_by_name("firstname").send_keys("Stanovnik")
+    driver.find_element_by_name("lastname").send_keys("Stanovnikic")
+    driver.find_element_by_name("username").send_keys("stanovnik")
+    driver.find_element_by_name("password").send_keys("stanovnik")
+    dropdown = driver.find_element_by_class_name("css-tlfecz-indicatorContainer")
+    dropdown.click()
+    actions = ActionChains(driver)
+    actions.move_to_element(dropdown).send_keys("Ulica 1 Kvarta 1").key_down(Keys.ENTER).key_up(Keys.ENTER).perform()
+    driver.find_element_by_name("streetnumber").send_keys("7")
+    driver.find_element_by_css_selector("button[type='submit']").click()
+    try:
+        driver.find_element_by_class_name("logout")
+    except NoSuchElementException:
+        driver.close()
+        return True
+    driver.close()
+    return False
+			\end{lstlisting}
+			
+			U trećem ispitnom slučaju ispitan je pokušaj registracije gdje su svi uneseni podaci valjani. Očekivani izlaz je uspjeh pri pokušaju registracije i preusmjeravanje na početnu stranicu korisnikovog kvarta.
+			
+			\begin{lstlisting}[language=Python, breaklines=true]
+def test3() -> bool:
+    driver = webdriver.Firefox()
+    driver.get("http://localhost:3000/login")
+    driver.find_element_by_css_selector("button[type='button']").click()
+    driver.find_element_by_name("firstname").send_keys("Stanovnik")
+    driver.find_element_by_name("lastname").send_keys("Stanovnikic")
+    driver.find_element_by_name("username").send_keys("stanovnik@stanovnik.com")
+    driver.find_element_by_name("password").send_keys("stanovnik")
+    dropdown = driver.find_element_by_class_name("css-tlfecz-indicatorContainer")
+    dropdown.click()
+    actions = ActionChains(driver)
+    actions.move_to_element(dropdown).send_keys("Ulica 1 Kvarta 1").key_down(Keys.ENTER).key_up(Keys.ENTER).perform()
+    driver.find_element_by_name("streetnumber").send_keys("7")
+    driver.find_element_by_css_selector("button[type='submit']").click()
+    try:
+        driver.find_element_by_class_name("logout")
+    except NoSuchElementException:
+        driver.close()
+        return False
+    driver.close()
+    return True	
+			\end{lstlisting}
+			
+			U četvrtom ispitnom slučaju ispitan je pokušaj prijave s emailom za koji postoji korisnički račun, ali s neispravnom lozinkom. Očekivani izlaz je neuspjeh pri pokušaju prijave.
+			
+			\begin{lstlisting}[language=Python, breaklines=true]
+def test4() -> bool:
+    driver = webdriver.Firefox()
+    driver.get("http://localhost:3000/login")
+    driver.find_element_by_name("username").send_keys("stanovnik@stanovnik.com")
+    driver.find_element_by_name("password").send_keys("stanovni")
+    driver.find_element_by_css_selector("button[type='submit']").click()
+    try:
+        driver.find_element_by_class_name("logout")
+    except NoSuchElementException:
+        driver.close()
+        return True
+    driver.close()
+    return False
+			\end{lstlisting}
+			
+			U petom ispitnom slučaju ispitan je pokušaj prijave gdje su svi uneseni podaci ispravni. Očekivani izlaz je uspjeh pri pokušaju prijave i preusmjeravanje na početnu stranicu korisnikovog kvarta.
+			
+			\begin{lstlisting}[language=Python, breaklines=true]
+def test5() -> bool:
+    driver = webdriver.Firefox()
+    driver.get("http://localhost:3000/login")
+    driver.find_element_by_name("username").send_keys("stanovnik@stanovnik.com")
+    driver.find_element_by_name("password").send_keys("stanovnik")
+    driver.find_element_by_css_selector("button[type='submit']").click()
+    try:
+        driver.find_element_by_class_name("logout")
+    except NoSuchElementException:
+        driver.close()
+        return False
+    driver.close()
+    return True
+			\end{lstlisting}
+			
+			Na slici 5.2 prikazana je snimka zaslona terminala kao rezultat izvođenja prethodno navedenih pet ispitnih slučajeva.
+			
+			\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth,keepaspectratio]{18 ispitivanje sustava.png}
+					\caption{Rezultati ispitivanja Selenium WebDriverom}
+				\end{figure}	
 			\eject 
 		
 		
 		\section{Dijagram razmještaja}
 		
-		Na slici 5.1 prikazan je dijagram razmještaja. Sustav je baziran na arhitekturi "klijent-poslužitelj". Korisnici pristupaju aplikaciji korištenjem web preglednika. Na platformi Heroku se nalaze poslužitelji za frontend, backend i bazu podataka. Komunikacija između korisnika i poslužitelja za frontend, te poslužitelja za frontend i poslužitelja za backend, ostvaruje se korištenjem protokola HTTP.
+		Na slici 5.3 prikazan je dijagram razmještaja. Sustav je baziran na arhitekturi "klijent-poslužitelj". Korisnici pristupaju aplikaciji korištenjem web preglednika. Na platformi Heroku se nalaze poslužitelji za frontend, backend i bazu podataka. Komunikacija između korisnika i poslužitelja za frontend, te poslužitelja za frontend i poslužitelja za backend, ostvaruje se korištenjem protokola HTTP.
 			
 			\begin{figure}[H]
 					\centering
