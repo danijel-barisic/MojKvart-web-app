@@ -1,6 +1,7 @@
 package progi.project.mojkvart.street;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Cascade;
 import progi.project.mojkvart.district.District;
 import progi.project.mojkvart.home.Home;
 
@@ -28,16 +29,32 @@ public class Street {
     private Integer maxStreetNo;
 
     @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.PERSIST)
     @JoinColumn(name = "district_id")
     private District district;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "street")
+    @OneToMany(mappedBy = "street", cascade = {CascadeType.REMOVE})
     private List<Home> homes;
 
     public Street() {}
 
+    public List<Home> getHomes() {
+        return homes;
+    }
+
+    public void setHomes(List<Home> homes) {
+        this.homes = homes;
+    }
+
     public Street(String name, Integer minStreetNo, Integer maxStreetNo) {
+        this.name = name;
+        this.minStreetNo = minStreetNo;
+        this.maxStreetNo = maxStreetNo;
+    }
+
+    public Street(Long id, String name, Integer minStreetNo, Integer maxStreetNo) {
+        this.id = id;
         this.name = name;
         this.minStreetNo = minStreetNo;
         this.maxStreetNo = maxStreetNo;

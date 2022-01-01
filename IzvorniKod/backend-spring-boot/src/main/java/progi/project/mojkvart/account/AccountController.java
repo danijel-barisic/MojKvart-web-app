@@ -7,6 +7,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import progi.project.mojkvart.district.District;
 import progi.project.mojkvart.home.Home;
+import progi.project.mojkvart.home.HomeRepository;
 import progi.project.mojkvart.role.Role;
 import progi.project.mojkvart.role.RoleService;
 import progi.project.mojkvart.street.Street;
@@ -20,114 +21,99 @@ import java.util.stream.Collectors;
 @RequestMapping("/accounts")
 public class AccountController {
 
-    static private Home generateDummyHome() {
-        var h = new Home(-1L, new Street("", 0, 0));
-        h.getStreet().setDistrict(new District(""));
-        return h;
-    }
-    static private final Home dummyHome = generateDummyHome();
-    static private Account fillWithDummyIfAdmin(Account a) {
-        for (var role : a.getRoles()) {
-            if (role.getName().equals("ADMIN")) {
-                a.setHome(dummyHome);
-            }
-        }
-        return a;
-    }
-
     @Autowired
-    private AccountService AccountService;
+    private AccountService accountService;
 
     @Autowired
     private RoleService RoleService;
 
     @GetMapping("")
     public List<Account> listAccounts() {
-        return AccountService.listAll();
+        return accountService.listAll();
     }
 
     @GetMapping("/id/{id}")
     public Account getAccount(@PathVariable("id") long id) {
-        if(AccountService.findById(id).isEmpty()) {
+        if(accountService.findById(id).isEmpty()) {
             throw new IllegalArgumentException("Account with id: " + id + " does not exist");
         }
-        return fillWithDummyIfAdmin(AccountService.fetch(id));
+        return accountService.fillWithDummyIfAdmin(accountService.fetch(id));
 
     }
 
     @GetMapping("/{email}")
     public Account getAccount(@PathVariable("email") String email) {
-        if(AccountService.findByEmail(email).isEmpty()) {
+        if(accountService.findByEmail(email).isEmpty()) {
             throw new IllegalArgumentException("Account with email: " + email + " does not exist");
         }
-        return fillWithDummyIfAdmin(AccountService.fetch(email));
+        return accountService.fillWithDummyIfAdmin(accountService.fetch(email));
     }
 
     @GetMapping("/{email}/getdistrict")
     public District getAccountDistrict(@PathVariable("email") String email) {
-        if(AccountService.findByEmail(email).isEmpty()) {
+        if(accountService.findByEmail(email).isEmpty()) {
             throw new IllegalArgumentException("Account with email: " + email + " does not exist");
         }
-        return AccountService.fetch(email).getDistrict();
+        return accountService.fetch(email).getDistrict();
     }
 
     @GetMapping("/{id}/district")
     public District getDistrict(@PathVariable("id") long id) {
-        if(!AccountService.existsById(id)) {
+        if(!accountService.existsById(id)) {
             throw new IllegalArgumentException("Account with id: " + id + " does not exist");
         }
-        return AccountService.fetch(id).getDistrict();
+        return accountService.fetch(id).getDistrict();
     }
 
     @GetMapping("/{id}/banned")
     public boolean checkIfBanned(@PathVariable("id") Long id) {
-        Account account = AccountService.fetch(id);
+        Account account = accountService.fetch(id);
         return account.isBlocked();
     }
 
     @GetMapping("/roles/{id}")
     public List<Role> getRoles(@PathVariable("id") long id) {
-        if(!AccountService.existsById(id)) {
+        if(!accountService.existsById(id)) {
             throw new IllegalArgumentException("Account with id: " + id + " does not exist");
         }
-        return AccountService.fetch(id).getRoles();
+        return accountService.fetch(id).getRoles();
     }
 
     @PostMapping("")
     public ResponseEntity<Account> createAccount(@RequestBody Account account) {
-        if(AccountService.getEmailsFromAccounts().contains(account.getEmail())) {
+        if(accountService.getEmailsFromAccounts().contains(account.getEmail())) {
             throw new IllegalArgumentException("Email: " + account.getEmail() + " is already used");
         }
-        if(account.getId() != null && AccountService.existsById(account.getId())) {
+        if(account.getId() != null && accountService.existsById(account.getId())) {
             throw new IllegalArgumentException("Account with id: " + account.getId() + " already exists");
         }
         else {
-            Account saved = AccountService.createAccount(account);
+            Account saved = accountService.createAccount(account);
             return ResponseEntity.created(URI.create("/accounts/" + saved.getId())).body(saved);
         }
     }
 
     @PostMapping("/{id}/banned")
     public boolean setBanned(@PathVariable("id") Long id) {
-        Account account = AccountService.fetch(id);
+        Account account = accountService.fetch(id);
         account.setBlocked(true);
-        AccountService.updateAccount(account);
+        accountService.updateAccount(account);
         return account.isBlocked();
     }
 
     @PostMapping("/{id}/unbanned")
     public boolean setUnBanned(@PathVariable("id") Long id) {
-        Account account = AccountService.fetch(id);
+        Account account = accountService.fetch(id);
         account.setBlocked(false);
-        AccountService.updateAccount(account);
+        accountService.updateAccount(account);
         return account.isBlocked();
     }
 
     /*brise sve postojece i dodaje nove*/
     @PostMapping("/roles/{id}")
     public List<Role> createRoles(@PathVariable("id") long id, @RequestBody ArrayList<String> roleList) {
-        Account account = AccountService.fetch(id);
-        if(!AccountService.existsById(id)) {
+        Account account = accountService.fetch(id);
+        if(!accountService.existsById(id)) {
             throw new IllegalArgumentException("Account with id: " + id + " does not exist");
         } else {
             List<Role> listOfRoles = new ArrayList<Role>();
@@ -147,7 +133,7 @@ public class AccountController {
 
     @PutMapping("/{email}")
     public Account updateAccount(@PathVariable("email") String email, @RequestBody Account account) {
-        if(account.getEmail() != null && AccountService.findByEmail(account.getEmail()).isEmpty()) {
+        if(account.getEmail() != null && accountService.findByEmail(account.getEmail()).isEmpty()) {
             throw new IllegalArgumentException("Account with id: " + account.getId() + " does not exist");
         }
         else if(account.getEmail() == null) {
@@ -157,21 +143,21 @@ public class AccountController {
             if(!account.getEmail().equals(email))
                 throw new IllegalArgumentException("Account id must be preserved");
             System.out.println(account);
-            return AccountService.updateAccount(account);
+            return accountService.updateAccount(account);
         }
     }
 
     /*dodaje na postojece novi role*/
     @PutMapping("/roles/{id}")
     public List<Role> updateRoles(@PathVariable("id") Long accountId, @RequestBody String roleName) {
-        Account account = AccountService.fetch(accountId);
+        Account account = accountService.fetch(accountId);
         Role role = null;
         roleName = roleName.replace("\"","");
 
         if(accountId==null){
             throw new IllegalArgumentException("Account id must be given");
         }
-        else if(!AccountService.existsById(accountId)){
+        else if(!accountService.existsById(accountId)){
             throw new IllegalArgumentException("Account with id: "+ accountId + " does not exist");
         }
         else{
@@ -191,13 +177,13 @@ public class AccountController {
         if(accountId==null){
             throw new IllegalArgumentException("Account id must be given");
         }
-        else if(!AccountService.existsById(accountId)){
+        else if(!accountService.existsById(accountId)){
             throw new IllegalArgumentException("Account with id: "+ accountId + " does not exist");
         }
         else{
             role = RoleService.findByName(roleName).orElseThrow(()-> new IllegalArgumentException("No such role."));
 
-            Account account = AccountService.fetch(accountId);
+            Account account = accountService.fetch(accountId);
             account.getRoles().add(role);
             RoleService.updateRole(role);
         }
@@ -206,21 +192,21 @@ public class AccountController {
 
     @DeleteMapping("/{id}")
     public Account deleteAccount(@PathVariable("id") long accountId) {
-        if(!AccountService.existsById(accountId))
+        if(!accountService.existsById(accountId))
             throw new IllegalArgumentException("Account with id: "+ accountId + " does not exist");
-        return AccountService.deleteAccount(accountId);
+        return accountService.deleteAccount(accountId);
     }
 
     @DeleteMapping("/roles/{id}")
     public List<Role> deleteRole(@PathVariable("id") Long accountId, @RequestBody String roleName) {
-        Account account = AccountService.fetch(accountId);
+        Account account = accountService.fetch(accountId);
         Role role = null;
         roleName = roleName.replace("\"","");
 
         if(accountId==null){
             throw new IllegalArgumentException("Account id must be given");
         }
-        else if(!AccountService.existsById(accountId)){
+        else if(!accountService.existsById(accountId)){
             throw new IllegalArgumentException("Account with id: "+ accountId + " does not exist");
         }
         else{

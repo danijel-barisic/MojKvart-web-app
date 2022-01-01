@@ -40,6 +40,11 @@ public class District {
         this.name = name;
     }
 
+    public District(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }

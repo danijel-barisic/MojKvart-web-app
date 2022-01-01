@@ -1,6 +1,7 @@
 package progi.project.mojkvart.account;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Cascade;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -69,6 +70,7 @@ public class Account implements UserDetails {
     private List<Meeting> meetings;
 
     @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "home_id")
     private Home home;
 
@@ -219,13 +221,7 @@ public class Account implements UserDetails {
     public String toString() {
         return "Account{" +
                 "id=" + id +
-                ", email='" + email + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", password='" + password + '\'' +
-                ", isBlocked=" + isBlocked +
-                ", isAddressValid=" + isAddressValid +
-                ", roles='" + getRoles() + '\'' +
+                ", home=" + home.getId() +
                 '}';
     }
 }
