@@ -53,19 +53,19 @@ public class Account implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id")) // inverse is for the OTHER entity
     private List<Role> roles;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", cascade = {CascadeType.REMOVE})
     private List<RoleRequest> roleRequests;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", cascade = {CascadeType.REMOVE})
     private List<Post> posts;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", cascade = {CascadeType.REMOVE})
     private List<PostThread> threads;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", cascade = {CascadeType.REMOVE})
     private List<Event> events;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", cascade = {CascadeType.REMOVE})
     private List<Meeting> meetings;
 
     @ManyToOne

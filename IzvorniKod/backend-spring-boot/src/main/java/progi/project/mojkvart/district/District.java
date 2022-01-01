@@ -23,15 +23,15 @@ public class District {
     private String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "district")
+    @OneToMany(mappedBy = "district", cascade = {CascadeType.REMOVE})
     private List<Street> streets;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "district")
+    @OneToMany(mappedBy = "district", cascade = {CascadeType.REMOVE})
     private List<PostThread> threads;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "district")
+    @OneToMany(mappedBy = "district", cascade = {CascadeType.REMOVE})
     private List<Meeting> meetings;
 
     public District() {}
