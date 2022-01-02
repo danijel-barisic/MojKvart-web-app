@@ -10,9 +10,11 @@ import Thread from "./Thread";
 function Forum(props) {
    const [threads, setThreads] = React.useState([]);
    const [users, setUsers] = React.useState([]);
+   const [roles, setRoles] = React.useState([]);
    const [updated, setUpdated] = React.useState(new Date());
    const user = ReactSession.get("username");
    const history = useHistory();
+   let userid = undefined;
 
    function deleteThread(id) {
       const options = {
@@ -33,17 +35,19 @@ function Forum(props) {
    React.useEffect(() => {
       const fetchData = async () => {
          const fetchThreads = await fetch('/threads').then(data => data.json());
-         const fetchUsers = await fetch(`/accounts/${user}`).then(data => data.json());
-
          setThreads(fetchThreads);
+         const fetchUsers = await fetch(`/accounts/${user}`).then(data => data.json());
          setUsers(fetchUsers);
+         userid = fetchUsers.id;
+         const fetchRoles = await fetch(`/accounts/roles/${userid}`).then(data => data.json());
+         setRoles(fetchRoles);
       };
 
       fetchData();
    }, [updated]);
 
    if (users === undefined || threads === undefined || users.district === undefined) {
-      console.log("users: ", users, "threads: ", threads);
+      console.log("users: ", users, "threads: ", threads, "roles: ", roles);
       return ([ 
          <>
             <Card title='Forum'>
@@ -65,6 +69,10 @@ function Forum(props) {
             </Card>
             <Card title='Teme'>
                {threads.map(function (thread) {
+                  userid = users.id;
+                  let role = roles.map(function (x) {
+                     return x[Object.keys(x)[1]]
+                  })
                      if(users.district.id === thread.district.id) {
                         return ([
                            <div className="wrapper">
@@ -72,7 +80,7 @@ function Forum(props) {
                                  <Thread key={thread.id} thread={thread} />
                               </div>
                               {
-                                    (users.id === thread.account.id)
+                                    (role.includes("Moderator"))
                                     ?  <>
                                           <div className="inner">
                                              <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deleteThread(thread.id)}></MdDelete>

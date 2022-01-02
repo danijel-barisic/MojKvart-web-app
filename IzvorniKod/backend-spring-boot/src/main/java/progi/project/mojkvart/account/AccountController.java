@@ -37,7 +37,7 @@ public class AccountController {
         if(accountService.findById(id).isEmpty()) {
             throw new IllegalArgumentException("Account with id: " + id + " does not exist");
         }
-        return accountService.fillWithDummyIfAdmin(accountService.fetch(id));
+        return accountService.fetch(id);
 
     }
 
@@ -46,7 +46,7 @@ public class AccountController {
         if(accountService.findByEmail(email).isEmpty()) {
             throw new IllegalArgumentException("Account with email: " + email + " does not exist");
         }
-        return accountService.fillWithDummyIfAdmin(accountService.fetch(email));
+        return accountService.fetch(email);
     }
 
     @GetMapping("/{email}/getdistrict")

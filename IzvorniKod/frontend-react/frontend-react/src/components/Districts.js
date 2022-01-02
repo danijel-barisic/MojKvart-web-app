@@ -41,16 +41,18 @@ function Districts() {
          <Card title='Kvartovi'>
             <div className='StreetList'>
                {districts.map(function (district) {
-                  return ([
-                     <div className="wrapper">
-                        <div className="inner">
-                           <District key={district.id} district={district} />
+                  if (district.id !== -1) {
+                     return ([
+                        <div className="wrapper">
+                           <div className="inner">
+                              <District key={district.id} district={district} />
+                           </div>
+                           <div className="inner">
+                              <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deleteDistrict(district.id)}></MdDelete>
+                           </div>
                         </div>
-                        <div className="inner">
-                           <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deleteDistrict(district.id)}></MdDelete>
-                        </div>
-                     </div>
-                  ]);
+                     ]);  
+                  }
                })}
             </div>
             <div className='Login'>

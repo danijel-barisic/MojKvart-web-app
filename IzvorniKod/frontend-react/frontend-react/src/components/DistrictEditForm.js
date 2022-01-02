@@ -6,6 +6,7 @@ function DistrictEditForm(props) {
    const [form, setForm] = React.useState({ name: '' });
    const [error, setError] = React.useState('');
    const history = useHistory();
+   const [district, setDistrict] = React.useState([]);
    const { id } = props.location.state;
    console.log({id});
 
@@ -44,6 +45,11 @@ function DistrictEditForm(props) {
       return name.length > 0;
    }
 
+   React.useEffect(() => {
+      fetch(`/districts/${id}`)
+         .then(data => data.json())
+         .then(district => setDistrict(district))
+   }, []);
 
    return (
       <Card title='Novi naziv'>
@@ -51,7 +57,7 @@ function DistrictEditForm(props) {
             <form onSubmit={onSubmit}>
                <div className='FormRow'>
                   <label>Ime Kvarta</label>
-                  <input required name='name' onChange={onChange} value={ form.name}/>
+                  <input required placeholder={district.name} name='name' onChange={onChange} value={ form.name}/>
                </div>
                <div className='error'>{error}</div>
                <button type='submit' disabled={!isValid()}>Ažuriraj</button>
