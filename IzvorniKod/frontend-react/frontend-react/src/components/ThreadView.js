@@ -4,7 +4,8 @@ import Card from './Card';
 import ReactSession from "react-client-session/dist/ReactSession";
 import { useHistory } from "react-router";
 import { useParams } from 'react-router-dom';
-import { MdDelete } from 'react-icons/md';
+import { MdDelete, MdEdit } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 import {GoReply} from 'react-icons/go';
 import Post from './Post';
 import ThreadNewPost from './ThreadNewPost';
@@ -46,7 +47,7 @@ function ThreadView(props) {
       fetch(`/accounts/${user}`).then(data => data.json())
          .then(users => setUsers(users));
    }, [updated]);
-   console.log(posts.posts);
+
    console.log(posts)
    
    return (
@@ -66,14 +67,23 @@ function ThreadView(props) {
                         (post.replyId !== null) ? <>
                         <div className="innerReply">
                            <div className='innerReplyWho'>
-                              
-                        <GoReply href='' ></GoReply>
+                        <a href="#p3">
+                        <GoReply></GoReply>
+                        </a>
                         ({(post.replyId)})
                         </div>
 
                            <Post key={post.id} post={post} />
-                           <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deletePost(post.id)}></MdDelete>
-
+                           {
+                              (users.id === post.account.id )
+                              ?  <>
+                                    <div className="inner">
+                                       <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deletePost(post.id)}></MdDelete>
+                                      <Link to={`/novaobjava/${id}/${post.id}/edit`}><MdEdit></MdEdit></Link> 
+                                    </div>
+                                 </>
+                              :  <></>
+                           }
                         </div>
                         </>
                         : <>
@@ -89,6 +99,7 @@ function ThreadView(props) {
                               ?  <>
                                     <div className="inner">
                                        <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deletePost(post.id)}></MdDelete>
+                                      <Link to={`/novaobjava/${id}/${post.id}/edit`}><MdEdit></MdEdit></Link> 
                                     </div>
                                  </>
                               :  <></>

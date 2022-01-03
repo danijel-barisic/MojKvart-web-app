@@ -33,6 +33,7 @@ import PersonalDelete from './components/PersonalDelete';
 import PersonalPassword from  './components/PersonalPassword';
 import PerosnalRoleRequest from './components/PersonalRoleRequest';
 import ThreadNewPost from './components/ThreadNewPost';
+import PostEditForm from './components/PostEditForm';
 
 
 function App() {
@@ -104,6 +105,7 @@ function App() {
               <Route path='/forum/:idT' exact component={ThreadView} />
               <Route path='/novatema' exact component={ForumNewThread}/>
               <Route path='/novaobjava/:idT/:idP' exact component={ThreadNewPost}/>
+              <Route path = '/novaobjava/:idT/:idP/edit' exact component={PostEditForm} />
               <Route path='/personal' exact component={Personal} />
               <Route path='/personal/role_requests' exact component={PerosnalRoleRequest} />
               <Route path='/personal/edit' exact component={PersonalEdit} />
