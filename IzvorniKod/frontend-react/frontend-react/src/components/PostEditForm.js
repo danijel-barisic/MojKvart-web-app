@@ -30,6 +30,7 @@ const PostEditForm = () => {
     function onSubmit(e) {
        e.preventDefault();
        const data = {
+          id: idP,
           content: form.content,
           datetime:posts.datetime,
           replyId:posts.replyId,
@@ -50,7 +51,7 @@ const PostEditForm = () => {
           console.log(JSON.stringify(data))
           if (response.ok) {
              console.log("Nice");
-             
+             history.goBack();
           } else {
              setError("Something went wrong! Try again");
              console.log(response.body);
@@ -86,7 +87,7 @@ const PostEditForm = () => {
                     <textarea required name='content' onChange={onChange} value={ form.content} defaultValue= {posts.content}/>
                  </div>
                  <div className='error'>{error}</div>
-                 <button classname='submit' type='submit' disabled={!isValid()} >Stvori objavu</button>
+                 <button classname='submit' type='submit' disabled={!isValid()} >Uredi objavu</button>
                  <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
               </form>
            </div>
