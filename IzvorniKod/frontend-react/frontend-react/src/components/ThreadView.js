@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRef } from 'react';
 import './Header.css';
 import Card from './Card';
 import ReactSession from "react-client-session/dist/ReactSession";
@@ -16,10 +17,25 @@ function ThreadView(props) {
    const [posts, setPosts] = React.useState([]);
    const [updated, setUpdated] = React.useState(new Date());
    const [users,setUsers] = React.useState([]);
+   const [roles, setRoles] = React.useState()
+
    const history = useHistory();
    const user = ReactSession.get("username");
 
+   
 
+   
+    const inputRef = useRef({});
+   
+   console.log(inputRef.current)
+   function onReply(inputRef,replyId){
+      
+      inputRef.current[replyId].className = inputRef.current[replyId].className + " " + "elementToFadeInAndOutighlight";
+      setTimeout(function() {
+         inputRef.current[replyId].className = "inner"
+         },2000)
+      
+   }
    function deletePost(id){
       const options = {
          method: 'DELETE',
@@ -46,10 +62,23 @@ function ThreadView(props) {
          .then(posts => setPosts(posts.posts))
       fetch(`/accounts/${user}`).then(data => data.json())
          .then(users => setUsers(users));
+      
    }, [updated]);
 
-   console.log(posts)
-   
+   React.useEffect(() => {
+      if (users !== undefined && users.id !== undefined) {
+          fetch(`/accounts/roles/${users.id}`)
+          .then(data => data.json())
+          .then(roles => setRoles(roles))
+      }
+  }, [users])
+
+  if(roles == undefined) {
+     return(
+        <><div>Wait for page to load...</div></>
+     )
+  }
+  
    return (
       <>
          <div className="centar">
@@ -67,19 +96,21 @@ function ThreadView(props) {
                         (post.replyId !== null) ? <>
                         <div className="innerReply">
                            <div className='innerReplyWho'>
-                        <a href="#p3">
-                        <GoReply></GoReply>
-                        </a>
+                              
+                       
+                        <GoReply onClick={() => onReply(inputRef,post.replyId)} ></GoReply>
+                        
                         ({(post.replyId)})
                         </div>
 
                            <Post key={post.id} post={post} />
                            {
-                              (users.id === post.account.id )
+                              (users.id === post.account.id || roles[0].name === "Moderator" )
                               ?  <>
                                     <div className="inner">
                                        <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deletePost(post.id)}></MdDelete>
-                                      <Link to={`/novaobjava/${id}/${post.id}/edit`}><MdEdit></MdEdit></Link> 
+                                      <Link to={`/novaobjava/${id}/${post.id}/edit`}><MdEdit style={{margin:"0px 50px 0px 0px"}}></MdEdit></Link>
+                                      {"~" +users.firstName + " " + users.lastName}
                                     </div>
                                  </>
                               :  <></>
@@ -87,9 +118,10 @@ function ThreadView(props) {
                         </div>
                         </>
                         : <>
-                        <div className="inner">
+                        <div className="inner" ref={el => inputRef.current[post.id] = el} id={post.id}>
                            
                         <Post key={post.id} post={post} />
+                        
                         </div>
                         </>
                         }
@@ -99,7 +131,8 @@ function ThreadView(props) {
                               ?  <>
                                     <div className="inner">
                                        <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deletePost(post.id)}></MdDelete>
-                                      <Link to={`/novaobjava/${id}/${post.id}/edit`}><MdEdit></MdEdit></Link> 
+                                      <Link to={`/novaobjava/${id}/${post.id}/edit`}><MdEdit style={{margin:"0px 50px 0px 0px"}}></MdEdit></Link> 
+                                      {"~" +users.firstName + " " + users.lastName}
                                     </div>
                                  </>
                               :  <></>

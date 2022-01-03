@@ -3,10 +3,10 @@ import './Header.css';
 import { Link } from 'react-router-dom';
 
 function Post(props) {
-   console.log(props.post)
+   //console.log(props.post)
    const { id, content, account,threadId } = props.post;
-   const { district } = account;
-  console.log(district)
+   const { district, email } = account;
+  
    
    return (
       <div className='headerdist'>
