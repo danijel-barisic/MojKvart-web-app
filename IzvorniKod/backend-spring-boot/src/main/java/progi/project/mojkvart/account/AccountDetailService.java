@@ -14,6 +14,7 @@ import progi.project.mojkvart.account.AccountService;
 import progi.project.mojkvart.security.PasswordEncoder;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static org.springframework.security.core.authority.AuthorityUtils.NO_AUTHORITIES;
@@ -61,8 +62,9 @@ public class AccountDetailService  implements UserDetailsService {
         if(!accountExists) {
             throw new IllegalArgumentException("Username or password is incorrect");
         } else {
-            pass = (accountRepository.findByEmail(account.getEmail()).orElse(null)).getPassword();
-            if(passwordEncoder.bCryptPasswordEncoder().encode(pass) != encodedPassword)
+            pass = (Objects.requireNonNull(accountRepository.findByEmail(account.getEmail()).orElse(null)))
+                    .getPassword();
+            if(passwordEncoder.bCryptPasswordEncoder().encode(pass) != encodedPassword) // TODO equals instead of != ?
                 throw new IllegalArgumentException("Username or password is incorrect");
             return account;
         }

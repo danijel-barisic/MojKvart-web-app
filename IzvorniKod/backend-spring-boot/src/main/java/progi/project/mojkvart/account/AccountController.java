@@ -4,12 +4,14 @@ import ch.qos.logback.core.net.SyslogOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.*;
 import progi.project.mojkvart.district.District;
 import progi.project.mojkvart.home.Home;
 import progi.project.mojkvart.home.HomeRepository;
 import progi.project.mojkvart.role.Role;
 import progi.project.mojkvart.role.RoleService;
+import progi.project.mojkvart.security.PasswordEncoder;
 import progi.project.mojkvart.street.Street;
 
 import java.net.URI;
@@ -26,6 +28,9 @@ public class AccountController {
 
     @Autowired
     private RoleService RoleService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("")
     public List<Account> listAccounts() {
@@ -134,15 +139,18 @@ public class AccountController {
     @PutMapping("/{email}")
     public Account updateAccount(@PathVariable("email") String email, @RequestBody Account account) {
         if(account.getEmail() != null && accountService.findByEmail(account.getEmail()).isEmpty()) {
-            throw new IllegalArgumentException("Account with id: " + account.getId() + " does not exist");
+            throw new IllegalArgumentException("Account with email: " + account.getEmail() + " does not exist");
         }
         else if(account.getEmail() == null) {
-            throw new IllegalArgumentException("Account id must be given");
+            throw new IllegalArgumentException("Account email must be given");
         }
         else {
             if(!account.getEmail().equals(email))
-                throw new IllegalArgumentException("Account id must be preserved");
+                throw new IllegalArgumentException("Account email must be preserved");
             System.out.println(account);
+
+            String encodedPassword = passwordEncoder.bCryptPasswordEncoder().encode(account.getPassword());
+            account.setPassword(encodedPassword);
             return accountService.updateAccount(account);
         }
     }
