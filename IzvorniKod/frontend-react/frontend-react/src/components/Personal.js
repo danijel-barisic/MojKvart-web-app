@@ -26,6 +26,23 @@ function Personal() {
         }
     }, [account])
 
+    function deleteUser() {
+        const options = {
+            method: 'DELETE',
+        };
+        fetch(`/accounts/${account.id}`, options)
+            .then(response => {
+                if (!response.ok) {
+                    console.log(response.body);
+                } else {
+                    console.log("deleted");
+                }
+            });
+        history.push("/")
+        localStorage.clear()        
+        window.location.reload()
+    }
+
     function specialRoles() {
 
         let ret_val = ""
@@ -143,7 +160,7 @@ function Personal() {
                         </tbody></table>
                         <div className='Login'>
                             <button className='button' type="button" >Izmjena osobnih podataka</button>
-                            <button className='button' type="button" >Brisanje korisničkog računa</button>
+                            <button className='button' type="button" onClick={() => {deleteUser()}}>Brisanje korisničkog računa</button>
                             <button className='button' type="button" onClick={() => {history.push("/personal/role_requests")}} >Zahtjevi za ulogama</button>
                         </div>
                     </div>
@@ -198,7 +215,7 @@ function Personal() {
                         </tbody></table>
                         <div className='Login'>
                             <button className='button' type="button" >Izmjena osobnih podataka</button>
-                            <button className='button' type="button" >Brisanje korisničkog računa</button>
+                            <button className='button' type="button" onClick={() => {deleteUser()}}>Brisanje korisničkog računa</button>
                             <button className='button' type="button" onClick={() => {history.push("/personal/role_requests")}} >Zahtjevi za ulogama</button>
                         </div>
                     </div>

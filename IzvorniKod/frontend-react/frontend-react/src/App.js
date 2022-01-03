@@ -27,9 +27,7 @@ import CouncilFormEdit from './components/CouncilFormEdit';
 import Forum from './components/Forum';
 import ForumNewThread from './components/ForumNewThread';
 import ThreadView from './components/ThreadView';
-import PersonalEdit from './components/PersonalEdit';
 import Personal from "./components/Personal";
-import PersonalDelete from './components/PersonalDelete';
 import PersonalPassword from  './components/PersonalPassword';
 import PerosnalRoleRequest from './components/PersonalRoleRequest';
 import ThreadNewPost from './components/ThreadNewPost';
@@ -108,9 +106,7 @@ function App() {
               <Route path = '/novaobjava/:idT/:idP/edit' exact component={PostEditForm} />
               <Route path='/personal' exact component={Personal} />
               <Route path='/personal/role_requests' exact component={PerosnalRoleRequest} />
-              <Route path='/personal/edit' exact component={PersonalEdit} />
               <Route path='/personal/password' exact component={PersonalPassword} />
-              <Route path='/personal/delete' exact component={PersonalDelete} />
               <Route path='/events' exact component={Events} />
               <Route path='/events/suggestion' exact component={EventForm} />
               <Route path='/events/edit/:id' exact component={EventEditForm} />
@@ -150,7 +146,6 @@ function App() {
               <Route path='/korisnici' exact component={Users} />
               <Route path='/korisnici/:id' exact component={UserAdminView} />
               <Route path='/personal' exact component={Personal} />
-              <Route path='/personal/edit' exact component={PersonalEdit} />
               <Route path='/personal/password' exact component={PersonalPassword} />
               <Route path='/'/>
               </Switch>
