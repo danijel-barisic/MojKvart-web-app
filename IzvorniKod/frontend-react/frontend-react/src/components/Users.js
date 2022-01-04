@@ -92,35 +92,71 @@ function Users(props) {
                   let roles = user.roles.map(function (x) {
                      return x[Object.keys(x)[1]]
                   })
-                  console.log(district.id);
+                  console.log("districtid->",district.id);
                   console.log(roles);
-                  return ([
-                     <div className="wrapper">
-                        <div className="inner">
-                           <User key={user.id} user={user} props={props}/>
+                  if (district.id == currentId) {
+                     return ([
+                        <div className="wrapper">
+                           <div className="inner">
+                              <User key={user.id} user={user} props={props} />
+                           </div>
+                           <div className="inner">
+                              {
+                                 (roles.includes("ADMIN"))
+                                    ? <>
+                                    </>
+                                    : <>
+                                       {
+                                          (user.blocked === true)
+                                             ? <>
+                                                <FaLockOpen style={{ color: "green", cursor: "pointer", margin: "0px 10px 0px 0px" }} onClick={() => UnbanUser(user.id)}></FaLockOpen>
+                                                <MdDelete style={{ cursor: "pointer" }} onClick={() => deleteUser(user.id)}></MdDelete>
+                                             </>
+                                             : <>
+                                                <FaLock style={{ color: "red", cursor: "pointer", margin: "0px 10px 0px 0px" }} onClick={() => banUser(user.id)}></FaLock>
+                                                <MdDelete style={{ cursor: "pointer" }} onClick={() => deleteUser(user.id)}></MdDelete>
+                                             </>
+                                       }
+                                    </>
+                              }
+                           </div>
                         </div>
-                        <div className="inner">
+                     ])
+                  } else if (currentId === undefined){
+                     return ([
+                        <div className="wrapper">
+                           <div className="inner">
+                              <User key={user.id} user={user} props={props}/>
+                           </div>
+                           <div className="inner">
+                           <>
                            {
-                           (roles.includes("ADMIN"))
-                                 ? <>
-                                 </>
-                                 : <>
-                                    {
+                              (roles.includes("ADMIN"))
+                              ? <>
+                              </>
+                              : <>
+                                 {
                                     (user.blocked === true)
-                                       ?  <>
-                                             <FaLockOpen style={{color:"green" ,cursor:"pointer", margin: "0px 10px 0px 0px" }} onClick={() => UnbanUser(user.id)}></FaLockOpen>
-                                             <MdDelete style={{cursor: "pointer"}} onClick={() => deleteUser(user.id)}></MdDelete>
-                                          </>
-                                       :  <>
-                                             <FaLock style={{color:"red" ,cursor:"pointer", margin: "0px 10px 0px 0px" }} onClick={() => banUser(user.id)}></FaLock>
-                                             <MdDelete style={{cursor: "pointer"}} onClick={() => deleteUser(user.id)}></MdDelete>
-                                          </>
-                                    }
-                                 </>
+                                       ? <>
+                                          <FaLockOpen style={{ color: "green", cursor: "pointer", margin: "0px 10px 0px 0px" }} onClick={() => UnbanUser(user.id)}></FaLockOpen>
+                                          <MdDelete style={{ cursor: "pointer" }} onClick={() => deleteUser(user.id)}></MdDelete>
+                                       </>
+                                       : <>
+                                          <FaLock style={{ color: "red", cursor: "pointer", margin: "0px 10px 0px 0px" }} onClick={() => banUser(user.id)}></FaLock>
+                                          <MdDelete style={{ cursor: "pointer" }} onClick={() => deleteUser(user.id)}></MdDelete>
+                                       </>
+                                 }
+                              </>
                            }
+                              </>
+                           </div>
                         </div>
-                     </div>
-                  ])
+                     ])
+                  } else {
+                     return ([
+                        <></>
+                     ]);
+                  }
                })}
             </div>
          </Card>

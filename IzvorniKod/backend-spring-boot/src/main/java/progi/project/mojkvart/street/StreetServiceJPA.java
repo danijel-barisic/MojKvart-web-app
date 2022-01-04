@@ -71,6 +71,7 @@ public class StreetServiceJPA implements StreetService{
         List<Account> accounts = homes.stream().flatMap(home -> home.getAccounts().stream()).collect(Collectors.toList());
         for(Account account: accounts) {
             account.setHome(accountService.generateDummyHome());
+            account.setAddressValid(false);
             System.out.println("account: "+ account);
         }
         accountRepository.saveAll(accounts);
