@@ -83,6 +83,13 @@
   color: black;
 }
 
+.invalidAddressPoruka {
+  background-color: rgb(216, 30, 30);
+  text-align: center;
+  color: white;
+  padding: 7px;
+}
+
 .centar {
   align-items: center;
 }

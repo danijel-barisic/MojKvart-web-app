@@ -92,6 +92,7 @@ function ThreadView(props) {
             <Card>
                <div className='StreetList'>
                   {posts.map(function (post) {
+                     let rendered = false;
                      roles.forEach(role => {
                         if (role.name === "Moderator") {
                            isModerator = true;
@@ -116,7 +117,7 @@ function ThreadView(props) {
                               (user.id === post.account.id || isModerator )
                               ?  <>
                                     <div className="innerRep" ref={el => inputRef.current[post.id] = el} id={post.id}>
-                                    <p style={{color:"blue", margin:"0px 20px 0px 0px"}}>{"~" +post.account.firstName + " " + post.account.lastName + "tu sam 2"}</p>
+                                    <p style={{color:"blue", margin:"0px 20px 0px 0px"}}>{"~" +post.account.firstName + " " + post.account.lastName}</p>
                                        <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deletePost(post.id)}></MdDelete>
                                       <Link to={`/novaobjava/${id}/${post.id}/edit`}><MdEdit></MdEdit></Link>
                                       
@@ -134,14 +135,15 @@ function ThreadView(props) {
                         <div className="innerTV" ref={el => inputRef.current[post.id] = el} id={post.id}>
                         
                         <Post key={post.id} post={post} />
-                        <p style={{color:"blue", margin:"0px 20px 0px 0px"}}>{"~" +post.account.firstName + " " + post.account.lastName + "TU SAM"}</p>
+                                      <p style={{ color: "blue", margin: "0px 20px 0px 0px" }}>{"~" + post.account.firstName + " " + post.account.lastName}</p>
+                                      {rendered = true}
                         
                         </div>
                         </>
                         }
                      
                         {
-                              (user.id === post.account.id && post.replyId == null && !isModerator)
+                              (user.id === post.account.id && post.replyId == null && !isModerator && !rendered)
                               ?  <>
                                     <div className="innerTV">
                                        <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deletePost(post.id)}></MdDelete>

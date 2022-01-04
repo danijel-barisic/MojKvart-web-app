@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Header from './components/Header';
-import {BrowserRouter, Switch, Route } from 'react-router-dom';
+import {BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import DistrictForm from './components/DistrictForm';
 import Login from './components/Login';
@@ -37,27 +37,34 @@ import PostEditForm from './components/PostEditForm';
 function App() {
   ReactSession.setStoreType("localStorage");
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [account, setAccount] = React.useState([]);
+  const [updated, setUpdated] = React.useState(new Date());
   let user = "Stanovnik";
   console.log("isLoggedIn-> ", isLoggedIn, user);
 
   function onLogin(props) {
     user = props;
+    setUpdated(new Date());
     setIsLoggedIn(true);
   }
     
   function onLogout() {
     localStorage.clear();
+    setAccount(undefined);
     setIsLoggedIn(false);
   }
 
   useEffect(() => {
     const loggedInUser = ReactSession.get("username");
+    fetch(`/accounts/${loggedInUser}`)
+      .then(data => data.json())
+      .then(account => setAccount(account));
     if (loggedInUser) {
       setIsLoggedIn(true);
     } else {
       setIsLoggedIn(false);
     }
-  }, []);
+  }, [updated]);
 
   user = ReactSession.get(ReactSession.get("username"));
   if (user === undefined) {
@@ -70,56 +77,72 @@ function App() {
         <BrowserRouter>
           <Switch>
             <Route path='/login'>
-              <Login onLogin={onLogin} state={ isLoggedIn }/>
+              <Login onLogin={onLogin} state={isLoggedIn} />
             </Route>
             <Route path='/registration'>
-              <Registration onLogin={onLogin} state={ isLoggedIn }/>
+              <Registration onLogin={onLogin} state={isLoggedIn} />
             </Route>
             <Route path='/'>
-              <Home state={ isLoggedIn }/>
+              <Home state={isLoggedIn} />
             </Route>
           </Switch>
         </BrowserRouter>
       </div>
-    )
-  }
-  else if (isLoggedIn && (user === 'Stanovnik')) {
-    console.log("check user " + isLoggedIn, (user==="Stanovnik"));
-    return (
-      <div className='App'>
-        <BrowserRouter>
-          <Header onLogout={onLogout} onLogin={onLogin} state={isLoggedIn}/>
-          <div className='App'>
-            <Switch>
-              {/* <Route path='/streets' state={ isLoggedIn } exact component={StreetList} />
-              <Route path='/streets/add' exact component={StreetForm} />
-              <Route path='/districts' exact component={DistrictList} />
-              <Route path='/districts/add' exact component={DistrictForm} /> */}
-              {/* <Route path='/forum' exact component={Forum} />
-              <Route path='/events' exact component={Events} />
-              <Route path='/council' exact component={Council} />
-              <Route path='/user' exact component={UserDetails} /> */}
-              <Route path='/forum' exact component={Forum} />
-              <Route path='/forum/:idT' exact component={ThreadView} />
-              <Route path='/novatema' exact component={ForumNewThread}/>
-              <Route path='/novaobjava/:idT/:idP' exact component={ThreadNewPost}/>
-              <Route path = '/novaobjava/:idT/:idP/edit' exact component={PostEditForm} />
-              <Route path='/personal' exact component={Personal} />
-              <Route path='/personal/role_requests' exact component={PerosnalRoleRequest} />
-              <Route path='/personal/password' exact component={PersonalPassword} />
-              <Route path='/events' exact component={Events} />
-              <Route path='/events/suggestion' exact component={EventForm} />
-              <Route path='/events/edit/:id' exact component={EventEditForm} />
-              <Route path='/council' exact component={Council} />
-              <Route path='/council/report/:id' exact component={CouncilMeetingReport} />
-              <Route path='/council/new_report' exact component={CouncilForm} />
-              <Route path='/council/report/edit/:id' exact component={CouncilFormEdit} />
-              <Route path='/' />
-              </Switch>
-            </div>
-        </BrowserRouter>
-      </div>
     );
+  } else if (account === undefined) {
+    return (
+      <span>Čekanje na server...</span>
+    );
+  }
+  else if (isLoggedIn && (user === 'Stanovnik') && account !== undefined && account.home !== undefined){
+    console.log("check user " + isLoggedIn, (user === "Stanovnik"));
+    if (account.home.id === -1) {
+      return (
+        <div className='App'>
+          <BrowserRouter>
+            <Header onLogout={onLogout} onLogin={onLogin} state={isLoggedIn} account={account}/>
+            <div className='App'>
+              <Switch>
+                <Route path='/personal' exact component={Personal} />
+                <Route path='/personal/role_requests' exact component={PerosnalRoleRequest} />
+                <Route path='/personal/password' exact component={PersonalPassword} />
+                <Route path='/'>
+                  <Redirect to='/personal' />
+                </Route>
+                </Switch>
+              </div>
+          </BrowserRouter>
+        </div>
+      );
+    } else {
+        return (
+          <div className='App'>
+            <BrowserRouter>
+              <Header onLogout={onLogout} onLogin={onLogin} state={isLoggedIn} account={account}/>
+              <div className='App'>
+                <Switch>
+                  <Route path='/forum' exact component={Forum} />
+                  <Route path='/forum/:idT' exact component={ThreadView} />
+                  <Route path='/novatema' exact component={ForumNewThread}/>
+                  <Route path='/novaobjava/:idT/:idP' exact component={ThreadNewPost}/>
+                  <Route path = '/novaobjava/:idT/:idP/edit' exact component={PostEditForm} />
+                  <Route path='/personal' exact component={Personal} />
+                  <Route path='/personal/role_requests' exact component={PerosnalRoleRequest} />
+                  <Route path='/personal/password' exact component={PersonalPassword} />
+                  <Route path='/events' exact component={Events} />
+                  <Route path='/events/suggestion' exact component={EventForm} />
+                  <Route path='/events/edit/:id' exact component={EventEditForm} />
+                  <Route path='/council' exact component={Council} />
+                  <Route path='/council/report/:id' exact component={CouncilMeetingReport} />
+                  <Route path='/council/new_report' exact component={CouncilForm} />
+                  <Route path='/council/report/edit/:id' exact component={CouncilFormEdit} />
+                  <Route path='/'/>
+                  </Switch>
+                </div>
+            </BrowserRouter>
+          </div>
+      );
+    }
   }
     /* ADMIN */
   else {
@@ -130,12 +153,6 @@ function App() {
           <HeaderAdmin onLogout={onLogout} onLogin={onLogin} state={isLoggedIn}/>
           <div className='App'>
             <Switch>
-              {/* <Route path='/streets' exact component={StreetList} />
-              <Route path='/streets/add' exact component={StreetForm} />
-              <Route path='/districts' exact component={DistrictList} /> */}
-              {/* <Route path='/users' exact component={Users} />
-              <Route path='/rolerequests' exact component={RoleRequests} />
-              <Route path='/user' exact component={UserDetails} /> */}
               <Route path='/zahtjeviUloga' exact component={RoleRequests}/>
               <Route path='/kvartovi' exact component={Districts} />
               <Route path='/kvartovi/novi' exact component={DistrictForm} />

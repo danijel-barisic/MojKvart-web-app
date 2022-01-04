@@ -42,7 +42,7 @@ function Login(props) {
                      return "error";
                   }
                });
-               setError("Username ili password je netočan!");
+               setError("Username ili password je pogrešan!");
                return "error";
             } else {
                return response.text();
@@ -54,6 +54,7 @@ function Login(props) {
                /* console.log(splitted[1]); */
                ReactSession.set("username", loginForm.username);
                ReactSession.set(loginForm.username, splitted[0]);
+               ReactSession.set("addressValid", splitted[1]);
                props.onLogin(splitted[0]);
                history.push("/");
             }

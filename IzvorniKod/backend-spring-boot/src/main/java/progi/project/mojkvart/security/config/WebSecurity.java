@@ -104,7 +104,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                     }
                 }
                 httpServletResponse.getWriter().append(mainRole);
-                /*httpServletResponse.getWriter().append("|");*/
+                /*httpServletResponse.getWriter().append("|");
+                httpServletResponse.getWriter().append(String.valueOf(accountDetails.isAddressValid()));*/
                 /*httpServletResponse.getWriter().append(generateNewToken());*/
                 httpServletResponse.setStatus(200);
             }

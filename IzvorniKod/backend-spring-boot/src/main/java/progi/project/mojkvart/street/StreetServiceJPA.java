@@ -3,11 +3,17 @@ package progi.project.mojkvart.street;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import progi.project.mojkvart.account.Account;
+import progi.project.mojkvart.account.AccountRepository;
+import progi.project.mojkvart.account.AccountService;
+import progi.project.mojkvart.district.District;
 import progi.project.mojkvart.district.DistrictRepository;
+import progi.project.mojkvart.home.Home;
 import progi.project.mojkvart.role_request.RoleRequest;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class StreetServiceJPA implements StreetService{
@@ -15,6 +21,10 @@ public class StreetServiceJPA implements StreetService{
     private StreetRepository streetRepo;
     @Autowired
     private DistrictRepository districtRepo;
+    @Autowired
+    private AccountService accountService;
+    @Autowired
+    private AccountRepository accountRepository;
 
     public StreetServiceJPA(DistrictRepository districtRepo) {
         this.districtRepo = districtRepo;
@@ -57,6 +67,13 @@ public class StreetServiceJPA implements StreetService{
     @Override
     public Street deleteStreet(long streetId) {
         Street street = fetch(streetId);
+        List<Home> homes = street.getHomes();
+        List<Account> accounts = homes.stream().flatMap(home -> home.getAccounts().stream()).collect(Collectors.toList());
+        for(Account account: accounts) {
+            account.setHome(accountService.generateDummyHome());
+            System.out.println("account: "+ account);
+        }
+        accountRepository.saveAll(accounts);
         streetRepo.delete(street);
         return street;
     }
