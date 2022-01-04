@@ -90,7 +90,7 @@ function ThreadView(props) {
          </div>
          <div className='wrapperCard'>
             <Card>
-               <div className='StreetList'>
+               <div className='ThreadViewMain'>
                   {posts.map(function (post) {
                      let rendered = false;
                      roles.forEach(role => {
@@ -117,7 +117,7 @@ function ThreadView(props) {
                               (user.id === post.account.id || isModerator )
                               ?  <>
                                     <div className="innerRep" ref={el => inputRef.current[post.id] = el} id={post.id}>
-                                    <p style={{color:"blue", margin:"0px 20px 0px 0px"}}>{"~" +post.account.firstName + " " + post.account.lastName}</p>
+                                    <p className='pTV'>{"~" +post.account.firstName + " " + post.account.lastName}</p>
                                        <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deletePost(post.id)}></MdDelete>
                                       <Link to={`/novaobjava/${id}/${post.id}/edit`}><MdEdit></MdEdit></Link>
                                       
@@ -125,7 +125,7 @@ function ThreadView(props) {
                                  </>
                               :  <>
                               <div className='innerRep'>
-                              <p style={{color:"blue", margin:"0px 20px 0px 0px"}}>{"~" +post.account.firstName + " " + post.account.lastName}</p>
+                              <p className="pTV">{"~" +post.account.firstName + " " + post.account.lastName}</p>
                               </div>
                               </>
                            }
@@ -135,7 +135,7 @@ function ThreadView(props) {
                         <div className="innerTV" ref={el => inputRef.current[post.id] = el} id={post.id}>
                         
                         <Post key={post.id} post={post} />
-                                      <p style={{ color: "blue", margin: "0px 20px 0px 0px" }}>{"~" + post.account.firstName + " " + post.account.lastName}</p>
+                                      <p className='pTV'>{"~" + post.account.firstName + " " + post.account.lastName}</p>
                                       {rendered = true}
                         
                         </div>
@@ -148,7 +148,7 @@ function ThreadView(props) {
                                     <div className="innerTV">
                                        <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deletePost(post.id)}></MdDelete>
                                       <Link to={`/novaobjava/${id}/${post.id}/edit`}><MdEdit></MdEdit></Link> 
-                                      <p style={{color:"blue", margin:"0px 20px 0px 0px"}}>{"~" +post.account.firstName + " " + post.account.lastName}</p>
+                                      <p className='pTV'>{"~" +post.account.firstName + " " + post.account.lastName}</p>
                                     </div>
                                  </>
                               : (isModerator && post.replyId == null) ? <>

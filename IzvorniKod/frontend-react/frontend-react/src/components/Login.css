@@ -52,7 +52,7 @@
 }
 
 .wrapperCard{
-   max-height: 300px;
+   height:calc(100% - 50px);
    overflow-y: scroll;
 }
 
@@ -99,6 +99,22 @@
 .wrapperTV{
    display: flex;
    align-items: center;
+   justify-content: center;
+   border: 1px solid black;
+}
+.pTV{
+   color:blue;
+   
+   font-size: small;
+
+}
+
+.headerdistPost{
+  margin: auto;
+}
+
+.ThreadViewMain{
+   width: 100%;
 }
 
 .delete {

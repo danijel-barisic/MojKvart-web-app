@@ -9,7 +9,7 @@ function Post(props) {
   
    
    return (
-      <div className='headerdist'>
+      <div className='headerdistPost'>
          <Link to={{
             pathname: `/novaobjava/${threadId}/${id}`,
             state: { id,district },
