@@ -18,13 +18,11 @@ function ThreadView(props) {
    const [updated, setUpdated] = React.useState(new Date());
    const [users,setUsers] = React.useState([]);
    const [roles, setRoles] = React.useState()
+   let isModerator = false;
 
    const history = useHistory();
    const user = ReactSession.get("username");
 
-   
-
-   
     const inputRef = useRef({});
    
    console.log(inputRef.current)
@@ -69,7 +67,7 @@ function ThreadView(props) {
       if (users !== undefined && users.id !== undefined) {
           fetch(`/accounts/roles/${users.id}`)
           .then(data => data.json())
-          .then(roles => setRoles(roles))
+            .then(roles => setRoles(roles))
       }
   }, [users])
 
@@ -90,6 +88,11 @@ function ThreadView(props) {
             <Card>
                <div className='StreetList'>
                   {posts.map(function (post) {
+                     roles.forEach(role => {
+                        if (role.name === "Moderator") {
+                           isModerator = true;
+                        }
+                     });
                     return ([
                      <div className="wrapper">
                         {
@@ -105,7 +108,7 @@ function ThreadView(props) {
 
                            <Post key={post.id} post={post} />
                            {
-                              (users.id === post.account.id || roles[0].name === "Moderator" )
+                              (users.id === post.account.id || isModerator )
                               ?  <>
                                     <div className="inner">
                                        <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deletePost(post.id)}></MdDelete>
