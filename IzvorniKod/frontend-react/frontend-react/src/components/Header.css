@@ -28,7 +28,7 @@
 }
 
 .headerdistPost a {
-  float: left;
+  display: inline-block;
   color: black;
   text-align: center;
   padding: 12px;
@@ -36,6 +36,9 @@
   font-size: 18px;
   line-height: 25px;
   border-radius: 10px;
+  width: 100%;
+  max-width: 700px;
+  word-wrap: break-word;
 }
 
 /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
