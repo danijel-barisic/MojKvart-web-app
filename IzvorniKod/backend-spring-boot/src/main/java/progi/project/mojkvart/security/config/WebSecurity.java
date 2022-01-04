@@ -25,6 +25,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import progi.project.mojkvart.account.Account;
 import progi.project.mojkvart.account.AccountDetailService;
+import progi.project.mojkvart.account.AccountRepository;
 import progi.project.mojkvart.role.Role;
 import progi.project.mojkvart.security.PasswordEncoder;
 
@@ -35,6 +36,7 @@ import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 @Configuration
 @AllArgsConstructor
@@ -48,6 +50,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    AccountRepository accountRepository;
 
     /*public static String generateNewToken() {
         byte[] randomBytes = new byte[24];
@@ -112,6 +117,17 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
             public void onAuthenticationFailure(HttpServletRequest httpServletRequest,
                                                 HttpServletResponse httpServletResponse,
                                                 AuthenticationException e) throws IOException, ServletException {
+                String username = httpServletRequest.getParameter("username");
+                Optional<Account> account = accountRepository.findByEmail(username);
+                System.out.println(account.toString());
+                if(account.isPresent()) {
+                    Account account1 = account.get();
+                    System.out.println(account1.isBlocked());
+                    if(account1.isBlocked()) {
+                        System.out.println(account1.isBlocked());
+                        httpServletResponse.getWriter().append("Blocked|");
+                    }
+                }
                 httpServletResponse.getWriter().append("Authentication failure");
                 httpServletResponse.setStatus(401);
             }
