@@ -16,22 +16,23 @@ function ThreadView(props) {
    const { name } = props.location.state;
    const [posts, setPosts] = React.useState([]);
    const [updated, setUpdated] = React.useState(new Date());
-   const [users,setUsers] = React.useState([]);
-   const [roles, setRoles] = React.useState()
+   const [user,setUser] = React.useState([]);
+   const [users, setUsers] = React.useState([]);
+   const [roles, setRoles] = React.useState([]);
    let isModerator = false;
 
    const history = useHistory();
-   const user = ReactSession.get("username");
+   const userSession = ReactSession.get("username");
 
     const inputRef = useRef({});
    
    console.log(inputRef.current)
    function onReply(inputRef,replyId){
-      
+      var cln = inputRef.current[replyId].className
       inputRef.current[replyId].className = inputRef.current[replyId].className + " " + "elementToFadeInAndOutighlight";
       setTimeout(function() {
-         inputRef.current[replyId].className = "inner"
-         },2000)
+         inputRef.current[replyId].className = cln
+         },1000)
       
    }
    function deletePost(id){
@@ -58,24 +59,27 @@ function ThreadView(props) {
       fetch(`/threads/${id}`)
          .then(data => data.json())
          .then(posts => setPosts(posts.posts))
-      fetch(`/accounts/${user}`).then(data => data.json())
+      fetch(`/accounts/${userSession}`).then(data => data.json())
+         .then(user => setUser(user));
+      fetch(`/accounts`).then(data => data.json())
          .then(users => setUsers(users));
       
    }, [updated]);
 
    React.useEffect(() => {
-      if (users !== undefined && users.id !== undefined) {
-          fetch(`/accounts/roles/${users.id}`)
+      if (user !== undefined && user.id !== undefined) {
+          fetch(`/accounts/roles/${user.id}`)
           .then(data => data.json())
             .then(roles => setRoles(roles))
       }
-  }, [users])
+  }, [user])
 
   if(roles == undefined) {
      return(
         <><div>Wait for page to load...</div></>
      )
   }
+  
   
    return (
       <>
@@ -94,51 +98,60 @@ function ThreadView(props) {
                         }
                      });
                     return ([
-                     <div className="wrapper">
+                     <div className="wrapperTV">
                         {
                         (post.replyId !== null) ? <>
                         <div className="innerReply">
                            <div className='innerReplyWho'>
-                              
+                           
                        
-                        <GoReply onClick={() => onReply(inputRef,post.replyId)} ></GoReply>
+                        <GoReply style={{cursor:"pointer"}} onClick={() => onReply(inputRef,post.replyId)} ></GoReply>
                         
                         ({(post.replyId)})
-                        </div>
+                        
 
                            <Post key={post.id} post={post} />
+                           </div>
                            {
-                              (users.id === post.account.id || isModerator )
+                              (user.id === post.account.id || isModerator )
                               ?  <>
-                                    <div className="inner">
+                                    <div className="innerRep" ref={el => inputRef.current[post.id] = el} id={post.id}>
+                                    <p style={{color:"blue", margin:"0px 20px 0px 0px"}}>{"~" +post.account.firstName + " " + post.account.lastName + "tu sam 2"}</p>
                                        <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deletePost(post.id)}></MdDelete>
-                                      <Link to={`/novaobjava/${id}/${post.id}/edit`}><MdEdit style={{margin:"0px 50px 0px 0px"}}></MdEdit></Link>
-                                      {"~" +users.firstName + " " + users.lastName}
+                                      <Link to={`/novaobjava/${id}/${post.id}/edit`}><MdEdit></MdEdit></Link>
+                                      
                                     </div>
                                  </>
-                              :  <></>
+                              :  <>
+                              <div className='innerRep'>
+                              <p style={{color:"blue", margin:"0px 20px 0px 0px"}}>{"~" +post.account.firstName + " " + post.account.lastName}</p>
+                              </div>
+                              </>
                            }
                         </div>
                         </>
                         : <>
-                        <div className="inner" ref={el => inputRef.current[post.id] = el} id={post.id}>
-                           
+                        <div className="innerTV" ref={el => inputRef.current[post.id] = el} id={post.id}>
+                        
                         <Post key={post.id} post={post} />
+                        <p style={{color:"blue", margin:"0px 20px 0px 0px"}}>{"~" +post.account.firstName + " " + post.account.lastName + "TU SAM"}</p>
                         
                         </div>
                         </>
                         }
                      
                         {
-                              (users.id === post.account.id && post.replyId == null)
+                              (user.id === post.account.id && post.replyId == null && !isModerator)
                               ?  <>
-                                    <div className="inner">
+                                    <div className="innerTV">
                                        <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deletePost(post.id)}></MdDelete>
-                                      <Link to={`/novaobjava/${id}/${post.id}/edit`}><MdEdit style={{margin:"0px 50px 0px 0px"}}></MdEdit></Link> 
-                                      {"~" +users.firstName + " " + users.lastName}
+                                      <Link to={`/novaobjava/${id}/${post.id}/edit`}><MdEdit></MdEdit></Link> 
+                                      <p style={{color:"blue", margin:"0px 20px 0px 0px"}}>{"~" +post.account.firstName + " " + post.account.lastName}</p>
                                     </div>
                                  </>
-                              :  <></>
+                              : (isModerator && post.replyId == null) ? <>
+                              <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deletePost(post.id)}></MdDelete>
+                             <Link to={`/novaobjava/${id}/${post.id}/edit`}><MdEdit></MdEdit></Link> </> : <></>
                            }
                            
                      </div>

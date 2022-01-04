@@ -75,13 +75,30 @@
    vertical-align: middle;
    margin: 0;
 }
-
-.innerReply{
+.innerRep{
    display: flex;
    align-items: center;
 }
+.innerReply{
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   flex: 1;
+}
 .innerReplyWho{
-   margin-right: 10px;
+   flex-grow: 1;
+   display: flex;
+   align-items: center;
+}
+.innerTV{
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   flex:1;
+}
+.wrapperTV{
+   display: flex;
+   align-items: center;
 }
 
 .delete {
