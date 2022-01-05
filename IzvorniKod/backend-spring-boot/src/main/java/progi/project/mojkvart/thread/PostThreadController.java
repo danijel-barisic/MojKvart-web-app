@@ -5,8 +5,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import progi.project.mojkvart.account.AccountService;
 import progi.project.mojkvart.district.DistrictService;
+import progi.project.mojkvart.post.Post;
 
 import java.net.URI;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +34,16 @@ public class PostThreadController {
         if(!postThreadService.existsById(id)) {
             throw new IllegalArgumentException("PostThread with id: " + id + " does not exist");
         }
-        return postThreadService.fetch(id);
+        PostThread thread = postThreadService.fetch(id);
+        List<Post> posts = thread.getPosts();
+        Collections.sort(posts, new Comparator<Post>() {
+            @Override
+            public int compare(Post post1, Post post2) {
+                return post1.getId().compareTo(post2.getId());
+            }
+        });
+        thread.setPosts(posts);
+        return thread;
     }
 
     @PostMapping("")

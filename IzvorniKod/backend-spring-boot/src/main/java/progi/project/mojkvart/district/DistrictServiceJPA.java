@@ -73,6 +73,7 @@ public class DistrictServiceJPA implements DistrictService{
         System.out.println("accounts: "+ accounts);
         for(Account account: accounts) {
             account.setHome(accountService.generateDummyHome());
+            account.setAddressValid(false);
             System.out.println("account: "+ account);
         }
         accountRepository.saveAll(accounts);

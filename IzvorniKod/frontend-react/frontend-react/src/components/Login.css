@@ -52,7 +52,7 @@
 }
 
 .wrapperCard{
-   max-height: 300px;
+   height:calc(100% - 50px);
    overflow-y: scroll;
 }
 
@@ -75,13 +75,46 @@
    vertical-align: middle;
    margin: 0;
 }
-
-.innerReply{
+.innerRep{
    display: flex;
    align-items: center;
 }
+.innerReply{
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   flex: 1;
+}
 .innerReplyWho{
-   margin-right: 10px;
+   flex-grow: 1;
+   display: flex;
+   align-items: center;
+}
+.innerTV{
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   flex:1;
+}
+.wrapperTV{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border: 1px solid black;
+}
+.pTV{
+   color:blue;
+   
+   font-size: small;
+
+}
+
+.headerdistPost{
+  margin: auto;
+}
+
+.ThreadViewMain{
+   width: 100%;
 }
 
 .delete {

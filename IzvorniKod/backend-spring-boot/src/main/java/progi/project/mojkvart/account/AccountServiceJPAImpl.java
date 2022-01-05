@@ -6,6 +6,7 @@ import org.springframework.util.Assert;
 import progi.project.mojkvart.district.District;
 import progi.project.mojkvart.home.Home;
 import progi.project.mojkvart.home.HomeRepository;
+import progi.project.mojkvart.role.Role;
 import progi.project.mojkvart.street.Street;
 
 import java.util.List;
@@ -75,8 +76,7 @@ public class AccountServiceJPAImpl implements AccountService{
 
     @Override
     public List<String> getEmailsFromAccounts() {
-        var res = (List<String>) accountRepo.getEmailsFromAccounts();
-        return res;
+        return accountRepo.getEmailsFromAccounts();
     }
 
     @Override
@@ -100,7 +100,7 @@ public class AccountServiceJPAImpl implements AccountService{
 
     @Override
     public Account fillWithDummyIfAdmin(Account a) {
-        for (var role : a.getRoles()) {
+        for (Role role : a.getRoles()) {
             if (role.getName().equals("ADMIN")) {
                 a.setHome(dummyHome);
             }

@@ -29,13 +29,20 @@ function Login(props) {
       };
       fetch('/login', options)
          .then(response => {
-            /* console.log(response); */
-            if (response.status === 401) {
-               setError("Login Failed!");
-               return "error";
-            }
-            else if (!response.ok) {
-               setError("Login failed");
+            if (!response.ok) {
+               var varr = undefined;
+               var varrsplitted = undefined;
+               var serverresponse = response.text();
+               serverresponse.then(res => {
+                  varr = res;
+                  console.log(varr);
+                  varrsplitted = varr.split("|");
+                  if (varrsplitted[0] === "Blocked") {
+                     setError("Korisnik je blokiran!");
+                     return "error";
+                  }
+               });
+               setError("Username ili password je pogrešan!");
                return "error";
             } else {
                return response.text();
@@ -47,6 +54,7 @@ function Login(props) {
                /* console.log(splitted[1]); */
                ReactSession.set("username", loginForm.username);
                ReactSession.set(loginForm.username, splitted[0]);
+               ReactSession.set("addressValid", splitted[1]);
                props.onLogin(splitted[0]);
                history.push("/");
             }
