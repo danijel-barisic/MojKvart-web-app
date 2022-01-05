@@ -97,6 +97,18 @@ public class Account implements UserDetails {
         this.isAddressValid = isAddressValid;
     }
 
+    public Account(Long id, String firstName, String lastName, String email, String password, Home home,
+                   List<Role> roles, boolean isAddressValid) {
+        this.id = id;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.roles = roles;
+        this.home = home;
+        this.isAddressValid = isAddressValid;
+    }
+
     public Account(String email, String password) {
         this.email = email;
         this.password = password;
