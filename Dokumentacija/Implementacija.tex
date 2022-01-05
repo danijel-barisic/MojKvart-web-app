@@ -14,16 +14,174 @@
 		\section{Ispitivanje programskog rješenja}
 					
 			\subsection{Ispitivanje komponenti}
-			\textit{Potrebno je provesti ispitivanje jedinica (engl. unit testing) nad razredima koji implementiraju temeljne funkcionalnosti. Razraditi \textbf{minimalno 6 ispitnih slučajeva} u kojima će se ispitati redovni slučajevi, rubni uvjeti te izazivanje pogreške (engl. exception throwing). Poželjno je stvoriti i ispitni slučaj koji koristi funkcionalnosti koje nisu implementirane. Potrebno je priložiti izvorni kôd svih ispitnih slučajeva te prikaz rezultata izvođenja ispita u razvojnom okruženju (prolaz/pad ispita). }
-			
-			
-			
+
+			Ispitivanje komponenti ostvareno je korištenjem Spring Boot i JUnit alata za ispitivanje.
+			U nastavku su opisani provedeni testovi, te su priloženi kodovi.
+
+			Testovi 1-4 testiraju Account kontroler.
+			Inicijalizacijska metoda za testove 1-4 izgleda ovako:
+
+			\begin{lstlisting}[language=Java, breaklines=true]
+    @BeforeEach
+    public void init() {
+        Street street = new Street(1L, "Testna ulica", 1, 5);
+        street.setDistrict(new District(1L, "Testni kvart"));
+        home = new Home(1L, 1L, street);
+
+        account = new Account(1L, "John", "Doe", "johndoe@gmail.com", "pass123",
+                home, null, false);
+        account.setRoles(new ArrayList<>());
+    }
+			\end{lstlisting}
+
+			Testovi 5 i 6 testiraju Post kontroler.
+			Inicijalizacijska metoda za testove 5 i 6 izgleda ovako:
+
+			\begin{lstlisting}[language=Java, breaklines=true]
+    @BeforeEach
+    public void init() {
+        District district = new District(1L, "Testni kvart");
+        Street street = new Street(1L, "Testna ulica", 1, 5);
+        street.setDistrict(district);
+        home = new Home(1L, 1L, street);
+
+        account = new Account(1L, "John", "Doe", "johndoe@gmail.com", "pass123",
+                home, null, false);
+
+        postThread = new PostThread(1L, "Example", new ArrayList<>(), null, district);
+
+        post = new Post(1L, "First post",
+                null,
+                null, postThread, account);
+
+        post.setThreadId(postThread.getId());
+    }
+			\end{lstlisting}
+
+			U prvom ispitnom slučaju ispitan je pokušaj dobavljanja liste svih korisničkih računa.
+			Očekivani rezultat je uspješno dobavljanje liste u JSON obliku te HTTP status 200 (OK).
+
+			\begin{lstlisting}[language=Java, breaklines=true]
+    @Test
+    public void givenAccountsList_whenGetAccountsList_ThenReturnJsonArray() throws Exception {
+        List<Account> accounts = Collections.singletonList(account);
+
+        given(accountService.listAll()).willReturn(accounts);
+
+        mvc.perform(get("/accounts")
+                .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].firstName").value("John"));
+    }
+			\end{lstlisting}
+
+			U drugom ispitnom slučaju testiran je rubni slučaj u kojem ne postoji niti jedan korisnički račun, a lista
+			korisničkih računa se pokušava dohvatiti. Očekivani rezultat je uspješno dobavljanje prazne liste u JSON obliku te HTTP status 200 (OK).
+
+			\begin{lstlisting}[language=Java, breaklines=true]
+	@Test
+    public void givenEmptyAccountsList_whenGetAccountsList_thenReturnEmptyJsonArray() throws Exception {
+        List<Account> accounts = Collections.emptyList();
+
+        given(accountService.listAll()).willReturn(accounts);
+
+        mvc.perform(get("/accounts")
+                .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", empty()));
+    }
+			\end{lstlisting}
+
+			U trećem ispitnom slučaju ispitan je pokušaj izrade novog korisničkog računa, dok je pritom priložena email adresa koju neki postojeći korisnik već koristi. Očekivani rezultat je neuspješna izrada korisničkog računa te HTTP status 400 (Bad Request).
+
+			\begin{lstlisting}[language=Java, breaklines=true]
+    @Test
+    public void givenEmailList_whenCreateAccountWithExistingEmail_thenCauseError400() throws Exception {
+        given(accountService.getEmailsFromAccounts()).willReturn(Collections.singletonList("johndoe@gmail.com"));
+
+        mvc.perform(post("/accounts")
+                .content(new ObjectMapper()
+                        .writeValueAsString(new Account("Johnny", "Doe",
+                                "johndoe@gmail.com", "pass123", home, null,
+                                false)
+                        )
+                ).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isBadRequest());
+    }
+			\end{lstlisting}
+
+			U četvrtom ispitnom slučaju ispitan je pokušaj dodjele uloge "Stanovnik" postojećem korisniku preko "/accounts/grantRole/" endpointa.
+			Očekivani rezultat je uspješna dodjela uloge "Stanovnik" korisniku te HTTP status 200 (OK).
+
+			\begin{lstlisting}[language=Java, breaklines=true]
+    @Test
+    public void whenGrantRole_thenReturnRole() throws Exception {
+        given(accountService.fetch(any(Long.class))).willReturn(account);
+        given(accountService.existsById(eq(1L))).willReturn(true);
+        given(roleService.findByName(any(String.class))).willReturn(java.util.Optional.of(new Role("Stanovnik")));
+
+        mvc.perform(put("/accounts/grantRole/{id}",1)
+                .content("Stanovnik").contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("Stanovnik"));
+    }
+			\end{lstlisting}
+
+			U petom ispitnom slučaju ispitan je pokušaj izrade nove objave uz priložen tekst objave i priložen id postojeće dretve. Očekivani rezultat je uspješna izrada nove objave koja sadrži priložen tekst, te HTTP status 201 (Created).
+
+			\begin{lstlisting}[language=Java, breaklines=true]
+    @Test
+    public void givenPost_whenCreatePost_thenReturnPostAsJson() throws Exception {
+        Post post2 = new Post(2L, "Second post",
+                null,
+                null, postThread, account);
+
+        post2.setThreadId(postThread.getId());
+        given(accountService.fetch(any(Long.class))).willReturn(account);
+        given(postService.createPost(any(Post.class), eq(postThread.getId()))).willReturn(post2);
+        given(postService.existsById(eq(post2.getId()))).willReturn(false);
+        given(postThreadService.existsById(eq(postThread.getId()))).willReturn(true);
+
+        mvc.perform(post("/posts/{id}",1)
+                .content(new ObjectMapper().writeValueAsString(post2))
+                .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").value(2))
+                .andExpect(jsonPath("$.content").value("Second post"));
+    }
+			\end{lstlisting}
+
+			U šestom ispitnom slučaju ispitan je pokušaj dohvaćanja objave preko nepostojećeg id-a.
+			Očekivani rezultat je neuspješno dohvaćanje objave te HTTP status 400 (Bad Request).
+
+			\begin{lstlisting}[language=Java, breaklines=true]
+    @Test
+    public void givenNonexistentPostId_whenGetPost_thenCauseError400() throws Exception {
+        given(postService.existsById(any(Long.class))).willReturn(false);
+
+        mvc.perform(get("/posts/{id}",5)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isBadRequest());
+    }
+			\end{lstlisting}
+
+			Na slici 5.2.1 je prikazana je snimka zaslona terminala u IntelliJ IDE-u, kao rezultat izvođenja prethodno navedenih šest ispitnih slučajeva.
+
+			\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth,keepaspectratio]{19 ispitivanje komponenti.png}
+					\caption{Rezultati ispitivanja pomoću Spring-a i JUnit-a}
+				\end{figure}
+			\eject
+
 			\subsection{Ispitivanje sustava}
-			
+
 			Ispitivanje sustava ostvareno je korištenjem Selenium WebDrivera i programskog jezika Python. U nastavku su opisani provedeni testovi, te su priloženi kodovi.
-			
+
 			U prvom ispitnom slučaju ispitan je pokušaj prijave s emailom koji nije povezan niti jedan račun, tj. emailom koji ne postoji u sustavu. Očekivani izlaz je neuspjeh pri pokušaju prijave.
-			
+
 			\begin{lstlisting}[language=Python, breaklines=true]
 def test1() -> bool:
     driver = webdriver.Firefox()
@@ -37,11 +195,11 @@ def test1() -> bool:
         driver.close()
         return True
     driver.close()
-    return False		
+    return False
 			\end{lstlisting}
 
 			U drugom ispitnom slučaju ispitan je pokušaj registracije s neispravnim podacima, konkretno s emailom koji je zadan u krivom formatu. Očekivani izlaz je neuspjeh pri pokušaju registracije.
-		
+
 			\begin{lstlisting}[language=Python, breaklines=true]
 def test2() -> bool:
     driver = webdriver.Firefox()
@@ -65,9 +223,9 @@ def test2() -> bool:
     driver.close()
     return False
 			\end{lstlisting}
-			
+
 			U trećem ispitnom slučaju ispitan je pokušaj registracije gdje su svi uneseni podaci valjani. Očekivani izlaz je uspjeh pri pokušaju registracije i preusmjeravanje na početnu stranicu korisnikovog kvarta.
-			
+
 			\begin{lstlisting}[language=Python, breaklines=true]
 def test3() -> bool:
     driver = webdriver.Firefox()
@@ -89,11 +247,11 @@ def test3() -> bool:
         driver.close()
         return False
     driver.close()
-    return True	
+    return True
 			\end{lstlisting}
-			
+
 			U četvrtom ispitnom slučaju ispitan je pokušaj prijave s emailom za koji postoji korisnički račun, ali s neispravnom lozinkom. Očekivani izlaz je neuspjeh pri pokušaju prijave.
-			
+
 			\begin{lstlisting}[language=Python, breaklines=true]
 def test4() -> bool:
     driver = webdriver.Firefox()
@@ -109,9 +267,9 @@ def test4() -> bool:
     driver.close()
     return False
 			\end{lstlisting}
-			
+
 			U petom ispitnom slučaju ispitan je pokušaj prijave gdje su svi uneseni podaci ispravni. Očekivani izlaz je uspjeh pri pokušaju prijave i preusmjeravanje na početnu stranicu korisnikovog kvarta.
-			
+
 			\begin{lstlisting}[language=Python, breaklines=true]
 def test5() -> bool:
     driver = webdriver.Firefox()
@@ -127,37 +285,37 @@ def test5() -> bool:
     driver.close()
     return True
 			\end{lstlisting}
-			
-			Na slici 5.2 prikazana je snimka zaslona terminala kao rezultat izvođenja prethodno navedenih pet ispitnih slučajeva.
-			
+
+			Na slici 5.2.2 prikazana je snimka zaslona terminala kao rezultat izvođenja prethodno navedenih pet ispitnih slučajeva.
+
 			\begin{figure}[H]
 					\centering
 					\includegraphics[width=\textwidth,keepaspectratio]{18 ispitivanje sustava.png}
 					\caption{Rezultati ispitivanja Selenium WebDriverom}
-				\end{figure}	
-			\eject 
-		
-		
+				\end{figure}
+			\eject
+
+
 		\section{Dijagram razmještaja}
-		
+
 		Na slici 5.3 prikazan je dijagram razmještaja. Sustav je baziran na arhitekturi "klijent-poslužitelj". Korisnici pristupaju aplikaciji korištenjem web preglednika. Na platformi Heroku se nalaze poslužitelji za frontend, backend i bazu podataka. Komunikacija između korisnika i poslužitelja za frontend, te poslužitelja za frontend i poslužitelja za backend, ostvaruje se korištenjem protokola HTTP.
-			
+
 			\begin{figure}[H]
 					\centering
 					\includegraphics[width=\textwidth,keepaspectratio]{17 dijagram razmještaja.png}
 					\caption{Dijagram razmještaja}
-				\end{figure}	
-			
-			\eject 
-		
+				\end{figure}
+
+			\eject
+
 		\section{Upute za puštanje u pogon}
-		
+
 			\textbf{\textit{dio 2. revizije}}\\
-		
+
 			 \textit{U ovom poglavlju potrebno je dati upute za puštanje u pogon (engl. deployment) ostvarene aplikacije. Na primjer, za web aplikacije, opisati postupak kojim se od izvornog kôda dolazi do potpuno postavljene baze podataka i poslužitelja koji odgovara na upite korisnika. Za mobilnu aplikaciju, postupak kojim se aplikacija izgradi, te postavi na neku od trgovina. Za stolnu (engl. desktop) aplikaciju, postupak kojim se aplikacija instalira na računalo. Ukoliko mobilne i stolne aplikacije komuniciraju s poslužiteljem i/ili bazom podataka, opisati i postupak njihovog postavljanja. Pri izradi uputa preporučuje se \textbf{naglasiti korake instalacije uporabom natuknica} te koristiti što je više moguće \textbf{slike ekrana} (engl. screenshots) kako bi upute bile jasne i jednostavne za slijediti.}
-			
-			
+
+
 			 \textit{Dovršenu aplikaciju potrebno je pokrenuti na javno dostupnom poslužitelju. Studentima se preporuča korištenje neke od sljedećih besplatnih usluga: \href{https://aws.amazon.com/}{Amazon AWS}, \href{https://azure.microsoft.com/en-us/}{Microsoft Azure} ili \href{https://www.heroku.com/}{Heroku}. Mobilne aplikacije trebaju biti objavljene na F-Droid, Google Play ili Amazon App trgovini.}
-			
-			
-			\eject 
+
+
+			\eject
