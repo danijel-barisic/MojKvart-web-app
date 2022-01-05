@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "./Card";
+import CardLogin from "./CardLogin";
 import './Login.css';
 import './Card.css';
 import { useHistory } from "react-router";
@@ -132,7 +132,12 @@ function Registration(props) {
    
 
    return (
-      <Card>
+      <>
+      <div className="logres">
+         <img src="../../winter-village-4567947.png" alt="MojKvart"></img>
+         </div>
+      <div className="logres">
+      <CardLogin>
          <div className='Login'>
             <form onSubmit={onSubmit}>
                <div className='FormRow'>
@@ -166,7 +171,9 @@ function Registration(props) {
                <button className='button' type="button" onClick={() => {history.push("/login")}}>Login</button>
             </form>
          </div>
-      </Card>
+            </CardLogin>
+         </div>
+      </>
    );
 }
 

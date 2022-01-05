@@ -5,7 +5,6 @@ import './App.css';
 import DistrictForm from './components/DistrictForm';
 import Login from './components/Login';
 import Registration from './components/Registration';
-import Home from './components/Home';
 import ReactSession from 'react-client-session/dist/ReactSession';
 import HeaderAdmin from './components/HeaderAdmin';
 import Districts from './components/Districts';
@@ -18,7 +17,6 @@ import Events from "./components/Events";
 import Users from './components/Users';
 import UserAdminView from "./components/UserAdminView";
 import EventForm from "./components/EventForm";
-import UserAdminView2 from './components/UserAdminView2';
 import EventEditForm from './components/EventEditForm';
 import Council from './components/Council';
 import CouncilMeetingReport from './components/CouncilMeetingReport';
@@ -42,8 +40,7 @@ function App() {
   let user = "Stanovnik";
   console.log("isLoggedIn-> ", isLoggedIn, user);
 
-  function onLogin(props) {
-    user = props;
+  function onLogin() {
     setUpdated(new Date());
     setIsLoggedIn(true);
   }
@@ -64,6 +61,10 @@ function App() {
     } else {
       setIsLoggedIn(false);
     }
+    user = ReactSession.get(ReactSession.get("username"));
+    if (user === undefined) {
+      user = "Stanovnik";
+    }
   }, [updated]);
 
   user = ReactSession.get(ReactSession.get("username"));
@@ -73,8 +74,9 @@ function App() {
   if (!isLoggedIn) {
     console.log(ReactSession.get(ReactSession.get("username")));
     return (
-      <div className='App'>
-        <BrowserRouter>
+      <BrowserRouter>
+      <Header onLogout={onLogout} onLogin={onLogin} state={isLoggedIn} account={account}/>
+        <div className='App'>
           <Switch>
             <Route path='/login'>
               <Login onLogin={onLogin} state={isLoggedIn} />
@@ -83,11 +85,11 @@ function App() {
               <Registration onLogin={onLogin} state={isLoggedIn} />
             </Route>
             <Route path='/'>
-              <Home state={isLoggedIn} />
+              <Redirect to='/login' />
             </Route>
           </Switch>
+        </div>
         </BrowserRouter>
-      </div>
     );
   } else if (account === undefined) {
     return (
@@ -96,6 +98,7 @@ function App() {
   }
   else if (isLoggedIn && (user === 'Stanovnik') && account !== undefined && account.home !== undefined){
     console.log("check user " + isLoggedIn, (user === "Stanovnik"));
+    console.log(account);
     if (account.home.id === -1) {
       return (
         <div className='App'>
@@ -136,7 +139,9 @@ function App() {
                   <Route path='/council/report/:id' exact component={CouncilMeetingReport} />
                   <Route path='/council/new_report' exact component={CouncilForm} />
                   <Route path='/council/report/edit/:id' exact component={CouncilFormEdit} />
-                  <Route path='/'/>
+                  <Route path='/'>
+                    <Redirect to='/forum' />
+                  </Route>
                   </Switch>
                 </div>
             </BrowserRouter>
@@ -145,7 +150,7 @@ function App() {
     }
   }
     /* ADMIN */
-  else {
+  else if (isLoggedIn && (user === 'ADMIN') && account !== undefined && account.home !== undefined){
     console.log("admin"  + isLoggedIn, user);
     return (
       <div className='App'>
@@ -164,12 +169,17 @@ function App() {
               <Route path='/korisnici/:id' exact component={UserAdminView} />
               <Route path='/personal' exact component={Personal} />
               <Route path='/personal/password' exact component={PersonalPassword} />
-              <Route path='/'/>
+              <Route path='/' >
+                <Redirect to='/korisnici' />
+              </Route>
               </Switch>
             </div>
         </BrowserRouter>
       </div>
     );
+  }
+  else {
+    return (<></>);
   }
 
 }
