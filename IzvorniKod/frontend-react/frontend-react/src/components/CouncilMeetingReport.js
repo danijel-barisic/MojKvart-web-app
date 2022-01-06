@@ -52,7 +52,7 @@ function CouncilMeetingReport() {
 
     if (meeting.account !== undefined) {
 
-        if (roles !== undefined && roles.length > 0 && roles.filter(r => r.name === "Vijecnik").length > 0) return (
+        return (
             <Card title={meeting.title}>
                 <div className="inner">
                     <div class="Event">
@@ -68,30 +68,20 @@ function CouncilMeetingReport() {
                             <b>Izvješće: </b>
                             <span>{meeting.report}</span>
                         </div>
-                        <div className='Login'>
-                            <button className='button' type="button" onClick={() => history.push(`/vijece/izvjesce/uredi/${id}`)}>Uredi</button>
-                            <button className='button' type="button" onClick={() => deleteMeeting(meeting.id)}>Obriši</button>
+                        <div className="Login">
+                            <b>Tema na Forumu: </b>
+                            {
+                                meeting.postThread === null ? 
+                                <button className='button' type="button">Napravi temu</button> : 
+                                <button className='button' type="button">Skoči na temu</button>
+                            }
                         </div>
-                    </div>        
-                </div>
-        </Card>
-        )
-        else return (
-            <Card title={meeting.title}>
-                <div className="inner">
-                    <div class="Event">
-                        <div>
-                            <b>Datum: </b>
-                            <span>{meeting.dateTime}</span>
-                        </div>
-                        <div>
-                            <b>Autor: </b>
-                            <span>{`${meeting.account.firstName} ${meeting.account.lastName}`}</span>
-                        </div>
-                        <div>
-                            <b>Izvješće: </b>
-                            <span>{meeting.report}</span>
-                        </div>
+                        {(roles !== undefined && roles.length > 0 && roles.filter(r => r.name === "Vijecnik").length > 0) ?
+                            <div className='Login'>
+                                <button className='button' type="button" onClick={() => history.push(`/vijece/izvjesce/uredi/${id}`)}>Uredi</button>
+                                <button className='button' type="button" onClick={() => deleteMeeting(meeting.id)}>Obriši</button>
+                            </div>
+                        : <></>}
                     </div>
                 </div> 
         </Card>
