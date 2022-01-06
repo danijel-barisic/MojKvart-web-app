@@ -57,7 +57,7 @@ function CouncilForm() {
 
         return fetch("/council", options).then(response => {
             if (response.ok) {
-                history.push('/council')
+                history.push('/vijece')
             }
             else {
                 setError("Prijedlog događaja nije moguće objaviti.");
@@ -87,7 +87,7 @@ function CouncilForm() {
                     <div>
                         <div className='error'>{error}</div>
                         <button className="button" type="submit" disabled={!isValid()}>Objavi izvješće</button>
-                        <button className="button" type="button" onClick={() => {history.push("/council")}}>Povratak</button>
+                        <button className="button" type="button" onClick={() => {history.push("/vijece")}}>Povratak</button>
                     </div>
                 </form>
             </div>

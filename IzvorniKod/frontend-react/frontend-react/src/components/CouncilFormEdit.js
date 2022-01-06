@@ -53,7 +53,7 @@ function CouncilFormEdit() {
                 console.log(response.body)
             } else {
                 console.log("deleted")
-                history.push("/council")
+                history.push("/vijece")
             }
         })
     }
@@ -86,7 +86,7 @@ function CouncilFormEdit() {
 
             if (response.ok) {
                 console.log(response)
-                history.push("/council");
+                history.push("/vijece");
             }
             
             else {
@@ -111,7 +111,7 @@ function CouncilFormEdit() {
                     <div>
                         <div className='error'>{error}</div>
                         <button className="button" type="submit" disabled={!isValid()}>Spremi promjene</button>
-                        <button className="button" type="button" onClick={() => {history.push("/council")}}>Odustani</button>
+                        <button className="button" type="button" onClick={() => {history.push("/vijece")}}>Odustani</button>
                     </div>
                 </form>
             </div>

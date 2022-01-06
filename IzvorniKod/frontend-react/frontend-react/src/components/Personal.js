@@ -161,7 +161,7 @@ function Personal() {
                         <div className='Login'>
                             <button className='button' type="button" >Izmjena osobnih podataka</button>
                             <button className='button' type="button" onClick={() => {deleteUser()}}>Brisanje korisničkog računa</button>
-                            <button className='button' type="button" onClick={() => {history.push("/personal/role_requests")}} >Zahtjevi za ulogama</button>
+                            <button className='button' type="button" onClick={() => {history.push("/osobno/zahtjevi_za_uloge")}} >Zahtjevi za ulogama</button>
                         </div>
                     </div>
                 </div>
@@ -216,7 +216,7 @@ function Personal() {
                         <div className='Login'>
                             <button className='button' type="button" >Izmjena osobnih podataka</button>
                             <button className='button' type="button" onClick={() => {deleteUser()}}>Brisanje korisničkog računa</button>
-                            <button className='button' type="button" onClick={() => {history.push("/personal/role_requests")}} >Zahtjevi za ulogama</button>
+                            <button className='button' type="button" onClick={() => {history.push("/osobno/zahtjevi_za_uloge")}} >Zahtjevi za ulogama</button>
                         </div>
                     </div>
                 </div>

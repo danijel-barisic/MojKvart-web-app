@@ -43,7 +43,7 @@ function Council() {
             <Card title="Izvješća s Vijeća četvrti">
                 <div>
                     <div className='Login'>
-                        <button className='button' type="button" onClick={() => {history.push("/council/new_report")}}>Novo izvješće</button>
+                        <button className='button' type="button" onClick={() => {history.push("/vijece/novo_izvjesce")}}>Novo izvješće</button>
                     </div>
                 </div>
                 <div>

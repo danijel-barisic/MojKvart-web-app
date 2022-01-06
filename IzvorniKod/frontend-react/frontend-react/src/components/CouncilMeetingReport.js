@@ -45,7 +45,7 @@ function CouncilMeetingReport() {
                 console.log(response.body)
             } else {
                 console.log("deleted");
-                history.push("/council")
+                history.push("/vijece")
             }
         })
     }
@@ -69,7 +69,7 @@ function CouncilMeetingReport() {
                             <span>{meeting.report}</span>
                         </div>
                         <div className='Login'>
-                            <button className='button' type="button" onClick={() => history.push(`/council/report/edit/${id}`)}>Uredi</button>
+                            <button className='button' type="button" onClick={() => history.push(`/vijece/izvjesce/uredi/${id}`)}>Uredi</button>
                             <button className='button' type="button" onClick={() => deleteMeeting(meeting.id)}>Obriši</button>
                         </div>
                     </div>        
