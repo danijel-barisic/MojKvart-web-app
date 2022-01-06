@@ -12,13 +12,15 @@ import ReactSession from "react-client-session/dist/ReactSession";
    option: (provided, state) => ({
      ...provided,
      padding: 20,
-     
+     borderRadius:'10px'
    }),
    menuList: styles => ({
       
       
         ...styles,
-        maxHeight: 138
+      maxHeight: 138,
+      color: 'black',
+      borderRadius:'10px'
       }),
    control: styles => ({ ...styles, backgroundColor: 'white',borderRadius:'10px' }),
    singleValue: (provided, state) => {
