@@ -2,6 +2,7 @@ import React from "react"
 import Card from "./Card"
 import "./Login.css"
 import { useHistory } from "react-router"
+import { ReactSession } from "react-client-session"
 
 function CouncilFormEdit() {
 
@@ -14,6 +15,25 @@ function CouncilFormEdit() {
     const [meetingForm, setMeetingForm] = React.useState({title: '', report: ''})
     
     const history = useHistory()
+    const acc_username = ReactSession.get("username")
+
+    const [account, setAccount] = React.useState({id: ''})
+
+    React.useEffect(() => {
+        fetch(`/accounts/${acc_username}`)
+        .then(data => data.json())
+        .then(account => setAccount(account))
+    }, [])
+
+    const [meetings, setMeetings] = React.useState()
+    React.useEffect(() => {
+        if (account !== undefined && account.district !== undefined) {
+            fetch('/council')
+            .then(data => data.json())
+            .then(data => setMeetings(data
+                .filter(m => m.district.id === account.district.id)))
+        }
+    }, [account])
 
     React.useEffect(() => {
         fetch(`/council/${report_id}`)
@@ -40,6 +60,16 @@ function CouncilFormEdit() {
     function isValid() {
         const {title, report} = meetingForm
         return title.length > 0 && report.length > 0
+    }
+
+    function is_unique(title) {
+        if (meetings.map(m => m.title).includes(title)){
+            setError("Izvješće s predloženim naslovom već postoji!")
+            return false
+        }
+        else {
+            return true
+        }
     }
 
     function deleteMeeting(id) {
@@ -72,31 +102,32 @@ function CouncilFormEdit() {
             account: oldReport.account
         }
 
-        console.log(data)
+        if (is_unique(data.title)) {
 
-        const options = {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
+            const options = {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }
+    
+            return fetch(`/council/${data.id}`, options).then(response => {
+    
+                if (response.ok) {
+                    console.log(response)
+                    history.push("/vijece");
+                }
+                
+                else {
+                    setError("Izvješće nije moguće promijeniti.");
+                    console.log(response.body);
+                }
+            })
         }
 
-        return fetch(`/council/${data.id}`, options).then(response => {
-
-            if (response.ok) {
-                console.log(response)
-                history.push("/vijece");
-            }
-            
-            else {
-                setError("Izvješće nije moguće promijeniti.");
-                console.log(response.body);
-            }
-        })
     }
-
-    return (
+    if (meetings !== undefined) return (
         <Card title="Uredi izvješće">
             <div className="Login">
                 <form onSubmit={onSubmit}>
@@ -116,6 +147,9 @@ function CouncilFormEdit() {
                 </form>
             </div>
         </Card>
+    )
+    else return (
+        <></>
     )
 }
 

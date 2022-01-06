@@ -10,6 +10,16 @@ function CouncilForm() {
     const [account, setAccount] = React.useState({id: ''})
     const [meetingForm, setMeetingForm] = React.useState({title: '', report: ''})
 
+    const [meetings, setMeetings] = React.useState()
+    React.useEffect(() => {
+        if (account !== undefined && account.district !== undefined) {
+            fetch('/council')
+            .then(data => data.json())
+            .then(data => setMeetings(data
+                .filter(m => m.district.id === account.district.id)))
+        }
+    }, [account])
+
     const history = useHistory()
     const acc_username = ReactSession.get("username")
 
@@ -47,23 +57,26 @@ function CouncilForm() {
             }
         }
 
-        const options = {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
+        if (is_unique(data.title)) {
+            
+            const options = {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }
+    
+            return fetch("/council", options).then(response => {
+                if (response.ok) {
+                    history.push('/vijece')
+                }
+                else {
+                    setError("Prijedlog događaja nije moguće objaviti.");
+                    console.log(response.body)
+                }
+            })
         }
-
-        return fetch("/council", options).then(response => {
-            if (response.ok) {
-                history.push('/vijece')
-            }
-            else {
-                setError("Prijedlog događaja nije moguće objaviti.");
-                console.log(response.body)
-            }
-        })
 
     }
 
@@ -72,7 +85,17 @@ function CouncilForm() {
         return title.length > 0 && report.length > 0
     }
 
-    return (
+    function is_unique(title) {
+        if (meetings.map(m => m.title).includes(title)){
+            setError("Izvješće s predloženim naslovom već postoji!")
+            return false
+        }
+        else {
+            return true
+        }
+    }
+
+    if (meetings !== undefined) return (
         <Card title="Novo izvješće">
             <div className="Login">
                 <form onSubmit={onSubmit}>
@@ -92,6 +115,9 @@ function CouncilForm() {
                 </form>
             </div>
         </Card>
+    )
+    else return (
+        <></>
     )
 }
 
