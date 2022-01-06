@@ -6,6 +6,7 @@ import './Login.css';
 import { FaTimes } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import Thread from "./Thread";
+import { MdForum } from 'react-icons/md'
 
 function Forum(props) {
    const [threads, setThreads] = React.useState([]);
@@ -50,23 +51,28 @@ function Forum(props) {
       console.log("users: ", users, "threads: ", threads, "roles: ", roles);
       return ([ 
          <>
-            <Card title='Forum'>
-               <div className='Login'>
+            <div className="current-title">
+               <MdForum className="icon-color" /> FORUM
+            </div>
+               {/* <div className='Login'>
                   <button className='button' type="button" onClick={() => {history.push("/novatema")}}>Dodaj temu</button>
-               </div>
-            </Card>
-            <Card title='Molimo pričekajte dok se podaci ne učitaju!'>
+               </div> */}
+               <Card title='Molimo pričekajte dok se podaci ne učitaju!'>
             </Card>
          </>
       ]);
    } else {
       return (
          <>
-            <Card title='Forum'>
+            <div className="current-title">
+               <MdForum className="icon-color" /> FORUM
+            </div>
+            {/* <div title='Forum'>
                <div className='Login'>
                   <button className='button' type="button" onClick={() => {history.push("/novatema")}}>Dodaj temu</button>
                </div>
-            </Card>
+            </div> */}
+            <div className="sub-header"></div>
             <Card title='Teme'>
                {threads.map(function (thread) {
                   userid = users.id;
