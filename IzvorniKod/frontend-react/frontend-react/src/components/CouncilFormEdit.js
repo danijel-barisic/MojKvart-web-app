@@ -133,7 +133,7 @@ function CouncilFormEdit() {
                 <form onSubmit={onSubmit}>
                     <div className="FormRow">
                         <label>Naslov</label>
-                        <input name="title" required onChange={onChange} value = {meetingForm.title}/>
+                        <input name="title" readOnly="readOnly" onChange={onChange} value = {meetingForm.title}/>
                     </div>
                     <div className="FormRow">
                         <label>Sadržaj</label>

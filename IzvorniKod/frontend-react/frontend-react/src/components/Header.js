@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import './Header.css';
+import { ReactComponent as Logo } from '../assets/city.svg'
 
 
 function Header(props) {
@@ -35,6 +36,7 @@ function Header(props) {
             <>
                <header className='header'>
                   <Link className='logo active' to='/'> MOJ KVART </Link>
+                  <Logo style={{ width: "150px", height: "50px"}}/>
                   <div className='header-right'>
                      <Link to='/osobno' > OSOBNI PODACI </Link>
                      {renderButton()}
@@ -46,7 +48,8 @@ function Header(props) {
       } else {
          return (
             <header className='header'>
-               <Link className='logo active' to='/'> MOJ KVART </Link>
+               <Link className='logo active' to='/'> MOJ KVART  </Link>
+               <Logo style={{ width: "150px", height: "50px"}} />
                <div className='header-right'>
                   <Link to='/forum' >FORUM </Link>
                   <Link to='/dogadjaji' >DOGAĐANJA </Link>

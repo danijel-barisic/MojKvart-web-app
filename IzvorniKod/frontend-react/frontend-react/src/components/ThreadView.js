@@ -13,15 +13,17 @@ import ThreadNewPost from './ThreadNewPost';
 function ThreadView(props) {
    const { idT:id } = useParams();
    console.log("hjkfshkfhskh" + id);
-   const { name } = props.location.state;
+  
    const [posts, setPosts] = React.useState([]);
    const [updated, setUpdated] = React.useState(new Date());
    const [user,setUser] = React.useState([]);
    const [users, setUsers] = React.useState([]);
    const [roles, setRoles] = React.useState([]);
+   const [thread,setThread] = React.useState();
    const [izbrisano,setIzbrisano] = React.useState([])
    let isModerator = false;
    const history = useHistory();
+   
    const userSession = ReactSession.get("username");
 
     const inputRef = useRef({});
@@ -66,12 +68,19 @@ function ThreadView(props) {
       setUpdated(new Date());
    }
 
-   console.log(izbrisano)
+   console.log(thread)
+
+   React.useEffect(() =>{
+      fetch(`/threads/${id}`)
+            .then(data => data.json())
+            .then(thread => setThread(thread))
+   },[]);
 
    React.useEffect(() => {
       fetch(`/threads/${id}`)
          .then(data => data.json())
-         .then(posts => setPosts(posts.posts))
+         .then(thread => setPosts(thread.posts))
+         
       fetch(`/accounts/${userSession}`).then(data => data.json())
          .then(user => setUser(user));
       fetch(`/accounts`).then(data => data.json())
@@ -84,10 +93,11 @@ function ThreadView(props) {
           fetch(`/accounts/roles/${user.id}`)
           .then(data => data.json())
             .then(roles => setRoles(roles))
+            
       }
   }, [user])
 
-  if(roles == undefined) {
+  if(roles == undefined || thread == undefined) {
      return(
         <><div>Wait for page to load...</div></>
      )
@@ -97,7 +107,7 @@ function ThreadView(props) {
    return (
       <>
          <div className="centar">
-         <Card title={name}>
+         <Card title={thread.name}>
        
          </Card>
          </div>

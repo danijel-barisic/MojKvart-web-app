@@ -7,6 +7,8 @@ import { FaLock, FaLockOpen } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import User from "./User";
 import RoleRequestUser from "./RoleRequestUser";
+import '../style/style.css';
+
 
 function Users(props) {
    const [users, setUsers] = React.useState([]);
