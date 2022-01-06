@@ -1,8 +1,8 @@
 import React from "react";
-import Card from "./Card";
 import './Login.css';
 import { useHistory } from "react-router";
 import { ReactSession } from "react-client-session";
+import CardLogin from "./CardLogin";
 
 
 function Login(props) {
@@ -63,23 +63,30 @@ function Login(props) {
    }
 
    return (
-      <Card>
-         <div className='Login'>
-            <form onSubmit={onSubmit}>
-               <div className='FormRow'>
-                  <label>Username</label>
-                  <input name='username' required onChange={onChange} value={ loginForm.username}/>
-               </div>
-               <div className='FormRow'>
-                  <label>Password</label>
-                  <input name='password' type='password' required onChange={onChange} value={ loginForm.password}/>
-               </div>
-               <div className='error'>{error}</div>
-               <button className='button' type='submit'>Login</button>
-               <button className='button' type="button" onClick={() => {history.push("/registration")}}>Registration</button>
-            </form>
+      <>
+      <div className="logres">
+         <img src="../../winter-village-4567947.png" alt="MojKvart"></img>
+      </div>
+      <div className="logres">
+         <CardLogin>
+            <div className='Login'>
+               <form onSubmit={onSubmit}>
+                  <div className='FormRow'>
+                     <label>Username</label>
+                     <input name='username' required onChange={onChange} value={ loginForm.username}/>
+                  </div>
+                  <div className='FormRow'>
+                     <label>Password</label>
+                     <input name='password' type='password' required onChange={onChange} value={ loginForm.password}/>
+                  </div>
+                  <div className='error'>{error}</div>
+                  <button className='button' type='submit'>Login</button>
+                  <button className='button' type="button" onClick={() => {history.push("/registration")}}>Registration</button>
+               </form>
+            </div>
+         </CardLogin>
          </div>
-      </Card>
+      </>
    );
 }
 

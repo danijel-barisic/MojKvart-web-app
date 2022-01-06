@@ -132,3 +132,13 @@
    cursor: pointer;
 }
 
+.logres {
+   margin: auto;
+   width: 600px;
+}
+
+img {
+   margin: auto;
+   width: 600px;
+   object-fit: contain;
+}
