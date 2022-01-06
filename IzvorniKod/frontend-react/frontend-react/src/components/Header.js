@@ -25,8 +25,8 @@ function Header(props) {
 
    const renderButton = () => {
       return (checkLogin)
-         ? <Link to='/' className="logout" onClick={logout} > LOG OUT </Link>
-         : <Link to='/login' className="login" > LOG IN </Link>;
+         ? <Link to='/' className="logout" onClick={logout} > ODJAVA </Link>
+         : <Link to='/login' className="login" > PRIJAVA </Link>;
    }
 
    if (account !== undefined && account.home !== undefined) {

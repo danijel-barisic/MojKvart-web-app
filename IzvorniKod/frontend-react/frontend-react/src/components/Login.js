@@ -81,16 +81,16 @@ function Login(props) {
             <div className='Login'>
                <form onSubmit={onSubmit}>
                   <div className='FormRow'>
-                     <label>Username</label>
+                     <label>Korisničko ime</label>
                      <input name='username' required onChange={onChange} value={ loginForm.username}/>
                   </div>
                   <div className='FormRow'>
-                     <label>Password</label>
+                     <label>Lozinka</label>
                      <input name='password' type='password' required onChange={onChange} value={ loginForm.password}/>
                   </div>
                   <div className='error'>{error}</div>
-                  <button className='button' type='submit'>Log in</button>
-                  <button className='button' type="button" onClick={() => {history.push("/registration")}}>Registration</button>
+                  <button className='button' type='submit'>Prijava</button>
+                  <button className='button' type="button" onClick={() => {history.push("/registration")}}>Registracija</button>
                </form>
             </div>
          </CardLogin>

@@ -74,6 +74,9 @@ function Forum(props) {
             </div> */}
             <div className="sub-header"></div>
             <Card title='Teme'>
+               <div className='Login'>
+                  <button className='button' type="button" onClick={() => {history.push("/novatema")}}>Dodaj temu</button>
+               </div>
                {threads.map(function (thread) {
                   userid = users.id;
                   let role = roles.map(function (x) {

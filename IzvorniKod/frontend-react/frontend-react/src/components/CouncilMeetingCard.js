@@ -2,6 +2,7 @@ import React from "react"
 import "./Event.css"
 import "./Login.css"
 import { useHistory } from "react-router"
+import "../style/style.css"
 
 
 function CouncilMeetingCard(props) {
