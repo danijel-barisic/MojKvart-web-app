@@ -147,11 +147,11 @@ function Registration(props) {
          <div className='Login'>
             <form onSubmit={onSubmit}>
                <div className='FormRow'>
-                  <label>FirstName</label>
+                  <label>Ime</label>
                   <input name='firstname' required onChange={onChange}value={ registrationForm.firstname}/>
                </div>
                <div className='FormRow'>
-                  <label>LastName</label>
+                  <label>Prezime</label>
                   <input name='lastname' required onChange={onChange} value={ registrationForm.lastname}/>
                </div>
                <div className='FormRow'>
@@ -159,22 +159,22 @@ function Registration(props) {
                   <input name='username' required onChange={onChange} value={ registrationForm.username}/>
                </div>
                <div className='FormRow'>
-                  <label>Password</label>
+                  <label>Lozinka</label>
                   <input name='password' required type='password' onChange={onChange} value={ registrationForm.password}/>
                </div>
 			    <div className='FormRow'>
-                  <label>Address</label>
+                  <label>Adresa</label>
                   <Select value={selectedOption} required onChange = {handleChange} styles={customStyles} placeholder="Select your address"
                    options={streets_array}
                />
                </div>
                <div className='FormRow'>
-                  <label>Street number</label>
+                  <label>Kućni broj</label>
                   <input type="number" name="streetnumber" min={selectedOption ? selectedOption.minNum: 0} max={selectedOption ? selectedOption.maxNum: 0} required onChange={onChange} />
                   </div>
                <div className='error'>{error}</div>
-               <button className='submit' type='submit'>Register</button>
-               <button className='button' type="button" onClick={() => {history.push("/login")}}>Login</button>
+               <button className='submit' type='submit'>Registriraj se</button>
+               <button className='button' type="button" onClick={() => {history.push("/login")}}>Prijava</button>
             </form>
          </div>
             </CardLogin>
