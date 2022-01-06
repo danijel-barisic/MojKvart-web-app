@@ -150,7 +150,7 @@ function ThreadView(props) {
                         <div className="innerTV" ref={el => inputRef.current[post.id] = el} id={post.id}>
                         
                         <Post key={post.id} post={post} />
-                                      <p className='pTV'>{"~" + post.account.firstName + " " + post.account.lastName + "TU"}</p>
+                                      <p className='pTV'>{"~" + post.account.firstName + " " + post.account.lastName}</p>
                                       {rendered = true}
                         
                         </div>
