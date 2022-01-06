@@ -42,6 +42,10 @@ function App() {
   function onLogin() {
     setUpdated(new Date());
     setIsLoggedIn(true);
+    user = ReactSession.get(ReactSession.get("username"));
+    if (user === undefined) {
+      user = "Stanovnik";
+    } 
   }
     
   function onLogout() {
@@ -59,6 +63,10 @@ function App() {
       setIsLoggedIn(true);
     } else {
       setIsLoggedIn(false);
+    }
+    user = ReactSession.get(ReactSession.get("username"));
+    if (user === undefined) {
+      user = "Stanovnik";
     }
     user = ReactSession.get(ReactSession.get("username"));
     if (user === undefined) {
@@ -84,7 +92,7 @@ function App() {
               <Registration onLogin={onLogin} state={isLoggedIn} />
             </Route>
             <Route path='/'>
-              <Redirect to='/login' />
+              <Login onLogin={onLogin} state={isLoggedIn} />
             </Route>
           </Switch>
         </div>
@@ -165,9 +173,7 @@ function App() {
               <Route path='/korisnici' exact component={Users} />
               <Route path='/korisnici/:id' exact component={UserAdminView} />
               <Route path='/osobno' exact component={Personal} />
-              <Route path='/' >
-                <Redirect to='/korisnici' />
-              </Route>
+              <Route path='/' exact component={Users} />
               </Switch>
             </div>
         </BrowserRouter>
