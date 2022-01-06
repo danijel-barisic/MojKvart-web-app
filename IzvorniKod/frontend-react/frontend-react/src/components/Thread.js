@@ -11,7 +11,7 @@ function Thread(props) {
             pathname: `/forum/${id}`,
             state: { id, name },
             className: 'header-right'
-         }}>{id}. {name}</Link>
+         }}>{name}</Link>
       </div>
    );
 }
