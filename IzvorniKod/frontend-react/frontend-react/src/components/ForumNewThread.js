@@ -61,7 +61,8 @@ function ForumNewThread(props) {
 
          return fetch('/threads', options).then(response => {
             if (response.ok) {
-               history.goBack()
+               let last = allThreads.at(-1).id
+               history.push(`/forum/${last+1}`)
                
             } else {
                setError("Došlo je do pogreške! Pokušaj ponovo!");
@@ -70,6 +71,7 @@ function ForumNewThread(props) {
          });
       }
    }
+   //console.log(allThreads.at(-1))
 
    function isValid() {
       const { name } = form;
