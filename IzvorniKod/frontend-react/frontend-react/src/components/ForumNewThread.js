@@ -12,7 +12,7 @@ function ForumNewThread(props) {
    const [account, setAccount] = React.useState('');
    const user = ReactSession.get("username");
    const history = useHistory();
-
+   
    const [threads, setThreads] = React.useState()
    const [allThreads,setAllThreads] = React.useState([])
 
@@ -61,9 +61,15 @@ function ForumNewThread(props) {
 
          return fetch('/threads', options).then(response => {
             if (response.ok) {
-               let last = allThreads.at(-1).id
+               let last
+               console.log(allThreads)
+               if (allThreads.length == 0){
+                  last = 0
+                  history.push(`/forum/${last+1}`)
+               }else{
+               last = allThreads.at(-1).id
                history.push(`/forum/${last+1}`)
-               
+               }
             } else {
                setError("Došlo je do pogreške! Pokušaj ponovo!");
                console.log(response.body);
