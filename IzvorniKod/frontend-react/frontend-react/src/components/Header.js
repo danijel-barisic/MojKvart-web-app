@@ -36,7 +36,7 @@ function Header(props) {
                <header className='header'>
                   <Link className='logo active' to='/'> MOJ KVART </Link>
                   <div className='header-right'>
-                     <Link to='/personal' > OSOBNI PODACI </Link>
+                     <Link to='/osobno' > OSOBNI PODACI </Link>
                      {renderButton()}
                   </div>
                </header>
@@ -49,9 +49,9 @@ function Header(props) {
                <Link className='logo active' to='/'> MOJ KVART </Link>
                <div className='header-right'>
                   <Link to='/forum' >FORUM </Link>
-                  <Link to='/events' >DOGAĐANJA </Link>
-                  <Link to='/council' >VIJEĆE ČETVRTI </Link>
-                  <Link to='/personal' >OSOBNI PODACI </Link>
+                  <Link to='/dogadjaji' >DOGAĐANJA </Link>
+                  <Link to='/vijece' >VIJEĆE ČETVRTI </Link>
+                  <Link to='/osobno' >OSOBNI PODACI </Link>
                   {renderButton()}
                </div>
             </header>

@@ -13,6 +13,27 @@ function ForumNewThread(props) {
    const user = ReactSession.get("username");
    const history = useHistory();
 
+   const [threads, setThreads] = React.useState()
+   const [allThreads,setAllThreads] = React.useState([])
+
+
+   React.useEffect(() => {
+      fetch(`/accounts/${user}/getdistrict`).then(data => data.json())
+         .then(district => setDistrict(district));
+      fetch(`/accounts/${user}`).then(data => data.json())
+      .then(account => setAccount(account));
+      fetch('/threads').then(data => data.json().then(data => setAllThreads(data)));
+   }, []);
+
+    React.useEffect(() => {
+        if (account !== undefined && account.district !== undefined) {
+            fetch('/threads')
+            .then(data => data.json())
+            .then(data => setThreads(data
+                .filter(t => t.district.id === account.district.id)))
+        }
+    }, [account])
+
    function onChange(event) {
       const { name, value } = event.target;
       setForm(oldForm => ({...oldForm, [name]: value}))
@@ -29,35 +50,47 @@ function ForumNewThread(props) {
             id: account.id
          }
       };
-      const options = {
-         method: 'POST',
-         headers: {
-            'Content-Type': 'application/json'
-         },
-         body: JSON.stringify(data)
-      };
+      if (is_unique(data.name)) {
+         const options = {
+            method: 'POST',
+            headers: {
+               'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+         };
 
-      return fetch('/threads', options).then(response => {
-         if (response.ok) {
-            history.goBack();
-         } else {
-            setError("Došlo je do pogreške! Pokušaj ponovo!");
-            console.log(response.body);
-         }
-      });
+         return fetch('/threads', options).then(response => {
+            if (response.ok) {
+               history.goBack()
+               
+            } else {
+               setError("Došlo je do pogreške! Pokušaj ponovo!");
+               console.log(response.body);
+            }
+         });
+      }
    }
 
    function isValid() {
       const { name } = form;
-      return name.length > 0;
+      let result = name.includes("[");
+      let result2 = name.includes("]");
+      return name.length > 0 && !result && !result2;
    }
 
-   React.useEffect(() => {
-      fetch(`/accounts/${user}/getdistrict`).then(data => data.json())
-         .then(district => setDistrict(district));
-      fetch(`/accounts/${user}`).then(data => data.json())
-      .then(account => setAccount(account));
-   }, []);
+   function is_unique(name) {
+      if (threads.map(t => t.name).includes(name)){
+          setError("Temano s predloženim naslovom već postoji!")
+          return false
+      }
+      else {
+          return true
+      }
+  }
+
+
+
+   console.log()
 
    return (
       <Card title="Nova Tema">

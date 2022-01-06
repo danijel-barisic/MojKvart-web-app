@@ -26,7 +26,6 @@ import Forum from './components/Forum';
 import ForumNewThread from './components/ForumNewThread';
 import ThreadView from './components/ThreadView';
 import Personal from "./components/Personal";
-import PersonalPassword from  './components/PersonalPassword';
 import PerosnalRoleRequest from './components/PersonalRoleRequest';
 import ThreadNewPost from './components/ThreadNewPost';
 import PostEditForm from './components/PostEditForm';
@@ -106,11 +105,10 @@ function App() {
             <Header onLogout={onLogout} onLogin={onLogin} state={isLoggedIn} account={account}/>
             <div className='App'>
               <Switch>
-                <Route path='/personal' exact component={Personal} />
-                <Route path='/personal/role_requests' exact component={PerosnalRoleRequest} />
-                <Route path='/personal/password' exact component={PersonalPassword} />
+                <Route path='/osobno' exact component={Personal} />
+                <Route path='/osobno/zahtjevi_za_uloge' exact component={PerosnalRoleRequest} />
                 <Route path='/'>
-                  <Redirect to='/personal' />
+                  <Redirect to='/osobno' />
                 </Route>
                 </Switch>
               </div>
@@ -129,16 +127,15 @@ function App() {
                   <Route path='/novatema' exact component={ForumNewThread}/>
                   <Route path='/novaobjava/:idT/:idP' exact component={ThreadNewPost}/>
                   <Route path = '/novaobjava/:idT/:idP/edit' exact component={PostEditForm} />
-                  <Route path='/personal' exact component={Personal} />
-                  <Route path='/personal/role_requests' exact component={PerosnalRoleRequest} />
-                  <Route path='/personal/password' exact component={PersonalPassword} />
-                  <Route path='/events' exact component={Events} />
-                  <Route path='/events/suggestion' exact component={EventForm} />
-                  <Route path='/events/edit/:id' exact component={EventEditForm} />
-                  <Route path='/council' exact component={Council} />
-                  <Route path='/council/report/:id' exact component={CouncilMeetingReport} />
-                  <Route path='/council/new_report' exact component={CouncilForm} />
-                  <Route path='/council/report/edit/:id' exact component={CouncilFormEdit} />
+                  <Route path='/osobno' exact component={Personal} />
+                  <Route path='/osobno/zahtjevi_za_uloge' exact component={PerosnalRoleRequest} />
+                  <Route path='/dogadjaji' exact component={Events} />
+                  <Route path='/dogadjaji/prijedlog' exact component={EventForm} />
+                  <Route path='/dogadjaji/uredi/:id' exact component={EventEditForm} />
+                  <Route path='/vijece' exact component={Council} />
+                  <Route path='/vijece/izvjesce/:id' exact component={CouncilMeetingReport} />
+                  <Route path='/vijece/novo_izvjesce' exact component={CouncilForm} />
+                  <Route path='/vijece/izvjesce/uredi/:id' exact component={CouncilFormEdit} />
                   <Route path='/'>
                     <Redirect to='/forum' />
                   </Route>
@@ -167,8 +164,7 @@ function App() {
               <Route path='/ulice/:id/edit' exact component={StreetEditForm} />
               <Route path='/korisnici' exact component={Users} />
               <Route path='/korisnici/:id' exact component={UserAdminView} />
-              <Route path='/personal' exact component={Personal} />
-              <Route path='/personal/password' exact component={PersonalPassword} />
+              <Route path='/osobno' exact component={Personal} />
               <Route path='/' >
                 <Redirect to='/korisnici' />
               </Route>

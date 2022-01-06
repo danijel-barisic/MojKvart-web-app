@@ -19,20 +19,30 @@ function ThreadView(props) {
    const [user,setUser] = React.useState([]);
    const [users, setUsers] = React.useState([]);
    const [roles, setRoles] = React.useState([]);
+   const [izbrisano,setIzbrisano] = React.useState([])
    let isModerator = false;
-
    const history = useHistory();
    const userSession = ReactSession.get("username");
 
     const inputRef = useRef({});
    
-   console.log(inputRef.current)
+   //console.log(inputRef.current)
+
    function onReply(inputRef,replyId){
-      var cln = inputRef.current[replyId].className
-      inputRef.current[replyId].className = inputRef.current[replyId].className + " " + "elementToFadeInAndOutighlight";
-      setTimeout(function() {
-         inputRef.current[replyId].className = cln
-         },1000)
+      
+     
+      if(inputRef.current[replyId] == undefined){
+         console.log("izbrisano")
+          
+      }else{
+         
+         var cln = inputRef.current[replyId].className
+         inputRef.current[replyId].className = inputRef.current[replyId].className + " " + "elementToFadeInAndOutighlight";
+         setTimeout(function() {
+            inputRef.current[replyId].className = cln
+            },1000)
+      }
+     
       
    }
    function deletePost(id){
@@ -48,12 +58,15 @@ function ThreadView(props) {
             setUpdated(new Date());
          }
       })
+      setIzbrisano(oldArray => [...oldArray, id]);
+      
    }
 
    function onNewPost() {
       setUpdated(new Date());
    }
 
+   console.log(izbrisano)
 
    React.useEffect(() => {
       fetch(`/threads/${id}`)
@@ -107,8 +120,10 @@ function ThreadView(props) {
                            
                        
                         <GoReply style={{cursor:"pointer"}} onClick={() => onReply(inputRef,post.replyId)} ></GoReply>
-                        
-                        ({(post.replyId)})
+                        {!izbrisano.includes(post.replyId)  ?
+                        <> ({(post.replyId)})</> : <>[obrisano]</>
+                     }
+                       
                         
 
                            <Post key={post.id} post={post} />
@@ -135,7 +150,7 @@ function ThreadView(props) {
                         <div className="innerTV" ref={el => inputRef.current[post.id] = el} id={post.id}>
                         
                         <Post key={post.id} post={post} />
-                                      <p className='pTV'>{"~" + post.account.firstName + " " + post.account.lastName}</p>
+                                      <p className='pTV'>{"~" + post.account.firstName + " " + post.account.lastName + "TU"}</p>
                                       {rendered = true}
                         
                         </div>
@@ -143,12 +158,12 @@ function ThreadView(props) {
                         }
                      
                         {
-                              (user.id === post.account.id && post.replyId == null && !isModerator && !rendered)
+                              (user.id === post.account.id && post.replyId == null && !isModerator && rendered)
                               ?  <>
                                     <div className="innerTV">
                                        <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deletePost(post.id)}></MdDelete>
                                       <Link to={`/novaobjava/${id}/${post.id}/edit`}><MdEdit></MdEdit></Link> 
-                                      <p className='pTV'>{"~" +post.account.firstName + " " + post.account.lastName}</p>
+                                      
                                     </div>
                                  </>
                               : (isModerator && post.replyId == null) ? <>

@@ -103,7 +103,7 @@ function EventSuggestion(props) {
             <div className="Login">
                 <button className='button' type="button" onClick={() => submitEvent(event)}>Objavi</button>
                 <button className='button' type="button" onClick={() => deleteEvent(event.id)}>Obriši</button>
-                <button className='button' type="button" onClick={() => {history.push(`/events/edit/${event.id}`)}}>Uredi</button>
+                <button className='button' type="button" onClick={() => {history.push(`/dogadjaji/uredi/${event.id}`)}}>Uredi</button>
             </div>
         </div>
     )

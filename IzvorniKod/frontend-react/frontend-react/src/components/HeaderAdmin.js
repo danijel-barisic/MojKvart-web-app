@@ -34,7 +34,7 @@ function HeaderAdmin(props) {
             <Link to='/korisnici' >Korisnici </Link>
             <Link to='/zahtjeviUloga' >Zahtjevi uloga </Link>
             <Link to='/kvartovi' >Kvartovi </Link>
-            <Link to='/personal' >Osobni podaci </Link>
+            <Link to='/osobno' >Osobni podaci </Link>
             {renderButton()}
          </div>
       </header>

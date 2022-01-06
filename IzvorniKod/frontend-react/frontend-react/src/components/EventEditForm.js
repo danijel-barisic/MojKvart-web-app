@@ -70,7 +70,7 @@ function EventEditForm() {
         return fetch(`/events/${data.id}`, options).then(response => {
 
             if (response.ok) {
-                history.push('/events')
+                history.push('/dogadjaji')
             }
 
             else {
@@ -127,7 +127,7 @@ function EventEditForm() {
                     <div>
                         <div className='error'>{error}</div>
                         <button className="button" type="submit" disabled={!isValid()}>Spremi promjene</button>
-                        <button className="button" type="button" onClick={() => {history.push("/events")}}>Odustani</button>
+                        <button className="button" type="button" onClick={() => {history.push("/dogadjaji")}}>Odustani</button>
                     </div>
                 </form>
             </div>

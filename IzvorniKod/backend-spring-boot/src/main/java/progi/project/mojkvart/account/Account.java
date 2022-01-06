@@ -12,6 +12,7 @@ import progi.project.mojkvart.meeting.Meeting;
 import progi.project.mojkvart.role.Role;
 import progi.project.mojkvart.role_request.RoleRequest;
 import progi.project.mojkvart.post.Post;
+import progi.project.mojkvart.street.Street;
 import progi.project.mojkvart.thread.PostThread;
 
 import javax.persistence.*;
@@ -218,10 +219,20 @@ public class Account implements UserDetails {
     }
 
     public District getDistrict() {
-        return home.getStreet().getDistrict();
+        return this.getHome().getStreet().getDistrict();
     }
 
+    static private Home generateDummyHome() {
+        var h = new Home(-1L, new Street("", 0, 0));
+        h.getStreet().setDistrict(new District(""));
+        return h;
+    }
+    static private final Home dummyHome = generateDummyHome();
+
     public Home getHome() {
+        if (this.home == null) {
+            return dummyHome;
+        }
         return home;
     }
 

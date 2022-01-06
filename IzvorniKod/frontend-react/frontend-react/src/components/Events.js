@@ -58,7 +58,7 @@ function Events() {
                 <Card title='Događaji'>
                     <div>
                         <div className='Login'>
-                            <button className='button' type="button" onClick={() => {history.push("/events/suggestion")}}>Predloži događaj</button>
+                            <button className='button' type="button" onClick={() => {history.push("/dogadjaji/prijedlog")}}>Predloži događaj</button>
                         </div>
                     </div>
                     <div>
@@ -97,7 +97,7 @@ function Events() {
                 <Card title='Događaji'>
                     <div>
                         <div className='Login'>
-                            <button className='button' type="button" onClick={() => {history.push("/events/suggestion")}}>Predloži događaj</button>
+                            <button className='button' type="button" onClick={() => {history.push("/dogadjaji/prijedlog")}}>Predloži događaj</button>
                         </div>
                     </div>
                     <div>
@@ -135,7 +135,7 @@ function Events() {
             <Card title='Događaji'>
                 <div>
                     <div className='Login'>
-                        <button className='button' type="button" onClick={() => {history.push("/events/suggestion")}}>Predloži događaj</button>
+                        <button className='button' type="button" onClick={() => {history.push("/dogadjaji/prijedlog")}}>Predloži događaj</button>
                     </div>
                 </div>
                 <div>
