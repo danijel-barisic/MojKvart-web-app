@@ -1,6 +1,7 @@
 package progi.project.mojkvart.account;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Cascade;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -54,22 +55,23 @@ public class Account implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id")) // inverse is for the OTHER entity
     private List<Role> roles;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", cascade = {CascadeType.REMOVE})
     private List<RoleRequest> roleRequests;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", cascade = {CascadeType.REMOVE})
     private List<Post> posts;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", cascade = {CascadeType.REMOVE})
     private List<PostThread> threads;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", cascade = {CascadeType.REMOVE})
     private List<Event> events;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", cascade = {CascadeType.REMOVE})
     private List<Meeting> meetings;
 
     @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "home_id")
     private Home home;
 
@@ -87,6 +89,18 @@ public class Account implements UserDetails {
 
     public Account(String firstName, String lastName, String email, String password, Home home,
                    List<Role> roles, boolean isAddressValid) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.roles = roles;
+        this.home = home;
+        this.isAddressValid = isAddressValid;
+    }
+
+    public Account(Long id, String firstName, String lastName, String email, String password, Home home,
+                   List<Role> roles, boolean isAddressValid) {
+        this.id = id;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -230,13 +244,7 @@ public class Account implements UserDetails {
     public String toString() {
         return "Account{" +
                 "id=" + id +
-                ", email='" + email + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", password='" + password + '\'' +
-                ", isBlocked=" + isBlocked +
-                ", isAddressValid=" + isAddressValid +
-                ", roles='" + getRoles() + '\'' +
+                ", home=" + home.getId() +
                 '}';
     }
 }

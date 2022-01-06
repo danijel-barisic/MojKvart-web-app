@@ -1,8 +1,8 @@
 import React from "react";
-import Card from "./Card";
 import './Login.css';
 import { useHistory } from "react-router";
 import { ReactSession } from "react-client-session";
+import CardLogin from "./CardLogin";
 
 
 function Login(props) {
@@ -29,13 +29,20 @@ function Login(props) {
       };
       fetch('/login', options)
          .then(response => {
-            /* console.log(response); */
-            if (response.status === 401) {
-               setError("Login Failed!");
-               return "error";
-            }
-            else if (!response.ok) {
-               setError("Login failed");
+            if (!response.ok) {
+               var varr = undefined;
+               var varrsplitted = undefined;
+               var serverresponse = response.text();
+               serverresponse.then(res => {
+                  varr = res;
+                  console.log(varr);
+                  varrsplitted = varr.split("|");
+                  if (varrsplitted[0] === "Blocked") {
+                     setError("Korisnik je blokiran!");
+                     return "error";
+                  }
+               });
+               setError("Username ili password je pogrešan!");
                return "error";
             } else {
                return response.text();
@@ -47,6 +54,7 @@ function Login(props) {
                /* console.log(splitted[1]); */
                ReactSession.set("username", loginForm.username);
                ReactSession.set(loginForm.username, splitted[0]);
+               ReactSession.set("addressValid", splitted[1]);
                props.onLogin(splitted[0]);
                history.push("/");
             }
@@ -55,23 +63,30 @@ function Login(props) {
    }
 
    return (
-      <Card>
-         <div className='Login'>
-            <form onSubmit={onSubmit}>
-               <div className='FormRow'>
-                  <label>Username</label>
-                  <input name='username' required onChange={onChange} value={ loginForm.username}/>
-               </div>
-               <div className='FormRow'>
-                  <label>Password</label>
-                  <input name='password' type='password' required onChange={onChange} value={ loginForm.password}/>
-               </div>
-               <div className='error'>{error}</div>
-               <button className='button' type='submit'>Login</button>
-               <button className='button' type="button" onClick={() => {history.push("/registration")}}>Registration</button>
-            </form>
+      <>
+      <div className="logres">
+         <img src="../../winter-village-4567947.png" alt="MojKvart"></img>
+      </div>
+      <div className="logres">
+         <CardLogin>
+            <div className='Login'>
+               <form onSubmit={onSubmit}>
+                  <div className='FormRow'>
+                     <label>Username</label>
+                     <input name='username' required onChange={onChange} value={ loginForm.username}/>
+                  </div>
+                  <div className='FormRow'>
+                     <label>Password</label>
+                     <input name='password' type='password' required onChange={onChange} value={ loginForm.password}/>
+                  </div>
+                  <div className='error'>{error}</div>
+                  <button className='button' type='submit'>Login</button>
+                  <button className='button' type="button" onClick={() => {history.push("/registration")}}>Registration</button>
+               </form>
+            </div>
+         </CardLogin>
          </div>
-      </Card>
+      </>
    );
 }
 

@@ -39,7 +39,7 @@ function EventSuggestionUser(props) {
                 <span>{event.account.firstName} {event.account.lastName}</span>
             </div>
             <div className="Login">
-                <button className='button' type="button" onClick={() => {history.push(`/events/edit/${event.id}`)}}>Uredi</button>
+                <button className='button' type="button" onClick={() => {history.push(`/dogadjaji/uredi/${event.id}`)}}>Uredi</button>
             </div>
         </div>
     )

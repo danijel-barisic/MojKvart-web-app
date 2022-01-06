@@ -3,6 +3,11 @@ package progi.project.mojkvart.account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import progi.project.mojkvart.district.District;
+import progi.project.mojkvart.home.Home;
+import progi.project.mojkvart.home.HomeRepository;
+import progi.project.mojkvart.role.Role;
+import progi.project.mojkvart.street.Street;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,8 +15,14 @@ import java.util.Optional;
 @Service
 public class AccountServiceJPAImpl implements AccountService{
 
+    private Home dummyHome = null;
+    private boolean isSet = false;
+
     @Autowired
     private AccountRepository accountRepo;
+
+    @Autowired
+    private HomeRepository homeRepository;
 
     @Override
     public List<Account> listAll() {
@@ -65,14 +76,36 @@ public class AccountServiceJPAImpl implements AccountService{
 
     @Override
     public List<String> getEmailsFromAccounts() {
-        var res = (List<String>) accountRepo.getEmailsFromAccounts();
-        return res;
+        return accountRepo.getEmailsFromAccounts();
     }
 
     @Override
     public Optional<Account> findByEmail(String email) {
         Assert.notNull(email, "Email must be given");
         return accountRepo.findByEmail(email);
+    }
+
+    @Override
+    public Home generateDummyHome() {
+        /*var h = new Home(-1L, -1L, new Street(-1L,"", 0, 0));
+        h.getStreet().setDistrict(new District(-1L, ""));
+        dummyHome = h;
+        if(!isSet) {
+            homeRepository.save(dummyHome);
+            isSet = true;
+        }*/
+        Home h = homeRepository.getById(Long.valueOf(-1));
+        return h;
+    }
+
+    @Override
+    public Account fillWithDummyIfAdmin(Account a) {
+        for (Role role : a.getRoles()) {
+            if (role.getName().equals("ADMIN")) {
+                a.setHome(dummyHome);
+            }
+        }
+        return a;
     }
 
 }

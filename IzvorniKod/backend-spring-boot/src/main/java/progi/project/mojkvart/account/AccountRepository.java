@@ -2,6 +2,8 @@ package progi.project.mojkvart.account;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import progi.project.mojkvart.district.District;
+import progi.project.mojkvart.home.Home;
 import progi.project.mojkvart.street.Street;
 
 import java.util.List;

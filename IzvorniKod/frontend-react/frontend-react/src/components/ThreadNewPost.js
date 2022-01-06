@@ -113,7 +113,7 @@ function ThreadNewPost(props) {
                      </div>
                      <div className='error'>{error}</div>
                      <button classname='submit' type='submit' disabled={!isValid()} >Stvori objavu</button>
-                     <button className='button' type="button" onClick={() => {history.goBack()}}>Nartag</button>
+                     <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
                   </form>
                </div>
             </Card>

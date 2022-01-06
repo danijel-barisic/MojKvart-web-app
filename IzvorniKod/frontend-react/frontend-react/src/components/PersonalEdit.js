@@ -1,96 +1,92 @@
-import React from "react";
-import Card from "./Card";
-import "./Login.css";
-import { useHistory } from "react-router";
-import { ReactSession } from "react-client-session";
+import React from "react"
+import Card from "./Card"
+import { useHistory } from "react-router"
+import Select from 'react-select';
+
+//https://react-select.com/styles#styles
+const customStyles = {
+    option: (provided, state) => ({
+        ...provided,
+        padding: 20, 
+    }),
+    menuList: styles => ({  
+        ...styles,
+        maxHeight: 138
+    }),
+    control: styles => ({ ...styles, backgroundColor: 'white',borderRadius:'10px' }),
+    singleValue: (provided, state) => {
+        const opacity = state.isDisabled ? 0.5 : 1;
+        const transition = 'opacity 300ms';
+        return { ...provided, opacity, transition };
+    }
+}
+
 
 function PersonalEdit() {
+    const [editPersonalForm, setEditPersonalForm] = React.useState({ firstname: '', lastname: '', email: '', password: '',streetnumber: ''});
+    const history = useHistory()
+
+    const [error, setError] = React.useState('');
+
+    const [state,setState] = React.useState({selectedOption:null})
+    var { selectedOption } = state;
     
-    const acc_username = ReactSession.get("username");
-    const [account, setAccount] = React.useState({id: ''});
-    React.useEffect(() => {
-        fetch(`/accounts/${acc_username}`)
-        .then(data => data.json())
-        .then(account => setAccount(account));
-    }, [])
-    
-    const history = useHistory();
-    /* ovo je pokušaj samo bil hahahah metoda ne radi  */
-    async function onSubmit(e) {
-        e.preventDefault();
-        console.log(account.firstName);
-        console.log("upomoc upomoc");
-        
-        const data = {
-            firstName: account.firstName,
-            lastName: account.lastName,
-            email: account.email,
-            username: account.username,
-            kvart: account.district.name,
-            status: 0,
-            account: account
-        }
-        const options = {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        }
-        return fetch("/personal", options).then(response => {
-            if (response.ok) {
-                history.push('/personal');
-            }
-            else {
-                console.log(response.body);
-            }
-        });
+    const [streets, setStreets] = React.useState([]);
+    const streets_array = []
+    streets.map((street)=> streets_array.push({id:street.id, label:street.name,value:street.name,minNum:street.minStreetNo,maxNum:street.maxStreetNo} ))
+
+    function onChange(event) {
+        const { name, value } = event.target
+        //console.log(event)
+        setEditPersonalForm(oldForm => ({...oldForm, [name]: value}))
     }
-    /*popraviti za kvart asinkrono nešto */
-   
+
+    function onSubmit() {
+
+    }
+
+    function handleChange(selectedOption) {
+        setState({ selectedOption });
+        console.log(selectedOption)   
+    }
+
     return (
-        <>
-            <Card title='Uredi osobne podatke'>
+        <Card>
+            <div className='Login'>
                 <form onSubmit={onSubmit}>
-                    <div className='Login'>
-                        
-                        <div className="FormRow">
-                            <label>ime</label>
-                            <input name="name"  defaultValue={ account["firstName"]}/>
-                        </div>
-                        <div className="FormRow">
-                            <label>prezime</label>
-                            <input name="name"  defaultValue={ account["lastName"]}/>
-                        </div>
-                        <div className="FormRow">
-                            <label>email</label>
-                            <input name="name" value={ account["email"]}/>
-                        </div>
-                        <div className="FormRow">
-                            <label>korisničko ime</label>
-                            <input name="name"  defaultValue={ account["username"]}/>
-                        </div>
-                        <div className="FormRow">
-                            <label>kvart</label>
-                            <input name="name"  defaultValue={ account["username"]}/>
-                            
-                        </div>
-                        
-                        
-                        <div>
-                            <div className='error'>{}</div>
-                            <button className="button" type="submit" >Izmijeni osobne podatke</button>
-                            <button className="button" type="button" onClick={() => {history.push("/personal")}}>Pregled osobnih podataka</button>
-                            <button className="button" type="button" onClick={() => {history.push("/personal/password")}}>Promijeni lozinku</button>
-                            <button className="button" type="button" onClick={() => {history.push("/personal/delete")}}>Brisanje accounta</button>
-                       
-                        </div>
+                    <div className='FormRow'>
+                        <label>FirstName</label>
+                        <input name='firstname' required onChange={onChange}value={ editPersonalForm.firstname}/>
                     </div>
+                    <div className='FormRow'>
+                        <label>LastName</label>
+                        <input name='lastname' required onChange={onChange} value={ editPersonalForm.lastname}/>
+                    </div>
+                    <div className='FormRow'>
+                        <label>Email</label>
+                        <input name='username' required onChange={onChange} value={ editPersonalForm.username}/>
+                    </div>
+                    <div className='FormRow'>
+                        <label>Password</label>
+                        <input name='password' required type='password' onChange={onChange} value={ editPersonalForm.password}/>
+                    </div>
+                    <div className='FormRow'>
+                        <label>Address</label>
+                        <Select value={selectedOption} required onChange = {handleChange} styles={customStyles} placeholder="Select your address"
+                        options={streets_array}
+                    />
+                    </div>
+                    <div className='FormRow'>
+                        <label>Street number</label>
+                        <input type="number" name="streetnumber" min={selectedOption ? selectedOption.minNum: 0} max={selectedOption ? selectedOption.maxNum: 0} required onChange={onChange} />
+                        </div>
+                    <div className='error'>{error}</div>
+                    <button className='submit' type='submit'>Register</button>
+                    <button className='button' type="button" onClick={() => {history.push("/login")}}>Login</button>
                 </form>
-            </Card>
-            
-        </>
+            </div>
+        </Card>
     );
 }
 
-export default PersonalEdit;
+export default PersonalEdit

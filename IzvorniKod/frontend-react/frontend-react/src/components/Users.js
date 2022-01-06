@@ -59,6 +59,19 @@ function Users(props) {
       })
    }
 
+   function checkAdmin(id) {
+      const options = {
+         method: 'GET',
+      };
+      fetch(`/accounts/roles/${id}`, options).then(response => {
+         if (!response.ok) {
+            console.log(response.body);
+         } else {
+            console.log(response.json());
+         }
+      })
+   }
+
    React.useEffect(() => {
       fetch('/accounts')
          .then(data => {
@@ -76,30 +89,39 @@ function Users(props) {
             <div className='StreetList'>
                {users.map(function (user) {
                   let district = user.district;
-                  console.log(district.id);
+                  let roles = user.roles.map(function (x) {
+                     return x[Object.keys(x)[1]]
+                  })
+                  console.log("districtid->",district.id);
+                  console.log(roles);
                   if (district.id == currentId) {
                      return ([
                         <div className="wrapper">
                            <div className="inner">
-                              <RoleRequestUser key={user.id} user={user} props={props}/>
+                              <User key={user.id} user={user} props={props} />
                            </div>
                            <div className="inner">
-                              <>
                               {
-                                 (user.blocked === true)
-                                    ?  <>
-                                          <FaLockOpen style={{color:"green" ,cursor:"pointer", margin: "0px 10px 0px 0px" }} onClick={() => UnbanUser(user.id)}></FaLockOpen>
-                                          <MdDelete style={{cursor: "pointer"}} onClick={() => deleteUser(user.id)}></MdDelete>
-                                       </>
-                                    :  <>
-                                          <FaLock style={{color:"red" ,cursor:"pointer", margin: "0px 10px 0px 0px" }} onClick={() => banUser(user.id)}></FaLock>
-                                          <MdDelete style={{cursor: "pointer"}} onClick={() => deleteUser(user.id)}></MdDelete>
-                                       </>
+                                 (roles.includes("ADMIN"))
+                                    ? <>
+                                    </>
+                                    : <>
+                                       {
+                                          (user.blocked === true)
+                                             ? <>
+                                                <FaLockOpen style={{ color: "green", cursor: "pointer", margin: "0px 10px 0px 0px" }} onClick={() => UnbanUser(user.id)}></FaLockOpen>
+                                                <MdDelete style={{ cursor: "pointer" }} onClick={() => deleteUser(user.id)}></MdDelete>
+                                             </>
+                                             : <>
+                                                <FaLock style={{ color: "red", cursor: "pointer", margin: "0px 10px 0px 0px" }} onClick={() => banUser(user.id)}></FaLock>
+                                                <MdDelete style={{ cursor: "pointer" }} onClick={() => deleteUser(user.id)}></MdDelete>
+                                             </>
+                                       }
+                                    </>
                               }
-                              </>
                            </div>
                         </div>
-                     ]);
+                     ])
                   } else if (currentId === undefined){
                      return ([
                         <div className="wrapper">
@@ -107,18 +129,25 @@ function Users(props) {
                               <User key={user.id} user={user} props={props}/>
                            </div>
                            <div className="inner">
-                              <>
-                              {
-                                 (user.blocked === true)
-                                    ?  <>
-                                          <FaLockOpen style={{color:"green" ,cursor:"pointer", margin: "0px 10px 0px 0px" }} onClick={() => UnbanUser(user.id)}></FaLockOpen>
-                                          <MdDelete style={{cursor: "pointer"}} onClick={() => deleteUser(user.id)}></MdDelete>
+                           <>
+                           {
+                              (roles.includes("ADMIN"))
+                              ? <>
+                              </>
+                              : <>
+                                 {
+                                    (user.blocked === true)
+                                       ? <>
+                                          <FaLockOpen style={{ color: "green", cursor: "pointer", margin: "0px 10px 0px 0px" }} onClick={() => UnbanUser(user.id)}></FaLockOpen>
+                                          <MdDelete style={{ cursor: "pointer" }} onClick={() => deleteUser(user.id)}></MdDelete>
                                        </>
-                                    :  <>
-                                          <FaLock style={{color:"red" ,cursor:"pointer", margin: "0px 10px 0px 0px" }} onClick={() => banUser(user.id)}></FaLock>
-                                          <MdDelete style={{cursor: "pointer"}} onClick={() => deleteUser(user.id)}></MdDelete>
+                                       : <>
+                                          <FaLock style={{ color: "red", cursor: "pointer", margin: "0px 10px 0px 0px" }} onClick={() => banUser(user.id)}></FaLock>
+                                          <MdDelete style={{ cursor: "pointer" }} onClick={() => deleteUser(user.id)}></MdDelete>
                                        </>
-                              }
+                                 }
+                              </>
+                           }
                               </>
                            </div>
                         </div>

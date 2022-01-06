@@ -28,7 +28,7 @@ function CouncilMeetingCard(props) {
                 <span>{author.firstName} {author.lastName}</span>
             </div>
             <div className='Login'>
-                <button className='button' type="button" onClick={() => {history.push(`/council/report/${id}`)}}>Više informacija</button>
+                <button className='button' type="button" onClick={() => {history.push(`/vijece/izvjesce/${id}`)}}>Više informacija</button>
             </div>
         </div>
     )

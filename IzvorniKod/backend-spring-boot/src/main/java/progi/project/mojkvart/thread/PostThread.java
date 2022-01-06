@@ -21,7 +21,7 @@ public class PostThread {
     @Column(name = "thread_name")
     private String name;
 
-    @OneToMany(mappedBy = "thread")
+    @OneToMany(mappedBy = "thread", cascade = {CascadeType.REMOVE})
     private List<Post> posts;
 
     @JsonIgnore

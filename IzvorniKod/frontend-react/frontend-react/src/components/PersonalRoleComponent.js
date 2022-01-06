@@ -18,6 +18,9 @@ function PersonalRoleComponent(props) {
             .filter(r => r.role.name === target)))
     }, [])
 
+    console.log(roleRequests)
+    console.log(target)
+
     function sendRoleRequest() {
 
         const data = {

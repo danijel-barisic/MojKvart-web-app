@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "./Card";
 import { useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 function DistrictForm(props) {
    const [form, setForm] = React.useState({ name: '' });
@@ -40,7 +41,6 @@ function DistrictForm(props) {
       const { name } = form;
       return name.length > 0;
    }
-
 
    return (
       <Card title='Novi Kvart'>

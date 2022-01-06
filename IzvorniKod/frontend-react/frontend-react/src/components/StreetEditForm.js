@@ -6,6 +6,7 @@ function StreetEditForm(props) {
    const [form, setForm] = React.useState({ name: '' });
    const [error, setError] = React.useState('');
    const history = useHistory();
+   const [street, setStreet] = React.useState([]);
    const { id } = props.location.state;
    console.log({id});
 
@@ -50,6 +51,12 @@ function StreetEditForm(props) {
       return name.length > 0;
    }
 
+   React.useEffect(() => {
+      fetch(`/streets/${id}`)
+         .then(data => data.json())
+         .then(street => setStreet(street))
+   }, []);
+
 
    return (
       <Card title="Ažuriranje ulice">
@@ -57,15 +64,15 @@ function StreetEditForm(props) {
             <form onSubmit={onSubmit}>
                <div className='FormRow'>
                   <label>Ime</label>
-                  <input required name='name' onChange={onChange} value={ form.name}/>
+                  <input required placeholder={street.name} name='name' onChange={onChange} value={ form.name}/>
                </div>
                <div className='FormRow'>
                   <label>MinStreetNo</label>
-                  <input required name='minStreetNo' onChange={onChange} value={ form.minStreetNo}/>
+                  <input required placeholder={street.minStreetNo} name='minStreetNo' onChange={onChange} value={ form.minStreetNo}/>
                </div>
                <div className='FormRow'>
                   <label>MaxStreetNo</label>
-                  <input required name='maxStreetNo' onChange={onChange} value={ form.maxStreetNo}/>
+                  <input required placeholder={street.maxStreetNo} name='maxStreetNo' onChange={onChange} value={ form.maxStreetNo}/>
                </div>
                <div className='FormRow'>
                   <label>DistrictId</label>
