@@ -27,6 +27,9 @@ public class AccountController {
     }
     static private final Home dummyHome = generateDummyHome();
     static private Account fillWithDummyIfAdmin(Account a) {
+        if (a.getHome() != null) {
+            return a;
+        }
         for (var role : a.getRoles()) {
             if (role.getName().equals("ADMIN")) {
                 a.setHome(dummyHome);
