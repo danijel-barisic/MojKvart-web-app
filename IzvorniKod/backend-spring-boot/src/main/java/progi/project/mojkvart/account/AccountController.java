@@ -1,18 +1,13 @@
 package progi.project.mojkvart.account;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.*;
 import progi.project.mojkvart.district.District;
 import progi.project.mojkvart.home.Home;
-import progi.project.mojkvart.home.HomeRepository;
 import progi.project.mojkvart.home.HomeService;
 import progi.project.mojkvart.role.Role;
 import progi.project.mojkvart.role.RoleService;
@@ -21,11 +16,7 @@ import progi.project.mojkvart.street.Street;
 import progi.project.mojkvart.street.StreetService;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.*;
 
 @RestController
 @RequestMapping("/accounts")
@@ -36,7 +27,9 @@ public class AccountController {
         h.getStreet().setDistrict(new District(""));
         return h;
     }
+
     static private final Home dummyHome = generateDummyHome();
+
     static private Account fillWithDummyIfAdmin(Account a) {
         if (a.getHome() != null) {
             return a;
@@ -53,7 +46,7 @@ public class AccountController {
     private AccountService accountService;
 
     @Autowired
-    private RoleService RoleService;
+    private RoleService roleService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -155,12 +148,12 @@ public class AccountController {
             List<Role> listOfRoles = new ArrayList<Role>();
             account.getRoles().clear();
             roleList.forEach(role -> {
-                Role newRole = RoleService.findByName(role).orElseThrow(() -> new IllegalArgumentException("No such role."));
+                Role newRole = roleService.findByName(role).orElseThrow(() -> new IllegalArgumentException("No such role."));
                 listOfRoles.add(newRole);
             });
             listOfRoles.forEach(role -> {
                 account.getRoles().add(role);
-                RoleService.updateRole(role);
+                roleService.updateRole(role);
             });
             account.setRoles(listOfRoles);
             return account.getRoles();
@@ -200,19 +193,28 @@ public class AccountController {
         String newHomeNum = newAccountData.get("homeNum");
 
         if (newStreetId != null && newHomeNum != null) {
-            Street street = streetService.findById(Long.parseLong(newStreetId))
+            Street newStreet = streetService.findById(Long.parseLong(newStreetId))
                     .orElseThrow(() -> new IllegalArgumentException("No such street."));
 
             long homeNum = Integer.parseInt(newAccountData.get("homeNum"));
-            if (homeNum < street.getMinStreetNo() || homeNum > street.getMaxStreetNo()) {
+            if (homeNum < newStreet.getMinStreetNo() || homeNum > newStreet.getMaxStreetNo()) {
                 throw new IllegalArgumentException("Home number is outside permitted range.");
             }
 
             Home home;
-            Optional<Home> optHome = homeService.findByNumberAndStreetName(homeNum, street.getName());
+            Optional<Home> optHome = homeService.findByNumberAndStreetName(homeNum, newStreet.getName());
             home = optHome.orElseGet(() ->
-                    homeService.createHome(new Home(homeNum, street))
+                    homeService.createHome(new Home(homeNum, newStreet))
             );
+
+            Street oldStreet = account.getHome().getStreet();
+            if (!oldStreet.getDistrict().getId().equals(newStreet.getDistrict().getId())) {
+                Optional<Role> newRole = roleService.findByName("Stanovnik");
+                List<Role> tmpList = new ArrayList<>();
+                tmpList.add(newRole.orElseThrow(() ->
+                        new IllegalArgumentException("No such role.")));
+                account.setRoles(tmpList);
+            }
 
             account.setHome(home);
         } else if ((newStreetId == null && newHomeNum != null) || (newStreetId != null && newHomeNum == null)) {
@@ -242,9 +244,9 @@ public class AccountController {
         } else if (!accountService.existsById(accountId)) {
             throw new IllegalArgumentException("Account with id: " + accountId + " does not exist");
         } else {
-            role = RoleService.findByName(roleName).orElseThrow(() -> new IllegalArgumentException("No such role."));
+            role = roleService.findByName(roleName).orElseThrow(() -> new IllegalArgumentException("No such role."));
             account.getRoles().add(role);
-            RoleService.updateRole(role);
+            roleService.updateRole(role);
         }
 
         return account.getRoles();
@@ -260,11 +262,11 @@ public class AccountController {
         } else if (!accountService.existsById(accountId)) {
             throw new IllegalArgumentException("Account with id: " + accountId + " does not exist");
         } else {
-            role = RoleService.findByName(roleName).orElseThrow(() -> new IllegalArgumentException("No such role."));
+            role = roleService.findByName(roleName).orElseThrow(() -> new IllegalArgumentException("No such role."));
 
             Account account = accountService.fetch(accountId);
             account.getRoles().add(role);
-            RoleService.updateRole(role);
+            roleService.updateRole(role);
         }
         return role;
     }
@@ -287,9 +289,9 @@ public class AccountController {
         } else if (!accountService.existsById(accountId)) {
             throw new IllegalArgumentException("Account with id: " + accountId + " does not exist");
         } else {
-            role = RoleService.findByName(roleName).orElseThrow(() -> new IllegalArgumentException("No such role."));
+            role = roleService.findByName(roleName).orElseThrow(() -> new IllegalArgumentException("No such role."));
             account.getRoles().remove(role);
-            RoleService.updateRole(role);
+            roleService.updateRole(role);
         }
 
         return account.getRoles();

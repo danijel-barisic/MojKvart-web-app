@@ -50,6 +50,7 @@ public class Account implements UserDetails {
     // only CascadeType.REMOVE is left out, because we don't want to remove accounts when we remove a role
     @ManyToMany(fetch = FetchType.EAGER)/*(cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH} */
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(name = "account_role",
             joinColumns = @JoinColumn(name = "account_id"), // joinColumns is for THIS entity
             inverseJoinColumns = @JoinColumn(name = "role_id")) // inverse is for the OTHER entity
