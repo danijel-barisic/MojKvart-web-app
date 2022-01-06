@@ -97,14 +97,14 @@ function Personal() {
                         </tbody></table>
                         <div>
                             <div className='Login'>
-                                <button className='button' type="button" >Izmjena osobnih podataka</button>
+                                <button className='button' type="button" onClick={() => history.push("/osobno/promjena_podataka")}>Izmjena osobnih podataka</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </Card>
             )
-        else if (roles.filter(r => r.name === "Moderator").length > 0 || (roles.filter(r => r.name === "Vijecnik").length > 0)) return (
+        else return (
             <Card title="Osobni podaci">
                 <div>
                     <div className='Login'>
@@ -149,72 +149,21 @@ function Personal() {
                                     <span>{`${account.home.street.name} ${account.home.number}`}</span>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <b>Dodatne uloge: </b>
-                                </td>
-                                <td>
-                                    <span>{specialRoles()}</span>
-                                </td>
-                            </tr>
+                            {
+                                (roles.filter(r => r.name === "Moderator").length > 0 || (roles.filter(r => r.name === "Vijecnik").length > 0)) ?
+                                <tr>
+                                    <td>
+                                        <b>Dodatne uloge: </b>
+                                    </td>
+                                    <td>
+                                        <span>{specialRoles()}</span>
+                                    </td>
+                                </tr>
+                                : <></>
+                            }
                         </tbody></table>
                         <div className='Login'>
-                            <button className='button' type="button" >Izmjena osobnih podataka</button>
-                            <button className='button' type="button" onClick={() => {deleteUser()}}>Brisanje korisničkog računa</button>
-                            <button className='button' type="button" onClick={() => {history.push("/osobno/zahtjevi_za_uloge")}} >Zahtjevi za ulogama</button>
-                        </div>
-                    </div>
-                </div>
-            </Card>
-        )
-        else return(
-            <Card title="Osobni podaci">
-                <div>
-                    <div className='Login'>
-                    <table><tbody>
-                            <tr>
-                                <td>
-                                    <b>E-mail: </b>
-                                </td>
-                                <td>
-                                    <span>{acc_username}</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <b>Ime: </b>
-                                </td>
-                                <td>
-                                    <span>{account.firstName}</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <b>Prezime: </b>
-                                </td>
-                                <td>
-                                    <span>{account.lastName}</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <b>Kvart: </b>
-                                </td>
-                                <td>
-                                    <span>{account.district.name}</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <b>Adresa: </b>
-                                </td>
-                                <td>
-                                    <span>{`${account.home.street.name} ${account.home.number}`}</span>
-                                </td>
-                            </tr>
-                        </tbody></table>
-                        <div className='Login'>
-                            <button className='button' type="button" >Izmjena osobnih podataka</button>
+                            <button className='button' type="button" onClick={() => history.push("/osobno/promjena_podataka")}>Izmjena osobnih podataka</button>
                             <button className='button' type="button" onClick={() => {deleteUser()}}>Brisanje korisničkog računa</button>
                             <button className='button' type="button" onClick={() => {history.push("/osobno/zahtjevi_za_uloge")}} >Zahtjevi za ulogama</button>
                         </div>

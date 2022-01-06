@@ -3,46 +3,49 @@ import Card from "./Card"
 import { useHistory } from "react-router"
 import Select from 'react-select';
 
-//https://react-select.com/styles#styles
 const customStyles = {
     option: (provided, state) => ({
         ...provided,
-        padding: 20, 
+        padding: 20,
+        borderRadius:'10px'
     }),
-    menuList: styles => ({  
+    menuList: styles => ({
+
         ...styles,
-        maxHeight: 138
+        maxHeight: 138,
+        color: 'black',
+        borderRadius:'10px'
     }),
     control: styles => ({ ...styles, backgroundColor: 'white',borderRadius:'10px' }),
     singleValue: (provided, state) => {
-        const opacity = state.isDisabled ? 0.5 : 1;
-        const transition = 'opacity 300ms';
-        return { ...provided, opacity, transition };
+    const opacity = state.isDisabled ? 0.5 : 1;
+    const transition = 'opacity 300ms';
+
+    return { ...provided, opacity, transition };
     }
 }
 
-
 function PersonalEdit() {
-    const [editPersonalForm, setEditPersonalForm] = React.useState({ firstname: '', lastname: '', email: '', password: '',streetnumber: ''});
-    const history = useHistory()
-
-    const [error, setError] = React.useState('');
-
-    const [state,setState] = React.useState({selectedOption:null})
-    var { selectedOption } = state;
-    
+    const [editForm, setEditForm] = React.useState({
+        firstName: '', lastName: '', password: '', streetnumber: ''
+    })
     const [streets, setStreets] = React.useState([]);
+    const [error, setError] = React.useState('');
+    const [state,setState] = React.useState({selectedOption:null})
+
+    const history = useHistory();
+    var { selectedOption } = state;
+
+    React.useEffect(()=>{
+        fetch('/streets').then((data) => data.json()).then((streets) => setStreets(streets))
+        
+    },[])
     const streets_array = []
     streets.map((street)=> streets_array.push({id:street.id, label:street.name,value:street.name,minNum:street.minStreetNo,maxNum:street.maxStreetNo} ))
-
+    
     function onChange(event) {
-        const { name, value } = event.target
-        //console.log(event)
-        setEditPersonalForm(oldForm => ({...oldForm, [name]: value}))
-    }
-
-    function onSubmit() {
-
+        const { name, value } = event.target;
+        setEditForm(oldForm => ({...oldForm, [name]: value}))
     }
 
     function handleChange(selectedOption) {
@@ -50,43 +53,19 @@ function PersonalEdit() {
         console.log(selectedOption)   
     }
 
+    async function onSubmit(e) {
+
+    }
+
     return (
-        <Card>
-            <div className='Login'>
-                <form onSubmit={onSubmit}>
-                    <div className='FormRow'>
-                        <label>FirstName</label>
-                        <input name='firstname' required onChange={onChange}value={ editPersonalForm.firstname}/>
-                    </div>
-                    <div className='FormRow'>
-                        <label>LastName</label>
-                        <input name='lastname' required onChange={onChange} value={ editPersonalForm.lastname}/>
-                    </div>
-                    <div className='FormRow'>
-                        <label>Email</label>
-                        <input name='username' required onChange={onChange} value={ editPersonalForm.username}/>
-                    </div>
-                    <div className='FormRow'>
-                        <label>Password</label>
-                        <input name='password' required type='password' onChange={onChange} value={ editPersonalForm.password}/>
-                    </div>
-                    <div className='FormRow'>
-                        <label>Address</label>
-                        <Select value={selectedOption} required onChange = {handleChange} styles={customStyles} placeholder="Select your address"
-                        options={streets_array}
-                    />
-                    </div>
-                    <div className='FormRow'>
-                        <label>Street number</label>
-                        <input type="number" name="streetnumber" min={selectedOption ? selectedOption.minNum: 0} max={selectedOption ? selectedOption.maxNum: 0} required onChange={onChange} />
-                        </div>
-                    <div className='error'>{error}</div>
-                    <button className='submit' type='submit'>Register</button>
-                    <button className='button' type="button" onClick={() => {history.push("/login")}}>Login</button>
-                </form>
+        <Card title="Promjena osobnih podataka">
+            <div>
+                <div className="Login">
+                    
+                </div>
             </div>
         </Card>
-    );
+    )
 }
 
 export default PersonalEdit

@@ -30,9 +30,8 @@ function CouncilMeetingReport() {
             if (name !== undefined) {
                 let l = threads.filter(t => t.name === name)
                 if (l.length > 0) {
-                    meeting.postThread = l[0].id
                     create_post(l[0].id)
-                    update_event(l[0].id)
+                    update_meeting(l[0].id)
                     history.push(`/forum/${l[0].id}`)
                 }
                 else {
@@ -79,6 +78,8 @@ function CouncilMeetingReport() {
             }
         })
     }
+
+    console.log(meeting)
 
     async function create_thread() {
         const data = {
@@ -129,13 +130,16 @@ function CouncilMeetingReport() {
         })
     }
 
-    function update_event(p) {
+    function update_meeting(p) {
+        console.log(p)
         const data = {
             id: meeting.id,
             title: meeting.title,
             report: meeting.report,
             dateTime: meeting.dateTime,
-            postThread: p,
+            postThread: {
+                id: p
+            },
             district: meeting.district,
             account: meeting.account
         }
@@ -176,7 +180,7 @@ function CouncilMeetingReport() {
                             {
                                 meeting.postThread === null ? 
                                 <button className='button' type="button" onClick={() => create_thread()}>Napravi temu</button> : 
-                                <button className='button' type="button" onClick={() => history.push(`/forum/${meeting.postThread}`)}>Skoči na temu</button>
+                                <button className='button' type="button" onClick={() => history.push(`/forum/${meeting.postThread.id}`)}>Skoči na temu</button>
                             }
                         </div>
                         {(roles !== undefined && roles.length > 0 && roles.filter(r => r.name === "Vijecnik").length > 0) ?

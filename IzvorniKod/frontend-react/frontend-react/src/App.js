@@ -29,6 +29,7 @@ import Personal from "./components/Personal";
 import PerosnalRoleRequest from './components/PersonalRoleRequest';
 import ThreadNewPost from './components/ThreadNewPost';
 import PostEditForm from './components/PostEditForm';
+import PersonalEdit from './components/PersonalEdit';
 
 
 function App() {
@@ -137,6 +138,7 @@ function App() {
                   <Route path = '/novaobjava/:idT/:idP/edit' exact component={PostEditForm} />
                   <Route path='/osobno' exact component={Personal} />
                   <Route path='/osobno/zahtjevi_za_uloge' exact component={PerosnalRoleRequest} />
+                  <Route path='/osobno/promjena_podataka' exact component={PersonalEdit}/>
                   <Route path='/dogadjaji' exact component={Events} />
                   <Route path='/dogadjaji/prijedlog' exact component={EventForm} />
                   <Route path='/dogadjaji/uredi/:id' exact component={EventEditForm} />
@@ -173,6 +175,7 @@ function App() {
               <Route path='/korisnici' exact component={Users} />
               <Route path='/korisnici/:id' exact component={UserAdminView} />
               <Route path='/osobno' exact component={Personal} />
+              <Route path='/osobno/promjena_podataka' exact component={PersonalEdit}/>
               <Route path='/' exact component={Users} />
               </Switch>
             </div>
