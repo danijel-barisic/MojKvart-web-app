@@ -14,6 +14,7 @@ function ForumNewThread(props) {
    const history = useHistory();
 
    const [threads, setThreads] = React.useState()
+   const [allThreads,setAllThreads] = React.useState([])
 
 
    React.useEffect(() => {
@@ -21,6 +22,7 @@ function ForumNewThread(props) {
          .then(district => setDistrict(district));
       fetch(`/accounts/${user}`).then(data => data.json())
       .then(account => setAccount(account));
+      fetch('/threads').then(data => data.json().then(data => setAllThreads(data)));
    }, []);
 
     React.useEffect(() => {
@@ -59,7 +61,8 @@ function ForumNewThread(props) {
 
          return fetch('/threads', options).then(response => {
             if (response.ok) {
-               history.goBack();
+               history.goBack()
+               
             } else {
                setError("Došlo je do pogreške! Pokušaj ponovo!");
                console.log(response.body);
@@ -70,12 +73,14 @@ function ForumNewThread(props) {
 
    function isValid() {
       const { name } = form;
-      return name.length > 0;
+      let result = name.includes("[");
+      let result2 = name.includes("]");
+      return name.length > 0 && !result && !result2;
    }
 
    function is_unique(name) {
       if (threads.map(t => t.name).includes(name)){
-          setError("Tema s predloženim naslovom već postoji!")
+          setError("Temano s predloženim naslovom već postoji!")
           return false
       }
       else {
@@ -85,7 +90,7 @@ function ForumNewThread(props) {
 
 
 
-   console.log(threads)
+   console.log()
 
    return (
       <Card title="Nova Tema">
