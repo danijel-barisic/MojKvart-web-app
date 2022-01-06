@@ -1,7 +1,8 @@
 import React from "react"
 import Card from "./Card"
 import { useHistory } from "react-router"
-import Select from 'react-select';
+import Select from 'react-select'
+import { ReactSession } from "react-client-session"
 
 const customStyles = {
     option: (provided, state) => ({
@@ -27,11 +28,42 @@ const customStyles = {
 
 function PersonalEdit() {
     const [editForm, setEditForm] = React.useState({
-        firstName: '', lastName: '', password: '', streetnumber: ''
+        firstname: '', lastname: '', password: '', streetnumber: ''
     })
     const [streets, setStreets] = React.useState([]);
     const [error, setError] = React.useState('');
     const [state,setState] = React.useState({selectedOption:null})
+
+    const [account, setAccount] = React.useState({id: undefined})
+    const [roles, setRoles] = React.useState()
+    
+    const acc_username = ReactSession.get("username")
+
+    React.useEffect(() => {
+        fetch(`/accounts/${acc_username}`)
+        .then(data => data.json())
+        .then(data => {
+            setEditForm({
+                firstname: data.firstName,
+                lastname: data.lastName,
+                streetnumber: data.home.number
+            })
+        })
+    }, [])
+
+    React.useEffect(() => {
+        fetch(`/accounts/${acc_username}`)
+        .then(data => data.json())
+        .then(account => setAccount(account))
+    }, [])
+
+    React.useEffect(() => {
+        if (account !== undefined && account.id !== undefined) {
+            fetch(`/accounts/roles/${account.id}`)
+            .then(data => data.json())
+            .then(roles => setRoles(roles))
+        }
+    }, [account])
 
     const history = useHistory();
     var { selectedOption } = state;
@@ -53,18 +85,116 @@ function PersonalEdit() {
         console.log(selectedOption)   
     }
 
-    async function onSubmit(e) {
-
+    async function submit(e) {
+        e.preventDefault()
+        const data = {
+            firstName: editForm.firstname,
+            lastName: editForm.lastname,
+            password: editForm.password,
+            homeNum: editForm.streetnumber,
+            streetId: selectedOption.id
+        }
+        console.log(data)
+        const options = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }
+        fetch(`/accounts/${account.email}`, options).then(response => {
+            if (response.ok) {
+                history.goBack()
+            }
+        })
     }
 
-    return (
-        <Card title="Promjena osobnih podataka">
-            <div>
-                <div className="Login">
-                    
+    async function submit_admin(e) {
+        e.preventDefault()
+        const data = {
+            firstName: editForm.firstname,
+            lastName: editForm.lastname,
+            password: editForm.password
+        }
+        console.log(data)
+        const options = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }
+        fetch(`/accounts/${account.email}`, options).then(response => {
+            if (response.ok) {
+                history.goBack()
+            }
+        })
+    }
+    
+    if (account.id !== undefined && roles !== undefined && roles.length > 0) {
+        if (roles.filter(r => r.name === "ADMIN").length == 0) return (
+            <Card title="Promjena osobnih podataka">
+                <div>
+                    <div className="Login">
+                        <form onSubmit={submit}>
+                            <div className="FormRow">
+                                <label>Ime</label>
+                                <input name='firstname' required onChange={onChange}value={ editForm.firstname}/>
+                            </div>
+                            <div className="FormRow">
+                                <label>Prezime</label>
+                                <input name='lastname' required onChange={onChange}value={ editForm.lastname}/>
+                            </div>
+                            <div className="FormRow">
+                                <label>Lozinka</label>
+                                <input name='password' required type='password' onChange={onChange} value={ editForm.password}/>
+                            </div>
+                            <div className="FormRow">
+                                <label>Ulica
+                                <Select value={selectedOption} required onChange = {handleChange} styles={customStyles} placeholder="Odaberite svoju ulicu"
+                                    options={streets_array}/>
+                                </label>
+                            </div>
+                            <div className="FormRow">
+                                <label>Kućni broj</label>
+                                <input type="number" name="streetnumber" min={selectedOption ? selectedOption.minNum: 0} max={selectedOption ? selectedOption.maxNum: 0} required onChange={onChange} value={editForm.streetnumber}/>
+                            </div>
+                            <div className='error'>{error}</div>
+                            <button className='submit' type='submit'>Potvrdi promjene</button>
+                            <button className='button' type="button" onClick={() => {history.goBack()}}>Povratak</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </Card>
+            </Card>
+        )
+        else return (
+            <Card title="Promjena osobnih podataka">
+                <div>
+                    <div className="Login">
+                        <form onSubmit={submit_admin}>
+                            <div className="FormRow">
+                                <label>Ime</label>
+                                <input name='firstname' required onChange={onChange}value={ editForm.firstname}/>
+                            </div>
+                            <div className="FormRow">
+                                <label>Prezime</label>
+                                <input name='lastname' required onChange={onChange}value={ editForm.lastname}/>
+                            </div>
+                            <div className="FormRow">
+                                <label>Lozinka</label>
+                                <input name='password' required type='password' onChange={onChange} value={ editForm.password}/>
+                            </div>
+                            <div className='error'>{error}</div>
+                            <button className='submit' type='submit'>Potvrdi promjene</button>
+                            <button className='button' type="button" onClick={() => {history.goBack()}}>Povratak</button>
+                        </form>
+                    </div>
+                </div>
+            </Card>
+        )
+    } 
+    else return (
+        <></>
     )
 }
 
