@@ -22,26 +22,6 @@ import java.util.*;
 @RequestMapping("/accounts")
 public class AccountController {
 
-    static private Home generateDummyHome() {
-        var h = new Home(-1L, new Street("", 0, 0));
-        h.getStreet().setDistrict(new District(""));
-        return h;
-    }
-
-    static private final Home dummyHome = generateDummyHome();
-
-    static private Account fillWithDummyIfAdmin(Account a) {
-        if (a.getHome() != null) {
-            return a;
-        }
-        for (var role : a.getRoles()) {
-            if (role.getName().equals("ADMIN")) {
-                a.setHome(dummyHome);
-            }
-        }
-        return a;
-    }
-
     @Autowired
     private AccountService accountService;
 
