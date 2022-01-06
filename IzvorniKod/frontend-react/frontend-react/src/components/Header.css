@@ -29,7 +29,7 @@
 
 .headerdistPost a {
   display: inline-block;
-  color: black;
+  color: white;
   text-align: center;
   padding: 12px;
   text-decoration: none;
@@ -85,20 +85,20 @@
 
 .link {
   border: none;
-  color: black;
+  color: white;
   text-align: center;
   padding: 12px;
   text-decoration: none;
   font-size: 22px;
   line-height: 0px;
   border-radius: 10px;
-  background-color: white;
+  background-color: #272C49;
 }
 
 .link:hover {
   cursor: pointer;
   background-color: white;
-  color: black;
+  color: #272C49;
 }
 
 .invalidAddressPoruka {

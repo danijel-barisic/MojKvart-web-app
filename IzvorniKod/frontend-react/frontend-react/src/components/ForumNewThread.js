@@ -80,7 +80,7 @@ function ForumNewThread(props) {
 
    function is_unique(name) {
       if (threads.map(t => t.name).includes(name)){
-          setError("Temano s predloženim naslovom već postoji!")
+          setError("Tema s predloženim naslovom već postoji!")
           return false
       }
       else {
