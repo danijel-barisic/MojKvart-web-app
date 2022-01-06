@@ -39,6 +39,8 @@ public class HomeServiceJPA implements HomeService{
     @Override
     public Home createHome(Home home) {
         Assert.isNull(home.getId(), "Home Id must be null, not: " + home.getId());
+        long maxId = homeRepository.getMaxId();
+        home.setId(maxId == -1 ? 1 : maxId + 1);
         return homeRepository.save(home);
     }
 
