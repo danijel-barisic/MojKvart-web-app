@@ -5,7 +5,8 @@ import './Card.css';
 import { useHistory } from "react-router";
 import Select from 'react-select';
 import ReactSession from "react-client-session/dist/ReactSession";
-
+import { ReactComponent as Logo } from '../assets/city.svg';
+import { RiLoginBoxFill } from 'react-icons/ri'
 
 //https://react-select.com/styles#styles
  const customStyles = {
@@ -133,10 +134,13 @@ function Registration(props) {
 
    return (
       <>
+      <div className="current-title">
+        <RiLoginBoxFill className="icon-color" /> REGISTRACIJA
+      </div>
       <div className="logres">
-         <img src="../../winter-village-4567947.png" alt="MojKvart"></img>
-         </div>
-      <div className="logres">
+      <div className="center-contents">
+         <Logo />
+      </div>
       <CardLogin>
          <div className='Login'>
             <form onSubmit={onSubmit}>
