@@ -3,6 +3,8 @@ import Card from "./Card";
 import ReactSession from "react-client-session/dist/ReactSession";
 import RoleManagement from "./RoleManagement";
 import * as authentication from "../authentication" // iako, mislim da se odmah na routerima onemogučio pristup
+import ComponentCard from "./ComponentCard"
+import CardClone from "./CardClone";
 
 /* user
 accountNonExpired: true
@@ -57,23 +59,26 @@ export default class UserAdminView extends React.Component {
         }
         const district = user.district || { name: "nema informacije", id: "?" };
         return (
-            <Card title={user.username}>
+            <>
+            <div className="current-title">{user.username}</div>
+            <ComponentCard>
                 <table><tbody>
-                <tr><td><b>E-mail:</b>                  </td><td>{user.email}                        </td></tr>
-                <tr><td><b>Ime:</b>                     </td><td>{user.firstName}                    </td></tr>
-                <tr><td><b>Prezime:</b>                 </td><td>{user.lastName}                     </td></tr>
-                <tr><td><b>id:</b>                      </td><td>{user.id}                           </td></tr>
+                <tr><td style={{padding: "3px 15px"}}><b>E-mail:</b>                  </td><td style={{padding: "3px 15px"}}>{user.email}                        </td></tr>
+                <tr><td style={{padding: "3px 15px"}}><b>Ime:</b>                     </td><td style={{padding: "3px 15px"}}>{user.firstName}                    </td></tr>
+                <tr><td style={{padding: "3px 15px"}}><b>Prezime:</b>                 </td><td style={{padding: "3px 15px"}}>{user.lastName}                     </td></tr>
+                <tr><td style={{padding: "3px 15px"}}><b>id:</b>                      </td><td style={{padding: "3px 15px"}}>{user.id}                           </td></tr>
                 { this.state.user_is_admin === false
                     ? <>
-                        <tr><td><b>Kvart:</b>                   </td><td>{district.name} (id: {district.id}) </td></tr>
-                        <tr><td><b>Adresa valjana:</b>          </td><td>{user.addressValid + ""}            </td></tr>
-                        <tr><td><b>Korisnik blokiran:</b>       </td><td>{user.blocked + ""}                 </td></tr>
+                        <tr><td style={{padding: "3px 15px"}}><b>Kvart:</b>                   </td><td style={{padding: "3px 15px"}}>{district.name} (id: {district.id}) </td></tr>
+                        <tr><td style={{padding: "3px 15px"}}><b>Adresa valjana:</b>          </td><td style={{padding: "3px 15px"}}>{user.addressValid + ""}            </td></tr>
+                        <tr><td style={{padding: "3px 15px"}}><b>Korisnik blokiran:</b>       </td><td style={{padding: "3px 15px"}}>{user.blocked + ""}                 </td></tr>
                     </>
                     : null
                 }
                 </tbody></table>
                 { this.state.user_is_admin ? null : <RoleManagement user={user} roles={this.state.user_roles} did_passin_roles={true} /> }
-            </Card>
+            </ComponentCard>
+            </>
         );
     }
 

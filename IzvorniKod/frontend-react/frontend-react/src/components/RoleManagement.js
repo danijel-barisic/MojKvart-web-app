@@ -9,6 +9,8 @@ import React from "react";
 import ReactSession from "react-client-session/dist/ReactSession";
 import Card from "./Card";
 import './RoleManagement.css'
+import CardClone from "./CardClone";
+import "./Card.css"
 
 function trueEquals(a, b) {
     if (a === b) return true;
@@ -110,7 +112,7 @@ export default class RoleManagement extends React.Component {
         }
         return (
             <div className="RoleManagement">
-                <Card title="Uloge">
+                <CardClone title="Uloge">
                     <table>
                         <thead>
                             <tr><th>Postojeće</th><th>Dostupne</th></tr>
@@ -123,7 +125,7 @@ export default class RoleManagement extends React.Component {
                         {/*</tbody>*/}
                         {this.getRoleTableContents()}
                     </table>
-                </Card>
+                </CardClone>
             </div>
         );
     }
@@ -156,7 +158,7 @@ export default class RoleManagement extends React.Component {
                             ? <td>
                                 {a.name}
                                 {a.name !== "Stanovnik" && a.name !== "ADMIN"
-                                    ? <button onClick={() => this.removeRole(a)}>Oduzmi</button>
+                                    ? <button className="roleButton" onClick={() => this.removeRole(a)}>Oduzmi</button>
                                     : null
                                 }
                               </td>
@@ -166,7 +168,7 @@ export default class RoleManagement extends React.Component {
                             ? <td>
                                 {b.name}
                                 {b.name !== "Stanovnik" && b.name !== "ADMIN"
-                                    ? <button onClick={() => this.addRole   (b)}>Dodaj </button>
+                                    ? <button className="roleButton" onClick={() => this.addRole   (b)}>Dodaj </button>
                                     : null
                                 }
                               </td>

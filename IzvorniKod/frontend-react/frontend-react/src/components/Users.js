@@ -8,6 +8,9 @@ import { MdDelete } from 'react-icons/md';
 import User from "./User";
 import RoleRequestUser from "./RoleRequestUser";
 import '../style/style.css';
+import {BsPeopleFill} from 'react-icons/bs'
+import {ImBlocked} from 'react-icons/im'
+import Card3 from "./Card3";
 
 
 function Users(props) {
@@ -87,7 +90,11 @@ function Users(props) {
    if (role === "ADMIN") {
       return (
          <>
-         <Card title='Svi korisnici'>
+         <div className="current-title">
+         <BsPeopleFill /> KORISNICI
+      </div>
+         <>
+         <Card3>
             <div className='StreetList'>
                {users.map(function (user) {
                   let district = user.district;
@@ -98,11 +105,12 @@ function Users(props) {
                   console.log(roles);
                   if (district.id == currentId) {
                      return ([
-                        <div className="wrapper">
+                        <div className="wrapper2">
                            <div className="inner">
                               <User key={user.id} user={user} props={props} />
                            </div>
                            <div className="inner">
+                           <div className="pad">
                               {
                                  (roles.includes("ADMIN"))
                                     ? <>
@@ -122,35 +130,39 @@ function Users(props) {
                                     </>
                               }
                            </div>
+                           </div>
                         </div>
                      ])
                   } else if (currentId === undefined){
                      return ([
-                        <div className="wrapper">
+                        <div className="wrapper2">
                            <div className="inner">
                               <User key={user.id} user={user} props={props}/>
                            </div>
                            <div className="inner">
-                           <>
-                           {
-                              (roles.includes("ADMIN"))
-                              ? <>
-                              </>
-                              : <>
-                                 {
-                                    (user.blocked === true)
-                                       ? <>
-                                          <FaLockOpen style={{ color: "green", cursor: "pointer", margin: "0px 10px 0px 0px" }} onClick={() => UnbanUser(user.id)}></FaLockOpen>
-                                          <MdDelete style={{ cursor: "pointer" }} onClick={() => deleteUser(user.id)}></MdDelete>
-                                       </>
-                                       : <>
-                                          <FaLock style={{ color: "red", cursor: "pointer", margin: "0px 10px 0px 0px" }} onClick={() => banUser(user.id)}></FaLock>
-                                          <MdDelete style={{ cursor: "pointer" }} onClick={() => deleteUser(user.id)}></MdDelete>
-                                       </>
-                                 }
-                              </>
-                           }
-                              </>
+                              <div className="pad">
+
+                              <>
+                              {
+                                 (roles.includes("ADMIN"))
+                                 ? <>
+                                 </>
+                                 : <>
+                                    {
+                                       (user.blocked === true)
+                                          ? <>
+                                             <FaLockOpen style={{ color: "green", cursor: "pointer", margin: "0px 10px 0px 0px" }} onClick={() => UnbanUser(user.id)}></FaLockOpen>
+                                             <MdDelete style={{ cursor: "pointer" }} onClick={() => deleteUser(user.id)}></MdDelete>
+                                          </>
+                                          : <>
+                                             <FaLock style={{ color: "red", cursor: "pointer", margin: "0px 10px 0px 0px" }} onClick={() => banUser(user.id)}></FaLock>
+                                             <MdDelete style={{ cursor: "pointer" }} onClick={() => deleteUser(user.id)}></MdDelete>
+                                          </>
+                                    }
+                                 </>
+                              }
+                                 </>
+                              </div>
                            </div>
                         </div>
                      ])
@@ -161,19 +173,23 @@ function Users(props) {
                   }
                })}
             </div>
-         </Card>
-         <Card title='Blokirani korisnici'>
+         </Card3>
+         <div className="current-title">
+         <ImBlocked /> BLOKIRANI KORISNICI
+      </div>
+         <Card3>
          <div className='StreetList'>
             {users.map(function (user) {
                let district = user.district;
                console.log(district.id);
                if (district.id == currentId && user.blocked === true) {
                   return ([
-                     <div className="wrapper">
+                     <div className="wrapper2">
                         <div className="inner">
                            <User key={user.id} user={user} props={props}/>
                         </div>
                         <div className="inner">
+                           <div className="pad">
                            <>
                            {
                               (user.blocked === true)
@@ -188,15 +204,17 @@ function Users(props) {
                            }
                            </>
                         </div>
+                        </div>
                      </div>
                   ]);
                } else if (currentId === undefined && user.blocked === true){
                   return ([
-                     <div className="wrapper">
+                     <div className="wrapper2">
                         <div className="inner">
                            <User key={user.id} user={user} props={props}/>
                         </div>
                         <div className="inner">
+                           <div className="pad">
                         <>
                         {
                            (user.blocked === true)
@@ -212,6 +230,7 @@ function Users(props) {
                            </>
                         </div>
                      </div>
+                     </div>
                   ])
                } else {
                   return ([
@@ -220,8 +239,9 @@ function Users(props) {
                }
             })}
          </div>
-            </Card>
+            </Card3>
             </>
+         </>
       );
    } 
    else {

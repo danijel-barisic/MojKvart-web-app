@@ -6,6 +6,7 @@ import District from "./District";
 import './Login.css';
 import { FaTimes } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
+import {MdApartment} from 'react-icons/md';
 
 function Districts() {
    const [districts, setDistricts] = React.useState([]);
@@ -38,7 +39,11 @@ function Districts() {
 
    if (role === "ADMIN") {
       return (
-         <Card title='Kvartovi'>
+         <>
+         <div className="current-title">
+               <MdApartment /> KVARTOVI
+            </div>
+         <Card>
             <div className='StreetList'>
                {districts.map(function (district) {
                   if (district.id !== -1) {
@@ -59,6 +64,8 @@ function Districts() {
                <button className='button' type="button" onClick={() => {history.push("/kvartovi/novi")}}>Dodaj Kvart</button>
             </div>
          </Card>
+         </>
+
       );
    } 
    else {
