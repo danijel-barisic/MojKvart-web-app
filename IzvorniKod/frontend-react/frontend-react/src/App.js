@@ -116,6 +116,7 @@ function App() {
               <Switch>
                 <Route path='/osobno' exact component={Personal} />
                 <Route path='/osobno/zahtjevi_za_uloge' exact component={PerosnalRoleRequest} />
+                <Route path='/osobno/promjena_podataka' exact component={PersonalEdit}/>
                 <Route path='/'>
                   <Redirect to='/osobno' />
                 </Route>

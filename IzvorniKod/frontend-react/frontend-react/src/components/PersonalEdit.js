@@ -36,7 +36,7 @@ function PersonalEdit() {
 
     const [account, setAccount] = React.useState({id: undefined})
     const [roles, setRoles] = React.useState()
-    
+
     const acc_username = ReactSession.get("username")
 
     React.useEffect(() => {
@@ -94,7 +94,7 @@ function PersonalEdit() {
             homeNum: editForm.streetnumber,
             streetId: selectedOption.id
         }
-        console.log(data)
+
         const options = {
             method: 'PUT',
             headers: {
@@ -104,7 +104,7 @@ function PersonalEdit() {
         }
         fetch(`/accounts/${account.email}`, options).then(response => {
             if (response.ok) {
-                history.goBack()
+                history.push("/osobno")
             }
         })
     }
@@ -126,7 +126,7 @@ function PersonalEdit() {
         }
         fetch(`/accounts/${account.email}`, options).then(response => {
             if (response.ok) {
-                history.goBack()
+                history.push("/osobno")
             }
         })
     }
