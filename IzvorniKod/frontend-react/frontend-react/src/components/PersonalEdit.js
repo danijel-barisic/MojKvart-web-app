@@ -74,7 +74,10 @@ function PersonalEdit() {
     },[])
     const streets_array = []
     streets.map((street)=> streets_array.push({id:street.id, label:street.name,value:street.name,minNum:street.minStreetNo,maxNum:street.maxStreetNo} ))
-    
+   
+    React.useEffect(()=>{
+        setState({selectedOption:streets_array[1]})
+    },[])
     function onChange(event) {
         const { name, value } = event.target;
         setEditForm(oldForm => ({...oldForm, [name]: value}))
@@ -130,10 +133,16 @@ function PersonalEdit() {
             }
         })
     }
-    
+    if (account.home == undefined){
+        return <>Wait for page to load</>
+    }
+    var result = streets_array.filter(obj => {
+        return obj.id === account.home.id
+      })
     if (account.id !== undefined && roles !== undefined && roles.length > 0) {
         if (roles.filter(r => r.name === "ADMIN").length == 0) return (
             <Card title="Promjena osobnih podataka">
+                
                 <div>
                     <div className="Login">
                         <form onSubmit={submit}>
@@ -151,7 +160,7 @@ function PersonalEdit() {
                             </div>
                             <div className="FormRow">
                                 <label>Ulica
-                                <Select value={selectedOption} required onChange = {handleChange} styles={customStyles} placeholder="Odaberite svoju ulicu"
+                                <Select defaultValue={result[0]} required onChange = {handleChange} styles={customStyles} placeholder="Odaberite svoju ulicu"
                                     options={streets_array}/>
                                 </label>
                             </div>

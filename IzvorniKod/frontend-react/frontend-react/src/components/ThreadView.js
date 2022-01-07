@@ -97,7 +97,7 @@ function ThreadView(props) {
       }
   }, [user])
 
-  if(roles == undefined || thread == undefined) {
+  if(roles == undefined || thread == undefined || posts == undefined) {
      return(
         <><div>Wait for page to load...</div></>
      )
