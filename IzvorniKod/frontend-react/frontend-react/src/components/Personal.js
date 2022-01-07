@@ -3,6 +3,9 @@ import Card from "./Card"
 import { ReactSession } from "react-client-session"
 import "./Login.css"
 import { useHistory } from "react-router"
+import '../style/style.css'
+import { BsFillPersonLinesFill } from "react-icons/bs"
+
 
 function Personal() {
     
@@ -58,7 +61,11 @@ function Personal() {
 
     if (account.id !== undefined && roles !== undefined && roles.length > 0) {
         if (roles.filter(r => r.name === "ADMIN").length > 0) return (
-            <Card title="Osobni podaci">
+            <>
+            <div className="current-title">
+                <BsFillPersonLinesFill /> OSOBNI PODACI
+            </div>
+            <Card>
                 <div>
                     <div className='Login'>
                         <table><tbody>
@@ -103,9 +110,14 @@ function Personal() {
                     </div>
                 </div>
             </Card>
+            </>
             )
         else return (
-            <Card title="Osobni podaci">
+            <>
+            <div className="current-title">
+                <BsFillPersonLinesFill /> OSOBNI PODACI
+            </div>
+            <Card>
                 <div>
                     <div className='Login'>
                         <table><tbody>
@@ -170,6 +182,7 @@ function Personal() {
                     </div>
                 </div>
             </Card>
+            </>
         )
     }
     else return (
