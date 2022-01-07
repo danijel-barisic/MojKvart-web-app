@@ -11,6 +11,7 @@ import progi.project.mojkvart.home.Home;
 import progi.project.mojkvart.home.HomeService;
 import progi.project.mojkvart.role.Role;
 import progi.project.mojkvart.role.RoleService;
+import progi.project.mojkvart.role_request.RoleRequestService;
 import progi.project.mojkvart.security.PasswordEncoder;
 import progi.project.mojkvart.street.Street;
 import progi.project.mojkvart.street.StreetService;
@@ -27,6 +28,9 @@ public class AccountController {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private RoleRequestService roleRequestService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -227,6 +231,7 @@ public class AccountController {
             role = roleService.findByName(roleName).orElseThrow(() -> new IllegalArgumentException("No such role."));
             account.getRoles().add(role);
             roleService.updateRole(role);
+            this.removeRoleRequests(accountId, roleName);
         }
 
         return account.getRoles();
@@ -247,6 +252,7 @@ public class AccountController {
             Account account = accountService.fetch(accountId);
             account.getRoles().add(role);
             roleService.updateRole(role);
+            this.removeRoleRequests(accountId, roleName);
         }
         return role;
     }
@@ -275,5 +281,10 @@ public class AccountController {
         }
 
         return account.getRoles();
+    }
+
+    public void removeRoleRequests(long user_id, String role_name) {
+        var maybe_request = this.roleRequestService.findByAccountIdAndRoleName(user_id, role_name);
+        maybe_request.ifPresent(roleRequest -> this.roleRequestService.deleteRoleRequest(roleRequest.getId()));
     }
 }
