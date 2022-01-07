@@ -3,6 +3,8 @@ import Card from "./Card"
 import { useHistory } from "react-router"
 import Select from 'react-select'
 import { ReactSession } from "react-client-session"
+import ComponentCard from "./ComponentCard"
+import Card1 from "./Card1"
 
 const customStyles = {
     option: (provided, state) => ({
@@ -141,7 +143,11 @@ function PersonalEdit() {
       })
     if (account.id !== undefined && roles !== undefined && roles.length > 0) {
         if (roles.filter(r => r.name === "ADMIN").length == 0) return (
-            <Card title="Promjena osobnih podataka">
+            <>
+            <div className="current-title">
+                PROMJENA OSOBNIH PODATAKA
+            </div>
+            <Card1>
                 
                 <div>
                     <div className="Login">
@@ -174,10 +180,15 @@ function PersonalEdit() {
                         </form>
                     </div>
                 </div>
-            </Card>
+            </Card1>
+            </>
         )
         else return (
-            <Card title="Promjena osobnih podataka">
+            <>
+            <div className="current-title">
+                PROMJENA OSOBNIH PODATAKA
+            </div>
+            <Card1>
                 <div>
                     <div className="Login">
                         <form onSubmit={submit_admin}>
@@ -199,7 +210,8 @@ function PersonalEdit() {
                         </form>
                     </div>
                 </div>
-            </Card>
+            </Card1>
+            </>
         )
     } 
     else return (

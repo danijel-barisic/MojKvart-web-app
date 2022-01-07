@@ -1,5 +1,7 @@
 import React from "react"
 import Card from "./Card"
+import ComponentCard from "./ComponentCard"
+import CardAdminPersonal from "./CardAdminPersonal"
 import { ReactSession } from "react-client-session"
 import "./Login.css"
 import { useHistory } from "react-router"
@@ -65,51 +67,51 @@ function Personal() {
             <div className="current-title">
                 <BsFillPersonLinesFill /> OSOBNI PODACI
             </div>
-            <Card>
+            <CardAdminPersonal>
                 <div>
-                    <div className='Login'>
+                    <div>
                         <table><tbody>
                             <tr>
-                                <td>
+                                <td style={{padding: "3px 15px"}}>
                                     <b>E-mail: </b>
                                 </td>
-                                <td>
+                                <td style={{padding: "3px 15px"}}>
                                     <span>{acc_username}</span>
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td style={{padding: "3px 15px"}}>
                                     <b>Ime: </b>
                                 </td>
-                                <td>
+                                <td style={{padding: "3px 15px"}}>
                                     <span>{account.firstName}</span>
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                            <td style={{padding: "3px 15px"}}>
                                     <b>Prezime: </b>
                                 </td>
-                                <td>
+                                <td style={{padding: "3px 15px"}}>
                                     <span>{account.lastName}</span>
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                            <td style={{padding: "3px 15px"}}>
                                     <b>Dodatne uloge: </b>
                                 </td>
-                                <td>
+                                <td style={{padding: "3px 15px"}}>
                                     <span>{specialRoles()}</span>
                                 </td>
                             </tr>
                         </tbody></table>
-                        <div>
                             <div className='Login'>
-                                <button className='button' type="button" onClick={() => history.push("/osobno/promjena_podataka")}>Izmjena osobnih podataka</button>
+                                <div className="flex-container">
+                                    <button className='button' type="button" onClick={() => history.push("/osobno/promjena_podataka")}>Izmjena osobnih podataka</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
                 </div>
-            </Card>
+            </CardAdminPersonal>
             </>
             )
         else return (
@@ -117,57 +119,57 @@ function Personal() {
             <div className="current-title">
                 <BsFillPersonLinesFill /> OSOBNI PODACI
             </div>
-            <Card>
+            <ComponentCard>
                 <div>
-                    <div className='Login'>
+                    <div>
                         <table><tbody>
                             <tr>
-                                <td>
+                                <td style={{padding: "3px 15px"}}>
                                     <b>E-mail: </b>
                                 </td>
-                                <td>
+                                <td style={{padding: "3px 15px"}}>
                                     <span>{acc_username}</span>
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td style={{padding: "3px 15px"}}>
                                     <b>Ime: </b>
                                 </td>
-                                <td>
+                                <td style={{padding: "3px 15px"}}>
                                     <span>{account.firstName}</span>
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td style={{padding: "3px 15px"}}>
                                     <b>Prezime: </b>
                                 </td>
-                                <td>
+                                <td style={{padding: "3px 15px"}}>
                                     <span>{account.lastName}</span>
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td style={{padding: "3px 15px"}}>
                                     <b>Kvart: </b>
                                 </td>
-                                <td>
+                                <td style={{padding: "3px 15px"}}>
                                     <span>{account.district.name}</span>
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td style={{padding: "3px 15px"}}>
                                     <b>Adresa: </b>
                                 </td>
-                                <td>
+                                <td style={{padding: "3px 15px"}}>
                                     <span>{`${account.home.street.name} ${account.home.number}`}</span>
                                 </td>
                             </tr>
                             {
                                 (roles.filter(r => r.name === "Moderator").length > 0 || (roles.filter(r => r.name === "Vijecnik").length > 0)) ?
                                 <tr>
-                                    <td>
+                                    <td style={{padding: "3px 15px"}}>
                                         <b>Dodatne uloge: </b>
                                     </td>
-                                    <td>
+                                    <td style={{padding: "3px 15px"}}>
                                         <span>{specialRoles()}</span>
                                     </td>
                                 </tr>
@@ -175,13 +177,15 @@ function Personal() {
                             }
                         </tbody></table>
                         <div className='Login'>
-                            <button className='button' type="button" onClick={() => history.push("/osobno/promjena_podataka")}>Izmjena osobnih podataka</button>
-                            <button className='button' type="button" onClick={() => {deleteUser()}}>Brisanje korisničkog računa</button>
-                            <button className='button' type="button" onClick={() => {history.push("/osobno/zahtjevi_za_uloge")}} >Zahtjevi za ulogama</button>
+                            <div className="grid-container">
+                                <button className='button' type="button" onClick={() => history.push("/osobno/promjena_podataka")}>Izmjena osobnih podataka</button>
+                                <button className='button' type="button" onClick={() => {history.push("/osobno/zahtjevi_za_uloge")}} >Zahtjevi za ulogama</button>
+                                <button className='button' type="button" onClick={() => {deleteUser()}}>Brisanje korisničkog računa</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </Card>
+            </ComponentCard>
             </>
         )
     }

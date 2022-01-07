@@ -9,6 +9,81 @@
    background-color: #272C49;
 }
 
+.SubCard {
+   border-radius: 25px;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   margin: 20px;
+   padding: 15px;
+   box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.6);
+   background-color: #083d69;
+}
+
+.CardComponent {
+   border-radius: 16px;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   margin: -1px 20px 20px 20px;
+   padding: 16px;
+   box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.6);
+   background-color: #272C49;
+   max-width: 850px;
+   margin: auto;
+}
+
+.CardAdminPersonal {
+   border-radius: 16px;
+   display: flex;
+   align-items: left;
+   flex-direction: column;
+   margin: -1px 20px 20px 20px;
+   padding: 16px;
+   box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.6);
+   background-color: #272C49;
+   max-width: 500px;
+   margin: auto;
+}
+
+.CardOne {
+   border-radius: 25px;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   margin: 20px;
+   padding: 15px;
+   box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.6);
+   background-color: #272C49;
+   max-width: 500px;
+   margin: auto;
+}
+
+.CardTwo {
+   border-radius: 25px;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   margin: 20px;
+   padding: 15px;
+   box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.6);
+   background-color: #272C49;
+   max-width: 550px;
+   margin: auto;
+}
+
+.grid-container {
+   display: grid;
+   grid-template-columns: auto auto auto;
+   padding: 10px;
+}
+
+.flex-container {
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+}
+
 .submit {
    border-radius: 10px;
    margin: 0px 20px 0px 20px;
@@ -16,4 +91,23 @@
 
 .submit:hover {
    color: dodgerblue;
+}
+
+.RoleRequestUser {
+   border-radius: 25px;
+   display: flex;
+   flex: 0 0 1;
+   align-items: flex-start;
+   flex-direction: column;
+   margin: 20px;
+   padding: 15px;
+   box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.6);
+   background-color: #083d69;
+   max-width: 500px;
+}
+
+.grid-two {
+   display: flex;
+   align-items: center;
+   flex-direction: column;
 }

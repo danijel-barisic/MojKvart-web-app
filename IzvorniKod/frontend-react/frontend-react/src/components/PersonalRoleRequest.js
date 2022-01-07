@@ -4,6 +4,7 @@ import { ReactSession } from "react-client-session"
 import "./Login.css"
 import PersonalRoleComponent from "./PersonalRoleComponent"
 import "./Event.css"
+import Card2 from "./Card2"
 
 function PerosnalRoleRequest() {
 
@@ -25,16 +26,25 @@ function PerosnalRoleRequest() {
     }, [account])
 
     if (account.id != undefined && roles !== undefined && roles.length > 0) {
-        return <Card title="Moji zahtjevi za ulogama">
-            <div className="Login">
-                <div className='Event'>
-                    <PersonalRoleComponent account={account} roles={roles} target={"Moderator"} targetId={2}/>
+        return (
+            <>
+                <div className="current-title">
+                    MOJI ZAHTJEVI ZA ULOGAMA
                 </div>
-                <div className='Event'>
-                    <PersonalRoleComponent account={account} roles={roles} target={"Vijecnik"} targetId={3}/>
+                <Card2>
+                <div className="Login">
+                    <div className="grid-two">
+                        <div className='RoleRequestUser'>                    
+                            <PersonalRoleComponent account={account} roles={roles} target={"Moderator"} targetId={2}/>
+                        </div>
+                        <div className='RoleRequestUser'>
+                            <PersonalRoleComponent account={account} roles={roles} target={"Vijecnik"} targetId={3}/>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </Card>
+                </Card2>
+            </>
+        )
     }
     else return (
         <></>
