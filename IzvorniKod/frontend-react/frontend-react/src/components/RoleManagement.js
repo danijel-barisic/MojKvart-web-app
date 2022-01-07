@@ -83,8 +83,9 @@ export default class RoleManagement extends React.Component {
     constructor(props) {
         super(props);
         this.user = props.user;
+        this.needs_fetch_roles = props.did_passin_roles !== true;
         this.state = {
-            roles: [], // [[1,2], [5, 6]],
+            roles: props.roles || [], // [[1,2], [5, 6]],
             all_roles: [], // [[1,2], [3, 4], [5, 6]],
             error: undefined,
         }
@@ -207,6 +208,9 @@ export default class RoleManagement extends React.Component {
         });
     }
     async fetchOwnedRoles() {
+        if (!this.needs_fetch_roles) {
+            return true;
+        }
         if (this.user === undefined) {
             this.setError({ message: "Nema korisnika" });
             return false;
