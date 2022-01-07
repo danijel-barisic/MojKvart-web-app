@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import './Header.css';
+import { ReactComponent as Logo } from '../assets/city.svg';
 
 
 function HeaderAdmin(props) {
@@ -23,18 +24,19 @@ function HeaderAdmin(props) {
 
    const renderButton = () => {
       return (checkLogin)
-         ? <Link to='/' className="logout" onClick={logout} >Logout</Link>
-         : <Link to='/login' className="login" >Login </Link>;
+         ? <Link to='/' className="logout" onClick={logout} >ODJAVA</Link>
+         : <Link to='/login' className="login" >PRIJAVA </Link>;
    }
 
    return (
       <header className='header'>
-         <Link className='logo active' to='/'>Moj Kvart </Link>
+         <Link className='logo active' to='/'>MOJ KVART </Link>
+         <Logo style={{ width: "150px", height: "50px"}} />
          <div className='header-right'>
-            <Link to='/korisnici' >Korisnici </Link>
-            <Link to='/zahtjeviUloga' >Zahtjevi uloga </Link>
-            <Link to='/kvartovi' >Kvartovi </Link>
-            <Link to='/osobno' >Osobni podaci </Link>
+            <Link to='/korisnici' >KORISNICI </Link>
+            <Link to='/zahtjeviUloga' >ZAHTJEVI ULOGA </Link>
+            <Link to='/kvartovi' >KVARTOVI </Link>
+            <Link to='/osobno' >OSOBNI PODACI </Link>
             {renderButton()}
          </div>
       </header>
