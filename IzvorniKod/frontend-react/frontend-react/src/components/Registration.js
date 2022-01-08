@@ -5,7 +5,7 @@ import './Card.css';
 import { useHistory } from "react-router";
 import Select from 'react-select';
 import ReactSession from "react-client-session/dist/ReactSession";
-import { ReactComponent as Logo } from '../assets/city.svg';
+import { ReactComponent as Logo } from '../assets/city2.svg';
 import { RiLoginBoxFill } from 'react-icons/ri'
 
 //https://react-select.com/styles#styles
