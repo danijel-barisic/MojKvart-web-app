@@ -7,11 +7,8 @@ function Thread(props) {
    
    return (
       <div className='headerdist'>
-         <Link to={{
-            pathname: `/forum/${id}`,
-            state: { id, name },
-            className: 'header-right'
-         }}>{name}</Link>
+         
+         {name}
       </div>
    );
 }
