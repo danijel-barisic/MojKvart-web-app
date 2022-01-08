@@ -5,7 +5,7 @@ import { useHistory } from "react-router";
 import { ReactSession } from "react-client-session";
 import CardLogin from "./CardLogin";
 import { RiLoginBoxFill } from 'react-icons/ri';
-import { ReactComponent as Logo } from '../assets/city.svg';
+import { ReactComponent as Logo } from '../assets/city2.svg';
 
 
 function Login(props) {
