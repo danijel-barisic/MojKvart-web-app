@@ -1,5 +1,4 @@
 import React from "react";
-import Card50 from "./Card50";
 import ReactSession from "react-client-session/dist/ReactSession";
 import { useHistory } from "react-router";
 import './Login.css';
@@ -9,7 +8,7 @@ import Thread from "./Thread";
 import SubCardForum from "./SubCardForum";
 import CardForum from "./CardForum";
 import {HiFolderOpen} from 'react-icons/hi'
-import Card50 from "./Card50";
+import Card50 from "./Card50.js";
 
 function Forum(props) {
    const [threads, setThreads] = React.useState([]);

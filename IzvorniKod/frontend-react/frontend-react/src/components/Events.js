@@ -150,7 +150,7 @@ function Events() {
                                 <h2>{event.name}</h2>
                                 <div className="Login flex-container-right">
                                     <div>
-                                    <button className='button' type="button" onClick={() => {history.push(history.push(`/dogadjaji/${event.id}`))}}>Više informacija</button>
+                                    <button className='button' type="button" onClick={() => {history.push(`/dogadjaji/dogadjaj/${event.id}`)}}>Više informacija</button>
                                     </div>
                                 </div>
                             </Card12>
@@ -169,7 +169,7 @@ function Events() {
                                 <h2>{event.name}</h2>
                                 <div className="Login flex-container-right">
                                     <div>
-                                    <button className='button' type="button" onClick={() => {history.push(history.push(`/dogadjaji/${event.id}`))}}>Više informacija</button>
+                                    <button className='button' type="button" onClick={() => {history.push(`/dogadjaji/dogadjaj/${event.id}`)}}>Više informacija</button>
                                     </div>
                                 </div>
                             </Card12>

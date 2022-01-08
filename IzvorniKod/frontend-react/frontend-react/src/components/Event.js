@@ -3,12 +3,23 @@ import "./Event.css"
 import duration_parser from "./EventTimeParser"
 import { useHistory } from "react-router"
 import Card14 from "./Card14"
+import { ReactSession } from "react-client-session"
+
 
 function Event(props) {
     const currentURL = window.location.href
     const splitURL = currentURL.split("/")
     const id = splitURL.at(-1)
     const [event, setEvent] = React.useState(undefined)
+    const [account, setAccount] = React.useState({id: undefined})
+    const [roles, setRoles] = React.useState()
+
+    const acc_username = ReactSession.get("username")
+    React.useEffect(() => {
+        fetch(`/accounts/${acc_username}`)
+        .then(data => data.json())
+        .then(account => setAccount(account))
+    }, [])
 
     React.useEffect(() => {
         fetch('/events')
@@ -17,6 +28,13 @@ function Event(props) {
             .filter(e => e.id == id)[0]))
     }, [])
 
+    React.useEffect(() => {
+        if (account !== undefined && account.id !== undefined) {
+            fetch(`/accounts/roles/${account.id}`)
+            .then(data => data.json())
+            .then(roles => setRoles(roles))
+        }
+    }, [account])
 
     const [updated, setUpdated] = React.useState(new Date())
     React.useEffect(() => {}, [updated])
@@ -83,7 +101,7 @@ function Event(props) {
     }
 
 
-    if (event !== undefined && event.account !== undefined) return (
+    if (event !== undefined && event.account !== undefined && roles !== undefined) return (
         <>
             <div className="current-title">{event.name}</div>
             <Card14>
@@ -118,8 +136,14 @@ function Event(props) {
                         <div style={{margin: "auto"}}>
                             <button className='button' type="button" onClick={() => {history.goBack()}}>Povratak</button>
                             <button className='button' type="button" onClick={() => {history.push(`/dogadjaji/uredi/${event.id}`)}}>Uredi</button>
-                            <button className='button' type="button" onClick={() => submitEvent(event)}>Objavi</button>
-                            <button className='button' type="button" onClick={() => deleteEvent(event.id)}>Obriši</button>
+                            {
+                                (roles.filter(r => r.name === "Moderator").length > 0) ?
+                                <>
+                                <button className='button' type="button" onClick={() => submitEvent(event)}>Objavi</button>
+                                <button className='button' type="button" onClick={() => deleteEvent(event.id)}>Obriši</button>
+                                </>
+                                : <></>
+                            }
                         </div>
                     </div>
                 : <div className="Login flex-container-row">
