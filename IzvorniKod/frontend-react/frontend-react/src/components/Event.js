@@ -2,7 +2,7 @@ import React from "react"
 import "./Event.css"
 import duration_parser from "./EventTimeParser"
 import { useHistory } from "react-router"
-
+import Card14 from "./Card14"
 
 function Event(props) {
     const currentURL = window.location.href
@@ -37,7 +37,7 @@ function Event(props) {
             } else {
                 console.log("deleted");
                 setUpdated(new Date());
-                window.location.reload()
+                history.push("/dogadjaji")
             }
 
         })
@@ -58,7 +58,7 @@ function Event(props) {
             }
         }
 
-        deleteEvent(event.id)
+        fetch(`/events/${id}`, {method: 'DELETE'})
 
         const options = {
             method: "POST",
@@ -72,7 +72,7 @@ function Event(props) {
 
             if (response.ok) {
                 setUpdated(new Date())
-                window.location.reload()
+                history.push("/dogadjaji")
             }
 
             else {
@@ -85,43 +85,50 @@ function Event(props) {
 
     if (event !== undefined && event.account !== undefined) return (
         <>
-        <div className='Event'>
-            <div>
-                <b>Naslov: </b>
-                <span>{event.name}</span>
-            </div>
-            <div>
-                <b>Opis: </b>
-                <span>{event.description}</span>
-            </div>
-            <div>
-                <b>Lokacija: </b>
-                <span>{event.location}</span>
-            </div>
-            <div>
-                <b>Datum: </b>
-                <span>{event.date}</span>
-            </div>
-            <div>
-                <b>Vrijeme početka: </b>
-                <span>{event.time}</span>
-            </div>
-            <div>
-                <b>Trajanje: </b>
-                <span>{duration_parser(event.duration)}</span>
-            </div>
-            <div>
-                <b>Organizator: </b>
-                <span>{event.account.firstName} {event.account.lastName}</span>
-            </div>
-        </div>
-        {(event.status == 0) ? 
-            <div className="Login">
-                <button className='button' type="button" onClick={() => submitEvent(event)}>Objavi</button>
-                <button className='button' type="button" onClick={() => deleteEvent(event.id)}>Obriši</button>
-                <button className='button' type="button" onClick={() => {history.push(`/dogadjaji/uredi/${event.id}`)}}>Uredi</button>
-            </div>
-        : <></>}
+            <div className="current-title">{event.name}</div>
+            <Card14>
+                <table><tbody>
+                    <tr>
+                        <td className="tdd"><b>Opis: </b></td>
+                        <td className="tdd"><span>{event.description}</span></td>
+                    </tr>
+                    <tr>
+                        <td className="tdd"><b>Lokacija: </b></td>
+                        <td className="tdd"><span>{event.location}</span></td>
+                    </tr>
+                    <tr>
+                        <td className="tdd"><b>Datum: </b></td>
+                        <td className="tdd"><span>{event.date}</span></td>
+                    </tr>
+                    <tr>
+                        <td className="tdd"><b>Vrijeme početka: </b></td>
+                        <td className="tdd"><span>{event.time}</span></td>
+                    </tr>
+                    <tr>
+                        <td className="tdd"><b>Trajanje: </b></td>
+                        <td className="tdd"><span>{duration_parser(event.duration)}</span></td>
+                    </tr>
+                    <tr>
+                        <td className="tdd"><b>Organizator: </b></td>
+                        <td className="tdd"><span>{event.account.firstName} {event.account.lastName}</span></td>
+                    </tr>
+                </tbody></table>
+                {(event.status == 0) ? 
+                    <div className="Login flex-container-row">
+                        <div style={{margin: "auto"}}>
+                            <button className='button' type="button" onClick={() => {history.goBack()}}>Povratak</button>
+                            <button className='button' type="button" onClick={() => {history.push(`/dogadjaji/uredi/${event.id}`)}}>Uredi</button>
+                            <button className='button' type="button" onClick={() => submitEvent(event)}>Objavi</button>
+                            <button className='button' type="button" onClick={() => deleteEvent(event.id)}>Obriši</button>
+                        </div>
+                    </div>
+                : <div className="Login flex-container-row">
+                <div style={{margin: "auto"}}>
+                    <button className='button' type="button" onClick={() => {history.goBack()}}>Povratak</button>
+                    </div>
+            </div>}
+            </Card14>
+            
         </>
     )
     else return (<></>)

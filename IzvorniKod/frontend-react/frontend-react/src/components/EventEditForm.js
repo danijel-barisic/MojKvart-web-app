@@ -2,6 +2,7 @@ import React from "react"
 import Card from "./Card"
 import "./Login.css"
 import { useHistory } from "react-router"
+import Card13 from "./Card13"
 
 function EventEditForm() {
 
@@ -70,7 +71,7 @@ function EventEditForm() {
         return fetch(`/events/${data.id}`, options).then(response => {
 
             if (response.ok) {
-                history.push('/dogadjaji')
+                history.goBack()
             }
 
             else {
@@ -93,7 +94,10 @@ function EventEditForm() {
     }
 
     return (
-        <Card title="Prijedlog događaja">
+        <>
+        <div className="current-title">PRIJEDLOG DOGAĐAJA
+        </div>
+        <Card13>
             <div className="Login">
                 <form onSubmit={onSubmit}>
                     <div className="FormRow">
@@ -127,11 +131,12 @@ function EventEditForm() {
                     <div>
                         <div className='error'>{error}</div>
                         <button className="button" type="submit" disabled={!isValid()}>Spremi promjene</button>
-                        <button className="button" type="button" onClick={() => {history.push("/dogadjaji")}}>Odustani</button>
+                        <button className="button" type="button" onClick={() => {history.goBack()}}>Odustani</button>
                     </div>
                 </form>
             </div>
-        </Card>
+        </Card13>
+        </>
     )
 }
 

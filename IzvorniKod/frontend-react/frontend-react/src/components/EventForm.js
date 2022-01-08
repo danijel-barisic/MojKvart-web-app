@@ -3,6 +3,7 @@ import Card from "./Card"
 import "./Login.css"
 import { useHistory } from "react-router"
 import { ReactSession } from "react-client-session"
+import Card13 from "./Card13"
 
 function EventForm() {
     const [eventForm, setEventForm] = React.useState(
@@ -77,7 +78,10 @@ function EventForm() {
     }
 
     return (
-        <Card title="Prijedlog događaja">
+        <>
+        <div className="current-title">PRIJEDLOG DOGAĐAJA
+        </div>
+        <Card13>
             <div className="Login">
                 <form onSubmit={onSubmit}>
                     <div className="FormRow">
@@ -115,7 +119,8 @@ function EventForm() {
                     </div>
                 </form>
             </div>
-        </Card>
+        </Card13>
+        </>
     )
 }
 
