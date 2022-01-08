@@ -6,6 +6,7 @@ import { ReactSession } from "react-client-session";
 import Thread from "./Thread";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import './ThreadNewPost.css';
+import Card16 from './Card16';
 
 const PostEditForm = () => {
     const [form, setForm] = React.useState({ content: ''});
@@ -79,19 +80,22 @@ const PostEditForm = () => {
     console.log(posts)
     return (
         <div className="footer">
-        <Card title="Uredi objavu">
+         <div className="current-title">
+            UREDI OBJAVU
+         </div>
+        <Card16>
            <div className='StreetForm Login'>
               <form onSubmit={onSubmit}>
                  <div className='FormRow'>
                     <label>Raspiši se...</label>
-                    <textarea required name='content' onChange={onChange} value={ form.content} defaultValue= {posts.content}/>
+                    <textarea rows={6} cols={50} required name='content' onChange={onChange} value={ form.content} defaultValue= {posts.content}/>
                  </div>
                  <div className='error'>{error}</div>
                  <button classname='submit' type='submit' disabled={!isValid()} >Uredi objavu</button>
                  <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
               </form>
            </div>
-        </Card>
+        </Card16>
      </div>
     );
  }

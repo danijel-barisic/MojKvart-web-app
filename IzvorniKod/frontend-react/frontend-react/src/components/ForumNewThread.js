@@ -3,6 +3,7 @@ import "./Login.css"
 import Card from "./Card";
 import { useHistory } from "react-router-dom";
 import { ReactSession } from "react-client-session";
+import Card16 from "./Card16";
 
 
 function ForumNewThread(props) {
@@ -101,7 +102,11 @@ function ForumNewThread(props) {
    console.log()
 
    return (
-      <Card title="Nova Tema">
+      <>
+      <div className="current-title">
+         NOVA TEMA
+      </div>
+      <Card16>
          <div className='StreetForm Login'>
             <form onSubmit={onSubmit}>
                <div className='FormRow'>
@@ -113,7 +118,8 @@ function ForumNewThread(props) {
                <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
             </form>
          </div>
-      </Card>
+      </Card16>
+      </>
    );
 }
 

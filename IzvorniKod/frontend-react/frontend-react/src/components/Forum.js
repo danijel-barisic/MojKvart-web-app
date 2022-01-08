@@ -9,6 +9,7 @@ import SubCardForum from "./SubCardForum";
 import CardForum from "./CardForum";
 import {HiFolderOpen} from 'react-icons/hi'
 import Card50 from "./Card50.js";
+import Card12 from "./Card12";
 
 function Forum(props) {
    const [threads, setThreads] = React.useState([]);
@@ -75,43 +76,43 @@ function Forum(props) {
                </div>
             </div> */}
             <div className="sub-header"></div>
-            <Card50 title='Teme'>
-                  <button className='forumButton' type="button" onClick={() => {history.push("/novatema")}}> <MdEdit size={16}></MdEdit>Dodaj temu</button>
-                  </Card50>
-               <CardForum>
+            <div className="grid-father">
+               <Card12>
+                  <h2>TEME</h2>
+                  <button className='button-purple' type="button" onClick={() => {history.push("/novatema")}}>Dodaj temu</button>
+               </Card12>
                {threads.map(function (thread) {
                   userid = users.id;
                   let role = roles.map(function (x) {
                      return x[Object.keys(x)[1]]
                   })
-                     if(users.district.id === thread.district.id) {
-                        return ([
-                           <SubCardForum>
-                           <div className="wrapper">
-                              <div className="inner">
-                                 <Thread key={thread.id} thread={thread} />
+                  if(users.district.id === thread.district.id) {
+                     return (
+                        <Card12>
+                           <h2>{thread.name}</h2>
+                           <div className="Login flex-container-right">
+                              <div>
+                                 <span>
+                                    <button className='button' type="button" onClick={() => {history.push(`/forum/${thread.id}`)}}>Otvori temu</button>
+                                    {
+                                       (role.includes("Moderator"))
+                                       ?  <>
+                                             <div className="inner">
+                                                <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deleteThread(thread.id)}></MdDelete>
+                                             </div>
+                                          </>
+                                       :  <></>
+                                    }
+                                 </span>
                               </div>
-                              <button className='replyButton' type="button" onClick={() => {history.push(`/forum/${thread.id}`)}}> <HiFolderOpen size={20}></HiFolderOpen>Otvori temu</button>
-                              {
-                                    (role.includes("Moderator"))
-                                    ?  <>
-                                          <div className="inner">
-                                             <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deleteThread(thread.id)}></MdDelete>
-                                          </div>
-                                       </>
-                                    :  <></>
-                                 }
                            </div>
-                           </SubCardForum>
-                        ]);
-                     } else {
-                        return ([
-                           <>
-                           </>
-                        ])
-                     }
-                     })}
-         </CardForum>
+                        </Card12>
+                     )
+                  } else {
+                     return (<></>)
+                  }
+               })}
+            </div>
          </>
       );
    }

@@ -493,7 +493,7 @@
   padding: 15px;
   box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.6);
   background-color: #272c49;
-  width: 900px;
+  width: 1000px;
   max-height: 50px;
   margin: auto;
   justify-content: space-between;
@@ -602,4 +602,17 @@
 
 .role-button-purple:hover {
   filter: brightness(120%)
+}
+
+.Card16 {
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 20px;
+  padding: 15px;
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.6);
+  background-color: #272c49;
+  max-width:500px;
+  margin: auto;
 }

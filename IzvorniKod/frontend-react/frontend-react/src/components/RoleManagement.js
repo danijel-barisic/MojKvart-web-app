@@ -158,7 +158,7 @@ export default class RoleManagement extends React.Component {
                             ? <td>
                                 {a.name}
                                 {a.name !== "Stanovnik" && a.name !== "ADMIN"
-                                    ? <button className="roleButton" onClick={() => this.removeRole(a)}>Oduzmi</button>
+                                    ? <button className="role-button-purple" onClick={() => this.removeRole(a)}>Oduzmi</button>
                                     : null
                                 }
                               </td>
@@ -168,7 +168,7 @@ export default class RoleManagement extends React.Component {
                             ? <td>
                                 {b.name}
                                 {b.name !== "Stanovnik" && b.name !== "ADMIN"
-                                    ? <button className="roleButton" onClick={() => this.addRole   (b)}>Dodaj </button>
+                                    ? <button className="role-button-purple" onClick={() => this.addRole   (b)}>Dodaj </button>
                                     : null
                                 }
                               </td>
