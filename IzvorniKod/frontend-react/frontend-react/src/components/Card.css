@@ -484,3 +484,57 @@
    max-width: 350px;
    margin: auto;
 }
+
+.Card12 {
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  margin: 20px;
+  padding: 15px;
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.6);
+  background-color: #272c49;
+  width: 900px;
+  max-height: 50px;
+  margin: auto;
+  justify-content: space-between;
+}
+
+.flex-container-row {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.title-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.button-purple {
+  background: none;
+  padding: 5px 12px;
+  font-size: 20px;
+  cursor: pointer;
+  margin: 10px;
+  border-radius: 10px;
+  background-color: #A555B9;
+  color: white;
+}
+
+.button-purple:hover {
+  filter: brightness(120%)
+}
+
+.grid-father {
+  display: grid;
+  grid-template-columns: auto;
+  padding: 10px;
+  row-gap: 20px
+}

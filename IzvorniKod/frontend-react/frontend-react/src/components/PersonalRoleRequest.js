@@ -5,6 +5,7 @@ import "./Login.css"
 import PersonalRoleComponent from "./PersonalRoleComponent"
 import "./Event.css"
 import Card2 from "./Card2"
+import { useHistory } from "react-router-dom";
 
 function PerosnalRoleRequest() {
 
@@ -12,6 +13,7 @@ function PerosnalRoleRequest() {
     const [roles, setRoles] = React.useState()
     
     const acc_username = ReactSession.get("username")
+    const history = useHistory();
 
     React.useEffect(() => {
         fetch(`/accounts/${acc_username}`)
@@ -40,6 +42,9 @@ function PerosnalRoleRequest() {
                         <div className='RoleRequestUser'>
                             <PersonalRoleComponent account={account} roles={roles} target={"Vijecnik"} targetId={3}/>
                         </div>
+                    </div>
+                    <div className="flex-container">
+                        <button onClick={() => history.goBack()}>Povratak</button>
                     </div>
                 </div>
                 </Card2>

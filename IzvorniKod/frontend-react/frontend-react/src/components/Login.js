@@ -5,7 +5,7 @@ import { useHistory } from "react-router";
 import { ReactSession } from "react-client-session";
 import CardLogin from "./CardLogin";
 import { RiLoginBoxFill } from 'react-icons/ri';
-import { ReactComponent as Logo } from '../assets/city.svg';
+import { ReactComponent as Logo } from '../assets/city2.svg';
 
 
 function Login(props) {
@@ -89,8 +89,8 @@ function Login(props) {
                      <input name='password' type='password' required onChange={onChange} value={ loginForm.password}/>
                   </div>
                   <div className='error'>{error}</div>
-                  <button className='button' type='submit'>Prijava</button>
                   <button className='button' type="button" onClick={() => {history.push("/registration")}}>Registracija</button>
+                  <button className='button' type='submit'>Prijavi se</button>
                </form>
             </div>
          </CardLogin>

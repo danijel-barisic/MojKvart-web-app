@@ -8,6 +8,8 @@ import Users from './Users';
 import Card6 from './Card6';
 import Card7 from './Card7';
 import Card8 from './Card8';
+import { useHistory } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 function DistrictView(props) {
    const { id } = useParams();
@@ -19,28 +21,25 @@ function DistrictView(props) {
    /* Streets --> Users */
    const users = <Users currentId = {id} currentName = {name}></Users>
    const linkuser=readMoreUsers?"Zatvori korisnike":"Prikaži korisnike"
+   const history = useHistory();
    
    return (
-      <> <div>
-            <Card6 id={id} title={name}>
+      <> 
+         <div className="current-title">{name}</div>
+      <div>
+            <Card6>
+            <div className='Login flex-container-row'>
+               <button onClick={() => history.goBack()}>Povratak</button>
+               <button onClick={() => history.push({pathname: `/kvartovi/${id}/edit`, state: { id }})}>Uredi ime</button>
+            </div>
             </Card6>
       </div>
          <div className='flex-container2'>
-               <div>
-                  <Card7>
-                     <span>
-                        <button className='link2' onClick={()=>{setReadMoreStreets(!readMoreStreets)}}><p>{linkstreet}</p></button>
-                     </span>
-                     {readMoreStreets && streets}
-                  </Card7>
+               <div style={{width: "500px"}}>
+                  {streets}
                </div>
-               <div>
-                  <Card8>
-                     <span>
-                     <button className='link2' onClick={()=>{setReadMoreUsers(!readMoreUsers)}}><p>{linkuser}</p></button>
-                     </span>
-                     {readMoreUsers && users}
-                  </Card8>
+               <div style={{width: "500px"}}>
+                  {users}
                </div>
          </div>
       </>
