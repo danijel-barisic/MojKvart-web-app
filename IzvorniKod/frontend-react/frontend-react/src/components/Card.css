@@ -23,6 +23,24 @@
   justify-content: space-between;
 }
 
+.CardNewPost{
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  margin: 20px;
+  padding: 15px;
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.6);
+  background-color: #272c49;
+  flex-direction: column;
+  margin-left:-250px;
+  justify-content: center;
+  width: 400px;
+  height: 180px;
+  position:absolute;
+  bottom: 0;
+  left:50%;
+  
+}
 .CardForum {
   display: flex;
   align-items: center;
@@ -43,6 +61,102 @@
   font-size: larger;
   width: 100%;
 }
+
+.CardThreadView{
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  margin: 20px;
+  padding: 15px;
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.6);
+  background-color: #272c49;
+  max-width: 1200px;
+  max-height: 420px;
+  margin: auto;
+ flex-direction: column;
+ overflow-y: scroll;
+ overflow-x: hidden;
+}
+
+.CardThreadView .wrapperTV{
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-bottom: 2px solid black;
+    border-radius: 25px;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.6);
+ 
+}
+.wrapperTV2,.CardThreadView .innerReply{
+  width: 100%;
+  margin-bottom: 20px;
+}
+.CardThreadView  .headerdistPost{
+  
+  text-align: left;
+  width: 100%;
+  margin-bottom: 20px;
+
+}
+.CardThreadView  .headerdistPost a {
+  
+  text-align: left;
+ 
+  
+
+}
+
+.CardThreadView .innerTV{
+  
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex:1;
+ 
+}
+
+.NewPostArea button{
+   background: none;
+   border: 2px solid white;
+   padding: 5px 12px;
+   font-size: 20px;
+   cursor: pointer;
+   margin: 10px;
+   border-radius: 10px;
+   color: white;
+}
+.NewPostArea{
+   width: 70%;
+ 
+   
+}
+.NewPostArea button:hover {
+   background-color: #aaa;
+}
+
+.NewPostArea button:disabled {
+   color: #ddd;
+}
+
+.NewPostForm{
+   display: flex;
+   flex-direction: column;
+   
+}
+
+.NewPostForm textarea{
+   resize: none;
+   height: 100px;
+   
+}
+
+.NewPostForm label{
+   font-size: larger;
+}
+
+
 .SubCardForum .headerdist{
    margin-left: 30px;
 }

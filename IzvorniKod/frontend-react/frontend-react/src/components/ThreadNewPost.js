@@ -5,7 +5,8 @@ import { useHistory } from "react-router-dom";
 import { ReactSession } from "react-client-session";
 import Thread from "./Thread";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import './ThreadNewPost.css';
+
+import CardNewPost from "./CardNewPost";
 
 
 function ThreadNewPost(props) {
@@ -103,11 +104,11 @@ function ThreadNewPost(props) {
    
    return (
       idP == undefined ? 
-         <div className="footer">
-            <Card title="Nova Objava">
-               <div className='StreetForm Login'>
+         
+            <CardNewPost >
+               <div className='NewPostArea'>
                   <form onSubmit={onSubmit}>
-                     <div className='FormRow'>
+                     <div className='NewPostForm'>
                         <label>Raspiši se...</label>
                         <textarea required name='content' onChange={onChange} value={ form.content}/>
                      </div>
@@ -116,8 +117,8 @@ function ThreadNewPost(props) {
                      <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
                   </form>
                </div>
-            </Card>
-         </div>
+            </CardNewPost>
+         
          :
          <div className="footer2">
             <Card title="Odgovori na objavu">
