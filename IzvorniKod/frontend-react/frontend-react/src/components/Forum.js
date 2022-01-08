@@ -1,12 +1,14 @@
 import React from "react";
-import Card from "./Card";
+import Card69 from "./Card69";
 import ReactSession from "react-client-session/dist/ReactSession";
 import { useHistory } from "react-router";
 import './Login.css';
 import { FaTimes } from 'react-icons/fa';
-import { MdDelete } from 'react-icons/md';
+import { MdDelete,MdForum,MdEdit,MdReply, MdPostAdd } from 'react-icons/md';
 import Thread from "./Thread";
-import { MdForum } from 'react-icons/md'
+import SubCardForum from "./SubCardForum";
+import CardForum from "./CardForum";
+import {HiFolderOpen} from 'react-icons/hi'
 
 function Forum(props) {
    const [threads, setThreads] = React.useState([]);
@@ -57,8 +59,8 @@ function Forum(props) {
                {/* <div className='Login'>
                   <button className='button' type="button" onClick={() => {history.push("/novatema")}}>Dodaj temu</button>
                </div> */}
-               <Card title='Molimo pričekajte dok se podaci ne učitaju!'>
-            </Card>
+               <Card69 title='Molimo pričekajte dok se podaci ne učitaju!'>
+            </Card69>
          </>
       ]);
    } else {
@@ -73,10 +75,10 @@ function Forum(props) {
                </div>
             </div> */}
             <div className="sub-header"></div>
-            <Card title='Teme'>
-               <div className='Login'>
-                  <button className='button' type="button" onClick={() => {history.push("/novatema")}}>Dodaj temu</button>
-               </div>
+            <Card69 title='Teme'>
+                  <button className='forumButton' type="button" onClick={() => {history.push("/novatema")}}> <MdEdit size={16}></MdEdit>Dodaj temu</button>
+                  </Card69>
+               <CardForum>
                {threads.map(function (thread) {
                   userid = users.id;
                   let role = roles.map(function (x) {
@@ -84,10 +86,12 @@ function Forum(props) {
                   })
                      if(users.district.id === thread.district.id) {
                         return ([
+                           <SubCardForum>
                            <div className="wrapper">
                               <div className="inner">
                                  <Thread key={thread.id} thread={thread} />
                               </div>
+                              <button className='replyButton' type="button" onClick={() => {history.push(`/forum/${thread.id}`)}}> <HiFolderOpen size={20}></HiFolderOpen>Otvori temu</button>
                               {
                                     (role.includes("Moderator"))
                                     ?  <>
@@ -98,6 +102,7 @@ function Forum(props) {
                                     :  <></>
                                  }
                            </div>
+                           </SubCardForum>
                         ]);
                      } else {
                         return ([
@@ -106,7 +111,7 @@ function Forum(props) {
                         ])
                      }
                      })}
-            </Card>
+         </CardForum>
          </>
       );
    }
