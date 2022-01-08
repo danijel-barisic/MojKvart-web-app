@@ -151,7 +151,7 @@ console.log(izbrisano)
                               " " +
                               post.account.lastName}
                               <GoReply
-                      style={{ color: "red",cursor: "pointer" }}
+                      style={{ color: "#A555B9",cursor: "pointer" }}
                       onClick={() => onReply(inputRef, post.replyId)}
                     ></GoReply>
                     {izbrisano.current[post.replyId] != "deleted" ? (
@@ -182,7 +182,7 @@ console.log(izbrisano)
                   {user.id === post.account.id || isModerator ? (<>
                   <div>
                             <MdDelete
-                              style={{ color: "red", cursor: "pointer" }}
+                              style={{ color: "#A555B9", cursor: "pointer" }}
                               onClick={() => deletePost(post.id)}
                             ></MdDelete>
                             <Link to={`/novaobjava/${id}/${post.id}/edit`}>
@@ -228,7 +228,7 @@ console.log(izbrisano)
                 <>
                   <div className>
                     <MdDelete
-                      style={{ color: "red", cursor: "pointer" }}
+                      style={{ color: "#A555B9", cursor: "pointer" }}
                       onClick={() => deletePost(post.id)}
                     ></MdDelete>
                     <Link to={`/novaobjava/${id}/${post.id}/edit`}>
@@ -239,7 +239,7 @@ console.log(izbrisano)
               ) : isModerator && post.replyId == null ? (
                 <>
                   <MdDelete
-                    style={{ color: "red", cursor: "pointer" }}
+                    style={{ color: "#A555B9", cursor: "pointer" }}
                     onClick={() => deletePost(post.id)}
                   ></MdDelete>
                   <Link to={`/novaobjava/${id}/${post.id}/edit`}>

@@ -113,8 +113,8 @@ function ThreadNewPost(props) {
                         <textarea required name='content' onChange={onChange} value={ form.content}/>
                      </div>
                      <div className='error'>{error}</div>
-                     <button classname='submit' type='submit' disabled={!isValid()} >Stvori objavu</button>
                      <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
+                     <button classname='submit' type='submit' disabled={!isValid()} >Stvori objavu</button>
                   </form>
                </div>
             </CardNewPost>
@@ -129,8 +129,8 @@ function ThreadNewPost(props) {
                         <textarea required name='content' onChange={onChange} value={ form.content}/>
                      </div>
                      <div className='error'>{error}</div>
-                     <button classname='submit' type='submit' disabled={!isValid()}>Odgovori</button>
                      <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
+                     <button classname='submit' type='submit' disabled={!isValid()}>Odgovori</button>
                   </form>
                </div>
             </Card>
