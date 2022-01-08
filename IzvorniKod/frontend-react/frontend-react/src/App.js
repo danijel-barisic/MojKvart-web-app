@@ -30,7 +30,7 @@ import PerosnalRoleRequest from './components/PersonalRoleRequest';
 import ThreadNewPost from './components/ThreadNewPost';
 import PostEditForm from './components/PostEditForm';
 import PersonalEdit from './components/PersonalEdit';
-
+import Event from './components/Event';
 
 function App() {
   ReactSession.setStoreType("localStorage");
@@ -141,6 +141,7 @@ function App() {
                   <Route path='/osobno/zahtjevi_za_uloge' exact component={PerosnalRoleRequest} />
                   <Route path='/osobno/promjena_podataka' exact component={PersonalEdit}/>
                   <Route path='/dogadjaji' exact component={Events} />
+                  <Route path='/dogadjaji/:id' exact component={Event} />
                   <Route path='/dogadjaji/prijedlog' exact component={EventForm} />
                   <Route path='/dogadjaji/uredi/:id' exact component={EventEditForm} />
                   <Route path='/vijece' exact component={Council} />

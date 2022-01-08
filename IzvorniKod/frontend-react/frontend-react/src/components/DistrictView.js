@@ -29,8 +29,8 @@ function DistrictView(props) {
       <div>
             <Card6>
             <div className='Login flex-container-row'>
-               <button onClick={() => history.push({pathname: `/kvartovi/${id}/edit`, state: { id }})}>Uredi</button>
                <button onClick={() => history.goBack()}>Povratak</button>
+               <button onClick={() => history.push({pathname: `/kvartovi/${id}/edit`, state: { id }})}>Uredi ime</button>
             </div>
             </Card6>
       </div>
