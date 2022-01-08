@@ -7,6 +7,7 @@ import './Login.css';
 import { FaTimes } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import {MdApartment} from 'react-icons/md';
+import Card4 from "./Card4";
 
 function Districts() {
    const [districts, setDistricts] = React.useState([]);
@@ -43,17 +44,19 @@ function Districts() {
          <div className="current-title">
                <MdApartment /> KVARTOVI
             </div>
-         <Card>
+         <Card4>
             <div className='StreetList'>
                {districts.map(function (district) {
                   if (district.id !== -1) {
                      return ([
-                        <div className="wrapper">
+                        <div className="wrapper2">
                            <div className="inner">
                               <District key={district.id} district={district} />
                            </div>
+                           <div className="pad">
                            <div className="inner">
                               <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deleteDistrict(district.id)}></MdDelete>
+                           </div>
                            </div>
                         </div>
                      ]);  
@@ -61,9 +64,11 @@ function Districts() {
                })}
             </div>
             <div className='Login'>
-               <button className='button' type="button" onClick={() => {history.push("/kvartovi/novi")}}>Dodaj Kvart</button>
+               <div className="flex-container">
+                  <button className='button' type="button" onClick={() => {history.push("/kvartovi/novi")}}>Dodaj Kvart</button>
+               </div>
             </div>
-         </Card>
+         </Card4>
          </>
 
       );

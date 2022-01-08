@@ -5,6 +5,8 @@ import { useHistory } from "react-router";
 import './Login.css';
 import Street from "./Street";
 import { FaTimes } from 'react-icons/fa';
+import {GiDoubleStreetLights} from 'react-icons/gi'
+import Card9 from "./Card9";
 
 function Streets(props) {
    const [streets, setStreets] = React.useState([]);
@@ -38,7 +40,11 @@ function Streets(props) {
 
    if (role === "ADMIN") {
       return (
-         <Card title='Ulice'>
+         <>
+         <div className="current-title">
+         <GiDoubleStreetLights /> ULICE
+      </div>
+         <Card>
             <div className='StreetList'>
                {streets.map(function (street) {
                   let district = street.district;
@@ -65,6 +71,7 @@ function Streets(props) {
                <button className='button' type="button" onClick={() => {history.push("/ulice/novi")}}>Dodaj Ulicu</button>
             </div>
          </Card>
+         </>
       );
    } 
    else {

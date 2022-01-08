@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "./Card";
 import { useHistory } from "react-router-dom";
+import Card11 from "./Card11.js";
 
 function StreetEditForm(props) {
    const [form, setForm] = React.useState({ name: '' });
@@ -59,8 +60,10 @@ function StreetEditForm(props) {
 
 
    return (
-      <Card title="Ažuriranje ulice">
-         <div className='StreetForm Login'>
+      <>
+      <div className="current-title">AŽURIRANJE ULICE</div>
+      <Card11>
+         <div className='StreetForm Login flex-container'>
             <form onSubmit={onSubmit}>
                <div className='FormRow'>
                   <label>Ime</label>
@@ -83,7 +86,8 @@ function StreetEditForm(props) {
                <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
             </form>
          </div>
-      </Card>
+      </Card11>
+      </>
    );
 }
 

@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "./Card";
 import { useHistory } from "react-router-dom";
+import Card10 from "./Card10";
 
 function DistrictEditForm(props) {
    const [form, setForm] = React.useState({ name: '' });
@@ -52,19 +53,24 @@ function DistrictEditForm(props) {
    }, []);
 
    return (
-      <Card title='Novi naziv'>
-         <div className='StreetForm Login'>
+      <>
+      <div className="current-title">PROMJENA IMENA KVARTA</div>
+      <Card10>
+         <div className='StreetForm Login flex-container'>
             <form onSubmit={onSubmit}>
                <div className='FormRow'>
                   <label>Ime Kvarta</label>
                   <input required placeholder={district.name} name='name' onChange={onChange} value={ form.name}/>
                </div>
                <div className='error'>{error}</div>
-               <button type='submit' disabled={!isValid()}>Ažuriraj</button>
-               <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
+               <div class="flex-container3">
+                  <button type='submit' disabled={!isValid()}>Ažuriraj</button>
+                  <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
+               </div>
             </form>
          </div>
-      </Card>
+      </Card10>
+      </>
    );
 }
 
