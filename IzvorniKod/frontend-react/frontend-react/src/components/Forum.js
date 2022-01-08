@@ -1,5 +1,5 @@
 import React from "react";
-import Card69 from "./Card69";
+import Card50 from "./Card50";
 import ReactSession from "react-client-session/dist/ReactSession";
 import { useHistory } from "react-router";
 import './Login.css';
@@ -9,6 +9,7 @@ import Thread from "./Thread";
 import SubCardForum from "./SubCardForum";
 import CardForum from "./CardForum";
 import {HiFolderOpen} from 'react-icons/hi'
+import Card50 from "./Card50";
 
 function Forum(props) {
    const [threads, setThreads] = React.useState([]);
@@ -59,8 +60,8 @@ function Forum(props) {
                {/* <div className='Login'>
                   <button className='button' type="button" onClick={() => {history.push("/novatema")}}>Dodaj temu</button>
                </div> */}
-               <Card69 title='Molimo pričekajte dok se podaci ne učitaju!'>
-            </Card69>
+               <Card50 title='Molimo pričekajte dok se podaci ne učitaju!'>
+            </Card50>
          </>
       ]);
    } else {
@@ -75,9 +76,9 @@ function Forum(props) {
                </div>
             </div> */}
             <div className="sub-header"></div>
-            <Card69 title='Teme'>
+            <Card50 title='Teme'>
                   <button className='forumButton' type="button" onClick={() => {history.push("/novatema")}}> <MdEdit size={16}></MdEdit>Dodaj temu</button>
-                  </Card69>
+                  </Card50>
                <CardForum>
                {threads.map(function (thread) {
                   userid = users.id;

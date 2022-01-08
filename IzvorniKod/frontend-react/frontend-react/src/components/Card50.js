@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import './Header.css';
 import { MdPostAdd } from "react-icons/md";
 
-function Card69(props) {
+function Card50(props) {
   const { children, id, title } = props;
 
   if (id && title) {
@@ -38,4 +38,4 @@ function Card69(props) {
   
 }
 
-export default Card69;
+export default Card50;
