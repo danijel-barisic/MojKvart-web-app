@@ -120,7 +120,7 @@ function ThreadView(props) {
           Natrag
         </button>
         <div className="current-title">
-          <MdPostAdd /> {thread.name}
+          <MdPostAdd /> Naziv teme: {thread.name}
         </div>
         <button
           className="button-purple"
@@ -142,15 +142,10 @@ function ThreadView(props) {
             }
           });
           return [
-            <div className="wrapperTV">
+            <div className="wrapperTV" ref={(el) => (inputRef.current[post.id] = el)} id={post.id}>
               {post.replyId !== null ? (
                 <>
                   <div className="innerReply">
-                    <div
-                      ref={(el) => (inputRef.current[post.id] = el)}
-                      id={post.id}
-                    ></div>
-
                     <div className="innerRep">
                       <p className="pTV">
                         {"~" +
@@ -167,7 +162,7 @@ function ThreadView(props) {
                           onClick={() => onReply(inputRef, post.replyId)}
                         ></GoReply>
                         {izbrisano.current[post.replyId] != "deleted" ? (
-                          <> ({post.replyId})</>
+                          <> Odgovor na objavu </>
                         ) : (
                           <>[obrisano]</>
                         )}
@@ -191,11 +186,11 @@ function ThreadView(props) {
                     <>
                       <div>
                         <MdDelete
-                          style={{ color: "#A555B9", cursor: "pointer" }}
+                          style={{ color: "#A555B9", cursor: "pointer", width: "28px", height: "28px"}}
                           onClick={() => deletePost(post.id)}
                         ></MdDelete>
                         <Link to={`/novaobjava/${id}/${post.id}/edit`}>
-                          <MdEdit style={{ color: "white" }}></MdEdit>
+                          <MdEdit style={{ color: "white" , width: "28px", height: "28px"}}></MdEdit>
                         </Link>
                       </div>
                     </>
@@ -205,7 +200,7 @@ function ThreadView(props) {
                 </>
               ) : (
                 <>
-                  <div className="wrapperTV2">
+                  <div className="wrapperTV2" >
                     <p className="pTV">
                       {"~" +
                         post.account.firstName +
@@ -214,8 +209,6 @@ function ThreadView(props) {
                     </p>
                     <div
                       className="innerTV"
-                      ref={(el) => (inputRef.current[post.id] = el)}
-                      id={post.id}
                     >
                       <Post key={post.id} post={post} />
                     </div>
@@ -242,11 +235,11 @@ function ThreadView(props) {
                 <>
                   <div className>
                     <MdDelete
-                      style={{ color: "#A555B9", cursor: "pointer" }}
+                      style={{ color: "#A555B9", cursor: "pointer" , width: "28px", height: "28px"}}
                       onClick={() => deletePost(post.id)}
                     ></MdDelete>
                     <Link to={`/novaobjava/${id}/${post.id}/edit`}>
-                      <MdEdit style={{ color: "white" }}></MdEdit>
+                      <MdEdit style={{ color: "white" , width: "28px", height: "28px"}}></MdEdit>
                     </Link>
                   </div>
                 </>

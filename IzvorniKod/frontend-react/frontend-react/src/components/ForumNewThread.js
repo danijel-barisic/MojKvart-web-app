@@ -84,7 +84,7 @@ function ForumNewThread(props) {
       const { name } = form;
       let result = name.includes("[");
       let result2 = name.includes("]");
-      return name.length > 0 && !result && !result2;
+      return name.length > 0 && !result && !result2 && name.length < 20;
    }
 
    function is_unique(name) {

@@ -9,9 +9,11 @@ function Post(props) {
   
    
    return (
+      <>
       <div className='headerdistPost'>
          {content} 
       </div>
+      </>
    );
 }
 

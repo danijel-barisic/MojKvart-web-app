@@ -68,13 +68,11 @@
   align-items: center;
   margin: 20px;
   padding: 32px;
-  
-  max-width: 100%;
+  max-width: 70%;
   max-height: 100%;
   margin: auto;
- flex-direction: column;
- 
- gap: 16px;
+  flex-direction: column;
+  gap: 16px;
 }
 .threadViewTop{
   display: flex;
@@ -115,6 +113,7 @@
 .wrapperTV2,.CardThreadView .innerReply{
   width: 100%;
   margin-bottom: 20px;
+  margin-left: 20px;
 }
 .CardThreadView  .headerdistPost{
   
