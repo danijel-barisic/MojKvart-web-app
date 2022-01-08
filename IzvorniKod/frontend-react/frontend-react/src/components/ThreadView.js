@@ -12,6 +12,7 @@ import Post from "./Post";
 import ThreadNewPost from "./ThreadNewPost";
 import CardThreadView from "./CardThreadView";
 import { HiFolderOpen } from "react-icons/hi";
+import "./Login.css";
 
 function ThreadView(props) {
   const { idT: id } = useParams();
@@ -46,9 +47,8 @@ function ThreadView(props) {
         inputRef.current[replyId].className = cln;
       }, 1000);
       var elmntToView = document.getElementById(replyId);
-      elmntToView.scrollIntoView()
+      elmntToView.scrollIntoView();
     }
-   
   }
   function deletePost(id) {
     const options = {
@@ -62,7 +62,7 @@ function ThreadView(props) {
         setUpdated(new Date());
       }
     });
-    izbrisano.current[id] = "deleted"
+    izbrisano.current[id] = "deleted";
   }
 
   function onNewPost() {
@@ -105,13 +105,34 @@ function ThreadView(props) {
       </>
     );
   }
-console.log(izbrisano)
+  console.log(izbrisano);
   return (
     <>
-      <div className="current-title">
-        <MdPostAdd /> {thread.name}
+      <div className="threadViewTop">
+        <button
+          className="button2"
+          type="button"
+          onClick={() => {
+            history.goBack();
+          }}
+        >
+          {" "}
+          Natrag
+        </button>
+        <div className="current-title">
+          <MdPostAdd /> {thread.name}
+        </div>
+        <button
+          className="button-purple"
+          type="button"
+          onClick={() => {
+            history.push(`/novaobjava/${id}`);
+          }}
+        >
+          {" "}
+          Stvori objavu
+        </button>
       </div>
-
       <CardThreadView>
         {posts.map(function (post) {
           let rendered = false;
@@ -125,46 +146,36 @@ console.log(izbrisano)
               {post.replyId !== null ? (
                 <>
                   <div className="innerReply">
-                    
-                  {user.id === post.account.id || isModerator ? (
-                      <>
-                        <div
-                          
-                          ref={(el) => (inputRef.current[post.id] = el)}
-                          id={post.id}
-                        >
-                          <p className="pTV">
-                            {"~" +
-                              post.account.firstName +
-                              " " +
-                              post.account.lastName}
-                          </p>
-                          
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <div className="innerRep">
-                          <p className="pTV">
-                            {"~" +
-                              post.account.firstName +
-                              " " +
-                              post.account.lastName}
-                              <GoReply
-                      style={{ color: "#A555B9",cursor: "pointer" }}
-                      onClick={() => onReply(inputRef, post.replyId)}
-                    ></GoReply>
-                    {izbrisano.current[post.replyId] != "deleted" ? (
-                      <> ({post.replyId})</>
-                    ) : (
-                      <>[obrisano]</>
-                    )}
-                          </p>
-                        </div>
-                      </>
-                    )}
+                    <div
+                      ref={(el) => (inputRef.current[post.id] = el)}
+                      id={post.id}
+                    ></div>
+
+                    <div className="innerRep">
+                      <p className="pTV">
+                        {"~" +
+                          post.account.firstName +
+                          " " +
+                          post.account.lastName}
+                        <GoReply
+                          style={{
+                            color: "#A555B9",
+                            cursor: "pointer",
+                            width: "50px",
+                            height: "30px",
+                          }}
+                          onClick={() => onReply(inputRef, post.replyId)}
+                        ></GoReply>
+                        {izbrisano.current[post.replyId] != "deleted" ? (
+                          <> ({post.replyId})</>
+                        ) : (
+                          <>[obrisano]</>
+                        )}
+                      </p>
+                    </div>
+
                     <Post key={post.id} post={post} />
-                    
+
                     <button
                       className="replyButton"
                       type="button"
@@ -175,36 +186,40 @@ console.log(izbrisano)
                       {" "}
                       <MdReply size={20}></MdReply>Odgovori
                     </button>
-
-                    
-                   
                   </div>
-                  {user.id === post.account.id || isModerator ? (<>
-                  <div>
-                            <MdDelete
-                              style={{ color: "#A555B9", cursor: "pointer" }}
-                              onClick={() => deletePost(post.id)}
-                            ></MdDelete>
-                            <Link to={`/novaobjava/${id}/${post.id}/edit`}>
-                              <MdEdit style={{ color: "white" }}></MdEdit>
-                            </Link>
-                          </div></> ): (<></>)}
+                  {user.id === post.account.id || isModerator ? (
+                    <>
+                      <div>
+                        <MdDelete
+                          style={{ color: "#A555B9", cursor: "pointer" }}
+                          onClick={() => deletePost(post.id)}
+                        ></MdDelete>
+                        <Link to={`/novaobjava/${id}/${post.id}/edit`}>
+                          <MdEdit style={{ color: "white" }}></MdEdit>
+                        </Link>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
                 </>
               ) : (
                 <>
-                <div className="wrapperTV2"><p className="pTV">
+                  <div className="wrapperTV2">
+                    <p className="pTV">
                       {"~" +
                         post.account.firstName +
                         " " +
                         post.account.lastName}
                     </p>
-                  <div
-                    className="innerTV"
-                    ref={(el) => (inputRef.current[post.id] = el)}
-                    id={post.id}
-                  >
-                    <Post key={post.id} post={post} /></div>
-                    
+                    <div
+                      className="innerTV"
+                      ref={(el) => (inputRef.current[post.id] = el)}
+                      id={post.id}
+                    >
+                      <Post key={post.id} post={post} />
+                    </div>
+
                     <button
                       className="replyButton"
                       type="button"
@@ -217,7 +232,6 @@ console.log(izbrisano)
                     </button>
                     {(rendered = true)}
                   </div>
-                  
                 </>
               )}
 
@@ -253,7 +267,6 @@ console.log(izbrisano)
           ];
         })}
       </CardThreadView>
-      <ThreadNewPost onNewPost={onNewPost} />
     </>
   );
 }

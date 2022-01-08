@@ -135,6 +135,7 @@ function App() {
                   <Route path='/forum' exact component={Forum} />
                   <Route path='/forum/:idT' exact component={ThreadView} />
                   <Route path='/novatema' exact component={ForumNewThread}/>
+                  <Route path='/novaobjava/:idT' exact component={ThreadNewPost}/>
                   <Route path='/novaobjava/:idT/:idP' exact component={ThreadNewPost}/>
                   <Route path = '/novaobjava/:idT/:idP/edit' exact component={PostEditForm} />
                   <Route path='/osobno' exact component={Personal} />

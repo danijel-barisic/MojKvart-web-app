@@ -57,14 +57,14 @@
    overflow-y: scroll;
 }
 
-.CardThreadView::-webkit-scrollbar {
+::-webkit-scrollbar {
    width:7px;
 }
-.CardThreadView::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
    -webkit-box-shadow:inset 0 0 3px rgba(0,0,0,0.3); 
    border-radius:5px;
 }
-.CardThreadView::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
    border-radius:5px;
    -webkit-box-shadow: inset 0 0 10px #A555B9; 
 }

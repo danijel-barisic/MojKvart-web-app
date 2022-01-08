@@ -50,7 +50,7 @@ function ThreadNewPost(props) {
          console.log(JSON.stringify(data))
          if (response.ok) {
             console.log("Nice");
-            props.onNewPost();
+            history.goBack();
          } else {
             setError("Something went wrong! Try again");
             console.log(response.body);
