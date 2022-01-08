@@ -192,13 +192,13 @@ function CouncilMeetingReport() {
                     <div style={{margin: "auto"}}>
                     {(roles !== undefined && roles.length > 0 && roles.filter(r => r.name === "Vijecnik").length > 0) ?
                             <div className='Login'>
-                                <button className='button' type="button" onClick={() => history.goBack()}>Povratak</button>
+                                <button className='button' type="button" onClick={() => history.goBack()}>Natrag</button>
                                 <button className='button' type="button" onClick={() => history.push(`/vijece/izvjesce/uredi/${id}`)}>Uredi</button>
                                 <button className='button' type="button" onClick={() => deleteMeeting(meeting.id)}>Obriši</button>
                             </div>
                         : 
                             <div className='Login'>
-                                <button className='button' type="button" onClick={() => history.goBack()}>Povratak</button>
+                                <button className='button' type="button" onClick={() => history.goBack()}>Natrag</button>
                             </div>
                     }
                     </div>

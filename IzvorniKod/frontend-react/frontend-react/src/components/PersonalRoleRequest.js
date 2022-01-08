@@ -44,7 +44,7 @@ function PerosnalRoleRequest() {
                         </div>
                     </div>
                     <div className="flex-container">
-                        <button onClick={() => history.goBack()}>Povratak</button>
+                        <button onClick={() => history.goBack()}>Natrag</button>
                     </div>
                 </div>
                 </Card2>

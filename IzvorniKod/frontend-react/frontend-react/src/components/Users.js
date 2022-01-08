@@ -118,12 +118,12 @@ function Users(props) {
                                        {
                                           (user.blocked === true)
                                              ? <>
-                                                <FaLockOpen style={{ color: "green", cursor: "pointer", margin: "0px 10px 0px 0px" }} onClick={() => UnbanUser(user.id)}></FaLockOpen>
-                                                <MdDelete style={{ cursor: "pointer" }} onClick={() => deleteUser(user.id)}></MdDelete>
+                                                <FaLockOpen style={{ color: "#2390F0", cursor: "pointer", margin: "0px 10px 0px 0px" , width: "28px", height: "28px"}} onClick={() => UnbanUser(user.id)}></FaLockOpen>
+                                                <MdDelete style={{ cursor: "pointer" , width: "28px", height: "28px"}} onClick={() => deleteUser(user.id)}></MdDelete>
                                              </>
                                              : <>
-                                                <FaLock style={{ color: "red", cursor: "pointer", margin: "0px 10px 0px 0px" }} onClick={() => banUser(user.id)}></FaLock>
-                                                <MdDelete style={{ cursor: "pointer" }} onClick={() => deleteUser(user.id)}></MdDelete>
+                                                <FaLock style={{ color: "#A555B9", cursor: "pointer", margin: "0px 10px 0px 0px" , width: "28px", height: "28px"}} onClick={() => banUser(user.id)}></FaLock>
+                                                <MdDelete style={{ cursor: "pointer" , width: "28px", height: "28px"}} onClick={() => deleteUser(user.id)}></MdDelete>
                                              </>
                                        }
                                     </>
@@ -150,12 +150,12 @@ function Users(props) {
                                     {
                                        (user.blocked === true)
                                           ? <>
-                                             <FaLockOpen style={{ color: "green", cursor: "pointer", margin: "0px 10px 0px 0px" }} onClick={() => UnbanUser(user.id)}></FaLockOpen>
-                                             <MdDelete style={{ cursor: "pointer" }} onClick={() => deleteUser(user.id)}></MdDelete>
+                                             <FaLockOpen style={{ color: "#2390F0", cursor: "pointer", margin: "0px 10px 0px 0px" , width: "28px", height: "28px"}} onClick={() => UnbanUser(user.id)}></FaLockOpen>
+                                             <MdDelete style={{ cursor: "pointer" , width: "28px", height: "28px"}} onClick={() => deleteUser(user.id)}></MdDelete>
                                           </>
                                           : <>
-                                             <FaLock style={{ color: "red", cursor: "pointer", margin: "0px 10px 0px 0px" }} onClick={() => banUser(user.id)}></FaLock>
-                                             <MdDelete style={{ cursor: "pointer" }} onClick={() => deleteUser(user.id)}></MdDelete>
+                                             <FaLock style={{ color: "#A555B9", cursor: "pointer", margin: "0px 10px 0px 0px" , width: "28px", height: "28px"}} onClick={() => banUser(user.id)}></FaLock>
+                                             <MdDelete style={{ cursor: "pointer" , width: "28px", height: "28px"}} onClick={() => deleteUser(user.id)}></MdDelete>
                                           </>
                                     }
                                  </>
@@ -195,12 +195,12 @@ function Users(props) {
                            {
                               (user.blocked === true)
                                  ?  <>
-                                       <FaLockOpen style={{color:"green" ,cursor:"pointer", margin: "0px 10px 0px 0px" }} onClick={() => UnbanUser(user.id)}></FaLockOpen>
-                                       <MdDelete style={{cursor: "pointer"}} onClick={() => deleteUser(user.id)}></MdDelete>
+                                       <FaLockOpen style={{color:"#2390F0" ,cursor:"pointer", margin: "0px 10px 0px 0px" , width: "28px", height: "28px"}} onClick={() => UnbanUser(user.id)}></FaLockOpen>
+                                       <MdDelete style={{cursor: "pointer", width: "28px", height: "28px"}} onClick={() => deleteUser(user.id)}></MdDelete>
                                     </>
                                  :  <>
-                                       <FaLock style={{color:"red" ,cursor:"pointer", margin: "0px 10px 0px 0px" }} onClick={() => banUser(user.id)}></FaLock>
-                                       <MdDelete style={{cursor: "pointer"}} onClick={() => deleteUser(user.id)}></MdDelete>
+                                       <FaLock style={{color:"#A555B9" ,cursor:"pointer", margin: "0px 10px 0px 0px" , width: "28px", height: "28px"}} onClick={() => banUser(user.id)}></FaLock>
+                                       <MdDelete style={{cursor: "pointer", width: "28px", height: "28px"}} onClick={() => deleteUser(user.id)}></MdDelete>
                                     </>
                            }
                            </>
@@ -220,12 +220,12 @@ function Users(props) {
                         {
                            (user.blocked === true)
                               ?  <>
-                                    <FaLockOpen style={{color:"green" ,cursor:"pointer", margin: "0px 10px 0px 0px" }} onClick={() => UnbanUser(user.id)}></FaLockOpen>
-                                    <MdDelete style={{cursor: "pointer"}} onClick={() => deleteUser(user.id)}></MdDelete>
+                                    <FaLockOpen style={{color:"#2390F0" ,cursor:"pointer", margin: "0px 10px 0px 0px" , width: "28px", height: "28px"}} onClick={() => UnbanUser(user.id)}></FaLockOpen>
+                                    <MdDelete style={{cursor: "pointer", width: "28px", height: "28px"}} onClick={() => deleteUser(user.id)}></MdDelete>
                                  </>
                               :  <>
-                                    <FaLock style={{color:"red" ,cursor:"pointer", margin: "0px 10px 0px 0px" }} onClick={() => banUser(user.id)}></FaLock>
-                                    <MdDelete style={{cursor: "pointer"}} onClick={() => deleteUser(user.id)}></MdDelete>
+                                    <FaLock style={{color:"#A555B9" ,cursor:"pointer", margin: "0px 10px 0px 0px" , width: "28px", height: "28px"}} onClick={() => banUser(user.id)}></FaLock>
+                                    <MdDelete style={{cursor: "pointer", width: "28px", height: "28px"}} onClick={() => deleteUser(user.id)}></MdDelete>
                                  </>
                         }
                            </>

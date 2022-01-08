@@ -79,7 +79,7 @@ export default class UserAdminView extends React.Component {
                 }
                 </tbody></table>
                 <div className="Login flex-container">
-                    <button onClick={() => this.props.history.push("/")}>Povratak</button>
+                    <button onClick={() => this.props.history.push("/")}>Natrag</button>
                 </div>
                 { this.state.user_is_admin ? null : <RoleManagement user={user} roles={this.state.user_roles} did_passin_roles={true} /> }
             </ComponentCard>

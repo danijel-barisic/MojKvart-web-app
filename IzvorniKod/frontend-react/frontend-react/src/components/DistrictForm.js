@@ -54,8 +54,8 @@ function DistrictForm(props) {
                      <input required name='name' onChange={onChange} value={ form.name}/>
                   </div>
                   <div className='error'>{error}</div>
+                  <button className='button' type="button" onClick={() => {history.push("/kvartovi")}}>Natrag</button>
                   <button type='submit' disabled={!isValid()}>Dodaj Kvart</button>
-                  <button className='button' type="button" onClick={() => {history.push("/kvartovi")}}>Povratak</button>
                </form>
             </div>
          </Card5>

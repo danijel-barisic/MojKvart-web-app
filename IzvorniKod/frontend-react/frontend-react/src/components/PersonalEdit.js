@@ -175,8 +175,8 @@ function PersonalEdit() {
                                 <input type="number" name="streetnumber" min={selectedOption ? selectedOption.minNum: 0} max={selectedOption ? selectedOption.maxNum: 0} required onChange={onChange} value={editForm.streetnumber}/>
                             </div>
                             <div className='error'>{error}</div>
+                            <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
                             <button className='submit' type='submit'>Potvrdi promjene</button>
-                            <button className='button' type="button" onClick={() => {history.goBack()}}>Povratak</button>
                         </form>
                     </div>
                 </div>
@@ -205,8 +205,8 @@ function PersonalEdit() {
                                 <input name='password' required type='password' onChange={onChange} value={ editForm.password}/>
                             </div>
                             <div className='error'>{error}</div>
+                            <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
                             <button className='submit' type='submit'>Potvrdi promjene</button>
-                            <button className='button' type="button" onClick={() => {history.goBack()}}>Povratak</button>
                         </form>
                     </div>
                 </div>

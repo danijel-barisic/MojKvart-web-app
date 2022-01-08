@@ -51,11 +51,11 @@ function Districts() {
                      return ([
                         <div className="wrapper2">
                            <div className="inner">
-                              <District key={district.id} district={district} />
+                              <District key={district.id} district={district}/>
                            </div>
                            <div className="pad">
                            <div className="inner">
-                              <MdDelete style={{color:"red" ,cursor:"pointer"}} onClick={() => deleteDistrict(district.id)}></MdDelete>
+                              <MdDelete style={{color:"#A555B9" ,cursor:"pointer", width: "28px", height: "28px"}} onClick={() => deleteDistrict(district.id)}></MdDelete>
                            </div>
                            </div>
                         </div>

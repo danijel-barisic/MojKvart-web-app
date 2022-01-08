@@ -91,8 +91,8 @@ const PostEditForm = () => {
                     <textarea rows={6} cols={50} required name='content' onChange={onChange} value={ form.content} defaultValue= {posts.content}/>
                  </div>
                  <div className='error'>{error}</div>
-                 <button classname='submit' type='submit' disabled={!isValid()} >Uredi objavu</button>
                  <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
+                 <button classname='submit' type='submit' disabled={!isValid()} >Uredi objavu</button>
               </form>
            </div>
         </Card16>

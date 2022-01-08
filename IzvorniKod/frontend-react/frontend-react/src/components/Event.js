@@ -134,7 +134,7 @@ function Event(props) {
                 {(event.status == 0) ? 
                     <div className="Login flex-container-row">
                         <div style={{margin: "auto"}}>
-                            <button className='button' type="button" onClick={() => {history.goBack()}}>Povratak</button>
+                            <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
                             <button className='button' type="button" onClick={() => {history.push(`/dogadjaji/uredi/${event.id}`)}}>Uredi</button>
                             {
                                 (roles.filter(r => r.name === "Moderator").length > 0) ?
@@ -148,7 +148,7 @@ function Event(props) {
                     </div>
                 : <div className="Login flex-container-row">
                 <div style={{margin: "auto"}}>
-                    <button className='button' type="button" onClick={() => {history.goBack()}}>Povratak</button>
+                    <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
                     </div>
             </div>}
             </Card14>

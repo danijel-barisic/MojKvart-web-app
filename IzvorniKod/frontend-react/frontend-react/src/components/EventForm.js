@@ -114,8 +114,8 @@ function EventForm() {
                     </div>
                     <div>
                         <div className='error'>{error}</div>
+                        <button className="button" type="button" onClick={() => {history.push("/dogadjaji")}}>Natrag</button>
                         <button className="button" type="submit" disabled={!isValid()}>Pošalji prijedlog</button>
-                        <button className="button" type="button" onClick={() => {history.push("/dogadjaji")}}>Povratak</button>
                     </div>
                 </form>
             </div>

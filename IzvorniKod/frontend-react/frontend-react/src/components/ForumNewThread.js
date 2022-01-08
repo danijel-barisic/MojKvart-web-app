@@ -114,8 +114,8 @@ function ForumNewThread(props) {
                   <input required name='name' onChange={onChange} value={ form.name}/>
                </div>
                <div className='error'>{error}</div>
-               <button classname='submit' type='submit' disabled={!isValid()}>Stvori temu</button>
                <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
+               <button classname='submit' type='submit' disabled={!isValid()}>Stvori temu</button>
             </form>
          </div>
       </Card16>

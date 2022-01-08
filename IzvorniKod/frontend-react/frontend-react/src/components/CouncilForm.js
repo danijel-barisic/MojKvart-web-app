@@ -112,8 +112,8 @@ function CouncilForm() {
                     </div>
                     <div>
                         <div className='error'>{error}</div>
+                        <button className="button" type="button" onClick={() => {history.push("/vijece")}}>Natrag</button>
                         <button className="button" type="submit" disabled={!isValid()}>Objavi izvješće</button>
-                        <button className="button" type="button" onClick={() => {history.push("/vijece")}}>Povratak</button>
                     </div>
                 </form>
             </div>

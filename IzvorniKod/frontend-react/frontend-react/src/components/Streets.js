@@ -56,7 +56,7 @@ function Streets(props) {
                               <Street key={street.id} street={street} props={props}/>
                            </div>
                            <div className="inner">
-                              <FaTimes style={{color:"red" ,cursor:"pointer"}} onClick={() => deleteStreet(street.id)}></FaTimes>
+                              <FaTimes style={{color:"#A555B9" ,cursor:"pointer"}} onClick={() => deleteStreet(street.id)}></FaTimes>
                            </div>
                         </div>
                      ]);
