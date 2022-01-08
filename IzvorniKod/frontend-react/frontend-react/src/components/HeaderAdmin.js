@@ -31,6 +31,7 @@ function HeaderAdmin(props) {
    return (
       <header className='header'>
          <Link className='logo active' to='/'>MOJ KVART </Link>
+         <div style={{ fontSize:"5px"}}> <tbf> Grad spava, svi snivaju slatko</tbf></div>
          <Logo style={{ width: "150px", height: "50px"}} />
          <div className='header-right'>
             <Link to='/korisnici' >KORISNICI </Link>
