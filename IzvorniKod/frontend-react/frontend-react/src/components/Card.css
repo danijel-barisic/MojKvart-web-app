@@ -370,3 +370,22 @@
    max-width: 350px;
    margin: auto;
 }
+
+.Card12 {
+  border-radius: 16px;
+  display: flex;
+  align-items: normal;
+  flex-direction: column;
+  margin: -1px 20px 20px 20px;
+  padding: 16px;
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.6);
+  background-color: #272C49;
+  max-width: 350px;
+  margin: auto;
+}
+
+.flex-container-row {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}

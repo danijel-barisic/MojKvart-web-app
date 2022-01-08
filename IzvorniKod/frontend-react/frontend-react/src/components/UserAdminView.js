@@ -5,6 +5,7 @@ import RoleManagement from "./RoleManagement";
 import * as authentication from "../authentication" // iako, mislim da se odmah na routerima onemogučio pristup
 import ComponentCard from "./ComponentCard"
 import CardClone from "./CardClone";
+import "./Card.css";
 
 /* user
 accountNonExpired: true
@@ -58,6 +59,7 @@ export default class UserAdminView extends React.Component {
             return <Card title="Čekajte da se korisnik učita" />;
         }
         const district = user.district || { name: "nema informacije", id: "?" };
+
         return (
             <>
             <div className="current-title">{user.username}</div>
@@ -76,6 +78,9 @@ export default class UserAdminView extends React.Component {
                     : null
                 }
                 </tbody></table>
+                <div className="Login flex-container">
+                    <button onClick={() => this.props.history.push("/")}>Povratak</button>
+                </div>
                 { this.state.user_is_admin ? null : <RoleManagement user={user} roles={this.state.user_roles} did_passin_roles={true} /> }
             </ComponentCard>
             </>

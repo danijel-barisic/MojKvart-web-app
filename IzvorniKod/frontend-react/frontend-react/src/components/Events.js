@@ -7,6 +7,7 @@ import EventSuggestion from "./EventSuggestion"
 import EventSuggestionUser from "./EventSuggestionUser"
 import {MdEvent} from "react-icons/md"
 import {MdEventNote} from "react-icons/md"
+import Card12 from "./Card12"
 
 function Events() {
 
@@ -61,7 +62,7 @@ function Events() {
                     <MdEvent/> DOGAĐAJI
                 </div>
                 <Card>
-                    <div>
+                    <div className="flex-container-right">
                         <div className='Login'>
                             <button className='button' type="button" onClick={() => {history.push("/dogadjaji/prijedlog")}}>Predloži događaj</button>
                         </div>

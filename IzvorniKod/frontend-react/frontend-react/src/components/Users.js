@@ -176,6 +176,8 @@ function Users(props) {
          <div className="current-title">
          <ImBlocked /> BLOKIRANI KORISNICI
       </div>
+         <div style={{marginBottom: "30px"}}>
+
          <Card3>
          <div className='StreetList'>
             {users.map(function (user) {
@@ -239,6 +241,7 @@ function Users(props) {
             })}
          </div>
             </Card3>
+         </div>
             </>
          </>
       );

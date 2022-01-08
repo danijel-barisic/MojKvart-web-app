@@ -2,6 +2,7 @@ import React from "react";
 import "./Login.css"
 import Card from "./Card";
 import { useHistory } from "react-router-dom";
+import Card11 from "./Card11.js";
 
 
 function StreetForm(props) {
@@ -49,8 +50,10 @@ function StreetForm(props) {
 
 
    return (
-      <Card title="Nova Ulica">
-         <div className='StreetForm Login'>
+      <>
+      <div className="current-title">NOVA ULICA</div>
+      <Card11>
+         <div className='StreetForm Login flex-container'>
             <form onSubmit={onSubmit}>
                <div className='FormRow'>
                   <label>Ime</label>
@@ -73,7 +76,8 @@ function StreetForm(props) {
                <button className='button' type="button" onClick={() => {history.goBack()}}>Nartag</button>
             </form>
          </div>
-      </Card>
+      </Card11>
+      </>
    );
 }
 
