@@ -141,8 +141,8 @@ function App() {
                   <Route path='/osobno/zahtjevi_za_uloge' exact component={PerosnalRoleRequest} />
                   <Route path='/osobno/promjena_podataka' exact component={PersonalEdit}/>
                   <Route path='/dogadjaji' exact component={Events} />
-                  <Route path='/dogadjaji/:id' exact component={Event} />
                   <Route path='/dogadjaji/prijedlog' exact component={EventForm} />
+                  <Route path='/dogadjaji/dogadjaj/:id' exact component={Event} />
                   <Route path='/dogadjaji/uredi/:id' exact component={EventEditForm} />
                   <Route path='/vijece' exact component={Council} />
                   <Route path='/vijece/izvjesce/:id' exact component={CouncilMeetingReport} />
