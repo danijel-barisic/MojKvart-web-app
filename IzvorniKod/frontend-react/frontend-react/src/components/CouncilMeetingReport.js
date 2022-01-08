@@ -2,6 +2,7 @@ import React from "react"
 import Card from "./Card"
 import { useHistory } from "react-router"
 import { ReactSession } from "react-client-session"
+import Card14 from "./Card14"
 
 function CouncilMeetingReport() {
 
@@ -160,38 +161,50 @@ function CouncilMeetingReport() {
     if (meeting.account !== undefined && threads !== undefined) {
 
         return (
-            <Card title={meeting.title}>
-                <div className="inner">
-                    <div class="Event">
-                        <div>
-                            <b>Datum: </b>
-                            <span>{meeting.dateTime}</span>
-                        </div>
-                        <div>
-                            <b>Autor: </b>
-                            <span>{`${meeting.account.firstName} ${meeting.account.lastName}`}</span>
-                        </div>
-                        <div>
-                            <b>Izvješće: </b>
-                            <span>{meeting.report}</span>
-                        </div>
-                        <div className="Login">
-                            <b>Tema na Forumu: </b>
-                            {
-                                meeting.postThread === null ? 
-                                <button className='button' type="button" onClick={() => create_thread()}>Napravi temu</button> : 
-                                <button className='button' type="button" onClick={() => history.push(`/forum/${meeting.postThread.id}`)}>Skoči na temu</button>
-                            }
-                        </div>
-                        {(roles !== undefined && roles.length > 0 && roles.filter(r => r.name === "Vijecnik").length > 0) ?
+            <>
+            <div className="current-title">{meeting.title}</div>
+            <Card14>
+                <table><tbody>
+                <tr>
+                    <td className="tdd"><b>Datum: </b></td>
+                    <td className="tdd"><span>{meeting.dateTime}</span></td>
+                </tr>
+                <tr>
+                    <td className="tdd"><b>Autor: </b></td>
+                    <td className="tdd"><span>{`${meeting.account.firstName} ${meeting.account.lastName}`}</span></td>
+                </tr>
+                <tr>
+                    <td className="tdd"><b>Izvješće: </b></td>
+                    <td className="tdd"><span>{meeting.report}</span></td>
+                </tr>
+                <tr>
+                    <td className="tdd"><b>Tema na Forumu: </b></td>
+                    <td className="tdd">
+                        {
+                            meeting.postThread === null ? 
+                            <button className="role-button-purple" type="button" onClick={() => create_thread()}>Napravi temu</button> : 
+                            <button className="role-button-purple" type="button" onClick={() => history.push(`/forum/${meeting.postThread.id}`)}>Skoči na temu</button>
+                        }
+                    </td>
+                </tr>
+                </tbody></table>
+                <div className="Login flex-container-row">
+                    <div style={{margin: "auto"}}>
+                    {(roles !== undefined && roles.length > 0 && roles.filter(r => r.name === "Vijecnik").length > 0) ?
                             <div className='Login'>
+                                <button className='button' type="button" onClick={() => history.goBack()}>Povratak</button>
                                 <button className='button' type="button" onClick={() => history.push(`/vijece/izvjesce/uredi/${id}`)}>Uredi</button>
                                 <button className='button' type="button" onClick={() => deleteMeeting(meeting.id)}>Obriši</button>
                             </div>
-                        : <></>}
+                        : 
+                            <div className='Login'>
+                                <button className='button' type="button" onClick={() => history.goBack()}>Povratak</button>
+                            </div>
+                    }
                     </div>
-                </div> 
-        </Card>
+                </div>
+            </Card14>
+            </>
         )
 
     }

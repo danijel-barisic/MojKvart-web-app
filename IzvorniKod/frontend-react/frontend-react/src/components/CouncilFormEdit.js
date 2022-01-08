@@ -3,6 +3,7 @@ import Card from "./Card"
 import "./Login.css"
 import { useHistory } from "react-router"
 import { ReactSession } from "react-client-session"
+import Card15 from "./Card15"
 
 function CouncilFormEdit() {
 
@@ -63,13 +64,7 @@ function CouncilFormEdit() {
     }
 
     function is_unique(title) {
-        if (meetings.map(m => m.title).includes(title)){
-            setError("Izvješće s predloženim naslovom već postoji!")
-            return false
-        }
-        else {
-            return true
-        }
+        return true
     }
 
     function deleteMeeting(id) {
@@ -128,7 +123,9 @@ function CouncilFormEdit() {
 
     }
     if (meetings !== undefined) return (
-        <Card title="Uredi izvješće">
+        <>
+        <div className="current-title">UREDI IZVJEŠĆE</div>
+        <Card15>
             <div className="Login">
                 <form onSubmit={onSubmit}>
                     <div className="FormRow">
@@ -137,7 +134,7 @@ function CouncilFormEdit() {
                     </div>
                     <div className="FormRow">
                         <label>Sadržaj</label>
-                        <input name="report" required onChange={onChange} value = {meetingForm.report}/>
+                        <textarea rows={6} cols={50} name="report" required onChange={onChange} value = {meetingForm.report}/>
                     </div>
                     <div>
                         <div className='error'>{error}</div>
@@ -146,7 +143,8 @@ function CouncilFormEdit() {
                     </div>
                 </form>
             </div>
-        </Card>
+        </Card15>
+        </>
     )
     else return (
         <></>

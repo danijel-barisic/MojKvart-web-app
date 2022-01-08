@@ -63,7 +63,7 @@ function Council() {
                                     <h2>{meeting.title}</h2>
                                     <div className="Login flex-container-right">
                                         <div>
-                                        <button className='button' type="button" onClick={() => {history.push(history.push(`/vijece/izvjesce/${meeting.id}`))}}>Više informacija</button>
+                                        <button className='button' type="button" onClick={() => {history.push(`/vijece/izvjesce/${meeting.id}`)}}>Više informacija</button>
                                         </div>
                                     </div>
                                 </Card12>

@@ -9,28 +9,6 @@ import {MdEvent} from "react-icons/md"
 import {MdEventNote} from "react-icons/md"
 import Card12 from "./Card12"
 
-/*
-                                {confirmed.map(function (event){
-                                    return (
-                                        <div className='inner'>
-                                            <Event event={event}/>
-                                        </div>
-                                    )
-                                })}
-
-                                {unconfirmed.map(function (ev){
-                                    return (
-                                        <div className='inner'>
-                                            <EventSuggestion event={ev}/>
-                                        </div>
-                                    )
-                                })}
-
-
-
-
-                                */
-
 function Events() {
 
     const [events, setEvents] = React.useState([])
@@ -163,7 +141,7 @@ function Events() {
                     <MdEventNote/> MOJI PRIJEDLOZI DOGAĐAJA
                 </div>
                 <div className="grid-father">
-                    {unconfirmed.map(function (event) {
+                    {my_unconfirmed.map(function (event) {
                         return (
                             <Card12>
                                 <h2>{event.name}</h2>

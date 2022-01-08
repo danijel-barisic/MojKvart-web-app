@@ -3,6 +3,7 @@ import Card from "./Card"
 import "./Login.css"
 import { useHistory } from "react-router"
 import { ReactSession } from "react-client-session"
+import Card15 from "./Card15"
 
 function CouncilForm() {
 
@@ -96,7 +97,9 @@ function CouncilForm() {
     }
 
     if (meetings !== undefined) return (
-        <Card title="Novo izvješće">
+        <>
+        <div className="current-title">NOVO IZVJEŠĆE</div>
+        <Card15>
             <div className="Login">
                 <form onSubmit={onSubmit}>
                     <div className="FormRow">
@@ -105,7 +108,7 @@ function CouncilForm() {
                     </div>
                     <div className="FormRow">
                         <label>Sadržaj</label>
-                        <input name="report" required onChange={onChange} value = {meetingForm.report}/>
+                        <textarea rows={6} cols={50} name="report" required onChange={onChange} value = {meetingForm.report}/>
                     </div>
                     <div>
                         <div className='error'>{error}</div>
@@ -114,7 +117,8 @@ function CouncilForm() {
                     </div>
                 </form>
             </div>
-        </Card>
+        </Card15>
+        </>
     )
     else return (
         <></>
