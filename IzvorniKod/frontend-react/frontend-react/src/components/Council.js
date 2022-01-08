@@ -4,6 +4,7 @@ import CouncilMeetingCard from "./CouncilMeetingCard"
 import "./Login.css"
 import { useHistory } from "react-router"
 import { ReactSession } from "react-client-session"
+import {FaPenAlt} from 'react-icons/fa'
 
 function Council() {
 
@@ -39,30 +40,19 @@ function Council() {
     }, [account])
 
     if (meetings !== undefined && roles !== undefined && roles.length > 0) {
-        if (roles.filter(r => r.name === "Vijecnik").length > 0) return (
+        return (
+            <>
+            <div className="current-title">
+                <FaPenAlt/> VIJEĆE ČETVRTI
+            </div>
             <Card title="Izvješća s Vijeća četvrti">
+                {(roles.filter(r => r.name === "Vijecnik").length > 0) ?
                 <div>
                     <div className='Login'>
                         <button className='button' type="button" onClick={() => {history.push("/vijece/novo_izvjesce")}}>Novo izvješće</button>
                     </div>
                 </div>
-                <div>
-                    <div className='innerEvent'>
-                        <div className='wrapper'>
-                            {meetings.map(function (meeting) {
-                                return (
-                                    <div className="inner">
-                                        <CouncilMeetingCard meeting={meeting}/>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
-                </div>
-            </Card>
-        )
-        else return (
-            <Card title="Izvješća s Vijeća četvrti">
+                : <></>}
                 <div>
                     <div className='innerEvent'>
                         <div className='wrapper'>
@@ -77,6 +67,7 @@ function Council() {
                     </div>
                 </div>
             </Card>
+            </>
         )
     }
     else return (

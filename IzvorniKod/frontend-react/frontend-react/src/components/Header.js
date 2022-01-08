@@ -52,7 +52,7 @@ function Header(props) {
                <Logo style={{ width: "150px", height: "50px"}} />
                <div className='header-right'>
                   <Link to='/forum' >FORUM </Link>
-                  <Link to='/dogadjaji' >DOGAĐANJA </Link>
+                  <Link to='/dogadjaji' >DOGAĐAJI </Link>
                   <Link to='/vijece' >VIJEĆE ČETVRTI </Link>
                   <Link to='/osobno' >OSOBNI PODACI </Link>
                   {renderButton()}

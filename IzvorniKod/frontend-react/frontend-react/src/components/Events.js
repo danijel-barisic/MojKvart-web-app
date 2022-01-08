@@ -5,6 +5,8 @@ import { useHistory } from "react-router"
 import { ReactSession } from "react-client-session"
 import EventSuggestion from "./EventSuggestion"
 import EventSuggestionUser from "./EventSuggestionUser"
+import {MdEvent} from "react-icons/md"
+import {MdEventNote} from "react-icons/md"
 
 function Events() {
 
@@ -55,7 +57,10 @@ function Events() {
     if (events !== undefined && roles !== undefined && roles.length > 0) {
         if (roles.filter(r => r.name === "Moderator").length > 0) return (
             <>
-                <Card title='Događaji'>
+                <div className="current-title">
+                    <MdEvent/> DOGAĐAJI
+                </div>
+                <Card>
                     <div>
                         <div className='Login'>
                             <button className='button' type="button" onClick={() => {history.push("/dogadjaji/prijedlog")}}>Predloži događaj</button>
@@ -75,7 +80,10 @@ function Events() {
                         </div>
                     </div>
                 </Card>
-                <Card title='Prijedlozi događaja'>
+                <div className="current-title">
+                    <MdEventNote/> PRIJEDLOZI DOGAĐAJA
+                </div>
+                <Card>
                     <div>
                         <div className='innerEvent'>
                             <div className='wrapper'>
@@ -94,7 +102,10 @@ function Events() {
         )
         else if (my_unconfirmed !== undefined && my_unconfirmed.length > 0) return (
             <>
-                <Card title='Događaji'>
+                <div className="current-title">
+                    <MdEvent/> DOGAĐAJI
+                </div>
+                <Card>
                     <div>
                         <div className='Login'>
                             <button className='button' type="button" onClick={() => {history.push("/dogadjaji/prijedlog")}}>Predloži događaj</button>
@@ -114,7 +125,10 @@ function Events() {
                         </div>
                     </div>
                 </Card>
-                <Card title="Moji nepotvrđeni događaji">
+                <div className="current-title">
+                    <MdEventNote/> MOJI PRIJEDLOZI DOGAĐAJA
+                </div>
+                <Card>
                     <div>
                         <div className='innerEvent'>
                             <div className='wrapper'>
