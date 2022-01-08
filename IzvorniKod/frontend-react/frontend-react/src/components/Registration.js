@@ -173,8 +173,8 @@ function Registration(props) {
                   <input type="number" name="streetnumber" min={selectedOption ? selectedOption.minNum: 0} max={selectedOption ? selectedOption.maxNum: 0} required onChange={onChange} />
                   </div>
                <div className='error'>{error}</div>
-               <button className='submit' type='submit'>Registriraj se</button>
                <button className='button' type="button" onClick={() => {history.push("/login")}}>Prijava</button>
+               <button className='submit' type='submit'>Registriraj se</button>
             </form>
          </div>
             </CardLogin>

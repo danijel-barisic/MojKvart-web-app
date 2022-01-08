@@ -89,8 +89,8 @@ function Login(props) {
                      <input name='password' type='password' required onChange={onChange} value={ loginForm.password}/>
                   </div>
                   <div className='error'>{error}</div>
-                  <button className='button' type='submit'>Prijava</button>
                   <button className='button' type="button" onClick={() => {history.push("/registration")}}>Registracija</button>
+                  <button className='button' type='submit'>Prijavi se</button>
                </form>
             </div>
          </CardLogin>
