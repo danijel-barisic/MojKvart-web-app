@@ -12,7 +12,6 @@ import {BsPeopleFill} from 'react-icons/bs'
 import {ImBlocked} from 'react-icons/im'
 import Card3 from "./Card3";
 
-
 function Users(props) {
    const [users, setUsers] = React.useState([]);
    const [updated, setUpdated] = React.useState(new Date());
