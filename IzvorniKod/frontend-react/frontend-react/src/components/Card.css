@@ -100,7 +100,7 @@
 }
 
 .CardThreadView .wrapperTV{
-    background-color: #232323;
+    background-color: #272c49;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -640,4 +640,11 @@
   background-color: #272c49;
   max-width:500px;
   margin: auto;
+}
+
+.flex-container-padding {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 16px;
 }

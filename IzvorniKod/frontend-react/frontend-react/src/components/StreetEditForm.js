@@ -82,8 +82,8 @@ function StreetEditForm(props) {
                   <input required name='districtId' onChange={onChange} placeholder={id} value={ form.districtId}/>
                </div>
                <div className='error'>{error}</div>
-               <button classname='submit' type='submit' disabled={!isValid()}>Ažuriraj</button>
                <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
+               <button classname='submit' type='submit' disabled={!isValid()}>Ažuriraj</button>
             </form>
          </div>
       </Card11>

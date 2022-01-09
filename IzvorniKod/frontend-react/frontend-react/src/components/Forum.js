@@ -98,7 +98,7 @@ function Forum(props) {
                                        (role.includes("Moderator"))
                                        ?  <>
                                              <div className="inner">
-                                                <MdDelete style={{color:"#A555B9" ,cursor:"pointer"}} onClick={() => deleteThread(thread.id)}></MdDelete>
+                                                <MdDelete style={{ color: "#A555B9", cursor: "pointer", width: "28px", height: "28px"}} onClick={() => deleteThread(thread.id)}></MdDelete>
                                              </div>
                                           </>
                                        :  <></>

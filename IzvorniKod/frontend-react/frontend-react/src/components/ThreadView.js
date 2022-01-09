@@ -184,14 +184,14 @@ function ThreadView(props) {
                   </div>
                   {user.id === post.account.id || isModerator ? (
                     <>
-                      <div>
+                      <div className="flex-container-padding">
+                        <Link to={`/novaobjava/${id}/${post.id}/edit`}>
+                          <MdEdit style={{ color: "white" , width: "28px", height: "28px"}}></MdEdit>
+                        </Link>
                         <MdDelete
                           style={{ color: "#A555B9", cursor: "pointer", width: "28px", height: "28px"}}
                           onClick={() => deletePost(post.id)}
                         ></MdDelete>
-                        <Link to={`/novaobjava/${id}/${post.id}/edit`}>
-                          <MdEdit style={{ color: "white" , width: "28px", height: "28px"}}></MdEdit>
-                        </Link>
                       </div>
                     </>
                   ) : (
@@ -233,25 +233,30 @@ function ThreadView(props) {
               !isModerator &&
               rendered ? (
                 <>
-                  <div className>
+                  <div className="flex-container-padding">
+                    <Link to={`/novaobjava/${id}/${post.id}/edit`}>
+                      <MdEdit style={{ color: "white" , width: "28px", height: "28px"}}></MdEdit>
+                    </Link>
                     <MdDelete
                       style={{ color: "#A555B9", cursor: "pointer" , width: "28px", height: "28px"}}
                       onClick={() => deletePost(post.id)}
                     ></MdDelete>
-                    <Link to={`/novaobjava/${id}/${post.id}/edit`}>
-                      <MdEdit style={{ color: "white" , width: "28px", height: "28px"}}></MdEdit>
-                    </Link>
                   </div>
                 </>
               ) : isModerator && post.replyId == null ? (
                 <>
+                <div className="flex-container-padding">
+                  {
+                    (user.id === post.account.id) ?
+                    <Link to={`/novaobjava/${id}/${post.id}/edit`}>
+                      <MdEdit style={{ color: "white" , width: "28px", height: "28px"}}></MdEdit>
+                    </Link> : <></>
+                  }
                   <MdDelete
-                    style={{ color: "#A555B9", cursor: "pointer" }}
+                    style={{ color: "#A555B9", cursor: "pointer" , width: "28px", height: "28px"}}
                     onClick={() => deletePost(post.id)}
                   ></MdDelete>
-                  <Link to={`/novaobjava/${id}/${post.id}/edit`}>
-                    <MdEdit style={{ color: "white" }}></MdEdit>
-                  </Link>{" "}
+                </div>
                 </>
               ) : (
                 <></>

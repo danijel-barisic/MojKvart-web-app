@@ -7,6 +7,7 @@ import Thread from "./Thread";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 import CardNewPost from "./CardNewPost";
+import Card16 from "./Card16";
 
 
 function ThreadNewPost(props) {
@@ -104,37 +105,44 @@ function ThreadNewPost(props) {
    
    return (
       idP == undefined ? 
-         
-            <CardNewPost >
+            <>
+            <div style={{margin: "32px"}}></div>
+            <Card16 >
                <div className='NewPostArea'>
                   <form onSubmit={onSubmit}>
                      <div className='NewPostForm'>
                         <label>Raspiši se...</label>
-                        <textarea required name='content' onChange={onChange} value={ form.content}/>
+                        <textarea rows={6} cols={50} required name='content' onChange={onChange} value={ form.content}/>
                      </div>
                      <div className='error'>{error}</div>
                      <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
                      <button classname='submit' type='submit' disabled={!isValid()} >Stvori objavu</button>
                   </form>
                </div>
-            </CardNewPost>
+            </Card16>
+            </>
          
          :
-         <div className="footer2">
-            <Card title="Odgovori na objavu">
+         <>
+         <div className="current-title">
+            ODGOVORI NA OBJAVU
+         </div>
+         <div>
+            <Card16>
                <div className='StreetForm Login'>
                   <form onSubmit={onSubmitReply}>
                      <div className='FormRow'>
                         <label>Raspiši se...</label>
-                        <textarea required name='content' onChange={onChange} value={ form.content}/>
+                        <textarea rows={6} cols={50} required name='content' onChange={onChange} value={ form.content}/>
                      </div>
                      <div className='error'>{error}</div>
                      <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
                      <button classname='submit' type='submit' disabled={!isValid()}>Odgovori</button>
                   </form>
                </div>
-            </Card>
+            </Card16>
          </div>
+         </>
    );
 }
 
