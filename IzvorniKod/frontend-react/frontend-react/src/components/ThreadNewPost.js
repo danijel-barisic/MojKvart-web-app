@@ -133,7 +133,7 @@ function ThreadNewPost(props) {
                   <form onSubmit={onSubmitReply}>
                      <div className='FormRow'>
                         <label>Raspiši se...</label>
-                        <textarea rows={6} cols={50} required name='content' onChange={onChange} value={ form.content}/>
+                        <textarea required name='content' rows={6} cols={50} onChange={onChange} value={ form.content}/>
                      </div>
                      <div className='error'>{error}</div>
                      <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
