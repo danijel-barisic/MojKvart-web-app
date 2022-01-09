@@ -64,8 +64,8 @@ function DistrictEditForm(props) {
                </div>
                <div className='error'>{error}</div>
                <div class="flex-container3">
-                  <button type='submit' disabled={!isValid()}>Ažuriraj</button>
                   <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
+                  <button type='submit' disabled={!isValid()}>Ažuriraj</button>
                </div>
             </form>
          </div>
