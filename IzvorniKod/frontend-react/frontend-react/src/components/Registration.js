@@ -37,7 +37,8 @@ function Registration(props) {
    const [registrationForm, setregistrationForm] = React.useState({ firstname: '', lastname: '', email: '', password: '',streetnumber: ''});
    const [streets, setStreets] = React.useState([]);
    const [error, setError] = React.useState('');
-   const [state,setState] = React.useState({selectedOption:null})
+   const [state, setState] = React.useState({ selectedOption: null })
+   const znakovi = ["!","\'","\"","#","$","%","&","/","(",")","=","?","*","<",">","|",":",";","[","]","@"];
    
    const history = useHistory();
    var { selectedOption } = state;
@@ -132,7 +133,12 @@ function Registration(props) {
          ).catch(err => {console.log(err)});
    }
 
-   
+   function isValid() {
+      let result = znakovi.some(el => registrationForm.firstname.includes(el));
+      let result2 = znakovi.some(el => registrationForm.lastname.includes(el));
+      console.log(result, result2);
+      return !result && !result2;
+   }
 
    return (
       <>
@@ -174,7 +180,7 @@ function Registration(props) {
                   </div>
                <div className='error'>{error}</div>
                <button className='button' type="button" onClick={() => {history.push("/login")}}>Prijava</button>
-               <button className='submit' type='submit'>Registriraj se</button>
+               <button className='submit' type='submit' disabled={!isValid()}>Registriraj se</button>
             </form>
          </div>
             </CardLogin>
