@@ -1,6 +1,7 @@
 package progi.project.mojkvart.district;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import progi.project.mojkvart.account.Account;
 import progi.project.mojkvart.street.Street;
 
@@ -16,4 +17,6 @@ public interface DistrictRepository extends JpaRepository<District, Long> {
 
     List<District> findByOrderById();
 
+    @Query("SELECT coalesce(max(d.id), 0) FROM District d")
+    Long getMaxId();
 }

@@ -54,6 +54,8 @@ public class DistrictServiceJPA implements DistrictService{
     @Override
     public District createDistrict(District district) {
         Assert.isNull(district.getId(), "District ID must be null, not: " + district.getId());
+        long maxId = districtrepo.getMaxId();
+        district.setId(maxId == -1 ? 1 : maxId + 1);
         return districtrepo.save(district);
     }
 
