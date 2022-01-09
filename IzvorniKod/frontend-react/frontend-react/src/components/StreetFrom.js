@@ -72,8 +72,8 @@ function StreetForm(props) {
                   <input required name='districtId' onChange={onChange} value={ form.districtId}/>
                </div>
                <div className='error'>{error}</div>
+               <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
                <button classname='submit' type='submit' disabled={!isValid()}>Dodaj ulicu</button>
-               <button className='button' type="button" onClick={() => {history.goBack()}}>Nartag</button>
             </form>
          </div>
       </Card11>
