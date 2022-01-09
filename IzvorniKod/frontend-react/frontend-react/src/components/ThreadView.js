@@ -185,13 +185,15 @@ function ThreadView(props) {
                   {user.id === post.account.id || isModerator ? (
                     <>
                       <div className="flex-container-padding">
+                      {user.id === post.account.id   ? (
                         <Link to={`/novaobjava/${id}/${post.id}/edit`}>
                           <MdEdit style={{ color: "white" , width: "28px", height: "28px"}}></MdEdit>
-                        </Link>
+                        </Link>) : (<></>)}
+                        {user.id === post.account.id || isModerator  ? (
                         <MdDelete
                           style={{ color: "#A555B9", cursor: "pointer", width: "28px", height: "28px"}}
                           onClick={() => deletePost(post.id)}
-                        ></MdDelete>
+                        ></MdDelete>) : (<></>)}
                       </div>
                     </>
                   ) : (
