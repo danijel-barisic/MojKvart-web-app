@@ -39,6 +39,7 @@
 
 .Login button:disabled {
    color: #ddd;
+   pointer-events: none;
 }
 
 .Login .error {

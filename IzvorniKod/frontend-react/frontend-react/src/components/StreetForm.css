@@ -31,4 +31,5 @@
 
 .StudentForm button:disabled {
    color: #ddd;
+   pointer-events: none;
 }

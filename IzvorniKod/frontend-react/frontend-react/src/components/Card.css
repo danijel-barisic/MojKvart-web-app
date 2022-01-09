@@ -97,6 +97,7 @@
 
 .button2:disabled {
   color: #ddd;
+  pointer-events: none;
 }
 
 .CardThreadView .wrapperTV{
@@ -160,6 +161,7 @@
 
 .NewPostArea button:disabled {
    color: #ddd;
+   pointer-events: none;
 }
 
 .NewPostForm{
