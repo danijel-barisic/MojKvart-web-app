@@ -130,8 +130,8 @@ function EventEditForm() {
                     </div>
                     <div>
                         <div className='error'>{error}</div>
-                        <button className="button" type="submit" disabled={!isValid()}>Spremi promjene</button>
                         <button className="button" type="button" onClick={() => {history.goBack()}}>Odustani</button>
+                        <button className="button" type="submit" disabled={!isValid()}>Spremi promjene</button>
                     </div>
                 </form>
             </div>

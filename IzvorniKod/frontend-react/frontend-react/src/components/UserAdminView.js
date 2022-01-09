@@ -72,8 +72,8 @@ export default class UserAdminView extends React.Component {
                 { this.state.user_is_admin === false
                     ? <>
                         <tr><td style={{padding: "3px 15px"}}><b>Kvart:</b>                   </td><td style={{padding: "3px 15px"}}>{district.name} (id: {district.id}) </td></tr>
-                        <tr><td style={{padding: "3px 15px"}}><b>Adresa valjana:</b>          </td><td style={{padding: "3px 15px"}}>{user.addressValid + ""}            </td></tr>
-                        <tr><td style={{padding: "3px 15px"}}><b>Korisnik blokiran:</b>       </td><td style={{padding: "3px 15px"}}>{user.blocked + ""}                 </td></tr>
+                        <tr><td style={{padding: "3px 15px"}}><b>Adresa valjana:</b>          </td><td style={{padding: "3px 15px"}}>{(user.home.id == -1) ? <span>NE</span> : <span>DA</span>}            </td></tr>
+                        <tr><td style={{padding: "3px 15px"}}><b>Korisnik blokiran:</b>       </td><td style={{padding: "3px 15px"}}>{(user.blocked) ? <span>DA</span> : <span>NE</span>}               </td></tr>
                     </>
                     : null
                 }
