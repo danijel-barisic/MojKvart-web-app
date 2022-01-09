@@ -18,6 +18,7 @@ function Users(props) {
    const role = ReactSession.get(ReactSession.get("username"));
    const history = useHistory();
    const { currentId } = props;
+   let haveBlocked = false;
 
    function deleteUser(id) {
       const options = {
@@ -91,7 +92,7 @@ function Users(props) {
          <>
          <div className="current-title">
          <BsPeopleFill /> KORISNICI
-      </div>
+         </div>
          <>
          <Card3>
             <div className='StreetList'>
@@ -100,6 +101,9 @@ function Users(props) {
                   let roles = user.roles.map(function (x) {
                      return x[Object.keys(x)[1]]
                   })
+                  if (user.blocked === true) {
+                     haveBlocked = true;
+                  }
                   console.log("districtid->",district.id);
                   console.log(roles);
                   if (district.id == currentId) {
@@ -172,10 +176,16 @@ function Users(props) {
                   }
                })}
             </div>
-         </Card3>
-         <div className="current-title">
+               </Card3>
+
+         {
+                  (haveBlocked === false) 
+                     ? <>
+                     </>
+                     : <>
+                        <div className="current-title">
          <ImBlocked /> BLOKIRANI KORISNICI
-      </div>
+         </div>
          <div style={{marginBottom: "30px"}}>
 
          <Card3>
@@ -242,6 +252,8 @@ function Users(props) {
          </div>
             </Card3>
          </div>
+                     </>      
+         }
             </>
          </>
       );

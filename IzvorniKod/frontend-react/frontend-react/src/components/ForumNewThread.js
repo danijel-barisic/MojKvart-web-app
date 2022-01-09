@@ -62,15 +62,7 @@ function ForumNewThread(props) {
 
          return fetch('/threads', options).then(response => {
             if (response.ok) {
-               let last
-               console.log(allThreads)
-               if (allThreads.length == 0){
-                  last = 0
-                  history.push(`/forum/${last+1}`)
-               }else{
-               last = allThreads.at(-1).id
-               history.push(`/forum/${last+1}`)
-               }
+               history.goBack();
             } else {
                setError("Došlo je do pogreške! Pokušaj ponovo!");
                console.log(response.body);
@@ -84,7 +76,7 @@ function ForumNewThread(props) {
       const { name } = form;
       let result = name.includes("[");
       let result2 = name.includes("]");
-      return name.length > 0 && !result && !result2 && name.length < 20;
+      return name.length > 0 && !result && !result2;
    }
 
    function is_unique(name) {

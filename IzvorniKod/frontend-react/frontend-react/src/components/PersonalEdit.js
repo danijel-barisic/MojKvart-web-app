@@ -109,7 +109,7 @@ function PersonalEdit() {
         }
         fetch(`/accounts/${account.email}`, options).then(response => {
             if (response.ok) {
-                history.push("/osobno")
+                window.location.reload();
             }
         })
     }

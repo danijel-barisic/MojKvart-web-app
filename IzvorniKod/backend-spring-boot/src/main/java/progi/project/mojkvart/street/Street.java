@@ -29,7 +29,6 @@ public class Street {
     private Integer maxStreetNo;
 
     @ManyToOne
-    @Cascade(org.hibernate.annotations.CascadeType.PERSIST)
     @JoinColumn(name = "district_id")
     private District district;
 
