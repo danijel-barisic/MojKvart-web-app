@@ -55,7 +55,7 @@ function Districts() {
                            </div>
                            <div className="pad">
                            <div className="inner">
-                              <MdDelete style={{color:"#A555B9" ,cursor:"pointer", width: "28px", height: "28px"}} onClick={() => deleteDistrict(district.id)}></MdDelete>
+                              <MdDelete style={{color:"#A555B9" ,cursor:"pointer", width: "28px", height: "28px"}} onClick={() => {if (window.confirm("Jeste li sigurni da želite obrisati ovaj kvart?")) deleteDistrict(district.id)} }></MdDelete>
                            </div>
                            </div>
                         </div>

@@ -180,7 +180,7 @@ function Personal() {
                             <div className="grid-container">
                                 <button className='button' type="button" onClick={() => history.push("/osobno/promjena_podataka")}>Izmjena osobnih podataka</button>
                                 <button className='button' type="button" onClick={() => {history.push("/osobno/zahtjevi_za_uloge")}} >Zahtjevi za ulogama</button>
-                                <button className='button' type="button" onClick={() => {deleteUser()}}>Brisanje korisničkog računa</button>
+                                <button className='button' type="button" onClick={() => {if (window.confirm("Jeste li sigurni da želite obrisati svoj račun")) deleteUser()}}>Brisanje korisničkog računa</button>
                             </div>
                         </div>
                     </div>
