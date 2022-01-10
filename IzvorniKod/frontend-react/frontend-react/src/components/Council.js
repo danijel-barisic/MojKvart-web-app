@@ -6,6 +6,7 @@ import { useHistory } from "react-router"
 import { ReactSession } from "react-client-session"
 import {FaPenAlt} from 'react-icons/fa'
 import Card12 from "./Card12"
+import Card17 from "./Card17"
 
 function Council() {
 
@@ -47,7 +48,7 @@ function Council() {
                     <FaPenAlt/> VIJEĆE ČETVRTI
                 </div>
                 <div className="grid-father">
-                    <Card12>
+                    <Card17>
                             <h2>IZVJEŠĆA</h2>
                             {(roles.filter(r => r.name === "Vijecnik").length > 0) ?
                             <div className="flex-container-right">
@@ -56,7 +57,7 @@ function Council() {
                                 </div>
                             </div>
                             : <></>}
-                        </Card12>
+                        </Card17>
                         {meetings.map(function (meeting) {
                             return (
                                 <Card12>

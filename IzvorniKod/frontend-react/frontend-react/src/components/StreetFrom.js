@@ -9,6 +9,15 @@ function StreetForm(props) {
    const [form, setForm] = React.useState({ name: '', minStreetNo: '', maxStreetNo: '', districtId: ''});
    const [error, setError] = React.useState('');
    const history = useHistory();
+   const [streets, setStreets] = React.useState(undefined)
+
+   React.useEffect(() => {
+      fetch("/streets")
+         .then(data => data.json())
+         .then(data => setStreets(data))
+   }, [])
+
+   console.log(streets)
 
    function onChange(event) {
       const { name, value } = event.target;
@@ -17,30 +26,38 @@ function StreetForm(props) {
 
    function onSubmit(e) {
       e.preventDefault();
-      const data = {
-         name: form.name,
-         minStreetNo: form.minStreetNo,
-         maxStreetNo: form.maxStreetNo,
-         district: {
-            id: form.districtId
-         }
-      };
-      const options = {
-         method: 'POST',
-         headers: {
-            'Content-Type': 'application/json'
-         },
-         body: JSON.stringify(data)
-      };
 
-      return fetch('/streets', options).then(response => {
-         if (response.ok) {
-            history.goBack();
-         } else {
-            setError("District with given id doesnt exist!");
-            console.log(response.body);
-         }
-      });
+      if (streets.filter(s => s.district.id == form.districtId).map(s => s.name).includes(form.name)) {
+         setError("U odabranom kvartu ulica s predloženim imenom već postoji!")
+      }
+
+      else {
+
+         const data = {
+            name: form.name,
+            minStreetNo: form.minStreetNo,
+            maxStreetNo: form.maxStreetNo,
+            district: {
+               id: form.districtId
+            }
+         };
+         const options = {
+            method: 'POST',
+            headers: {
+               'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+         };
+
+         return fetch('/streets', options).then(response => {
+            if (response.ok) {
+               history.goBack();
+            } else {
+               setError("Kvart s danim id-jem ne postoji!");
+               console.log(response.body);
+            }
+         });
+      }
    }
 
    function isValid() {
@@ -48,7 +65,7 @@ function StreetForm(props) {
       return name.length > 0 && !isNaN(minStreetNo) && !isNaN(maxStreetNo) && !isNaN(districtId);
    }
 
-
+   if (streets !== undefined) 
    return (
       <>
       <div className="current-title">NOVA ULICA</div>
@@ -60,15 +77,15 @@ function StreetForm(props) {
                   <input required name='name' onChange={onChange} value={ form.name}/>
                </div>
                <div className='FormRow'>
-                  <label>MinStreetNo</label>
+                  <label>Najmanji broj u ulici</label>
                   <input required name='minStreetNo' onChange={onChange} value={ form.minStreetNo}/>
                </div>
                <div className='FormRow'>
-                  <label>MaxStreetNo</label>
+                  <label>Najveći broj u ulici</label>
                   <input required name='maxStreetNo' onChange={onChange} value={ form.maxStreetNo}/>
                </div>
                <div className='FormRow'>
-                  <label>DistrictId</label>
+                  <label>Id kvarta</label>
                   <input required name='districtId' onChange={onChange} value={ form.districtId}/>
                </div>
                <div className='error'>{error}</div>
@@ -78,7 +95,8 @@ function StreetForm(props) {
          </div>
       </Card11>
       </>
-   );
+   )
+   else return (<></>)
 }
 
 export default StreetForm;

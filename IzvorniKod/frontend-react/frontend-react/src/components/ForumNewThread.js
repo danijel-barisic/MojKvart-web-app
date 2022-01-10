@@ -42,32 +42,38 @@ function ForumNewThread(props) {
 
    function onSubmit(e) {
       e.preventDefault();
-      const data = {
-         name: form.name,
-         district: {
-            id: district.id
-         },
-         account: {
-            id: account.id
-         }
-      };
-      if (is_unique(data.name)) {
-         const options = {
-            method: 'POST',
-            headers: {
-               'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-         };
 
-         return fetch('/threads', options).then(response => {
-            if (response.ok) {
-               history.goBack();
-            } else {
-               setError("Došlo je do pogreške! Pokušaj ponovo!");
-               console.log(response.body);
+      if (form.name.length > 30) {
+         setError("Naslov teme može sadržavati maksimalno 30 znakova!")
+      }
+      else {
+         const data = {
+            name: form.name,
+            district: {
+               id: district.id
+            },
+            account: {
+               id: account.id
             }
-         });
+         };
+         if (is_unique(data.name)) {
+            const options = {
+               method: 'POST',
+               headers: {
+                  'Content-Type': 'application/json'
+               },
+               body: JSON.stringify(data)
+            };
+
+            return fetch('/threads', options).then(response => {
+               if (response.ok) {
+                  history.goBack();
+               } else {
+                  setError("Došlo je do pogreške! Pokušaj ponovo!");
+                  console.log(response.body);
+               }
+            });
+         }
       }
    }
    //console.log(allThreads.at(-1))
@@ -76,7 +82,7 @@ function ForumNewThread(props) {
       const { name } = form;
       let result = name.includes("[");
       let result2 = name.includes("]");
-      return name.length > 0 && !result && !result2 && name.length < 20;
+      return name.length > 0 && !result && !result2;
    }
 
    function is_unique(name) {

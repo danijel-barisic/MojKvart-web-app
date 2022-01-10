@@ -32,7 +32,7 @@ function DistrictForm(props) {
             history.push('/kvartovi');
          }
          else {
-            setError("District with given name already exist!");
+            setError("Kvart s predloženim imenom već postoji!");
             console.log(response.body);
          }
       });

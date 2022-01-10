@@ -11,34 +11,52 @@ function DistrictEditForm(props) {
    const { id } = props.location.state;
    console.log({id});
 
+   const [districts, setDistricts] = React.useState(undefined)
+
    function onChange(event) {
       const { name, value } = event.target;
       setForm(oldForm => ({...oldForm, [name]: value}))
    }
 
+   React.useEffect(() => {
+      fetch('/districts')
+         .then(data => data.json())
+         .then(data => setDistricts(data
+            .filter(d => d.id != -1)))
+   }, [])
+
+   console.log(districts)
+
    function onSubmit(e) {
       e.preventDefault();
-      const data = {
-         id: id,
-         name: form.name
-      };
-      const options = {
-         method: 'PUT',
-         headers: {
-            'Content-Type': 'application/json'
-         },
-         body: JSON.stringify(data)
-      };
 
-      return fetch(`/districts/${id}`, options).then(response => {
-         if (response.ok) {
-            history.push('/kvartovi');
-         }
-         else {
-            setError("District with given name already exist!");
-            console.log(response.body);
-         }
-      });
+      if (districts.filter(d => d.id != id).map(d => d.name).includes(form.name)) {
+         setError("Kvart s predloženim imenom već postoji!")
+      }
+
+      else {
+         const data = {
+            id: id,
+            name: form.name
+         };
+         const options = {
+            method: 'PUT',
+            headers: {
+               'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+         };
+
+         return fetch(`/districts/${id}`, options).then(response => {
+            if (response.ok) {
+               history.push('/kvartovi');
+            }
+            else {
+               setError("Kvart s predloženim imenom već postoji!");
+               console.log(response.body);
+            }
+         });
+      }
    }
 
    function isValid() {
@@ -52,7 +70,7 @@ function DistrictEditForm(props) {
          .then(district => setDistrict(district))
    }, []);
 
-   return (
+   if (districts !== undefined) return (
       <>
       <div className="current-title">PROMJENA IMENA KVARTA</div>
       <Card10>
@@ -71,7 +89,8 @@ function DistrictEditForm(props) {
          </div>
       </Card10>
       </>
-   );
+   )
+   else return (<></>)
 }
 
 export default DistrictEditForm;

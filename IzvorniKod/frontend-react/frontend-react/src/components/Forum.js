@@ -10,6 +10,7 @@ import CardForum from "./CardForum";
 import {HiFolderOpen} from 'react-icons/hi'
 import Card50 from "./Card50.js";
 import Card12 from "./Card12";
+import Card17 from "./Card17";
 
 function Forum(props) {
    const [threads, setThreads] = React.useState([]);
@@ -77,10 +78,10 @@ function Forum(props) {
             </div> */}
             <div className="sub-header"></div>
             <div className="grid-father">
-               <Card12>
+               <Card17>
                   <h2>TEME</h2>
                   <button className='button-purple' type="button" onClick={() => {history.push("/novatema")}}>Dodaj temu</button>
-               </Card12>
+               </Card17>
                {threads.map(function (thread) {
                   userid = users.id;
                   let role = roles.map(function (x) {

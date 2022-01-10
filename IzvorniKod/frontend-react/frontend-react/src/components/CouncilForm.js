@@ -58,26 +58,34 @@ function CouncilForm() {
             }
         }
 
-        if (is_unique(data.title)) {
-            
-            const options = {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            }
-    
-            return fetch("/council", options).then(response => {
-                if (response.ok) {
-                    history.push('/vijece')
-                }
-                else {
-                    setError("Prijedlog događaja nije moguće objaviti.");
-                    console.log(response.body)
-                }
-            })
+        if (meetingForm.title.length > 25) {
+            setError("Naslov izvješća smije sadržavati maksimalno 25 znakova!")
         }
+
+        else {
+
+            if (is_unique(data.title)) {
+                
+                const options = {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                }
+        
+                return fetch("/council", options).then(response => {
+                    if (response.ok) {
+                        history.push('/vijece')
+                    }
+                    else {
+                        setError("Prijedlog događaja nije moguće objaviti.");
+                        console.log(response.body)
+                    }
+                })
+            }
+        }
+
 
     }
 

@@ -8,6 +8,7 @@ import EventSuggestionUser from "./EventSuggestionUser"
 import {MdEvent} from "react-icons/md"
 import {MdEventNote} from "react-icons/md"
 import Card12 from "./Card12"
+import Card17 from "./Card17"
 
 function Events() {
 
@@ -62,14 +63,14 @@ function Events() {
                     <MdEvent/> DOGAĐAJI
                 </div>
                 <div className="grid-father">
-                    <Card12>
+                    <Card17>
                         <h2>POTVRĐENI DOGAĐAJI</h2>
                         <div className="flex-container-right">
                             <div>
                                 <button className='button-purple' type="button" onClick={() => {history.push("/dogadjaji/prijedlog")}}>Predloži događaj</button>
                             </div>
                         </div>
-                    </Card12>
+                    </Card17>
                     {confirmed.map(function (event) {
                         console.log(event)
                         return (
@@ -113,14 +114,14 @@ function Events() {
                     <MdEvent/> DOGAĐAJI
                 </div>
                 <div className="grid-father">
-                    <Card12>
+                    <Card17>
                         <h2>POTVRĐENI DOGAĐAJI</h2>
                         <div className="flex-container-right">
                             <div>
                                 <button className='button-purple' type="button" onClick={() => {history.push("/dogadjaji/prijedlog")}}>Predloži događaj</button>
                             </div>
                         </div>
-                    </Card12>
+                    </Card17>
                     {confirmed.map(function (event) {
                         console.log(event)
                         return (

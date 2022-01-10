@@ -650,3 +650,18 @@
   flex-direction: row;
   padding: 16px;
 }
+
+.Card17 {
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  margin: 20px;
+  padding: 15px;
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.6);
+  background-color: #272c49;
+  width: 1000px;
+  max-height: 50px;
+  margin: auto;
+  justify-content: space-between;
+  border: 2px solid white;
+}

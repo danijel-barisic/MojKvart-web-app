@@ -60,37 +60,45 @@ function EventEditForm() {
             account: oldEvent.account
         }
 
-        const options = {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
+        var d1 = new Date(eventForm.date)
+        var d2 = new Date()
+        d1.setHours(0,0,0,0)
+        d2.setHours(0,0,0,0)
+
+        if (d1 - d2 < 0) {
+            setError("Ne možete predložiti događaj u prošlosti!")
         }
 
-        return fetch(`/events/${data.id}`, options).then(response => {
+        else {
 
-            if (response.ok) {
-                history.goBack()
+            const options = {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
             }
+    
+            return fetch(`/events/${data.id}`, options).then(response => {
+    
+                if (response.ok) {
+                    history.goBack()
+                }
+    
+                else {
+                    setError("Prijedlog događaja nije moguće objaviti.");
+                    console.log(response.body)
+                }
+            })
+        }
 
-            else {
-                setError("Prijedlog događaja nije moguće objaviti.");
-                console.log(response.body)
-            }
-        })
     }
 
     function isValid() {
         const {name, description, location, hours, minutes, date, time} = eventForm
-        var d1 = new Date(date)
-        var d2 = new Date()
-        d1.setHours(0,0,0,0)
-        d2.setHours(0,0,0,0)
         return name.length > 0 && description.length > 0 && 
             location.length > 0 && date.length > 0 && time.length > 0 &&
             parseInt(hours) >= 0 && parseInt(minutes) >= 0 && parseInt(minutes) < 60
-            && d1 - d2 >= 0
     }
 
     return (
