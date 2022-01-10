@@ -167,7 +167,7 @@
     }
 			\end{lstlisting}
 
-			Na slici 5.2.1 je prikazana je snimka zaslona terminala u IntelliJ IDE-u, kao rezultat izvođenja prethodno navedenih šest ispitnih slučajeva.
+			Na slici 5.1 je prikazana je snimka zaslona terminala u IntelliJ IDE-u, kao rezultat izvođenja prethodno navedenih šest ispitnih slučajeva.
 
 			\begin{figure}[H]
 					\centering
@@ -286,7 +286,7 @@ def test5() -> bool:
     return True
 			\end{lstlisting}
 
-			Na slici 5.2.2 prikazana je snimka zaslona terminala kao rezultat izvođenja prethodno navedenih pet ispitnih slučajeva.
+			Na slici 5.2 prikazana je snimka zaslona terminala kao rezultat izvođenja prethodno navedenih pet ispitnih slučajeva.
 
 			\begin{figure}[H]
 					\centering
@@ -309,13 +309,38 @@ def test5() -> bool:
 			\eject
 
 		\section{Upute za puštanje u pogon}
+		
+		
+		Potrebno je napraviti korisnički račun na Heroku i zatim odabirom opcije "New app" stvoriti dvije aplikacije, jednu za frontend i jednu za backend.
+		
+		S obzirom da je puštanje u pogon značajno jednostavnije s Githuba nego s Gitlaba, potrebno je neki, npr. osobni Github račun, povezati s Heroku računom i potom klonirati projekt dva puta. U prvom kloniranom projektu je potrebno u root direktorij premjestiti sadržaj poddirektorija IzvorniKod/backend-spring-boot, a ostatak sadržaja projekta obrisati. U drugom je projektu potrebno učiniti istu stvar za sadržaj poddirektorija IzvorniKod/frontend-react. Zatim je u svakom projektu na main grani potrebno odabrati opciju "Deploy to Heroku". 
+		
+		Na Heroku Vas dočeka stranica poput one na slici 5.4. Kada ste u pogon pustili frontend i backend, potrebno je u datoteku .env.production na frontend projektu napisati točan URL na kojem se nalazi backend. Primjer je pokazan na slici 5.5.
 
-			\textbf{\textit{dio 2. revizije}}\\
-
-			 \textit{U ovom poglavlju potrebno je dati upute za puštanje u pogon (engl. deployment) ostvarene aplikacije. Na primjer, za web aplikacije, opisati postupak kojim se od izvornog kôda dolazi do potpuno postavljene baze podataka i poslužitelja koji odgovara na upite korisnika. Za mobilnu aplikaciju, postupak kojim se aplikacija izgradi, te postavi na neku od trgovina. Za stolnu (engl. desktop) aplikaciju, postupak kojim se aplikacija instalira na računalo. Ukoliko mobilne i stolne aplikacije komuniciraju s poslužiteljem i/ili bazom podataka, opisati i postupak njihovog postavljanja. Pri izradi uputa preporučuje se \textbf{naglasiti korake instalacije uporabom natuknica} te koristiti što je više moguće \textbf{slike ekrana} (engl. screenshots) kako bi upute bile jasne i jednostavne za slijediti.}
-
-
-			 \textit{Dovršenu aplikaciju potrebno je pokrenuti na javno dostupnom poslužitelju. Studentima se preporuča korištenje neke od sljedećih besplatnih usluga: \href{https://aws.amazon.com/}{Amazon AWS}, \href{https://azure.microsoft.com/en-us/}{Microsoft Azure} ili \href{https://www.heroku.com/}{Heroku}. Mobilne aplikacije trebaju biti objavljene na F-Droid, Google Play ili Amazon App trgovini.}
-
+		Konačni je korak napuniti bazu s nekom .sql skriptom. Pri puštanju u pogon backenda, automatski se stvori i baza podataka. Na slici 5.4 vidljiva je poveznica "Resources". Potrebno je odabrati ju, zatim je potrebno pod "add-ons" odabrati "heroku postgres" i dočekaju Vas podaci slični onima na slici 5.6. Zatim je potrebno otvoriti pgAdmin, i odabrati opciju "Create Server", kao što je prikazano na slici 5.7. Dalje je potrebno slijediti upute i unijeti podatke poput onih na slici 5.6, i konačno, kada je baza podataka povezana lokalno s pgAdminom, potrebno je odabirom na "Query tool" unijeti željenu .sql skriptu.
+		
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth,keepaspectratio]{20 heroku screenshot.png}
+					\caption{Prikaz aplikacije na poslužitelju Heroku}
+				\end{figure}
+				
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth,keepaspectratio]{21 URL config.png}
+					\caption{Povezivanje frontenda i backenda}
+				\end{figure}
+				
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth,keepaspectratio]{22 baza podaci.png}
+					\caption{Podaci za pristup bazi}
+				\end{figure}
+				
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth,keepaspectratio]{23 baza povezivanje.png}
+					\caption{Pristup bazi lokalno u pgAdminu}
+				\end{figure}
 
 			\eject
