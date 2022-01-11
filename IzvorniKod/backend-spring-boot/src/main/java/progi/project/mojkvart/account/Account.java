@@ -1,15 +1,18 @@
 package progi.project.mojkvart.account;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Cascade;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import progi.project.mojkvart.district.District;
 import progi.project.mojkvart.event.Event;
 import progi.project.mojkvart.home.Home;
 import progi.project.mojkvart.meeting.Meeting;
 import progi.project.mojkvart.role.Role;
 import progi.project.mojkvart.role_request.RoleRequest;
 import progi.project.mojkvart.post.Post;
+import progi.project.mojkvart.thread.PostThread;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -44,28 +47,30 @@ public class Account implements UserDetails {
     private boolean isAddressValid;
 
     // only CascadeType.REMOVE is left out, because we don't want to remove accounts when we remove a role
-    @JsonIgnore
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE,
-                    CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)/*(cascade = {CascadeType.DETACH, CascadeType.MERGE,
+            CascadeType.PERSIST, CascadeType.REFRESH} */
     @JoinTable(name = "account_role",
             joinColumns = @JoinColumn(name = "account_id"), // joinColumns is for THIS entity
             inverseJoinColumns = @JoinColumn(name = "role_id")) // inverse is for the OTHER entity
     private List<Role> roles;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", cascade = {CascadeType.REMOVE})
     private List<RoleRequest> roleRequests;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", cascade = {CascadeType.REMOVE})
     private List<Post> posts;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", cascade = {CascadeType.REMOVE})
+    private List<PostThread> threads;
+
+    @OneToMany(mappedBy = "account", cascade = {CascadeType.REMOVE})
     private List<Event> events;
 
-    @ManyToOne
-    @JoinColumn(name = "meeting_id")
-    private Meeting meeting;
+    @OneToMany(mappedBy = "account", cascade = {CascadeType.REMOVE})
+    private List<Meeting> meetings;
 
     @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "home_id")
     private Home home;
 
@@ -79,6 +84,29 @@ public class Account implements UserDetails {
         this.lastName = lastName;
         this.password = password;
         this.roles = roles;
+    }
+
+    public Account(String firstName, String lastName, String email, String password, Home home,
+                   List<Role> roles, boolean isAddressValid) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.roles = roles;
+        this.home = home;
+        this.isAddressValid = isAddressValid;
+    }
+
+    public Account(Long id, String firstName, String lastName, String email, String password, Home home,
+                   List<Role> roles, boolean isAddressValid) {
+        this.id = id;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.roles = roles;
+        this.home = home;
+        this.isAddressValid = isAddressValid;
     }
 
     public Account(String email, String password) {
@@ -134,11 +162,12 @@ public class Account implements UserDetails {
         isAddressValid = addressValid;
     }
 
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
         }
         return authorities;
     }
@@ -152,21 +181,25 @@ public class Account implements UserDetails {
         return email;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
         return !isBlocked;
     }
 
+    @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isEnabled() {
         return true;
@@ -184,17 +217,23 @@ public class Account implements UserDetails {
         this.roles = roles;
     }
 
+    public District getDistrict() {
+        return home.getStreet().getDistrict();
+    }
+
+    public Home getHome() {
+        return home;
+    }
+
+    public void setHome(Home home) {
+        this.home = home;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
                 "id=" + id +
-                ", email='" + email + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", password='" + password + '\'' +
-                ", isBlocked=" + isBlocked +
-                ", isAddressValid=" + isAddressValid +
-                ", roles='" + getRoles() + '\'' +
+                ", home=" + home.getId() +
                 '}';
     }
 }

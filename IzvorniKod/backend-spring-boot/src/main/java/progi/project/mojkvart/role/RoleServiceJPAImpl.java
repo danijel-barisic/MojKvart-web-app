@@ -15,7 +15,7 @@ public class RoleServiceJPAImpl implements RoleService{
 
     @Override
     public List<Role> listAll() {
-        return roleRepo.findAll();
+        return roleRepo.findByOrderById();
     }
 
     @Override
@@ -55,5 +55,10 @@ public class RoleServiceJPAImpl implements RoleService{
     @Override
     public boolean existsById(long id) {
         return findById(id).isPresent();
+    }
+
+    @Override
+    public Optional<Role> findByName(String name){
+        return roleRepo.findByName(name);
     }
 }

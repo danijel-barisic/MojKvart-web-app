@@ -1,5 +1,6 @@
 package progi.project.mojkvart.role;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Repository;
 import progi.project.mojkvart.role_request.RoleRequest;
 import progi.project.mojkvart.account.Account;
@@ -18,15 +19,16 @@ public class Role {
     private Long id;
 
     @Column(name = "role_name")
-    private String roleName;
+    private String name;
 
     // lazy FetchType because we don't want to immediately fetch all accounts that have the role we're fetching
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.DETACH, CascadeType.MERGE,
-                    CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.LAZY)
+            /*cascade = {CascadeType.DETACH, CascadeType.MERGE,
+                    CascadeType.PERSIST, CascadeType.REFRESH})*/
     @JoinTable(name = "account_role",
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "account_id"))
+    @JsonIgnore
     private List<Account> accounts;
 
     @OneToMany(mappedBy = "role")
@@ -36,8 +38,8 @@ public class Role {
 
     }
 
-    public Role(String roleName) {
-        this.roleName = roleName;
+    public Role(String name) {
+        this.name = name;
     }
 
     public Long getId() {
@@ -48,19 +50,19 @@ public class Role {
         this.id = id;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getName() {
+        return name;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
         return "Role{" +
                 "id=" + id +
-                ", roleName='" + roleName + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 

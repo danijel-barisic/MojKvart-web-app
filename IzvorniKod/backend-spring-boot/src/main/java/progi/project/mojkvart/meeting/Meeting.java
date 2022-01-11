@@ -35,22 +35,22 @@ public class Meeting {
     @JoinColumn(name = "district_id")
     private District district;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "meeting")
-    private List<Account> accounts;
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
 
     public Meeting() {
 
     }
 
-    public Meeting(Long id, String title, String report, LocalDate dateTime, PostThread postThread, District district, List<Account> accounts) {
+    public Meeting(Long id, String title, String report, LocalDate dateTime, PostThread postThread, District district, Account account) {
         this.id = id;
         this.title = title;
         this.report = report;
         this.dateTime = dateTime;
         this.postThread = postThread;
         this.district = district;
-        this.accounts = accounts;
+        this.account = account;
     }
 
     public Long getId() {
@@ -89,12 +89,12 @@ public class Meeting {
         this.district = district;
     }
 
-    public List<Account> getAccounts() {
-        return accounts;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
+    public void setAccounts(Account account) {
+        this.account = account;
     }
 
     public String getTitle() {

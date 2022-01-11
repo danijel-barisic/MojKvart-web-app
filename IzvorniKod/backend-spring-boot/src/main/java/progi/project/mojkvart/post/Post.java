@@ -1,5 +1,6 @@
 package progi.project.mojkvart.post;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import progi.project.mojkvart.thread.PostThread;
 import progi.project.mojkvart.account.Account;
 
@@ -25,9 +26,21 @@ public class Post {
     @Column(name = "post_datetime")
     private LocalDateTime dateTime;
 
+    @Column(name = "thread_id_saved")
+    private Long threadId;
+
     @Column(name = "post_reply_id", nullable = true)
     private Long replyId;
 
+    public PostThread getThread() {
+        return thread;
+    }
+
+    public void setThread(PostThread thread) {
+        this.thread = thread;
+    }
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "thread_id")
     private PostThread thread;
@@ -56,6 +69,14 @@ public class Post {
         this.replyId = replyId;
         this.thread = thread;
         this.account = account;
+    }
+
+    public Long getThreadId() {
+        return threadId;
+    }
+
+    public void setThreadId(Long threadId) {
+        this.threadId = threadId;
     }
 
     public Long getId() {

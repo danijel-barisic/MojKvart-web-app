@@ -7,7 +7,7 @@ import progi.project.mojkvart.account.Account;
 import javax.persistence.*;
 
 @Entity
-@Table(name="role_request")
+@Table(name = "role_request")
 public class RoleRequest {
 
     @Id
@@ -15,15 +15,15 @@ public class RoleRequest {
     @Column(name = "role_request_id")
     private Long id;
 
-    @Column(name="role_request_status")
+    @Column(name = "role_request_status")
     private String status;
 
     @ManyToOne
-    @JoinColumn(name="account_id")
+    @JoinColumn(name = "account_id")
     private Account account;
 
     @ManyToOne
-    @JoinColumn(name="role_id")
+    @JoinColumn(name = "role_id")
     private Role role;
 
     public RoleRequest() {
@@ -48,6 +48,22 @@ public class RoleRequest {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override

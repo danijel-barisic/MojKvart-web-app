@@ -11,14 +11,24 @@ function StreetList() {
          .then(streets => setStreets(streets))
    }, []);
 
-   return (
-      <Card title="Streets">
-         <div className='StreetList'>
-            {streets.map(street => <Street key={street.id } street={street} />)}
-         </div>
-      </Card>
-   );
+   /* if (ReactSession.get("username") === false) {
+      return (
+         <Card title="not logged in">
+            <div className='StreetList'>
+               {streets.map(street => <Street key={street.id } street={street} />)}
+            </div>
+         </Card>
+      );
+   }
+   else { */
+      return (
+         <Card title="Ulice">
+            <div className='StreetList'>
+               {streets.map(street => <Street key={street.id} street={street} />)}
+            </div>
+         </Card>
+      );
+   }
 
-}
 
 export default StreetList;

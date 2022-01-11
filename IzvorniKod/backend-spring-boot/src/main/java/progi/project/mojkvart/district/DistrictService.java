@@ -52,4 +52,6 @@ public interface DistrictService {
      * @return true if present, else false
      */
     boolean existsById(long id);
+
+    Optional<District> findByName(String name);
 }

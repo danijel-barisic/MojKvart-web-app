@@ -8,14 +8,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class RoleRequestServiceJPAImpl implements RoleRequestService{
+public class RoleRequestServiceJPAImpl implements RoleRequestService {
 
     @Autowired
     private RoleRequestRepository roleRequestRepo;
 
     @Override
     public List<RoleRequest> listAll() {
-        return roleRequestRepo.findAll();
+        return roleRequestRepo.findByOrderByIdDesc();
     }
 
     @Override
@@ -55,5 +55,11 @@ public class RoleRequestServiceJPAImpl implements RoleRequestService{
     @Override
     public boolean existsById(long id) {
         return findById(id).isPresent();
+    }
+
+    @Override
+    public Optional<RoleRequest> findByAccountIdAndRoleName(long accountId, String roleName) {
+        Assert.notNull(accountId, "Account ID must be given");
+        return roleRequestRepo.findByAccountIdAndRoleName(accountId, roleName);
     }
 }

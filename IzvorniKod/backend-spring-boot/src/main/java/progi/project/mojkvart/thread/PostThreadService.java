@@ -2,14 +2,25 @@ package progi.project.mojkvart.thread;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import progi.project.mojkvart.post.Post;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
-public class PostThreadService {
+public interface PostThreadService {
 
-    private final PostThreadRepository postThreadRepository;
+    List<PostThread> listAll();
 
-    @Autowired
-    public PostThreadService(PostThreadRepository postThreadRepository){
-        this.postThreadRepository = postThreadRepository;
-    }
+    PostThread fetch(long postThreadId);
+
+    Optional<PostThread> findById(long postThreadId);
+
+    PostThread createPostThread(PostThread postThread);
+
+    PostThread updatePostThread(PostThread postThread);
+
+    long deletePostThread(long postThread);
+
+    boolean existsById(long id);
 }

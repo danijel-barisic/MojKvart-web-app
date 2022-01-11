@@ -23,17 +23,20 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+import progi.project.mojkvart.account.Account;
 import progi.project.mojkvart.account.AccountDetailService;
-import progi.project.mojkvart.account.AccountService;
+import progi.project.mojkvart.account.AccountRepository;
+import progi.project.mojkvart.role.Role;
 import progi.project.mojkvart.security.PasswordEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.SecureRandom;
+import java.util.Base64;
+import java.util.List;
+import java.util.Optional;
 
 @Configuration
 @AllArgsConstructor
@@ -42,9 +45,20 @@ import java.io.IOException;
 public class WebSecurity extends WebSecurityConfigurerAdapter {
     private final AccountDetailService accountDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    /*private static final SecureRandom secureRandom = new SecureRandom();
+    private static final Base64.Encoder base64Encoder = Base64.getUrlEncoder();*/
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    AccountRepository accountRepository;
+
+    /*public static String generateNewToken() {
+        byte[] randomBytes = new byte[24];
+        secureRandom.nextBytes(randomBytes);
+        return base64Encoder.encodeToString(randomBytes);
+    }*/
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -80,7 +94,19 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
             public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,
                                                 HttpServletResponse httpServletResponse,
                                                 Authentication authentication) throws IOException, ServletException {
-                httpServletResponse.getWriter().append("OK");
+                Account accountDetails = (Account) authentication.getPrincipal();
+                String mainRole = "Stanovnik";
+                List<Role> roles = accountDetails.getRoles();
+                for (Role role : roles) {
+                    System.out.println(role.getName());
+                    if(role.getName().equals("ADMIN")) {
+                        mainRole = "ADMIN";
+                    }
+                }
+                httpServletResponse.getWriter().append(mainRole);
+                /*httpServletResponse.getWriter().append("|");
+                httpServletResponse.getWriter().append(String.valueOf(accountDetails.isAddressValid()));*/
+                /*httpServletResponse.getWriter().append(generateNewToken());*/
                 httpServletResponse.setStatus(200);
             }
         };
@@ -92,6 +118,17 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
             public void onAuthenticationFailure(HttpServletRequest httpServletRequest,
                                                 HttpServletResponse httpServletResponse,
                                                 AuthenticationException e) throws IOException, ServletException {
+                String username = httpServletRequest.getParameter("username");
+                Optional<Account> account = accountRepository.findByEmail(username);
+                System.out.println(account.toString());
+                if(account.isPresent()) {
+                    Account account1 = account.get();
+                    System.out.println(account1.isBlocked());
+                    if(account1.isBlocked()) {
+                        System.out.println(account1.isBlocked());
+                        httpServletResponse.getWriter().append("Blocked|");
+                    }
+                }
                 httpServletResponse.getWriter().append("Authentication failure");
                 httpServletResponse.setStatus(401);
             }

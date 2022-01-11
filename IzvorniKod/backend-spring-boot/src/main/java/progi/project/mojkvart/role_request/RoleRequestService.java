@@ -18,4 +18,6 @@ public interface RoleRequestService {
     RoleRequest deleteRoleRequest(long roleRequestId);
 
     boolean existsById(long id);
+
+    Optional<RoleRequest> findByAccountIdAndRoleName(long accountId, String roleName);
 }

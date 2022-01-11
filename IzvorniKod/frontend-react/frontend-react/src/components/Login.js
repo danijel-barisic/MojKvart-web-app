@@ -2,6 +2,7 @@ import React from "react";
 import Card from "./Card";
 import './Login.css';
 import { useHistory } from "react-router";
+import { ReactSession } from "react-client-session";
 
 
 function Login(props) {
@@ -15,7 +16,7 @@ function Login(props) {
       setLoginForm(oldForm => ({...oldForm, [name]: value}))
    }
 
-   function onSubmit(e) {
+   async function onSubmit(e) {
       e.preventDefault();
       setError("");
       const body = `username=${loginForm.username}&password=${loginForm.password}`;
@@ -28,14 +29,37 @@ function Login(props) {
       };
       fetch('/login', options)
          .then(response => {
-            console.log(response);
             if (!response.ok) {
-               setError("Login failed");
+               var varr = undefined;
+               var varrsplitted = undefined;
+               var serverresponse = response.text();
+               serverresponse.then(res => {
+                  varr = res;
+                  console.log(varr);
+                  varrsplitted = varr.split("|");
+                  if (varrsplitted[0] === "Blocked") {
+                     setError("Korisnik je blokiran!");
+                     return "error";
+                  }
+               });
+               setError("Username ili password je pogrešan!");
+               return "error";
             } else {
-               props.onLogin();
+               return response.text();
+            }
+         }).then(function (data) {
+            if (data !== "error") {
+               var splitted = data.split("|");
+               console.log(splitted[0]);
+               /* console.log(splitted[1]); */
+               ReactSession.set("username", loginForm.username);
+               ReactSession.set(loginForm.username, splitted[0]);
+               ReactSession.set("addressValid", splitted[1]);
+               props.onLogin(splitted[0]);
                history.push("/");
             }
-         });
+         }
+         );
    }
 
    return (

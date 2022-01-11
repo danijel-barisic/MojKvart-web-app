@@ -1,20 +1,20 @@
 import React from "react";
-import Street from "./Street";
+import District from "./District";
 import Card from "./Card";
 
 function DistrictList() {
-   const [streets, setStreets] = React.useState([]);
+   const [districts, setDistrict] = React.useState([]);
 
    React.useEffect(() => {
       fetch('/districts')
          .then(data => data.json())
-         .then(streets => setStreets(streets))
+         .then(districts => setDistrict(districts))
    }, []);
 
    return (
-      <Card title='Districs'>
+      <Card title='Kvartovi'>
          <div className='StreetList'>
-            {streets.map(street => <Street key={street.id } street={street} />)}
+            {districts.map(district => <District key={district.id } district={district} />)}
          </div>
       </Card>
    );

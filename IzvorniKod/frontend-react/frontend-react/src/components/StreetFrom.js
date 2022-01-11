@@ -1,11 +1,13 @@
 import React from "react";
-import "./StreetForm.css"
+import "./Login.css"
 import Card from "./Card";
-import './Card.css';
+import { useHistory } from "react-router-dom";
 
 
 function StreetForm(props) {
    const [form, setForm] = React.useState({ name: '', minStreetNo: '', maxStreetNo: '', districtId: ''});
+   const [error, setError] = React.useState('');
+   const history = useHistory();
 
    function onChange(event) {
       const { name, value } = event.target;
@@ -32,7 +34,10 @@ function StreetForm(props) {
 
       return fetch('/streets', options).then(response => {
          if (response.ok) {
-            props.history.push('/streets');
+            history.goBack();
+         } else {
+            setError("District with given id doesnt exist!");
+            console.log(response.body);
          }
       });
    }
@@ -44,26 +49,28 @@ function StreetForm(props) {
 
 
    return (
-      <Card title="New Street">
-         <div className='StreetForm'>
+      <Card title="Nova Ulica">
+         <div className='StreetForm Login'>
             <form onSubmit={onSubmit}>
                <div className='FormRow'>
-                  <label>name</label>
+                  <label>Ime</label>
                   <input required name='name' onChange={onChange} value={ form.name}/>
                </div>
                <div className='FormRow'>
-                  <label>minStreetNo</label>
+                  <label>MinStreetNo</label>
                   <input required name='minStreetNo' onChange={onChange} value={ form.minStreetNo}/>
                </div>
                <div className='FormRow'>
-                  <label>maxStreetNo</label>
+                  <label>MaxStreetNo</label>
                   <input required name='maxStreetNo' onChange={onChange} value={ form.maxStreetNo}/>
                </div>
                <div className='FormRow'>
-                  <label>districtId</label>
+                  <label>DistrictId</label>
                   <input required name='districtId' onChange={onChange} value={ form.districtId}/>
                </div>
-               <button classname='submit' type='submit' disabled={!isValid()}>Add street</button>
+               <div className='error'>{error}</div>
+               <button classname='submit' type='submit' disabled={!isValid()}>Dodaj ulicu</button>
+               <button className='button' type="button" onClick={() => {history.goBack()}}>Nartag</button>
             </form>
          </div>
       </Card>

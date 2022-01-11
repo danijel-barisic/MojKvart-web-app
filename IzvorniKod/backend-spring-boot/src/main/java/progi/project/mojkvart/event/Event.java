@@ -2,6 +2,7 @@ package progi.project.mojkvart.event;
 import progi.project.mojkvart.account.Account;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.time.Duration;
 import java.time.LocalDate;
 
@@ -21,10 +22,13 @@ public class Event {
     private String description;
 
     @Column(name = "event_duration")
-    private Duration duration;
+    private Long duration;
 
-    @Column(name = "event_datetime")
-    private LocalDate datetime;
+    @Column(name = "event_date")
+    private LocalDate date;
+
+    @Column(name = "event_time")
+    private Time time;
 
     @Column(name = "event_location")
     private String location;
@@ -39,12 +43,13 @@ public class Event {
     public Event(){
     }
 
-    public Event(Long id, String name, String description, Duration duration, LocalDate datetime, String location, String status, Account account) {
+    public Event(Long id, String name, String description, Long duration, LocalDate date, Time time, String location, String status, Account account) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.duration = duration;
-        this.datetime = datetime;
+        this.date = date;
+        this.time = time;
         this.location = location;
         this.status = status;
         this.account = account;
@@ -74,21 +79,21 @@ public class Event {
         this.description = description;
     }
 
-    public Duration getDuration() {
+    public Long getDuration() {
         return duration;
     }
 
-    public void setDuration(Duration duration) {
+    public void setDuration(Long duration) {
         this.duration = duration;
     }
 
-    public LocalDate getDatetime() {
-        return datetime;
-    }
+    public LocalDate getDate() { return date; }
 
-    public void setDatetime(LocalDate datetime) {
-        this.datetime = datetime;
-    }
+    public void setDate(LocalDate date) { this.date = date; }
+
+    public Time getTime() { return time; }
+
+    public void setTime(Time time) { this.time = time; }
 
     public String getLocation() {
         return location;
@@ -112,6 +117,19 @@ public class Event {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    @Override
+    public String toString() {
+        return "Event{account{" +
+                getAccount().toString() + "}" +
+                "date: " +getDate() +
+                "time: " + getTime() +
+                "description: " +getDescription()+
+                "duration: " +getDuration()+
+                "location: " +getLocation()+
+                "name: " +getName()+
+                "status" + getStatus();
     }
 
 }

@@ -1,8 +1,12 @@
 import React from "react";
 import Card from "./Card";
+import { useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 function DistrictForm(props) {
-   const [form, setForm] = React.useState({ name: ''});
+   const [form, setForm] = React.useState({ name: '' });
+   const [error, setError] = React.useState('');
+   const history = useHistory();
 
    function onChange(event) {
       const { name, value } = event.target;
@@ -24,7 +28,11 @@ function DistrictForm(props) {
 
       return fetch('/districts', options).then(response => {
          if (response.ok) {
-            props.history.push('/districts');
+            history.push('/kvartovi');
+         }
+         else {
+            setError("District with given name already exist!");
+            console.log(response.body);
          }
       });
    }
@@ -34,16 +42,17 @@ function DistrictForm(props) {
       return name.length > 0;
    }
 
-
    return (
-      <Card title='New District'>
-         <div className='StreetForm'>
+      <Card title='Novi Kvart'>
+         <div className='StreetForm Login'>
             <form onSubmit={onSubmit}>
                <div className='FormRow'>
-                  <label>name</label>
+                  <label>Ime Kvarta</label>
                   <input required name='name' onChange={onChange} value={ form.name}/>
                </div>
-               <button type='submit' disabled={!isValid()}>Add districs</button>
+               <div className='error'>{error}</div>
+               <button type='submit' disabled={!isValid()}>Dodaj Kvart</button>
+               <button className='button' type="button" onClick={() => {history.push("/kvartovi")}}>Kvartovi</button>
             </form>
          </div>
       </Card>

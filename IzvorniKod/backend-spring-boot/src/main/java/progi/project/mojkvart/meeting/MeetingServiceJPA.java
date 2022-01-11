@@ -16,7 +16,7 @@ public class MeetingServiceJPA implements MeetingService{
 
     @Override
     public List<Meeting> listAll() {
-        return meetingRepo.findAll();
+        return meetingRepo.findByOrderByIdDesc();
     }
 
     @Override

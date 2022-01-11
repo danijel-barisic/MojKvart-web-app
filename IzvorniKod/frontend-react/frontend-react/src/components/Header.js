@@ -5,7 +5,9 @@ import './Header.css';
 
 function Header(props) {
    const { state } = props;
+   const { account } = props;
    let checkLogin = false;
+   console.log(account);
 
    function logout() {
       fetch("/logout").then(() => {
@@ -27,17 +29,48 @@ function Header(props) {
          : <Link to='/login' className="login" >Login </Link>;
    }
 
-   return (
-      <header className='header'>
-         <Link className='logo active' to='/'>Moj Kvart </Link>
-         <div className='header-right'>
-            <Link to='/threads' >Forum </Link>
-            <Link to='/events' >Događanja </Link>
-            <Link to='/council' >Vijeće četvrti </Link>
-            {renderButton()}
-         </div>
-      </header>
-   ); 
+   if (account !== undefined && account.home !== undefined) {
+      if (account.home.id === -1) {
+         return (
+            <>
+               <header className='header'>
+                  <Link className='logo active' to='/'>Moj Kvart </Link>
+                  <div className='header-right'>
+                     <Link to='/personal' >Osobni podaci </Link>
+                     {renderButton()}
+                  </div>
+               </header>
+               <div className="invalidAddressPoruka">Prije korištenja foruma molimo ispravite svoje osobne podatke!</div>
+            </>
+         ); 
+      } else {
+         return (
+            <header className='header'>
+               <Link className='logo active' to='/'>Moj Kvart </Link>
+               <div className='header-right'>
+                  <Link to='/forum' >Forum </Link>
+                  <Link to='/events' >Događanja </Link>
+                  <Link to='/council' >Vijeće četvrti </Link>
+                  <Link to='/personal' >Osobni podaci </Link>
+                  {renderButton()}
+               </div>
+            </header>
+         ); 
+      }
+   } else {
+      return (
+         <header className='header'>
+            <Link className='logo active' to='/'>Moj Kvart </Link>
+            <div className='header-right'>
+               <Link to='/forum' >Forum </Link>
+               <Link to='/events' >Događanja </Link>
+               <Link to='/council' >Vijeće četvrti </Link>
+               <Link to='/personal' >Osobni podaci </Link>
+               {renderButton()}
+            </div>
+         </header>
+      ); 
+   }
 }
 
 export default Header;
