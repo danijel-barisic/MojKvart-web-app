@@ -105,6 +105,8 @@ Baza podataka sastoji se od deset entiteta:
 					\SetCell{LightGreen}IDEvent & INT	&  	Identifikacijski ključ događaja  	\\ \hline
 					eventName	& VARCHAR & Naziv događaja  	\\ \hline
 					eventDatetime & TIMESTAMP & Vrijeme događaja \\ \hline
+					eventDate & DATE & Datum događaja \\ \hline
+					eventTime & TIME & Vrijeme početka događaja \\ \hline
 					eventLocation & VARCHAR & Lokacija događaja \\ \hline
 					eventDuration & INTERVAL & Trajanje događaja \\ \hline
 					eventDescription & VARCHAR & Opis događaja \\ \hline
@@ -145,7 +147,6 @@ Baza podataka sastoji se od deset entiteta:
 					\SetCell{LightGreen}IDPost & INT	&  	Identifikacijski ključ objave  	\\ \hline
 					postDatetime	& TIMESTAMP & Vrijeme postavljanja objave  	\\ \hline
 					postContent & VARCHAR & Sadržaj objave \\ \hline
-					replyId & INT & Identifikacijski ključ odgovora na objavu \\ \hline
 					\SetCell{LightBlue}IdThread	 & INT & Identifikacijski ključ pripadajuće dretve  	\\ \hline
 					\SetCell{LightBlue}IDAccount	& INT & Identifikacijski ključ korisnika koji je objavio objavu  	\\ \hline
 					\SetCell{LightBlue}IDPostReply & INT & Identifikacijski ključ odgovora na objavu ako postoji  	\\ \hline
@@ -286,7 +287,7 @@ Baza podataka sastoji se od deset entiteta:
 			\subsection{Dijagram baze podataka}
 	\begin{figure}[h]
 	\centering
-  \hbox{\hspace{-2.2cm}\includegraphics[width = 200mm,scale = 3]{Dijagram_11.png}}
+  \hbox{\hspace{-2.2cm}\includegraphics[width = 200mm,scale = 3]{11 relacijska shema baze podataka.png}}
   \caption{Relacijska shema baze podataka}
   \label{Relacijska_shema}
 \end{figure}
@@ -295,51 +296,92 @@ Baza podataka sastoji se od deset entiteta:
 			
 		\section{Dijagram razreda}
 		
-		\begin{figure}[H]
-		\centering
-		\includegraphics[width=\textwidth]{Dijagram_12.png}
-		\caption{Dijagram razreda - modeli}
-		\end{figure}
-			
-			
-			
-			\eject
-			
-			Na slici 4.2 prikazani su razredi koji odgovaraju \textit{backend} dijelu MVC arhitekture. Razred \textit{District} označava kvartove i uz njega su vezani razredi \textit{Meeting} (koji odgovara izvješćima s Vijeća četvrti), \textit{Thread} (koji odgovara temi na Forumu), \textit{Event} (koji odgovara događaju u sekciji Događaji) i \textit{Street} (koji odgovara ulici koja pripada nekom kvartu). Uz razred \textit{Street} vezan je razred \textit{Home}, koji označava adrese na kojima neki stanovnik kvarta živi. Uz razred \textit{Home} vezan je razred \textit{Account}, koji odgovara korisnicima aplikacije. Razred \textit{Thread} uz sebe veže razred \textit{Post}, koji označava odgovore unutar pojedine teme na Forumu. Apstraktan razred \textit{Role} označava uloge unutar aplikacije, a nasljeđuju ga razredi \textit{BasicAccount}, \textit{Councilor}, \textit{Moderator} i \textit{Administrator}. Konačno, razred \textit{RoleRequest} označava zahtjev za ulogu.
-			
-			\eject
-			
-		\begin{figure}[H]
-		\centering
-		\includegraphics[width=\textwidth]{Dijagram_13.png}
-		\caption{Dijagram razreda - registracija}
-		\end{figure}
+		Backend aplikacije je ostvaren korištenjem radnog okvira Spring Boot, i stoga aplikacija ima nekoliko slojeva.
 		
+		Iako se ne smatraju posebnim slojem, na slici 4.2 prikazani su entiteti koji odgovaraju relacijama u bazi podataka, opisanoj u poglavlju 4.1. Entiteti ne sadrže nikakvu proceduralnu logiku, nego isključivo članske varijable i njihove gettere i settere. Entitetu našoj aplikaciji su redom: Account, District, Event, Home, Meeting, Post, Role, RoleRequest, Street i PostThread.
+		
+		Na slici 4.3 prikazan je sloj Repository. Razredi u njemu se definiraju kao sučelja koja nude metode dohvaćanja elemenata iz baze, te stvaranja promjena u bazi. Njihov kod u pravilu programer ne piše eksplicitno, nego te metode generira Spring na temelju njihovog imena.
+		
+		Na slici 4.4 prikazan je sloj Service. Taj sloj sadrži centralnu logiku na backendu, manipulira entitetima i poziva metode koje nudi prethodni sloj, Repository.
+		
+		Na slici 4.5 prikazan je sloj Controller. Taj je sloj najviši u hijerarhiji slojeva, i on je jedini sloj s kojim komunicira frontend dio aplikacije. Uloga ovog sloja je da obrađuje HTTP zahtjeve, poziva metode koje nudi prethodni sloj Service, i potom odgovara na primljene zahtjeve.
+		
+		Na slici 4.6 prikazan je dijagram razreda cijele aplikacije, i naglasak je najviše na ovisnostima među slojevima.
+		
+		\eject
+		
+					\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth,keepaspectratio]{12.1 entiteti.png}
+					\caption{Dijagram razreda - entiteti}
+				\end{figure}	
+				
+							\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth,keepaspectratio]{12.2 repozitoriji.png}
+					\caption{Dijagram razreda - repozitoriji}
+				\end{figure}	
+				
+							\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth,keepaspectratio]{12.3 servisi.png}
+					\caption{Dijagram razreda - servisi}
+				\end{figure}	
+				
+							\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth,keepaspectratio]{12.4 kontroleri.png}
+					\caption{Dijagram razreda - kontroleri}
+				\end{figure}	
+				
+							\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth,keepaspectratio]{13 aplikacija.png}
+					\caption{Dijagram razreda - cjelokupna aplikacija}
+				\end{figure}	
+			
+			
 			\eject
 			
-			Na slici 4.3 prikazani su razredi koji odgovoraju funkcionalnosti registracije u aplikaciji. Centralni razred je \textit{RegistrationController}. \textit{RegistrationController} u funkciji \textit{register} prima objekte tipa \textit{RegistrationRequest}, te potom poziva funkciju \textit{register} objekta tipa \textit{RegistrationService}. Objekt tipa \textit{RegistrationService} u funkciji \textit{register} prvo poziva funkciju \textit{validate} objekta tipa \textit{EmailValidator} koja provjerava je li zadani email u ispravnom formatu. Ako je email u neispravnom formatu, funkcija baca \textit{IllegalStateException}, a inače poziva funkciju \textit{signupAccount} objekta tipa \textit{AccountDetailService}. Unutar funkcije \textit{singupAccount} se prvo provjerava postoji li već registriran korisnik s unesesnim mailom, pozivanjem funkcije \textit{findByEmail} objekta tipa \textit{AccountRepository}. Ako funkcija \textit{findByEmail} vrati logičku istinu, onda se baca \textit{IllegalArgumentException}. U protivnom se unesena lozinka kriptira korištenjem funkcije \textit{bCryptPasswordEncoder} objekta tipa \textit{PasswordEncoder}, a potom se kreira korisnički račun korištenjem funkcije \textit{createAccount} objekta tipa \textit{AccountService}.
-			
-			\eject
 		
 		\section{Dijagram stanja}
+		
+		Na slici 4.7 prikazan je dijagram stanja korisničkog sučelja. Stranica na koju korisnik uvijek prvo dođe je "Prijava". S te stranice korisnik može birati opciju "Registracija" kako bi stvorio novi račun, ili se može prijaviti s postojećim računom. Ovisno o tome je li korisnik stanovnik ili administrator, dočeka ga prikladna početna stranica. 
+		
+		Ako je korisnik stanovnik, sa svoje početne stranice može birati opcije "Osobni podaci", "Događaji", "Vijeće četvrti" i "Forum". Pri pregledu svojih osobnih podataka, korisnik može slati zahtjeve za dodatne uloge ili mijenjati svoje osobne podatke. Pri pregledu sekcije "Događaji", korisnik može stvarati prijedloge događaja. Pri pregledu sekcije "Vijeće četvrti", korisnik klikom na pojedino izvješće može dobiti dodatne informacije o tom izvješću, a ako ima ulogu "Vijećnik", onda može i stvarati nova izvješća. Konačno, pregledom sekcije "Forum" korisnik može otvarati nove teme i pregledavati postojeće.
+		
+		Ako je korisnik administrator, sa svoje početne stranice može birati opcije "Osobni podaci", "Zahtjevi za uloge", "Korisnici" i "Kvartovi". Prilikom pregleda svojih osobnih podataka, administrator može neke od tih podataka može mijenjati. Prilikom pregleda zahtjeva za uloge administrator može odabrati pojedini zahtjev te ga prihvatiti ili odbiti. Prilikom pregleda svih korisnika sustava, administrator može odabrati pojedinog korisnika i dobiti više informacija o njemu. Konačno, pri pregledu kvartova, administrator može dodati novi kvart, a može i za postojeći kvart odabrati opciju unosa nove ulice.
+		
+		Iako zbog preglednosti to nije navedeno na dijagramu, stanovnici iz svih stanja mogu doći u stanja "Početna stranica", "Događaji", "Vijeće četvrti", "Forum" i "Osobni podaci", te administratori analogno mogu iz svih stanja doći u stanja "Početna stranica", "Korisnici", "Kvartovi", "Zahtjevi uloga" i "Osobni podaci". Također, svi korisnici iz svih stanja mogu birati opciju "Odjava" i preći u stanje "Prijava".
 			
 			
-			\textbf{\textit{dio 2. revizije}}\\
-			
-			\textit{Potrebno je priložiti dijagram stanja i opisati ga. Dovoljan je jedan dijagram stanja koji prikazuje \textbf{značajan dio funkcionalnosti} sustava. Na primjer, stanja korisničkog sučelja i tijek korištenja neke ključne funkcionalnosti jesu značajan dio sustava, a registracija i prijava nisu. }
+						\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth,keepaspectratio]{14 dijagram stanja.png}
+					\caption{Dijagram stanja}
+				\end{figure}	
 			
 			
 			\eject 
 		
 		\section{Dijagram aktivnosti}
+		
+		Na slici 4.8 prikazan je dijagram aktivnosti prilikom stvaranja novih događaja. Korisnik koji želi predložiti događaj ispunjava formu u koju unosi naziv, mjesto, vrijeme, trajanje i kratki opis. Kada ju je ispunio, odabire opciju spremanja prijedloga. Web aplikacija tada provjerava jesu li svi traženi podaci u ispravnom formatu. Ako nisu, upozorava korisnika na pogreške i omogućuje mu da ih ispravi, a ako su podaci ispravni, onda sprema prijedlog u bazu podataka. Nakon što je prijedlog spremljen, moderator ga može pregledati. Ako moderator procijeni da prijedlog ne zadovoljava jezični standard, može ga uređivati. Kada je ispravio sve eventualne pogreške, moderator odabire opciju spremanja promjena. Tada web aplikacija provjerava jesu li svi podaci u ispravnom formatu, te ako jesu, sprema promjene, a ako nisu, upozorava moderatora na pogreške i omogućuje mu da ih ispravi. Nakon što je završio s eventualnim uređivanjem prijedloga, moderator može odabrati opciju prihvaćanja ili odbijanja prijedloga, i u oba slučaja se ažurira status prijedloga događaja u bazi podataka.
 			
-			\textbf{\textit{dio 2. revizije}}\\
-			
-			 \textit{Potrebno je priložiti dijagram aktivnosti s pripadajućim opisom. Dijagram aktivnosti treba prikazivati značajan dio sustava.}
+			\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth,keepaspectratio]{15 dijagram aktivnosti.png}
+					\caption{Dijagram aktivnosti}
+				\end{figure}	
 			
 			\eject
 		\section{Dijagram komponenti}
 		
-			\textbf{\textit{dio 2. revizije}}\\
+		 Na slici 4.9 prikazan je dijagram komponenti. Korisnik iz web preglednika pristupa pristupa aplikaciji korištenjem REST API-ja. Sama aplikacija se sastoji od dvije komponente. Prva komponenta odgovara frontendu i izgrađena je korištenjem React biblioteke. Druga komponenta odgovara backendu i izgrađena je korištenjem radnog okvira Spring. Frontend i backend komuniciraju korištenjem REST API-ja. Baza podataka je relacijska i backend joj pristupa slanjem SQL upita.
 		
-			 \textit{Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije.}
+			\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth,keepaspectratio]{16 dijagram komponenti.png}
+					\caption{Dijagram komponenti}
+				\end{figure}	
+				\newpage			
