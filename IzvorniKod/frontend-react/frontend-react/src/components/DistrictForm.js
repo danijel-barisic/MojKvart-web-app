@@ -2,6 +2,7 @@ import React from "react";
 import Card from "./Card";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import Card5 from "./Card5";
 
 function DistrictForm(props) {
    const [form, setForm] = React.useState({ name: '' });
@@ -31,7 +32,7 @@ function DistrictForm(props) {
             history.push('/kvartovi');
          }
          else {
-            setError("District with given name already exist!");
+            setError("Kvart s predloženim imenom već postoji!");
             console.log(response.body);
          }
       });
@@ -43,19 +44,22 @@ function DistrictForm(props) {
    }
 
    return (
-      <Card title='Novi Kvart'>
-         <div className='StreetForm Login'>
-            <form onSubmit={onSubmit}>
-               <div className='FormRow'>
-                  <label>Ime Kvarta</label>
-                  <input required name='name' onChange={onChange} value={ form.name}/>
-               </div>
-               <div className='error'>{error}</div>
-               <button type='submit' disabled={!isValid()}>Dodaj Kvart</button>
-               <button className='button' type="button" onClick={() => {history.push("/kvartovi")}}>Kvartovi</button>
-            </form>
-         </div>
-      </Card>
+      <>
+         <div className="current-title">NOVI KVART</div>
+         <Card5>
+            <div className='StreetForm Login flex-container'>
+               <form onSubmit={onSubmit}>
+                  <div className='FormRow'>
+                     <label>Ime Kvarta</label>
+                     <input required name='name' onChange={onChange} value={ form.name}/>
+                  </div>
+                  <div className='error'>{error}</div>
+                  <button className='button' type="button" onClick={() => {history.push("/kvartovi")}}>Natrag</button>
+                  <button type='submit' disabled={!isValid()}>Dodaj Kvart</button>
+               </form>
+            </div>
+         </Card5>
+      </>
    );
 }
 

@@ -3,6 +3,10 @@ import Card from './Card'
 import {FaTimes,FaCheck} from 'react-icons/fa'
 import RoleRequestUser from './RoleRequestUser'
 import './RoleRequest.css'
+import '../style/style.css'
+import { FaMedal } from "react-icons/fa"
+import "./Card.css"
+import SubCard from './SubCard'
 
 const RoleRequests = () => {
     const [requests,setRequests] = React.useState([]);
@@ -65,35 +69,41 @@ const RoleRequests = () => {
 
     
     return (
-        <Card title = "Zahtjevi">
+      <>
+          <div className="current-title">
+                <FaMedal /> ZAHTJEVI ZA ULOGE
+            </div>
+        <Card>
                  <div className="wrapperRR">
-                        <p>Username</p> <p >Status</p> <p> Role Requested </p>  <p></p>
-                        </div>
+                        <p>Korisnik</p> <p >Status</p> <p> Tražena uloga </p>  <p></p>
+                  </div>
+        </Card> 
                {requests.map( (request) => {
                      console.log(request.status)
 
                  var user = users.find(x => x.id === request.account.id)
                   return ([
-
+                      <SubCard>
                         <div className="innerRR" >
                            <p> <RoleRequestUser key={request.account.id-1} user={user} /> </p>
                            <p className={request.status == "Pending" ? "Pending" : request.status == "Denied" ? "Denied" : "Approved" }>  {request.status == "Pending" ? "Pending" : request.status == "Denied" ? "Denied" : "Approved"}</p>
                            <p > {roles[request.role.id]}</p>
 
                            <div className="icons">
-                           <FaCheck style={{color:"#039487" ,cursor:"pointer"}} onClick={() => {if(window.confirm('Are you sure u want to approve this role request?')) {onApprove(request.id,request.account.id,request.role.id)}}}></FaCheck>
-                           <FaTimes style={{color:"red" ,cursor:"pointer"}} onClick={() => {if(window.confirm('Are you sure u want to deny this role request?')) {onDeny(request.id,request.account.id)}}}></FaTimes>
+                           <FaCheck style={{color:"#2390F0" ,cursor:"pointer"}} onClick={() => {if(window.confirm('Jeste li sigurni da želite prihvatiti ovaj zahtjev?')) {onApprove(request.id,request.account.id,request.role.id)}}}></FaCheck>
+                           <FaTimes style={{color:"#A555B9" ,cursor:"pointer"}} onClick={() => {if(window.confirm('Jeste li sigurni da želite odbiti ovaj zahtjev?')) {onDeny(request.id,request.account.id)}}}></FaTimes>
                            </div>
 
                       
                         </div>
                      
-                     
+                     </SubCard>
                   ]);
                })}
                
             
-        </Card>
+        
+      </>
     )
 }
 

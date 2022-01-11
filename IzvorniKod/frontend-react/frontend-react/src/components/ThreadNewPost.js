@@ -5,7 +5,9 @@ import { useHistory } from "react-router-dom";
 import { ReactSession } from "react-client-session";
 import Thread from "./Thread";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import './ThreadNewPost.css';
+
+import CardNewPost from "./CardNewPost";
+import Card16 from "./Card16";
 
 
 function ThreadNewPost(props) {
@@ -49,7 +51,7 @@ function ThreadNewPost(props) {
          console.log(JSON.stringify(data))
          if (response.ok) {
             console.log("Nice");
-            props.onNewPost();
+            history.goBack();
          } else {
             setError("Something went wrong! Try again");
             console.log(response.body);
@@ -103,37 +105,44 @@ function ThreadNewPost(props) {
    
    return (
       idP == undefined ? 
-         <div className="footer">
-            <Card title="Nova Objava">
-               <div className='StreetForm Login'>
+            <>
+            <div style={{margin: "32px"}}></div>
+            <Card16 >
+               <div className='NewPostArea'>
                   <form onSubmit={onSubmit}>
-                     <div className='FormRow'>
+                     <div className='NewPostForm'>
                         <label>Raspiši se...</label>
-                        <textarea required name='content' onChange={onChange} value={ form.content}/>
+                        <textarea rows={6} cols={50} required name='content' onChange={onChange} value={ form.content}/>
                      </div>
                      <div className='error'>{error}</div>
-                     <button classname='submit' type='submit' disabled={!isValid()} >Stvori objavu</button>
                      <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
+                     <button classname='submit' type='submit' disabled={!isValid()} >Stvori objavu</button>
                   </form>
                </div>
-            </Card>
-         </div>
+            </Card16>
+            </>
+         
          :
-         <div className="footer2">
-            <Card title="Odgovori na objavu">
+         <>
+         <div className="current-title">
+            ODGOVORI NA OBJAVU
+         </div>
+         <div>
+            <Card16>
                <div className='StreetForm Login'>
                   <form onSubmit={onSubmitReply}>
                      <div className='FormRow'>
                         <label>Raspiši se...</label>
-                        <textarea required name='content' onChange={onChange} value={ form.content}/>
+                        <textarea required name='content' rows={6} cols={50} onChange={onChange} value={ form.content}/>
                      </div>
                      <div className='error'>{error}</div>
-                     <button classname='submit' type='submit' disabled={!isValid()}>Odgovori</button>
                      <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
+                     <button classname='submit' type='submit' disabled={!isValid()}>Odgovori</button>
                   </form>
                </div>
-            </Card>
+            </Card16>
          </div>
+         </>
    );
 }
 

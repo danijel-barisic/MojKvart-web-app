@@ -1,0 +1,35 @@
+.current-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    font-size: 35px;
+    text-align: center;
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+.icon-color {
+    fill: white;
+}
+
+.center-contents {
+    display: flex;
+    justify-content: center;
+}
+
+.sub-header {
+    display: flex;
+    align-items: center;
+}
+
+.centered {
+    display: flex;
+    align-items: center;
+}
+
+.street-list {
+    display: flex;
+    justify-content: left;
+}

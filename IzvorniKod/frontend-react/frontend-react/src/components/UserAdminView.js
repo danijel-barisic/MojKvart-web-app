@@ -3,6 +3,9 @@ import Card from "./Card";
 import ReactSession from "react-client-session/dist/ReactSession";
 import RoleManagement from "./RoleManagement";
 import * as authentication from "../authentication" // iako, mislim da se odmah na routerima onemogučio pristup
+import ComponentCard from "./ComponentCard"
+import CardClone from "./CardClone";
+import "./Card.css";
 
 /* user
 accountNonExpired: true
@@ -30,6 +33,8 @@ export default class UserAdminView extends React.Component {
             user_id: id,
             error: undefined,
             is_admin: undefined,
+            user_is_admin: undefined,
+            user_roles: undefined,
         }
         this.has_already_fetched_user = false;
     }
@@ -38,7 +43,7 @@ export default class UserAdminView extends React.Component {
         if (this.state.error !== undefined) {
             return <Card title="Greška"><span>{this.state.error.message + ""}</span></Card>;
         }
-        const role = ReactSession.get(ReactSession.get("username"));
+        // const role = ReactSession.get(ReactSession.get("username"));
         // if (role !== "ADMIN") {
         //     this.props.history.push("/");
         // }
@@ -50,27 +55,35 @@ export default class UserAdminView extends React.Component {
             return null;
         }
         const user = this.state.user;
-        if (!user || !user.username) {
+        if (!user || !user.username || this.state.user_is_admin === undefined) {
             return <Card title="Čekajte da se korisnik učita" />;
         }
         const district = user.district || { name: "nema informacije", id: "?" };
+
         return (
-            <Card title={user.username}>
+            <>
+            <div className="current-title">{user.username}</div>
+            <ComponentCard>
                 <table><tbody>
-                <tr><td><b>E-mail:</b>                  </td><td>{user.email}                        </td></tr>
-                <tr><td><b>Ime:</b>                     </td><td>{user.firstName}                    </td></tr>
-                <tr><td><b>Prezime:</b>                 </td><td>{user.lastName}                     </td></tr>
-                <tr><td><b>id:</b>                      </td><td>{user.id}                           </td></tr>
-                <tr><td><b>Kvart:</b>                   </td><td>{district.name} (id: {district.id}) </td></tr>
-                {/*<tr><td>account not expired:         </td><td>{user.accountNonExpired + ""}       </td></tr>*/}
-                {/*<tr><td>account not locked:          </td><td>{user.accountNonLocked + ""}        </td></tr>*/}
-                <tr><td><b>Adresa valjana:</b>          </td><td>{user.addressValid + ""}            </td></tr>
-                <tr><td><b>Korisnik blokiran:</b>       </td><td>{user.blocked + ""}                 </td></tr>
-                {/*<tr><td>credentials not expired:</td><td>{user.credentialsNonExpired + ""}   </td></tr>*/}
-                {/*<tr><td>enabled:                </td><td>{user.enabled + ""}                 </td></tr>*/}
+                <tr><td style={{padding: "3px 15px"}}><b>E-mail:</b>                  </td><td style={{padding: "3px 15px"}}>{user.email}                        </td></tr>
+                <tr><td style={{padding: "3px 15px"}}><b>Ime:</b>                     </td><td style={{padding: "3px 15px"}}>{user.firstName}                    </td></tr>
+                <tr><td style={{padding: "3px 15px"}}><b>Prezime:</b>                 </td><td style={{padding: "3px 15px"}}>{user.lastName}                     </td></tr>
+                <tr><td style={{padding: "3px 15px"}}><b>id:</b>                      </td><td style={{padding: "3px 15px"}}>{user.id}                           </td></tr>
+                { this.state.user_is_admin === false
+                    ? <>
+                        <tr><td style={{padding: "3px 15px"}}><b>Kvart:</b>                   </td><td style={{padding: "3px 15px"}}>{district.name} (id: {district.id}) </td></tr>
+                        <tr><td style={{padding: "3px 15px"}}><b>Adresa valjana:</b>          </td><td style={{padding: "3px 15px"}}>{(user.home.id == -1) ? <span>NE</span> : <span>DA</span>}            </td></tr>
+                        <tr><td style={{padding: "3px 15px"}}><b>Korisnik blokiran:</b>       </td><td style={{padding: "3px 15px"}}>{(user.blocked) ? <span>DA</span> : <span>NE</span>}               </td></tr>
+                    </>
+                    : null
+                }
                 </tbody></table>
-                <RoleManagement user={user} />
-            </Card>
+                <div className="Login flex-container">
+                    <button onClick={() => this.props.history.goBack()}>Natrag</button>
+                </div>
+                { this.state.user_is_admin ? null : <RoleManagement user={user} roles={this.state.user_roles} did_passin_roles={true} /> }
+            </ComponentCard>
+            </>
         );
     }
 
@@ -98,8 +111,15 @@ export default class UserAdminView extends React.Component {
                     this.setError({ message: "Korisnik se nije mogao učitati", });
                 } else {
                     console.log("UserAdminView.js: fetched user");
-                    response.json().then(data => this.setUser(data));
+                    response.json().then(data => {
+                        this.setUser(data);
+                        this.checkRoles(data);
+                    });
                 }
+            })
+            .catch(reason => {
+                console.log("UserAdminView.js: error fetchig account");
+                this.setError({ message: "Korisnik se nije mogao učitati", });
             })
         ;
     }
@@ -111,4 +131,42 @@ export default class UserAdminView extends React.Component {
     }
 
     myComponentDidRender() {}
+
+    checkRoles(user) {
+        if (user === undefined) {
+            this.setError({ message: "Nema korisnika" });
+            return false;
+        }
+        const id = user.id;
+        fetch(`/accounts/roles/${id}` /* GET */)
+            .then(response => {
+
+                if (!response.ok) {
+                    console.log("UserAdminView.js: error fetchig roles");
+                    this.setError({message: "Uloge se misu mogle učitati",});
+                    return false;
+                } else {
+                    console.log("UserAdminView.js: fetched roles");
+                    response.json().then(data => {
+                        this.setRoles(data);
+                    });
+                    return true;
+                }
+            })
+            .catch(reason => {
+                console.log("UserAdminView.js: error fetchig roles");
+                this.setError({ message: "Korisnikove uloge se nisu mogle učitati", });
+            })
+        ;
+    }
+    setRoles(roles) {
+        this.setState({ user_roles: roles });
+        for (const role of roles) {
+            if (role.name === "ADMIN") {
+                this.setState({ user_is_admin: true });
+                return;
+            }
+        }
+        this.setState({ user_is_admin: false });
+    }
 }

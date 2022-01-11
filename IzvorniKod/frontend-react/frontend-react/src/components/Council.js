@@ -4,6 +4,9 @@ import CouncilMeetingCard from "./CouncilMeetingCard"
 import "./Login.css"
 import { useHistory } from "react-router"
 import { ReactSession } from "react-client-session"
+import {FaPenAlt} from 'react-icons/fa'
+import Card12 from "./Card12"
+import Card17 from "./Card17"
 
 function Council() {
 
@@ -39,44 +42,36 @@ function Council() {
     }, [account])
 
     if (meetings !== undefined && roles !== undefined && roles.length > 0) {
-        if (roles.filter(r => r.name === "Vijecnik").length > 0) return (
-            <Card title="Izvješća s Vijeća četvrti">
-                <div>
-                    <div className='Login'>
-                        <button className='button' type="button" onClick={() => {history.push("/council/new_report")}}>Novo izvješće</button>
-                    </div>
+        return (
+            <>
+                <div className="current-title">
+                    <FaPenAlt/> VIJEĆE ČETVRTI
                 </div>
-                <div>
-                    <div className='innerEvent'>
-                        <div className='wrapper'>
-                            {meetings.map(function (meeting) {
-                                return (
-                                    <div className="inner">
-                                        <CouncilMeetingCard meeting={meeting}/>
+                <div className="grid-father">
+                    <Card17>
+                            <h2>IZVJEŠĆA</h2>
+                            {(roles.filter(r => r.name === "Vijecnik").length > 0) ?
+                            <div className="flex-container-right">
+                                <div>
+                                <button className='button-purple' type="button" onClick={() => {history.push("/vijece/novo_izvjesce")}}>Novo izvješće</button>
+                                </div>
+                            </div>
+                            : <></>}
+                        </Card17>
+                        {meetings.map(function (meeting) {
+                            return (
+                                <Card12>
+                                    <h2>{meeting.title}</h2>
+                                    <div className="Login flex-container-right">
+                                        <div>
+                                        <button className='button' type="button" onClick={() => {history.push(`/vijece/izvjesce/${meeting.id}`)}}>Više informacija</button>
+                                        </div>
                                     </div>
-                                );
-                            })}
-                        </div>
-                    </div>
+                                </Card12>
+                            )
+                        })}
                 </div>
-            </Card>
-        )
-        else return (
-            <Card title="Izvješća s Vijeća četvrti">
-                <div>
-                    <div className='innerEvent'>
-                        <div className='wrapper'>
-                            {meetings.map(function (meeting) {
-                                return (
-                                    <div className="inner">
-                                        <CouncilMeetingCard meeting={meeting}/>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </div>
-                </div>
-            </Card>
+            </>
         )
     }
     else return (

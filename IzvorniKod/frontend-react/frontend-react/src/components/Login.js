@@ -1,8 +1,11 @@
 import React from "react";
-import Card from "./Card";
 import './Login.css';
+import '../style/style.css';
 import { useHistory } from "react-router";
 import { ReactSession } from "react-client-session";
+import CardLogin from "./CardLogin";
+import { RiLoginBoxFill } from 'react-icons/ri';
+import { ReactComponent as Logo } from '../assets/city2.svg';
 
 
 function Login(props) {
@@ -61,25 +64,38 @@ function Login(props) {
          }
          );
    }
-
+   
    return (
-      <Card>
-         <div className='Login'>
-            <form onSubmit={onSubmit}>
-               <div className='FormRow'>
-                  <label>Username</label>
-                  <input name='username' required onChange={onChange} value={ loginForm.username}/>
-               </div>
-               <div className='FormRow'>
-                  <label>Password</label>
-                  <input name='password' type='password' required onChange={onChange} value={ loginForm.password}/>
-               </div>
-               <div className='error'>{error}</div>
-               <button className='button' type='submit'>Login</button>
-               <button className='button' type="button" onClick={() => {history.push("/registration")}}>Registration</button>
-            </form>
+      <>
+      <div className="current-title">
+        <RiLoginBoxFill className="icon-color" /> PRIJAVA
+      </div>
+      {/* <div className="logres">
+         <img src="../../winter-village-4567947.png" alt="MojKvart"></img>
+      </div> */}
+      <div className="logres">
+         <div className="center-contents">
+            <Logo />
          </div>
-      </Card>
+         <CardLogin>
+            <div className='Login'>
+               <form onSubmit={onSubmit}>
+                  <div className='FormRow'>
+                     <label>Korisničko ime</label>
+                     <input name='username' required onChange={onChange} value={ loginForm.username}/>
+                  </div>
+                  <div className='FormRow'>
+                     <label>Lozinka</label>
+                     <input name='password' type='password' required onChange={onChange} value={ loginForm.password}/>
+                  </div>
+                  <div className='error'>{error}</div>
+                  <button className='button' type="button" onClick={() => {history.push("/registration")}}>Registracija</button>
+                  <button className='button' type='submit'>Prijavi se</button>
+               </form>
+            </div>
+         </CardLogin>
+         </div>
+      </>
    );
 }
 

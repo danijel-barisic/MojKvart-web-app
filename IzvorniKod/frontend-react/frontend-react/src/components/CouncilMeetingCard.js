@@ -2,6 +2,7 @@ import React from "react"
 import "./Event.css"
 import "./Login.css"
 import { useHistory } from "react-router"
+import "../style/style.css"
 
 
 function CouncilMeetingCard(props) {
@@ -28,7 +29,7 @@ function CouncilMeetingCard(props) {
                 <span>{author.firstName} {author.lastName}</span>
             </div>
             <div className='Login'>
-                <button className='button' type="button" onClick={() => {history.push(`/council/report/${id}`)}}>Više informacija</button>
+                <button className='button' type="button" onClick={() => {history.push(`/vijece/izvjesce/${id}`)}}>Više informacija</button>
             </div>
         </div>
     )

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import './Header.css';
+import { ReactComponent as Logo } from '../assets/city.svg'
 
 
 function Header(props) {
@@ -25,8 +26,8 @@ function Header(props) {
 
    const renderButton = () => {
       return (checkLogin)
-         ? <Link to='/' className="logout" onClick={logout} >Logout</Link>
-         : <Link to='/login' className="login" >Login </Link>;
+         ? <Link to='/' className="logout" onClick={logout} > ODJAVA </Link>
+         : <Link to='/login' className="login" > PRIJAVA </Link>;
    }
 
    if (account !== undefined && account.home !== undefined) {
@@ -34,9 +35,10 @@ function Header(props) {
          return (
             <>
                <header className='header'>
-                  <Link className='logo active' to='/'>Moj Kvart </Link>
+                  <Link className='logo active' to='/'> MOJ KVART </Link>
+                  <Logo style={{ width: "150px", height: "50px"}}/>
                   <div className='header-right'>
-                     <Link to='/personal' >Osobni podaci </Link>
+                     <Link to='/osobno' > OSOBNI PODACI </Link>
                      {renderButton()}
                   </div>
                </header>
@@ -46,12 +48,13 @@ function Header(props) {
       } else {
          return (
             <header className='header'>
-               <Link className='logo active' to='/'>Moj Kvart </Link>
+               <Link className='logo active' to='/'> MOJ KVART  </Link>
+               <Logo style={{ width: "150px", height: "50px"}} />
                <div className='header-right'>
-                  <Link to='/forum' >Forum </Link>
-                  <Link to='/events' >Događanja </Link>
-                  <Link to='/council' >Vijeće četvrti </Link>
-                  <Link to='/personal' >Osobni podaci </Link>
+                  <Link to='/forum' >FORUM </Link>
+                  <Link to='/dogadjaji' >DOGAĐAJI </Link>
+                  <Link to='/vijece' >VIJEĆE ČETVRTI </Link>
+                  <Link to='/osobno' >OSOBNI PODACI </Link>
                   {renderButton()}
                </div>
             </header>
@@ -60,12 +63,8 @@ function Header(props) {
    } else {
       return (
          <header className='header'>
-            <Link className='logo active' to='/'>Moj Kvart </Link>
+            <Link className='logo active' to='/'> MOJ KVART </Link>
             <div className='header-right'>
-               <Link to='/forum' >Forum </Link>
-               <Link to='/events' >Događanja </Link>
-               <Link to='/council' >Vijeće četvrti </Link>
-               <Link to='/personal' >Osobni podaci </Link>
                {renderButton()}
             </div>
          </header>

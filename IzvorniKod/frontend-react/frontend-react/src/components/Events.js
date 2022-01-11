@@ -5,6 +5,10 @@ import { useHistory } from "react-router"
 import { ReactSession } from "react-client-session"
 import EventSuggestion from "./EventSuggestion"
 import EventSuggestionUser from "./EventSuggestionUser"
+import {MdEvent} from "react-icons/md"
+import {MdEventNote} from "react-icons/md"
+import Card12 from "./Card12"
+import Card17 from "./Card17"
 
 function Events() {
 
@@ -55,103 +59,105 @@ function Events() {
     if (events !== undefined && roles !== undefined && roles.length > 0) {
         if (roles.filter(r => r.name === "Moderator").length > 0) return (
             <>
-                <Card title='Događaji'>
-                    <div>
-                        <div className='Login'>
-                            <button className='button' type="button" onClick={() => {history.push("/events/suggestion")}}>Predloži događaj</button>
-                        </div>
-                    </div>
-                    <div>
-                        <div className='innerEvent'>
-                            <div className='wrapper'>
-                                {confirmed.map(function (event){
-                                    return (
-                                        <div className='inner'>
-                                            <Event event={event}/>
-                                        </div>
-                                    )
-                                })}
+                <div className="current-title">
+                    <MdEvent/> DOGAĐAJI
+                </div>
+                <div className="grid-father">
+                    <Card17>
+                        <h2>POTVRĐENI DOGAĐAJI</h2>
+                        <div className="flex-container-right">
+                            <div>
+                                <button className='button-purple' type="button" onClick={() => {history.push("/dogadjaji/prijedlog")}}>Predloži događaj</button>
                             </div>
                         </div>
-                    </div>
-                </Card>
-                <Card title='Prijedlozi događaja'>
-                    <div>
-                        <div className='innerEvent'>
-                            <div className='wrapper'>
-                                {unconfirmed.map(function (ev){
-                                    return (
-                                        <div className='inner'>
-                                            <EventSuggestion event={ev}/>
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                        </div>
-                    </div>
-                </Card>
-            </>
-        )
-        else if (my_unconfirmed !== undefined && my_unconfirmed.length > 0) return (
-            <>
-                <Card title='Događaji'>
-                    <div>
-                        <div className='Login'>
-                            <button className='button' type="button" onClick={() => {history.push("/events/suggestion")}}>Predloži događaj</button>
-                        </div>
-                    </div>
-                    <div>
-                        <div className='innerEvent'>
-                            <div className='wrapper'>
-                                {confirmed.map(function (event){
-                                    return (
-                                        <div className='inner'>
-                                            <Event event={event}/>
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                        </div>
-                    </div>
-                </Card>
-                <Card title="Moji nepotvrđeni događaji">
-                    <div>
-                        <div className='innerEvent'>
-                            <div className='wrapper'>
-                                {my_unconfirmed.map(function (event){
-                                    return (
-                                        <div className='inner'>
-                                            <EventSuggestionUser event={event}/>
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                        </div>
-                    </div>
-                </Card>
+                    </Card17>
+                    {confirmed.map(function (event) {
+                        console.log(event)
+                        return (
+                            <Card12>
+                                <h2>{event.name}</h2>
+                                <div className="Login flex-container-right">
+                                    <div>
+                                    <button className='button' type="button" onClick={() => {history.push(`/dogadjaji/dogadjaj/${event.id}`)}}>Više informacija</button>
+                                    </div>
+                                </div>
+                            </Card12>
+                        )
+                    })}
+                </div>
+                {(unconfirmed.length > 0) ?
+                <>
+                <div className="current-title">
+                    <MdEventNote/> PRIJEDLOZI DOGAĐAJA
+                </div>
+                <div className="grid-father">
+                    {unconfirmed.map(function (event) {
+                        return (
+                            <Card12>
+                                <h2>{event.name}</h2>
+                                <div className="Login flex-container-right">
+                                    <div>
+                                    <button className='button' type="button" onClick={() => {history.push(`/dogadjaji/dogadjaj/${event.id}`)}}>Više informacija</button>
+                                    </div>
+                                </div>
+                            </Card12>
+                        )
+                    })}
+                </div>
+                </>                
+                : <></>}
             </>
         )
         else return (
-            <Card title='Događaji'>
-                <div>
-                    <div className='Login'>
-                        <button className='button' type="button" onClick={() => {history.push("/events/suggestion")}}>Predloži događaj</button>
-                    </div>
+            <>
+                <div className="current-title">
+                    <MdEvent/> DOGAĐAJI
                 </div>
-                <div>
-                    <div className='innerEvent'>
-                        <div className='wrapper'>
-                            {confirmed.map(function (event){
-                                return (
-                                    <div className='inner'>
-                                        <Event event={event}/>
-                                    </div>
-                                )
-                            })}
+                <div className="grid-father">
+                    <Card17>
+                        <h2>POTVRĐENI DOGAĐAJI</h2>
+                        <div className="flex-container-right">
+                            <div>
+                                <button className='button-purple' type="button" onClick={() => {history.push("/dogadjaji/prijedlog")}}>Predloži događaj</button>
+                            </div>
                         </div>
-                    </div>
+                    </Card17>
+                    {confirmed.map(function (event) {
+                        console.log(event)
+                        return (
+                            <Card12>
+                                <h2>{event.name}</h2>
+                                <div className="Login flex-container-right">
+                                    <div>
+                                    <button className='button' type="button" onClick={() => {history.push(`/dogadjaji/dogadjaj/${event.id}`)}}>Više informacija</button>
+                                    </div>
+                                </div>
+                            </Card12>
+                        )
+                    })}
                 </div>
-            </Card>
+                {(my_unconfirmed !== undefined && my_unconfirmed.length > 0) ?
+                <>
+                <div className="current-title">
+                    <MdEventNote/> MOJI PRIJEDLOZI DOGAĐAJA
+                </div>
+                <div className="grid-father">
+                    {my_unconfirmed.map(function (event) {
+                        return (
+                            <Card12>
+                                <h2>{event.name}</h2>
+                                <div className="Login flex-container-right">
+                                    <div>
+                                    <button className='button' type="button" onClick={() => {history.push(`/dogadjaji/dogadjaj/${event.id}`)}}>Više informacija</button>
+                                    </div>
+                                </div>
+                            </Card12>
+                        )
+                    })}
+                </div>
+                </>
+                : <></>}
+            </>
         )
     } else return (
         <></>

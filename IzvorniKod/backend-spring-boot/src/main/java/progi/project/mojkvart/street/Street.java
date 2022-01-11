@@ -15,7 +15,7 @@ import java.util.List;
 public class Street {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, name = "street_id")
     private Long id;
 
@@ -29,7 +29,6 @@ public class Street {
     private Integer maxStreetNo;
 
     @ManyToOne
-    @Cascade(org.hibernate.annotations.CascadeType.PERSIST)
     @JoinColumn(name = "district_id")
     private District district;
 

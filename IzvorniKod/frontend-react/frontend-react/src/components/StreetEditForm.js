@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "./Card";
 import { useHistory } from "react-router-dom";
+import Card11 from "./Card11.js";
 
 function StreetEditForm(props) {
    const [form, setForm] = React.useState({ name: '' });
@@ -9,6 +10,15 @@ function StreetEditForm(props) {
    const [street, setStreet] = React.useState([]);
    const { id } = props.location.state;
    console.log({id});
+   const [streets, setStreets] = React.useState(undefined)
+
+   React.useEffect(() => {
+      fetch("/streets")
+         .then(data => data.json())
+         .then(data => setStreets(data))
+   }, [])
+
+   console.log(street)
 
    function onChange(event) {
       const { name, value } = event.target;
@@ -17,33 +27,43 @@ function StreetEditForm(props) {
 
    function onSubmit(e) {
       e.preventDefault();
-      const data = {
-         id: id,
-         name: form.name,
-         minStreetNo: form.minStreetNo,
-         maxStreetNo: form.maxStreetNo,
-         district: {
-            id: form.districtId
-         }
-      };
-      console.log("data->>>>" + JSON.stringify(data))
-      const options = {
-         method: 'PUT',
-         headers: {
-            'Content-Type': 'application/json'
-         },
-         body: JSON.stringify(data)
-      };
 
-      return fetch(`/streets/${id}`, options).then(response => {
-         if (response.ok) {
-            history.goBack();
-         }
-         else {
-            setError("District with given name already exist!");
-            console.log(response.body);
-         }
-      });
+      if (streets.filter(s => s.district.id == street.district.id)
+         .filter(s => s.id !== street.id)
+         .map(s => s.name).includes(form.name)) {
+         setError("U odabranom kvartu ulica s predloženim imenom već postoji!")
+      }
+
+      else {
+
+         const data = {
+            id: id,
+            name: form.name,
+            minStreetNo: form.minStreetNo,
+            maxStreetNo: form.maxStreetNo,
+            district: {
+               id: street.district.id
+            }
+         };
+         console.log("data->>>>" + JSON.stringify(data))
+         const options = {
+            method: 'PUT',
+            headers: {
+               'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+         };
+
+         return fetch(`/streets/${id}`, options).then(response => {
+            if (response.ok) {
+               history.goBack();
+            }
+            else {
+               setError("Kvart s danim id-jem ne postoji!");
+               console.log(response.body);
+            }
+         });
+      }
    }
 
    function isValid() {
@@ -57,34 +77,34 @@ function StreetEditForm(props) {
          .then(street => setStreet(street))
    }, []);
 
-
+   if (streets !== undefined)
    return (
-      <Card title="Ažuriranje ulice">
-         <div className='StreetForm Login'>
+      <>
+      <div className="current-title">AŽURIRANJE ULICE</div>
+      <Card11>
+         <div className='StreetForm Login flex-container'>
             <form onSubmit={onSubmit}>
                <div className='FormRow'>
                   <label>Ime</label>
                   <input required placeholder={street.name} name='name' onChange={onChange} value={ form.name}/>
                </div>
                <div className='FormRow'>
-                  <label>MinStreetNo</label>
+                  <label>Najmanji broj u ulici</label>
                   <input required placeholder={street.minStreetNo} name='minStreetNo' onChange={onChange} value={ form.minStreetNo}/>
                </div>
                <div className='FormRow'>
-                  <label>MaxStreetNo</label>
+                  <label>Najveći broj u ulici</label>
                   <input required placeholder={street.maxStreetNo} name='maxStreetNo' onChange={onChange} value={ form.maxStreetNo}/>
                </div>
-               <div className='FormRow'>
-                  <label>DistrictId</label>
-                  <input required name='districtId' onChange={onChange} placeholder={id} value={ form.districtId}/>
-               </div>
                <div className='error'>{error}</div>
-               <button classname='submit' type='submit' disabled={!isValid()}>Ažuriraj</button>
                <button className='button' type="button" onClick={() => {history.goBack()}}>Natrag</button>
+               <button classname='submit' type='submit' disabled={!isValid()}>Ažuriraj</button>
             </form>
          </div>
-      </Card>
-   );
+      </Card11>
+      </>
+   )
+   else return (<></>)
 }
 
 export default StreetEditForm;

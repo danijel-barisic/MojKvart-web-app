@@ -3,12 +3,23 @@ import Card from "./Card"
 import "./Login.css"
 import { useHistory } from "react-router"
 import { ReactSession } from "react-client-session"
+import Card15 from "./Card15"
 
 function CouncilForm() {
 
     const [error, setError] = React.useState('')
     const [account, setAccount] = React.useState({id: ''})
     const [meetingForm, setMeetingForm] = React.useState({title: '', report: ''})
+
+    const [meetings, setMeetings] = React.useState()
+    React.useEffect(() => {
+        if (account !== undefined && account.district !== undefined) {
+            fetch('/council')
+            .then(data => data.json())
+            .then(data => setMeetings(data
+                .filter(m => m.district.id === account.district.id)))
+        }
+    }, [account])
 
     const history = useHistory()
     const acc_username = ReactSession.get("username")
@@ -47,23 +58,34 @@ function CouncilForm() {
             }
         }
 
-        const options = {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
+        if (meetingForm.title.length > 25) {
+            setError("Naslov izvješća smije sadržavati maksimalno 25 znakova!")
         }
 
-        return fetch("/council", options).then(response => {
-            if (response.ok) {
-                history.push('/council')
+        else {
+
+            if (is_unique(data.title)) {
+                
+                const options = {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                }
+        
+                return fetch("/council", options).then(response => {
+                    if (response.ok) {
+                        history.push('/vijece')
+                    }
+                    else {
+                        setError("Prijedlog događaja nije moguće objaviti.");
+                        console.log(response.body)
+                    }
+                })
             }
-            else {
-                setError("Prijedlog događaja nije moguće objaviti.");
-                console.log(response.body)
-            }
-        })
+        }
+
 
     }
 
@@ -72,8 +94,20 @@ function CouncilForm() {
         return title.length > 0 && report.length > 0
     }
 
-    return (
-        <Card title="Novo izvješće">
+    function is_unique(title) {
+        if (meetings.map(m => m.title).includes(title)){
+            setError("Izvješće s predloženim naslovom već postoji!")
+            return false
+        }
+        else {
+            return true
+        }
+    }
+
+    if (meetings !== undefined) return (
+        <>
+        <div className="current-title">NOVO IZVJEŠĆE</div>
+        <Card15>
             <div className="Login">
                 <form onSubmit={onSubmit}>
                     <div className="FormRow">
@@ -82,16 +116,20 @@ function CouncilForm() {
                     </div>
                     <div className="FormRow">
                         <label>Sadržaj</label>
-                        <input name="report" required onChange={onChange} value = {meetingForm.report}/>
+                        <textarea rows={6} cols={50} name="report" required onChange={onChange} value = {meetingForm.report}/>
                     </div>
                     <div>
                         <div className='error'>{error}</div>
+                        <button className="button" type="button" onClick={() => {history.push("/vijece")}}>Natrag</button>
                         <button className="button" type="submit" disabled={!isValid()}>Objavi izvješće</button>
-                        <button className="button" type="button" onClick={() => {history.push("/council")}}>Povratak</button>
                     </div>
                 </form>
             </div>
-        </Card>
+        </Card15>
+        </>
+    )
+    else return (
+        <></>
     )
 }
 

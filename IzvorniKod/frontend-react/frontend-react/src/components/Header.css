@@ -1,13 +1,13 @@
 .header {
   overflow: hidden;
-  background-color: #f1f1f1;
+  background-color: #272C49;
   padding: 20px 10px;
 }
 
 /* Style the header links */
 .header a {
   float: left;
-  color: black;
+  color: white;
   text-align: center;
   padding: 12px;
   text-decoration: none;
@@ -18,7 +18,7 @@
 
 .headerdist a {
   float: left;
-  color: black;
+  color: white;
   text-align: center;
   padding: 12px;
   text-decoration: none;
@@ -29,7 +29,7 @@
 
 .headerdistPost a {
   display: inline-block;
-  color: black;
+  color: white;
   text-align: center;
   padding: 12px;
   text-decoration: none;
@@ -43,28 +43,28 @@
 
 /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
 .header a.logo {
-  font-size: 25px;
+  font-size: 30px;
   font-weight: bold;
 }
 
 /* Change the background color on mouse-over */
 .header a:hover {
-  background-color: #ddd;
+  background-color: white;
   color: black;
 }
 
 .headerdist a:hover {
-  background-color: #ddd;
+  background-color: white;
   color: black;
 }
 .headerdistPost a:hover {
-  background-color: #ddd;
+  background-color: white;
   color: black;
 }
 
 /* Style the active/current link*/
 .header a.active {
-  background-color: dodgerblue;
+  background-color: #272C49;
   color: white;
 }
 
@@ -74,31 +74,31 @@
 }
 
 .header-right a.logout {
-  background-color: rgb(216, 30, 30);
+  background-color: #A555B9;
   color: white;
 }
 
 .header-right a.login {
-  background-color: green;
+  background-color: #2390F0;
   color: white;
 }
 
 .link {
   border: none;
-  color: black;
+  color: white;
   text-align: center;
   padding: 12px;
   text-decoration: none;
   font-size: 22px;
   line-height: 0px;
   border-radius: 10px;
-  background-color: white;
+  background-color: #272C49;
 }
 
 .link:hover {
   cursor: pointer;
-  background-color: #ddd;
-  color: black;
+  background-color: white;
+  color: #272C49;
 }
 
 .invalidAddressPoruka {
@@ -113,10 +113,10 @@
 }
 @keyframes highlight {
   0% {
-      background: red
+      background: #A555B9
   }
   100% {
-      background: none;
+      background: #272c49;
   }
 }
 
@@ -125,7 +125,7 @@
 }
 
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 720px) {
   .header a {
     float: none;
     display: block;

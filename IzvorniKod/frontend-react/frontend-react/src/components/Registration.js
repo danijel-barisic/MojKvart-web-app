@@ -1,24 +1,27 @@
 import React from "react";
-import Card from "./Card";
+import CardLogin from "./CardLogin";
 import './Login.css';
 import './Card.css';
 import { useHistory } from "react-router";
 import Select from 'react-select';
 import ReactSession from "react-client-session/dist/ReactSession";
-
+import { ReactComponent as Logo } from '../assets/city2.svg';
+import { RiLoginBoxFill } from 'react-icons/ri'
 
 //https://react-select.com/styles#styles
  const customStyles = {
    option: (provided, state) => ({
      ...provided,
      padding: 20,
-     
+     borderRadius:'10px'
    }),
    menuList: styles => ({
       
       
         ...styles,
-        maxHeight: 138
+      maxHeight: 138,
+      color: 'black',
+      borderRadius:'10px'
       }),
    control: styles => ({ ...styles, backgroundColor: 'white',borderRadius:'10px' }),
    singleValue: (provided, state) => {
@@ -34,7 +37,8 @@ function Registration(props) {
    const [registrationForm, setregistrationForm] = React.useState({ firstname: '', lastname: '', email: '', password: '',streetnumber: ''});
    const [streets, setStreets] = React.useState([]);
    const [error, setError] = React.useState('');
-   const [state,setState] = React.useState({selectedOption:null})
+   const [state, setState] = React.useState({ selectedOption: null })
+   const znakovi = ["!","\'","\"","#","$","%","&","/","(",")","=","?","*","<",">","|",":",";","[","]","@"];
    
    const history = useHistory();
    var { selectedOption } = state;
@@ -129,18 +133,31 @@ function Registration(props) {
          ).catch(err => {console.log(err)});
    }
 
-   
+   function isValid() {
+      let result = znakovi.some(el => registrationForm.firstname.includes(el));
+      let result2 = znakovi.some(el => registrationForm.lastname.includes(el));
+      console.log(result, result2);
+      return !result && !result2;
+   }
 
    return (
-      <Card>
+      <>
+      <div className="current-title">
+        <RiLoginBoxFill className="icon-color" /> REGISTRACIJA
+      </div>
+      <div className="logres">
+      <div className="center-contents">
+         <Logo />
+      </div>
+      <CardLogin>
          <div className='Login'>
             <form onSubmit={onSubmit}>
                <div className='FormRow'>
-                  <label>FirstName</label>
+                  <label>Ime</label>
                   <input name='firstname' required onChange={onChange}value={ registrationForm.firstname}/>
                </div>
                <div className='FormRow'>
-                  <label>LastName</label>
+                  <label>Prezime</label>
                   <input name='lastname' required onChange={onChange} value={ registrationForm.lastname}/>
                </div>
                <div className='FormRow'>
@@ -148,25 +165,27 @@ function Registration(props) {
                   <input name='username' required onChange={onChange} value={ registrationForm.username}/>
                </div>
                <div className='FormRow'>
-                  <label>Password</label>
+                  <label>Lozinka</label>
                   <input name='password' required type='password' onChange={onChange} value={ registrationForm.password}/>
                </div>
 			    <div className='FormRow'>
-                  <label>Address</label>
+                  <label>Adresa</label>
                   <Select value={selectedOption} required onChange = {handleChange} styles={customStyles} placeholder="Select your address"
                    options={streets_array}
                />
                </div>
                <div className='FormRow'>
-                  <label>Street number</label>
+                  <label>Kućni broj</label>
                   <input type="number" name="streetnumber" min={selectedOption ? selectedOption.minNum: 0} max={selectedOption ? selectedOption.maxNum: 0} required onChange={onChange} />
                   </div>
                <div className='error'>{error}</div>
-               <button className='submit' type='submit'>Register</button>
-               <button className='button' type="button" onClick={() => {history.push("/login")}}>Login</button>
+               <button className='button' type="button" onClick={() => {history.push("/login")}}>Prijava</button>
+               <button className='submit' type='submit' disabled={!isValid()}>Registriraj se</button>
             </form>
          </div>
-      </Card>
+            </CardLogin>
+         </div>
+      </>
    );
 }
 

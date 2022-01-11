@@ -2,6 +2,7 @@ import React from "react"
 import Card from "./Card"
 import "./Login.css"
 import { useHistory } from "react-router"
+import Card13 from "./Card13"
 
 function EventEditForm() {
 
@@ -59,41 +60,52 @@ function EventEditForm() {
             account: oldEvent.account
         }
 
-        const options = {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
+        var d1 = new Date(eventForm.date)
+        var d2 = new Date()
+        d1.setHours(0,0,0,0)
+        d2.setHours(0,0,0,0)
+
+        if (d1 - d2 < 0) {
+            setError("Ne možete predložiti događaj u prošlosti!")
         }
 
-        return fetch(`/events/${data.id}`, options).then(response => {
+        else {
 
-            if (response.ok) {
-                history.push('/events')
+            const options = {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
             }
+    
+            return fetch(`/events/${data.id}`, options).then(response => {
+    
+                if (response.ok) {
+                    history.goBack()
+                }
+    
+                else {
+                    setError("Prijedlog događaja nije moguće objaviti.");
+                    console.log(response.body)
+                }
+            })
+        }
 
-            else {
-                setError("Prijedlog događaja nije moguće objaviti.");
-                console.log(response.body)
-            }
-        })
     }
 
     function isValid() {
         const {name, description, location, hours, minutes, date, time} = eventForm
-        var d1 = new Date(date)
-        var d2 = new Date()
-        d1.setHours(0,0,0,0)
-        d2.setHours(0,0,0,0)
         return name.length > 0 && description.length > 0 && 
             location.length > 0 && date.length > 0 && time.length > 0 &&
             parseInt(hours) >= 0 && parseInt(minutes) >= 0 && parseInt(minutes) < 60
-            && d1 - d2 >= 0
     }
 
     return (
-        <Card title="Prijedlog događaja">
+        <>
+        <div className="current-title">PRIJEDLOG DOGAĐAJA
+        </div>
+        <Card13>
             <div className="Login">
                 <form onSubmit={onSubmit}>
                     <div className="FormRow">
@@ -126,12 +138,13 @@ function EventEditForm() {
                     </div>
                     <div>
                         <div className='error'>{error}</div>
+                        <button className="button" type="button" onClick={() => {history.goBack()}}>Odustani</button>
                         <button className="button" type="submit" disabled={!isValid()}>Spremi promjene</button>
-                        <button className="button" type="button" onClick={() => {history.push("/events")}}>Odustani</button>
                     </div>
                 </form>
             </div>
-        </Card>
+        </Card13>
+        </>
     )
 }
 

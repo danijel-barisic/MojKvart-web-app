@@ -12,6 +12,7 @@ import progi.project.mojkvart.meeting.Meeting;
 import progi.project.mojkvart.role.Role;
 import progi.project.mojkvart.role_request.RoleRequest;
 import progi.project.mojkvart.post.Post;
+import progi.project.mojkvart.street.Street;
 import progi.project.mojkvart.thread.PostThread;
 
 import javax.persistence.*;
@@ -49,6 +50,7 @@ public class Account implements UserDetails {
     // only CascadeType.REMOVE is left out, because we don't want to remove accounts when we remove a role
     @ManyToMany(fetch = FetchType.EAGER)/*(cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH} */
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(name = "account_role",
             joinColumns = @JoinColumn(name = "account_id"), // joinColumns is for THIS entity
             inverseJoinColumns = @JoinColumn(name = "role_id")) // inverse is for the OTHER entity
@@ -218,10 +220,20 @@ public class Account implements UserDetails {
     }
 
     public District getDistrict() {
-        return home.getStreet().getDistrict();
+        return this.getHome().getStreet().getDistrict();
     }
 
+    static private Home generateDummyHome() {
+        var h = new Home(-1L, new Street("", 0, 0));
+        h.getStreet().setDistrict(new District(""));
+        return h;
+    }
+    static private final Home dummyHome = generateDummyHome();
+
     public Home getHome() {
+        if (this.home == null) {
+            return dummyHome;
+        }
         return home;
     }
 

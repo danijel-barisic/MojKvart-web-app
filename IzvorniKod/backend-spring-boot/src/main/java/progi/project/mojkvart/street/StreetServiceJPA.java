@@ -84,6 +84,8 @@ public class StreetServiceJPA implements StreetService{
         Assert.isNull(street.getId(),
                 "Street ID must be null, not: " + street.getId()
         );
+        long maxId = streetRepo.getMaxId();
+        street.setId(maxId == -1 ? 1 : maxId + 1);
         return streetRepo.save(street);
     }
 

@@ -9,13 +9,11 @@ function Post(props) {
   
    
    return (
+      <>
       <div className='headerdistPost'>
-         <Link to={{
-            pathname: `/novaobjava/${threadId}/${id}`,
-            state: { id,district },
-            className: 'header-right'
-         }}>{content} </Link>
+         {content} 
       </div>
+      </>
    );
 }
 
