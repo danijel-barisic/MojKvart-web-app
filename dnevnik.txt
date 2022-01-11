@@ -55,3 +55,15 @@
     prisustvovali: Danijel Barišić, Mihael Miličević, Tomislav Žiger
     teme sastanka:
         izrada dijagrama razreda
+
+10. sastanak
+    datum: 8.12.2021.
+    prisustvovali: Andrija Banić, Danijel Barišić, Danko Čurlin, Bartol Hrg, Mihael Miličević, Dario Pavlović, Tomislav Žiger
+    teme sastanka:
+        rasprava o aktivnostima na projektu i zadacima do prezentacije alfa inačice
+
+11. sastanak
+    datum: 1.1.2022.
+    prisustvovali: Andrija Banić, Danijel Barišić, Danko Čurlin, Bartol Hrg, Mihael Miličević, Dario Pavlović, Tomislav Žiger
+    teme sastanka:
+        rasprava o aktivnostima na projektu i zadacima do konačne predaje projekta
