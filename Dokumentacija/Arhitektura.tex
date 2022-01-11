@@ -296,34 +296,57 @@ Baza podataka sastoji se od deset entiteta:
 			
 		\section{Dijagram razreda}
 		
-			
-			Na slici 4.2 prikazani su razredi koji odgovaraju \textit{backend} dijelu MVC arhitekture. Razred \textit{District} označava kvartove i uz njega su vezani razredi \textit{Meeting} (koji odgovara izvješćima s Vijeća četvrti), \textit{Thread} (koji odgovara temi na Forumu), \textit{Event} (koji odgovara događaju u sekciji Događaji) i \textit{Street} (koji odgovara ulici koja pripada nekom kvartu). Uz razred \textit{Street} vezan je razred \textit{Home}, koji označava adrese na kojima neki stanovnik kvarta živi. Uz razred \textit{Home} vezan je razred \textit{Account}, koji odgovara korisnicima aplikacije. Razred \textit{Thread} uz sebe veže razred \textit{Post}, koji označava odgovore unutar pojedine teme na Forumu. Apstraktan razred \textit{Role} označava uloge unutar aplikacije, a nasljeđuju ga razredi \textit{BasicAccount}, \textit{Councilor}, \textit{Moderator} i \textit{Administrator}. Konačno, razred \textit{RoleRequest} označava zahtjev za ulogu.
-			
-			\begin{figure}[H]
-		\centering
-		\includegraphics[width=\textwidth]{12 dijagram razreda 1.png}
-		\caption{Dijagram razreda - modeli}
-		\end{figure}
-			
+		Backend aplikacije je ostvaren korištenjem radnog okvira Spring Boot, i stoga aplikacija ima nekoliko slojeva.
+		
+		Iako se ne smatraju posebnim slojem, na slici 4.2 prikazani su entiteti koji odgovaraju relacijama u bazi podataka, opisanoj u poglavlju 4.1. Entiteti ne sadrže nikakvu proceduralnu logiku, nego isključivo članske varijable i njihove gettere i settere. Entitetu našoj aplikaciji su redom: Account, District, Event, Home, Meeting, Post, Role, RoleRequest, Street i PostThread.
+		
+		Na slici 4.3 prikazan je sloj Repository. Razredi u njemu se definiraju kao sučelja koja nude metode dohvaćanja elemenata iz baze, te stvaranja promjena u bazi. Njihov kod u pravilu programer ne piše eksplicitno, nego te metode generira Spring na temelju njihovog imena.
+		
+		Na slici 4.4 prikazan je sloj Service. Taj sloj sadrži centralnu logiku na backendu, manipulira entitetima i poziva metode koje nudi prethodni sloj, Repository.
+		
+		Na slici 4.5 prikazan je sloj Controller. Taj je sloj najviši u hijerarhiji slojeva, i on je jedini sloj s kojim komunicira frontend dio aplikacije. Uloga ovog sloja je da obrađuje HTTP zahtjeve, poziva metode koje nudi prethodni sloj Service, i potom odgovara na primljene zahtjeve.
+		
+		Na slici 4.6 prikazan je dijagram razreda cijele aplikacije, i naglasak je najviše na ovisnostima među slojevima.
+		
+		\eject
+		
+					\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth,keepaspectratio]{12.1 entiteti.png}
+					\caption{Dijagram razreda - entiteti}
+				\end{figure}	
+				
+							\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth,keepaspectratio]{12.2 repozitoriji.png}
+					\caption{Dijagram razreda - repozitoriji}
+				\end{figure}	
+				
+							\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth,keepaspectratio]{12.3 servisi.png}
+					\caption{Dijagram razreda - servisi}
+				\end{figure}	
+				
+							\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth,keepaspectratio]{12.4 kontroleri.png}
+					\caption{Dijagram razreda - kontroleri}
+				\end{figure}	
+				
+							\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth,keepaspectratio]{13 aplikacija.png}
+					\caption{Dijagram razreda - cjelokupna aplikacija}
+				\end{figure}	
 			
 			
 			\eject
 			
-		
-			
-			Na slici 4.3 prikazani su razredi koji odgovoraju funkcionalnosti registracije u aplikaciji. Centralni razred je \textit{RegistrationController}. \textit{RegistrationController} u funkciji \textit{register} prima objekte tipa \textit{RegistrationRequest}, te potom poziva funkciju \textit{register} objekta tipa \textit{RegistrationService}. Objekt tipa \textit{RegistrationService} u funkciji \textit{register} prvo poziva funkciju \textit{validate} objekta tipa \textit{EmailValidator} koja provjerava je li zadani email u ispravnom formatu. Ako je email u neispravnom formatu, funkcija baca \textit{IllegalStateException}, a inače poziva funkciju \textit{signupAccount} objekta tipa \textit{AccountDetailService}. Unutar funkcije \textit{singupAccount} se prvo provjerava postoji li već registriran korisnik s unesesnim mailom, pozivanjem funkcije \textit{findByEmail} objekta tipa \textit{AccountRepository}. Ako funkcija \textit{findByEmail} vrati logičku istinu, onda se baca \textit{IllegalArgumentException}. U protivnom se unesena lozinka kriptira korištenjem funkcije \textit{bCryptPasswordEncoder} objekta tipa \textit{PasswordEncoder}, a potom se kreira korisnički račun korištenjem funkcije \textit{createAccount} objekta tipa \textit{AccountService}.
-			
-			\begin{figure}[H]
-		\centering
-		\includegraphics[width=\textwidth]{13 dijagram razreda 2.png}
-		\caption{Dijagram razreda - registracija}
-		\end{figure}
-		
-			\eject
 		
 		\section{Dijagram stanja}
 		
-		Na slici 4.4 prikazan je dijagram stanja korisničkog sučelja. Stranica na koju korisnik uvijek prvo dođe je "Prijava". S te stranice korisnik može birati opciju "Registracija" kako bi stvorio novi račun, ili se može prijaviti s postojećim računom. Ovisno o tome je li korisnik stanovnik ili administrator, dočeka ga prikladna početna stranica. 
+		Na slici 4.7 prikazan je dijagram stanja korisničkog sučelja. Stranica na koju korisnik uvijek prvo dođe je "Prijava". S te stranice korisnik može birati opciju "Registracija" kako bi stvorio novi račun, ili se može prijaviti s postojećim računom. Ovisno o tome je li korisnik stanovnik ili administrator, dočeka ga prikladna početna stranica. 
 		
 		Ako je korisnik stanovnik, sa svoje početne stranice može birati opcije "Osobni podaci", "Događaji", "Vijeće četvrti" i "Forum". Pri pregledu svojih osobnih podataka, korisnik može slati zahtjeve za dodatne uloge ili mijenjati svoje osobne podatke. Pri pregledu sekcije "Događaji", korisnik može stvarati prijedloge događaja. Pri pregledu sekcije "Vijeće četvrti", korisnik klikom na pojedino izvješće može dobiti dodatne informacije o tom izvješću, a ako ima ulogu "Vijećnik", onda može i stvarati nova izvješća. Konačno, pregledom sekcije "Forum" korisnik može otvarati nove teme i pregledavati postojeće.
 		
@@ -343,7 +366,7 @@ Baza podataka sastoji se od deset entiteta:
 		
 		\section{Dijagram aktivnosti}
 		
-		Na slici 4.5 prikazan je dijagram aktivnosti prilikom stvaranja novih događaja. Korisnik koji želi predložiti događaj ispunjava formu u koju unosi naziv, mjesto, vrijeme, trajanje i kratki opis. Kada ju je ispunio, odabire opciju spremanja prijedloga. Web aplikacija tada provjerava jesu li svi traženi podaci u ispravnom formatu. Ako nisu, upozorava korisnika na pogreške i omogućuje mu da ih ispravi, a ako su podaci ispravni, onda sprema prijedlog u bazu podataka. Nakon što je prijedlog spremljen, moderator ga može pregledati. Ako moderator procijeni da prijedlog ne zadovoljava jezični standard, može ga uređivati. Kada je ispravio sve eventualne pogreške, moderator odabire opciju spremanja promjena. Tada web aplikacija provjerava jesu li svi podaci u ispravnom formatu, te ako jesu, sprema promjene, a ako nisu, upozorava moderatora na pogreške i omogućuje mu da ih ispravi. Nakon što je završio s eventualnim uređivanjem prijedloga, moderator može odabrati opciju prihvaćanja ili odbijanja prijedloga, i u oba slučaja se ažurira status prijedloga događaja u bazi podataka.
+		Na slici 4.8 prikazan je dijagram aktivnosti prilikom stvaranja novih događaja. Korisnik koji želi predložiti događaj ispunjava formu u koju unosi naziv, mjesto, vrijeme, trajanje i kratki opis. Kada ju je ispunio, odabire opciju spremanja prijedloga. Web aplikacija tada provjerava jesu li svi traženi podaci u ispravnom formatu. Ako nisu, upozorava korisnika na pogreške i omogućuje mu da ih ispravi, a ako su podaci ispravni, onda sprema prijedlog u bazu podataka. Nakon što je prijedlog spremljen, moderator ga može pregledati. Ako moderator procijeni da prijedlog ne zadovoljava jezični standard, može ga uređivati. Kada je ispravio sve eventualne pogreške, moderator odabire opciju spremanja promjena. Tada web aplikacija provjerava jesu li svi podaci u ispravnom formatu, te ako jesu, sprema promjene, a ako nisu, upozorava moderatora na pogreške i omogućuje mu da ih ispravi. Nakon što je završio s eventualnim uređivanjem prijedloga, moderator može odabrati opciju prihvaćanja ili odbijanja prijedloga, i u oba slučaja se ažurira status prijedloga događaja u bazi podataka.
 			
 			\begin{figure}[H]
 					\centering
@@ -354,7 +377,7 @@ Baza podataka sastoji se od deset entiteta:
 			\eject
 		\section{Dijagram komponenti}
 		
-		 Na slici 4.6 prikazan je dijagram komponenti. Korisnik iz web preglednika pristupa pristupa aplikaciji korištenjem REST API-ja. Sama aplikacija se sastoji od dvije komponente. Prva komponenta odgovara frontendu i izgrađena je korištenjem React biblioteke. Druga komponenta odgovara backendu i izgrađena je korištenjem radnog okvira Spring. Frontend i backend komuniciraju korištenjem REST API-ja. Baza podataka je relacijska i backend joj pristupa slanjem SQL upita.
+		 Na slici 4.9 prikazan je dijagram komponenti. Korisnik iz web preglednika pristupa pristupa aplikaciji korištenjem REST API-ja. Sama aplikacija se sastoji od dvije komponente. Prva komponenta odgovara frontendu i izgrađena je korištenjem React biblioteke. Druga komponenta odgovara backendu i izgrađena je korištenjem radnog okvira Spring. Frontend i backend komuniciraju korištenjem REST API-ja. Baza podataka je relacijska i backend joj pristupa slanjem SQL upita.
 		
 			\begin{figure}[H]
 					\centering
