@@ -306,38 +306,56 @@ Baza podataka sastoji se od deset entiteta:
 		
 		Na slici 4.5 prikazan je sloj Controller. Taj je sloj najviši u hijerarhiji slojeva, i on je jedini sloj s kojim komunicira frontend dio aplikacije. Uloga ovog sloja je da obrađuje HTTP zahtjeve, poziva metode koje nudi prethodni sloj Service, i potom odgovara na primljene zahtjeve.
 		
-		Na slici 4.6 prikazan je dijagram razreda cijele aplikacije, i naglasak je najviše na ovisnostima među slojevima.
+		Zbog preglednosti, na jednom dijagramu nije bilo moguće prikazati sve razrede. Umjesto toga, na sljedeći način su prikazani odnosi među slojevima: na slici 4.6 prikazan je odnos između slojeva Controller i Service, na slici 4.7 prikazan je odnos između slojeva Service i Repository, na slici 4.8 prikazan je odnos između sloja Service i entiteta, te je na slici 4.9 prikazan odnos između sloja Repository i entiteta.
 		
 		\eject
 		
-					\begin{figure}[H]
+				\begin{figure}[H]
 					\centering
 					\includegraphics[width=\textwidth,keepaspectratio]{12.1 entiteti.png}
 					\caption{Dijagram razreda - entiteti}
 				\end{figure}	
 				
-							\begin{figure}[H]
+				\begin{figure}[H]
 					\centering
 					\includegraphics[width=\textwidth,keepaspectratio]{12.2 repozitoriji.png}
-					\caption{Dijagram razreda - repozitoriji}
+					\caption{Dijagram razreda - sloj Repository}
 				\end{figure}	
 				
-							\begin{figure}[H]
+				\begin{figure}[H]
 					\centering
 					\includegraphics[width=\textwidth,keepaspectratio]{12.3 servisi.png}
-					\caption{Dijagram razreda - servisi}
+					\caption{Dijagram razreda - sloj Service}
 				\end{figure}	
 				
-							\begin{figure}[H]
+				\begin{figure}[H]
 					\centering
 					\includegraphics[width=\textwidth,keepaspectratio]{12.4 kontroleri.png}
-					\caption{Dijagram razreda - kontroleri}
+					\caption{Dijagram razreda - sloj Controller}
 				\end{figure}	
 				
-							\begin{figure}[H]
+				\begin{figure}[H]
 					\centering
-					\includegraphics[width=\textwidth,keepaspectratio]{13 aplikacija.png}
-					\caption{Dijagram razreda - cjelokupna aplikacija}
+					\includegraphics[width=\textwidth,keepaspectratio]{13.1 kontroleri i servisi.png}
+					\caption{Dijagram razreda - odnos slojeva Controller i Service}
+				\end{figure}	
+				
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth,keepaspectratio]{13.2 servisi i repozitoriji.png}
+					\caption{Dijagram razreda - odnos slojeva Service i Repository}
+				\end{figure}	
+				
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth,keepaspectratio]{13.3 servisi i entiteti.png}
+					\caption{Dijagram razreda - odnos sloja Service i entiteta}
+				\end{figure}	
+				
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=\textwidth,keepaspectratio]{13.4 repozitoriji i entiteti.png}
+					\caption{Dijagram razreda - odnos sloja Repository i entiteta}
 				\end{figure}	
 			
 			
@@ -346,7 +364,7 @@ Baza podataka sastoji se od deset entiteta:
 		
 		\section{Dijagram stanja}
 		
-		Na slici 4.7 prikazan je dijagram stanja korisničkog sučelja. Stranica na koju korisnik uvijek prvo dođe je "Prijava". S te stranice korisnik može birati opciju "Registracija" kako bi stvorio novi račun, ili se može prijaviti s postojećim računom. Ovisno o tome je li korisnik stanovnik ili administrator, dočeka ga prikladna početna stranica. 
+		Na slici 4.10 prikazan je dijagram stanja korisničkog sučelja. Stranica na koju korisnik uvijek prvo dođe je "Prijava". S te stranice korisnik može birati opciju "Registracija" kako bi stvorio novi račun, ili se može prijaviti s postojećim računom. Ovisno o tome je li korisnik stanovnik ili administrator, dočeka ga prikladna početna stranica. 
 		
 		Ako je korisnik stanovnik, sa svoje početne stranice može birati opcije "Osobni podaci", "Događaji", "Vijeće četvrti" i "Forum". Pri pregledu svojih osobnih podataka, korisnik može slati zahtjeve za dodatne uloge ili mijenjati svoje osobne podatke. Pri pregledu sekcije "Događaji", korisnik može stvarati prijedloge događaja. Pri pregledu sekcije "Vijeće četvrti", korisnik klikom na pojedino izvješće može dobiti dodatne informacije o tom izvješću, a ako ima ulogu "Vijećnik", onda može i stvarati nova izvješća. Konačno, pregledom sekcije "Forum" korisnik može otvarati nove teme i pregledavati postojeće.
 		
@@ -366,7 +384,7 @@ Baza podataka sastoji se od deset entiteta:
 		
 		\section{Dijagram aktivnosti}
 		
-		Na slici 4.8 prikazan je dijagram aktivnosti prilikom stvaranja novih događaja. Korisnik koji želi predložiti događaj ispunjava formu u koju unosi naziv, mjesto, vrijeme, trajanje i kratki opis. Kada ju je ispunio, odabire opciju spremanja prijedloga. Web aplikacija tada provjerava jesu li svi traženi podaci u ispravnom formatu. Ako nisu, upozorava korisnika na pogreške i omogućuje mu da ih ispravi, a ako su podaci ispravni, onda sprema prijedlog u bazu podataka. Nakon što je prijedlog spremljen, moderator ga može pregledati. Ako moderator procijeni da prijedlog ne zadovoljava jezični standard, može ga uređivati. Kada je ispravio sve eventualne pogreške, moderator odabire opciju spremanja promjena. Tada web aplikacija provjerava jesu li svi podaci u ispravnom formatu, te ako jesu, sprema promjene, a ako nisu, upozorava moderatora na pogreške i omogućuje mu da ih ispravi. Nakon što je završio s eventualnim uređivanjem prijedloga, moderator može odabrati opciju prihvaćanja ili odbijanja prijedloga, i u oba slučaja se ažurira status prijedloga događaja u bazi podataka.
+		Na slici 4.11 prikazan je dijagram aktivnosti prilikom stvaranja novih događaja. Korisnik koji želi predložiti događaj ispunjava formu u koju unosi naziv, mjesto, vrijeme, trajanje i kratki opis. Kada ju je ispunio, odabire opciju spremanja prijedloga. Web aplikacija tada provjerava jesu li svi traženi podaci u ispravnom formatu. Ako nisu, upozorava korisnika na pogreške i omogućuje mu da ih ispravi, a ako su podaci ispravni, onda sprema prijedlog u bazu podataka. Nakon što je prijedlog spremljen, moderator ga može pregledati. Ako moderator procijeni da prijedlog ne zadovoljava jezični standard, može ga uređivati. Kada je ispravio sve eventualne pogreške, moderator odabire opciju spremanja promjena. Tada web aplikacija provjerava jesu li svi podaci u ispravnom formatu, te ako jesu, sprema promjene, a ako nisu, upozorava moderatora na pogreške i omogućuje mu da ih ispravi. Nakon što je završio s eventualnim uređivanjem prijedloga, moderator može odabrati opciju prihvaćanja ili odbijanja prijedloga, i u oba slučaja se ažurira status prijedloga događaja u bazi podataka.
 			
 			\begin{figure}[H]
 					\centering
@@ -377,7 +395,7 @@ Baza podataka sastoji se od deset entiteta:
 			\eject
 		\section{Dijagram komponenti}
 		
-		 Na slici 4.9 prikazan je dijagram komponenti. Korisnik iz web preglednika pristupa pristupa aplikaciji korištenjem REST API-ja. Sama aplikacija se sastoji od dvije komponente. Prva komponenta odgovara frontendu i izgrađena je korištenjem React biblioteke. Druga komponenta odgovara backendu i izgrađena je korištenjem radnog okvira Spring. Frontend i backend komuniciraju korištenjem REST API-ja. Baza podataka je relacijska i backend joj pristupa slanjem SQL upita.
+		 Na slici 4.12 prikazan je dijagram komponenti. Korisnik iz web preglednika pristupa pristupa aplikaciji korištenjem REST API-ja. Sama aplikacija se sastoji od dvije komponente. Prva komponenta odgovara frontendu i izgrađena je korištenjem React biblioteke. Druga komponenta odgovara backendu i izgrađena je korištenjem radnog okvira Spring. Frontend i backend komuniciraju korištenjem REST API-ja. Baza podataka je relacijska i backend joj pristupa slanjem SQL upita.
 		
 			\begin{figure}[H]
 					\centering
