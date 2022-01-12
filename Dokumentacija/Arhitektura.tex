@@ -11,7 +11,7 @@
 		\item \textbf{Baza podataka} služi za pohranu podataka sustava. Gotovo svi scenariji korištenja web aplikacije podrazumijevaju dohvaćanje podataka iz baze, i spremanje podataka u bazu.
 		\end{itemize}
 		
-		Aplikacija je izgrađena na principu arhitekture zasnovane na događajima, i shodno tome, aplikacija se temelji na MVC konceptu. MVC se sastoji od tri komponente:	
+		Aplikacija je izgrađena u stilu arhitekture zasnovane na događajima, i shodno tome, aplikacija se temelji na MVC konceptu. MVC se sastoji od tri komponente:	
 		
 		\begin{itemize}
 		
@@ -294,13 +294,13 @@ Baza podataka sastoji se od deset entiteta:
 		
 		Backend aplikacije je ostvaren korištenjem radnog okvira Spring Boot, i stoga aplikacija ima nekoliko slojeva.
 		
-		Iako se ne smatraju posebnim slojem, na slici 4.2 prikazani su entiteti koji odgovaraju relacijama u bazi podataka, opisanoj u poglavlju 4.1. Entiteti ne sadrže nikakvu proceduralnu logiku, nego isključivo članske varijable i njihove gettere i settere. Entitetu našoj aplikaciji su redom: Account, District, Event, Home, Meeting, Post, Role, RoleRequest, Street i PostThread.
+		Iako se ne smatraju posebnim slojem, na slici 4.2 prikazani su entiteti koji odgovaraju relacijama u bazi podataka, opisanoj u poglavlju 4.1. Entiteti ne sadrže nikakvu proceduralnu logiku, nego isključivo članske varijable i njihove gettere i settere. Entiteti u našoj aplikaciji su redom: Account, District, Event, Home, Meeting, Post, Role, RoleRequest, Street i PostThread.
 		
 		Na slici 4.3 prikazan je sloj Repository. Razredi u njemu se definiraju kao sučelja koja nude metode dohvaćanja elemenata iz baze, te stvaranja promjena u bazi. Njihov kod u pravilu programer ne piše eksplicitno, nego te metode generira Spring na temelju njihovog imena.
 		
 		Na slici 4.4 prikazan je sloj Service. Taj sloj sadrži centralnu logiku na backendu, manipulira entitetima i poziva metode koje nudi prethodni sloj, Repository.
 		
-		Na slici 4.5 prikazan je sloj Controller. Taj je sloj najviši u hijerarhiji slojeva, i on je jedini sloj s kojim komunicira frontend dio aplikacije. Uloga ovog sloja je da obrađuje HTTP zahtjeve, poziva metode koje nudi prethodni sloj Service, i potom odgovara na primljene zahtjeve.
+		Na slici 4.5 prikazan je sloj Controller. Taj je sloj najniži u hijerarhiji slojeva, i on je jedini sloj s kojim komunicira frontend dio aplikacije. Uloga ovog sloja je da obrađuje HTTP zahtjeve, poziva metode koje nudi prethodni sloj Service, i potom šalje odgovore na primljene HTTP zahtjeve.
 		
 		Zbog preglednosti, na jednom dijagramu nije bilo moguće prikazati sve razrede. Umjesto toga, na sljedeći način su prikazani odnosi među slojevima: na slici 4.6 prikazan je odnos između slojeva Controller i Service, na slici 4.7 prikazan je odnos između slojeva Service i Repository, na slici 4.8 prikazan je odnos između sloja Service i entiteta, te je na slici 4.9 prikazan odnos između sloja Repository i entiteta.
 		
@@ -391,7 +391,7 @@ Baza podataka sastoji se od deset entiteta:
 			\eject
 		\section{Dijagram komponenti}
 		
-		 Na slici 4.12 prikazan je dijagram komponenti. Korisnik iz web preglednika pristupa pristupa aplikaciji korištenjem REST API-ja. Sama aplikacija se sastoji od dvije komponente. Prva komponenta odgovara frontendu i izgrađena je korištenjem React biblioteke. Druga komponenta odgovara backendu i izgrađena je korištenjem radnog okvira Spring. Frontend i backend komuniciraju korištenjem REST API-ja. Baza podataka je relacijska i backend joj pristupa slanjem SQL upita.
+		 Na slici 4.12 prikazan je dijagram komponenti. Korisnik iz web preglednika pristupa pristupa aplikaciji korištenjem REST API-ja. Sama aplikacija se sastoji od dvije komponente. Prva komponenta odgovara frontendu i izgrađena je korištenjem React biblioteke. Druga komponenta odgovara backendu i izgrađena je korištenjem radnog okvira Spring Boot. Frontend i backend komuniciraju korištenjem REST API-ja. Baza podataka je relacijska i backend joj pristupa slanjem SQL upita.
 		
 			\begin{figure}[H]
 					\centering
