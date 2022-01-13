@@ -2,6 +2,10 @@
 
 ## [mojkvartapp](https://mojkvart-frontend.herokuapp.com/)
 
+Ako Vam je stranica neresponzivna pri prvom pokretanju, moguće je da Vam je u pregledniku ostala sjednica\
+koja je pri novom deployu i punjenju baze prestala biti važeća. U tom slučaju otvorite Developer tools, u\
+konzolu upišite `localStorage.clear()`, refreshajte stranicu i proradit će. 
+
 Podaci za prijavu (lozinka za sve korisnike je "lozinka"):
 
 ADMINISTRATORI:\
