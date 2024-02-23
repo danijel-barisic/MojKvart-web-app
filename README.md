@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # MojKvart
 
 ## [mojkvartapp](https://mojkvart-frontend.herokuapp.com/)
@@ -30,3 +31,6 @@ KVART 3:\
     Moderator: kurtcobain@mojkvart.com\
     Vijećnik: tomislavziger@mojkvart.com\
     Stanovnik: billieeilish@mojkvart.com
+=======
+# MojKvart-web-app
+>>>>>>> ff7f514dbbf819d1be01b26feab32cf1eb54e479
